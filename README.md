@@ -1,2 +1,2 @@
 # cupet-frontend
-Server backend for Cupet
+Front end for Cupet
