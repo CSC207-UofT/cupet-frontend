@@ -1,6 +1,7 @@
 package com.example.cupetfrontend.ui.login;
 
 import android.app.Activity;
+import android.content.Intent;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import android.os.Bundle;
@@ -38,10 +39,15 @@ public class LoginActivity extends AppCompatActivity {
         loginViewModel = new ViewModelProvider(this, new LoginViewModelFactory())
                 .get(LoginViewModel.class);
 
+        Toast.makeText(getApplicationContext(), "hello", Toast.LENGTH_LONG).show();
+
         nRegisterButton = findViewById(R.id.registerButton_login);
         nRegisterButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
+
                 setContentView(R.layout.activity_register);
+                Intent Register = new Intent(LoginActivity.this, RegisterActivity.class);
+                startActivity(Register);
             }
         });
 
@@ -83,7 +89,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 //Complete and destroy login activity once successful
                 finish();
-                // go into successfully logged in page
+                //TODO: Add direct to logged in view
             }
         });
 
