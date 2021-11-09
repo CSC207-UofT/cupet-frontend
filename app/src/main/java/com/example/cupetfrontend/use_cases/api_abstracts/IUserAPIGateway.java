@@ -1,18 +1,16 @@
 package com.example.cupetfrontend.use_cases.api_abstracts;
 
+import com.example.cupetfrontend.use_cases.api_abstracts.request_models.APICreateUserRequestModel;
+
 /**
  * Interface with methods for interacting with an external API
  * (server) for actions relating to a User.
  */
 public interface IUserAPIGateway {
     /**
-     * Create a new user.
-     *
-     * @param firstName The user's first name
-     * @param lastName The user's last name
-     * @param homeAddress The user's home address
-     * @param password The user's password
-     * @param email The user's email
+     * Create a new user by calling the back-end API.
+     *  @param requestData The data needed ot create a new user.
+     * @param responseListener A class with callback methods for when a response is received
      */
-    String createUser(String firstName, String lastName, String homeAddress, String password, String email);
+    void createUser(APICreateUserRequestModel requestData, IServerResponseListener responseListener);
 }
