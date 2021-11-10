@@ -3,6 +3,7 @@ package com.example.cupetfrontend.use_cases;
 import com.example.cupetfrontend.use_cases.api_abstracts.IServerResponseListener;
 import com.example.cupetfrontend.use_cases.api_abstracts.IUserAPIGateway;
 import com.example.cupetfrontend.use_cases.api_abstracts.request_models.APICreateUserRequestModel;
+import com.example.cupetfrontend.use_cases.input_boundaries.UserCreatorInputBoundary;
 import com.example.cupetfrontend.use_cases.output_boundaries.UserCreatorOutputBoundary;
 import com.example.cupetfrontend.use_cases.request_models.UserCreatorRequestModel;
 import com.example.cupetfrontend.use_cases.response_models.UserCreatorFailResponseModel;
@@ -10,7 +11,7 @@ import com.example.cupetfrontend.use_cases.response_models.UserCreatorSuccessRes
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class UserCreator {
+public class UserCreator implements UserCreatorInputBoundary {
     IUserAPIGateway userAPIGateway;
     UserCreatorOutputBoundary outputBoundary;
 
