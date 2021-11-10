@@ -1,4 +1,4 @@
-package com.example.cupetfrontend.api;
+package com.example.cupetfrontend.drivers.api;
 
 import android.content.Context;
 import com.android.volley.Request;
@@ -30,6 +30,15 @@ public class HTTPRequestManager implements IServerRequestManager {
      */
     public HTTPRequestManager(Context context) {
         requestQueue = Volley.newRequestQueue(context);
+    }
+
+    /**
+     * Construct a new instance of HTTPRequestManager
+     *
+     * @param requestQueue A volley request queue
+     */
+    public HTTPRequestManager(RequestQueue requestQueue) {
+        this.requestQueue = requestQueue;
     }
 
     /**

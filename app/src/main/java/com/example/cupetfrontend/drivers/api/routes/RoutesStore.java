@@ -1,4 +1,4 @@
-package com.example.cupetfrontend.api.routes;
+package com.example.cupetfrontend.drivers.api.routes;
 
 /**
  * A class used to store various routes to the server.
