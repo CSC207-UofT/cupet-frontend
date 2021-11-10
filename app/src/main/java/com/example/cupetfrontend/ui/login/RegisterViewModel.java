@@ -9,7 +9,7 @@ import com.example.cupetfrontend.data.Result;
 import com.example.cupetfrontend.data.model.LoggedInUser;
 import com.example.cupetfrontend.R;
 
-public class RegisterViewModel extends ViewModel {
+public class RegisterViewModel extends ViewModel implements IRegisterViewModel{
 
     private MutableLiveData<RegisterFormState> registerFormState = new MutableLiveData<>();
     private MutableLiveData<RegisterResult> registerResult = new MutableLiveData<>();
@@ -69,4 +69,15 @@ public class RegisterViewModel extends ViewModel {
         return address != null && address.trim().length() > 5;
     }
 
+    @Override
+    public void onCreateUserSuccess() {
+        // TODO: Update the user interface showing that the user has successfully been created.
+        System.out.println("User successfully created!");
+    }
+
+    @Override
+    public void onCreateUserFailure(String message) {
+        // TODO: Update the user interface showing that the user has failed to been created and display message.
+        System.out.println("User failed to be created: " + message);
+    }
 }

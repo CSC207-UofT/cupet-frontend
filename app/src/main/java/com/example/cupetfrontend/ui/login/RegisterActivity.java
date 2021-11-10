@@ -129,10 +129,6 @@ public class RegisterActivity extends AppCompatActivity {
 //                    Toast.makeText(getApplicationContext(), jsonData, Toast.LENGTH_LONG).show(); //remove
 //
 
-                    APICreateUserRequestModel rd = new APICreateUserRequestModel( fName_input, lName_input, address_input, password_input,  email_input);
-                    IServerResponseListener rl = new IServerResponseListener();
-                    UserAPIGateway ug = new UserAPIGateway();
-                    ug.createUser(rd, rl);
 
 
 
