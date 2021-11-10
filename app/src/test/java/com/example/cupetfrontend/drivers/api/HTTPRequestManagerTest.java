@@ -1,5 +1,6 @@
 package com.example.cupetfrontend.drivers.api;
 
+import com.example.cupetfrontend.drivers.api.mock_volley.DummyNetwork;
 import com.example.cupetfrontend.drivers.api.mock_volley.MockNetwork;
 import com.example.cupetfrontend.drivers.api.mock_volley.MockRequestQueue;
 import com.example.cupetfrontend.use_cases.api_abstracts.IServerResponseListener;
@@ -15,12 +16,12 @@ import static org.junit.Assert.fail;
 
 public class HTTPRequestManagerTest extends AsyncTestClass{
     private HTTPRequestManager requestManager;
-    private MockNetwork mockNetwork;
+    private DummyNetwork dummyNetwork;
 
     @Before
     public void setUp(){
-        mockNetwork = new MockNetwork();
-        requestManager = new HTTPRequestManager(new MockRequestQueue(mockNetwork));
+        dummyNetwork = new DummyNetwork();
+        requestManager = new HTTPRequestManager(new MockRequestQueue(dummyNetwork));
     }
 
     /**
@@ -78,7 +79,7 @@ public class HTTPRequestManagerTest extends AsyncTestClass{
             }
         };
 
-        mockNetwork.setDummyResponse(200, responseBody);
+        dummyNetwork.setDummyResponse(200, responseBody);
         requestManager.makeGetRequest("dummy_url", requestBody, listener);
         awaitForTask(500);
     }
@@ -106,7 +107,7 @@ public class HTTPRequestManagerTest extends AsyncTestClass{
             }
         };
 
-        mockNetwork.setDummyResponse(400, responseBody);
+        dummyNetwork.setDummyResponse(400, responseBody);
         requestManager.makeGetRequest("dummy_url", requestBody, listener);
         awaitForTask(500);
     }
@@ -135,7 +136,7 @@ public class HTTPRequestManagerTest extends AsyncTestClass{
             }
         };
 
-        mockNetwork.setDummyResponse(200, responseBody);
+        dummyNetwork.setDummyResponse(200, responseBody);
         requestManager.makePostRequest("dummy_url", requestBody, listener);
         awaitForTask(500);
     }
@@ -163,7 +164,7 @@ public class HTTPRequestManagerTest extends AsyncTestClass{
             }
         };
 
-        mockNetwork.setDummyResponse(400, responseBody);
+        dummyNetwork.setDummyResponse(400, responseBody);
         requestManager.makePostRequest("dummy_url", requestBody, listener);
         awaitForTask(500);
     }

@@ -1,4 +1,12 @@
 package com.example.cupetfrontend.drivers.api;
 
-public class UserAPIGatewayTest {
+import org.junit.Before;
+
+public class UserAPIGateway {
+    UserAPIGateway userAPIGateway;
+
+    @Before
+    public void setUp() {
+        userAPIGateway = new UserAPIGateway(;
+    }
 }

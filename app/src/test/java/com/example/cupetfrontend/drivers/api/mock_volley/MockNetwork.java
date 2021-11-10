@@ -9,13 +9,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * A class that mimics the behaviour of a network.
- *
- * When a request is made to this network, a dummy response is given through
- * the setDummyResponse and getDummyResponse methods.
+ * A class that mimics the behaviour of a Volley network.
  */
-public class MockNetwork implements Network {
-    NetworkResponse dummyResponse;
+abstract public class MockNetwork implements Network {
 
     /**
      * Convert a JSONObject to a byte array
@@ -23,45 +19,22 @@ public class MockNetwork implements Network {
      * @param data The data to convert
      * @return The data as a byte array
      */
-    public byte[] toByteArray(JSONObject data) {
+    protected byte[] toByteArray(JSONObject data) {
         return data.toString().getBytes();
     }
 
     /**
-     * Return a list of dummy headers.
+     * Create a network response using a JSONObject response body.
+     * The network response is initialized with dummy values relating to
+     * how long the request took in the network (as the network is a mock).
      *
-     * @return a list of dummy headers
-     */
-    public List<Header> getDummyHeaders() {
-        List<Header> headers = new ArrayList<>();
-
-        headers.add(new Header("header1", "val1"));
-        headers.add(new Header("header2", "val2"));
-
-        return headers;
-    }
-
-    /**
-     * Return a dummy server response that will be given for all future
-     * server responses until a new dummy response is set.
-     *
-     * @param statusCode The status code for the response
+     * @param statusCode The HTTP status code (ex. 400, 202, etc.)
      * @param responseBody The response body
-     */
-    public void setDummyResponse(int statusCode, JSONObject responseBody) {
-        this.dummyResponse = new NetworkResponse(statusCode, toByteArray(responseBody),
-                true, 1000, getDummyHeaders());
-    }
-
-    /**
-     * Perform a request to the mock network. The mock network simply
-     * returns a dummy response to any request.
+     * @param headers The response headers
      *
-     * @param request The request made to the network
-     * @return The network's dummy response
+     * @return A new network response based on this data
      */
-    @Override
-    public NetworkResponse performRequest(Request<?> request) {
-        return dummyResponse;
+    protected NetworkResponse createNetworkResponse(int statusCode, JSONObject responseBody, List<Header> headers){
+        return new NetworkResponse(statusCode, toByteArray(responseBody), true, 1000, headers);
     }
 }
