@@ -23,7 +23,7 @@ public class UserCreator implements UserCreatorInputBoundary {
     public void createUser(UserCreatorRequestModel request) {
         APICreateUserRequestModel apiRequest = new APICreateUserRequestModel(
                 request.getFirstName(), request.getLastName(),
-                request.getHomeAddress(), request.getPassword(), request.getEmail());
+                request.getEmail(), request.getPassword(), request.getHomeAddress());
 
         userAPIGateway.createUser(apiRequest, new IServerResponseListener() {
             @Override

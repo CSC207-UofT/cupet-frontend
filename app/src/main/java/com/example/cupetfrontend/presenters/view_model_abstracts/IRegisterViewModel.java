@@ -9,7 +9,7 @@ public interface IRegisterViewModel {
     /**
      * This method is called when the register/create user request failed.
      *
-     * @param message The error message returned in the response
+     * @param message The error message from the response
      */
     void onCreateUserFailure(String message);
 }

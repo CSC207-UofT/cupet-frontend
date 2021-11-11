@@ -36,7 +36,7 @@ public class RegisterViewModel extends ViewModel implements IRegisterViewModel {
      */
     public void register(RegisterFormData formData){
         userController.createUser(formData.getFirstName(), formData.getLastName(),
-                formData.getHomeAddress(), formData.getPassword(), formData.getEmail());
+                formData.getEmail(), formData.getPassword(), formData.getHomeAddress());
     }
 
     /**

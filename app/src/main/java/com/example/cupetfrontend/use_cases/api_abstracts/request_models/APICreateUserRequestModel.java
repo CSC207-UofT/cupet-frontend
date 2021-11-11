@@ -7,11 +7,11 @@ package com.example.cupetfrontend.use_cases.api_abstracts.request_models;
 public class APICreateUserRequestModel {
     private final String firstName;
     private final String lastName;
-    private final String homeAddress;
-    private final String password;
     private final String email;
+    private final String password;
+    private final String homeAddress;
 
-    public APICreateUserRequestModel(String firstName, String lastName, String homeAddress, String password, String email) {
+    public APICreateUserRequestModel(String firstName, String lastName, String email, String password, String homeAddress) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.homeAddress = homeAddress;
@@ -27,15 +27,16 @@ public class APICreateUserRequestModel {
         return lastName;
     }
 
-    public String getHomeAddress() {
-        return homeAddress;
+    public String getEmail() {
+        return email;
     }
 
     public String getPassword() {
         return password;
     }
 
-    public String getEmail() {
-        return email;
+    public String getHomeAddress() {
+        return homeAddress;
     }
+
 }

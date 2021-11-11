@@ -11,8 +11,8 @@ public class UserController implements IUserController {
         this.userCreator = userCreator;
     }
 
-    public void createUser(String firstName, String lastName, String homeAddress, String password, String email){
-        UserCreatorRequestModel request = new UserCreatorRequestModel(firstName, lastName, homeAddress, email, password);
+    public void createUser(String firstName, String lastName, String email, String password, String homeAddress){
+        UserCreatorRequestModel request = new UserCreatorRequestModel(firstName, lastName, email, password, homeAddress);
 
         userCreator.createUser(request);
     }
