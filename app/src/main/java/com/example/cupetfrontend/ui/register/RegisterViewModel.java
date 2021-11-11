@@ -127,10 +127,6 @@ public class RegisterViewModel extends ViewModel implements IRegisterViewModel {
         return homeAddress != null && homeAddress.trim().length() > 5;
     }
 
-
-    /**
-     * @see IRegisterViewModel#onCreateUserSuccess()
-     */
     @Override
     public void onCreateUserSuccess() {
         RegisterResult newRegisterResult = new RegisterResult(false);
@@ -138,9 +134,6 @@ public class RegisterViewModel extends ViewModel implements IRegisterViewModel {
         registerResult.setValue(newRegisterResult);
     }
 
-    /**
-     * @see IRegisterViewModel#onCreateUserFailure(String)
-     */
     @Override
     public void onCreateUserFailure(String message) {
         RegisterResult newRegisterResult = new RegisterResult(true, message);

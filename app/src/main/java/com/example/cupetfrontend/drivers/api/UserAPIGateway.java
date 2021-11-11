@@ -10,7 +10,9 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-
+/**
+ * A class responsible for making API requests relating to users.
+ */
 public class UserAPIGateway implements IUserAPIGateway {
     IServerRequestManager requestManager;
 

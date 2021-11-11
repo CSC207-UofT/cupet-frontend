@@ -1,5 +1,8 @@
 package com.example.cupetfrontend.use_cases.request_models;
 
+/**
+ * A class containing the request data for creating a new user.
+ */
 public class UserCreatorRequestModel {
     private final String firstName;
     private final String lastName;

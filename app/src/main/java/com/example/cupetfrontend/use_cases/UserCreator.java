@@ -38,6 +38,13 @@ public class UserCreator implements UserCreatorInputBoundary {
         });
     }
 
+    /**
+     * Convert a JSONObject response to an instance of
+     * UserCreatorSuccessResponseModel.
+     *
+     * @param jsonResponse A JSON representation of the response.
+     * @return The response as a UserCreatorSuccessResponseModel
+     */
     private UserCreatorSuccessResponseModel toSuccessResponseModel(JSONObject jsonResponse) {
         try {
             // TODO: The current API does not return a message; include a dummy message
@@ -55,6 +62,13 @@ public class UserCreator implements UserCreatorInputBoundary {
         }
     }
 
+    /**
+     * Convert a JSONObject response to an instance of
+     * UserCreatorFailResponseModel.
+     *
+     * @param jsonResponse A JSON representation of the response.
+     * @return The response as a UserCreatorFailResponseModel
+     */
     private UserCreatorFailResponseModel toFailResponseModel(JSONObject jsonResponse) {
         // TODO: The current API does not return a message; include a dummy message
         //  replace with actual message once API is updated

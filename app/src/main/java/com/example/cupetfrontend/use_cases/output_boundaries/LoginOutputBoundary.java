@@ -1,21 +1,22 @@
 package com.example.cupetfrontend.use_cases.output_boundaries;
 
+import com.example.cupetfrontend.use_cases.response_models.LoginFailResponseModel;
+import com.example.cupetfrontend.use_cases.response_models.LoginSuccessResponseModel;
 import com.example.cupetfrontend.use_cases.response_models.UserCreatorFailResponseModel;
-import com.example.cupetfrontend.use_cases.response_models.UserCreatorSuccessResponseModel;
 
 /**
  * An interface defining a class responsible for receiving the response of a
- * create user request.
+ * login request.
  */
-public interface UserCreatorOutputBoundary {
+public interface LoginOutputBoundary {
     /**
      * Method called when a successful response is received.
      * @param response The response data
      */
-    void onCreateUserSuccess(UserCreatorSuccessResponseModel response);
+    void onLoginSuccess(LoginSuccessResponseModel response);
     /**
      * Method called when a failed response is received.
      * @param response The response data
      */
-    void onCreateUserFailure(UserCreatorFailResponseModel response);
+    void onLoginFailure(LoginFailResponseModel response);
 }
