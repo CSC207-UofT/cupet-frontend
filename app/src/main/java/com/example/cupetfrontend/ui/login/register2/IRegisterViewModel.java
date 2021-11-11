@@ -1,4 +1,4 @@
-package com.example.cupetfrontend.ui.login;
+package com.example.cupetfrontend.ui.login.register2;
 
 /**
  * An interface defining a RegisterViewModel, which should

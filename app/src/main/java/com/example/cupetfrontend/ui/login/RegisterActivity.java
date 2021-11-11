@@ -1,14 +1,21 @@
 package com.example.cupetfrontend.ui.login;
 
+import android.app.Activity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Toast;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import android.widget.Button;
 import android.widget.EditText;
 
+import androidx.lifecycle.Observer;
+import com.example.cupetfrontend.App;
 import com.example.cupetfrontend.R;
 import com.example.cupetfrontend.RegisterData;
+import com.example.cupetfrontend.controllers.abstracts.IUserController;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -19,12 +26,17 @@ public class RegisterActivity extends AppCompatActivity {
     EditText password;
     EditText password_confirm;
     Button confirm_registerButton;
+    RegisterViewModel registerViewModel;
     boolean is_valid = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
+        IUserController userController = ((App) getApplication()).getDependencySelector().
+                getControllers().getUserController();
+        registerViewModel = new RegisterViewModel(userController);
 
         firstName = findViewById(R.id.reg_firstName);
         lastName = findViewById(R.id.reg_lastName);
@@ -34,106 +46,70 @@ public class RegisterActivity extends AppCompatActivity {
         password_confirm = findViewById(R.id.reg_password_confirm);
         confirm_registerButton = findViewById(R.id.confirm_register_button);
 
+        registerViewModel.getRegisterFormState().observe(this, new Observer<RegisterFormState>() {
+            @Override
+            public void onChanged(@Nullable RegisterFormState registerFormState) {
+                if (registerFormState == null) {
+                    return;
+                }
+                confirm_registerButton.setEnabled(registerFormState.isDataValid());
+                // TODO: Set error text for each of the fields
+//                if (loginFormState.getUsernameError() != null) {
+//                    usernameEditText.setError(getString(loginFormState.getUsernameError()));
+//                }
+//                if (loginFormState.getPasswordError() != null) {
+//                    passwordEditText.setError(getString(loginFormState.getPasswordError()));
+//                }
+            }
+        });
+
+        registerViewModel.getRegisterResult().observe(this, new Observer<RegisterResult>() {
+            @Override
+            public void onChanged(@Nullable RegisterResult registerResult) {
+                // TODO: Show the result of the registration.
+//                if (loginResult == null) {
+//                    return;
+//                }
+//                loadingProgressBar.setVisibility(View.GONE);
+//                if (loginResult.getError() != null) {
+//                    showLoginFailed(loginResult.getError());
+//                }
+//                if (loginResult.getSuccess() != null) {
+//                    updateUiWithUser(loginResult.getSuccess());
+//                }
+//                setResult(Activity.RESULT_OK); //if success result is ok - replace result_ok
+
+                //Complete and destroy login activity once successful
+                finish();
+                //TODO: Direct to some view after registered
+            }
+        });
+
+        TextWatcher afterTextChangedListener = new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                // ignore
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                // ignore
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                // TODO: The ordering of firstName, lastName, address, password, email
+                //  is super weird and was brought over from the back-end.
+                //  Going to change this everywhere - Andrew.
+                //  It should probably be firstName, lastName, email, password, address
+                registerViewModel.registerDataChanged(
+                        firstName.getText().toString(), lastName.getText().toString(), address.getText().toString(), password.getText().toString(), email.getText().toString());
+            }
+        };
 
         confirm_registerButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view){
-                // get text from the inputs
-                String fName_input = String.valueOf(firstName.getText());
-                String lName_input = String.valueOf(lastName.getText());
-                String email_input = String.valueOf(email.getText());
-                String address_input = String.valueOf(address.getText());
-                String password_input = String.valueOf(password.getText());
-                String passwordConfirm_input = String.valueOf(password_confirm.getText());
-
-
-
-                String errorString = "error:";
-
-                // note: Temporary input validation for Registration form
-
-                is_valid = true;
-                // Validate first name
-
-                if (fName_input.isEmpty()){
-                    is_valid = false;
-                    errorString += " \n First Name should not be empty.";}
-                if (fName_input.length() < 2){
-                    is_valid = false;
-                    errorString += "\n First Name is invalid.";}
-
-
-                // Validate last name
-                if (lName_input.isEmpty()){
-                    is_valid = false;
-                    errorString +=" \n Last Name should not be empty.";}
-                if (lName_input.length() < 2){
-                    is_valid = false;
-                    errorString += "\n Last Name is invalid.";}
-
-
-                // Validate email
-                if (email_input.isEmpty()){
-                    is_valid = false;
-                    errorString +=" \n email should not be empty.";}
-                if (!email_input.contains("@")){
-                    is_valid = false;
-                    errorString +=" \n Invalid Email input. - no @";}
-                String[] email_address_parts = email_input.split("@");
-                if (email_address_parts.length != 2) {
-                    is_valid = false;
-                    errorString +=" \n Invalid Email input. - not enough parts";}
-                if (!email_address_parts[1].contains(".")){
-                    is_valid = false;
-                    errorString +=" \n Invalid Email input. - no . ";}
-                String[] email_domain = email_address_parts[1].split("\\.");
-                if (email_domain.length < 2){
-                    is_valid = false;
-                    errorString +=" \n Invalid Email input. - . ";}
-
-
-                //Validate Password:
-                if (password_input.length() < 5){
-                    is_valid = false;
-                    errorString += " \n Password must be greater than 5 characters.";
-                }
-                if (!password_input.equals(passwordConfirm_input)){
-                    is_valid = false;
-                    errorString += " \n Passwords do not match.";
-                }
-
-
-                // Validate Home Address
-                if (address_input.isEmpty()){
-                    is_valid = false;
-                    errorString += " \n Invalid Home Address";}
-
-                //TODO: Improve Input Validation
-                //Split into helper methods, minimize repeated code
-
-
-
-
-                // If at least one field is not valid
-                if (!is_valid){
-                    Toast.makeText(getApplicationContext(), errorString, Toast.LENGTH_LONG).show();
-                }
-
-                // If all fields are valid
-                else{
-//                    RegisterData rd = new RegisterData(fName_input,
-//                            lName_input,
-//                            email_input,
-//                            password_input,
-//                            address_input);
-//                    String jsonData = rd.toJSON();
-//                    Toast.makeText(getApplicationContext(), jsonData, Toast.LENGTH_LONG).show(); //remove
-//
-
-
-
-
-                }
-
+                registerViewModel.register(firstName.getText().toString(), lastName.getText().toString(), address.getText().toString(), password.getText().toString(), email.getText().toString());
             }
         });
 

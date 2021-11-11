@@ -31,6 +31,6 @@ public class UserAPIGateway implements IUserAPIGateway {
         JSONObject requestBody = new JSONObject(requestDataMap);
         String url = UserRoutesStore.toAbsoluteRoute(UserRoutesStore.CREATE_USER);
 
-        requestManager.makeGetRequest(url, requestBody, responseListener);
+        requestManager.makePostRequest(url, requestBody, responseListener);
     }
 }

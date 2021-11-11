@@ -58,10 +58,12 @@ public class HTTPRequestManager implements IServerRequestManager {
                     @Override
                     public void onResponse(JSONObject response) {
                         listener.onRequestSuccess(response);
+                        System.out.println(response.toString());
                     }
                 }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        System.out.println("XASD" + error.getMessage());
                         JSONObject response;
 
                         try {

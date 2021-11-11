@@ -4,7 +4,13 @@ package com.example.cupetfrontend.drivers.api.routes;
  * A class used to store various routes to the server.
  */
 public class RoutesStore {
-    public static final String ROOT_ROUTE = "http://localhost:3000";
+    /**
+     * The root url for the routes to the server.
+     * TODO: Replace this with a .env.
+     * The android VM runs with a virtual network, so you should set
+     * this to http://<your local ip address>:8080.
+     */
+    public static final String ROOT_ROUTE = "http://192.168.1.72:8080";
 
     /**
      * Given a relative route, return its absolute route in context

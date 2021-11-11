@@ -13,13 +13,25 @@ import com.example.cupetfrontend.use_cases.api_abstracts.IUserAPIGateway;
  * use cases, etc. are we using)
  */
 public class DependencySelector {
-    APIDependencies apiDependencies;
-    PresenterDependencies presenters;
-    ControllerDependencies controllers;
+    private APIDependencies apiDependencies;
+    private PresenterDependencies presenters;
+    private ControllerDependencies controllers;
 
     public DependencySelector(Context applicationContext) {
         apiDependencies = new APIDependencies(applicationContext);
         presenters = new PresenterDependencies();
         controllers = new ControllerDependencies(apiDependencies, presenters);
+    }
+
+    public APIDependencies getApiDependencies() {
+        return apiDependencies;
+    }
+
+    public PresenterDependencies getPresenters() {
+        return presenters;
+    }
+
+    public ControllerDependencies getControllers() {
+        return controllers;
     }
 }

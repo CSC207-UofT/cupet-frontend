@@ -4,36 +4,48 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import android.util.Patterns;
 
-import com.example.cupetfrontend.data.LoginRepository;
-import com.example.cupetfrontend.data.Result;
-import com.example.cupetfrontend.data.model.LoggedInUser;
 import com.example.cupetfrontend.R;
+import com.example.cupetfrontend.controllers.abstracts.IUserController;
+import com.example.cupetfrontend.ui.login.register2.IRegisterViewModel;
 
-public class RegisterViewModel extends ViewModel implements IRegisterViewModel{
+public class RegisterViewModel extends ViewModel implements IRegisterViewModel {
 
     private MutableLiveData<RegisterFormState> registerFormState = new MutableLiveData<>();
     private MutableLiveData<RegisterResult> registerResult = new MutableLiveData<>();
-    private LoginRepository loginRepository; // do I need register repository
+    private IUserController userController;
 
-    public void register(String fName, String lName, String email, String password, String address){}
-    //
+    public RegisterViewModel (IUserController userController) {
+        this.userController = userController;
+    }
 
-    public void registerDataChanged(String fName, String lName, String email, String password) {
-        if (!isFNameValid(fName)){
-            registerFormState.setValue(new RegisterFormState(null, null, null, null, null));
-        } //change to add fName error
-        // add lName valid
-        if (!isEmailValid(email)) {
-            registerFormState.setValue(new RegisterFormState(null, null, R.string.invalid_username, null, null));
-        } else if (!isPasswordValid(password)) {
-            registerFormState.setValue(new RegisterFormState(null, null, null, R.string.invalid_password, null));
-        } // confirm password
-        // add address valid
-        else {
-            registerFormState.setValue(new RegisterFormState(true));
-        }
+    LiveData<RegisterFormState> getRegisterFormState() {
+        return registerFormState;
+    }
 
+    LiveData<RegisterResult> getRegisterResult() {
+        return registerResult;
+    }
 
+    public void register(String firstName, String lastName, String homeAddress, String password, String email){
+        userController.createUser(firstName, lastName, homeAddress, password, email);
+    }
+
+    public void registerDataChanged(String firstName, String lastName, String homeAddress, String password, String email) {
+        // TODO: data validation and update the form state
+
+        //        if (!isFNameValid(fName)){
+//            registerFormState.setValue(new RegisterFormState(null, null, null, null, null));
+//        } //change to add fName error
+//        // add lName valid
+//        if (!isEmailValid(email)) {
+//            registerFormState.setValue(new RegisterFormState(null, null, R.string.invalid_username, null, null));
+//        } else if (!isPasswordValid(password)) {
+//            registerFormState.setValue(new RegisterFormState(null, null, null, R.string.invalid_password, null));
+//        } // confirm password
+//        // add address valid
+//        else {
+//            registerFormState.setValue(new RegisterFormState(true));
+//        }
     }
 
     // A placeholder first name validation check
