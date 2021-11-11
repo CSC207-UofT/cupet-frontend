@@ -40,12 +40,15 @@ public class UserCreator implements UserCreatorInputBoundary {
 
     private UserCreatorSuccessResponseModel toSuccessResponseModel(JSONObject jsonResponse) {
         try {
+            // TODO: The current API does not return a message; include a dummy message
+            //  replace with actual message once API is updated
             return new UserCreatorSuccessResponseModel(
-                    jsonResponse.getString("message"),
+                    "temp_message",
                     jsonResponse.getString("firstName"),
                     jsonResponse.getString("lastName"),
                     jsonResponse.getString("homeAddress"),
-                    jsonResponse.getString("email")
+                    jsonResponse.getString("email"),
+                    jsonResponse.getString("userId")
             );
         } catch (JSONException e) {
             throw new InvalidAPIResponseException("The API gave an invalid successful create user response.");
@@ -53,12 +56,8 @@ public class UserCreator implements UserCreatorInputBoundary {
     }
 
     private UserCreatorFailResponseModel toFailResponseModel(JSONObject jsonResponse) {
-        try {
-            return new UserCreatorFailResponseModel(
-                    jsonResponse.getString("message")
-            );
-        } catch (JSONException e) {
-            throw new InvalidAPIResponseException("The API gave an invalid failed create user response.");
-        }
+        // TODO: The current API does not return a message; include a dummy message
+        //  replace with actual message once API is updated
+        return new UserCreatorFailResponseModel("Sample Error Message");
     }
 }

@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.example.cupetfrontend.R;
 import com.example.cupetfrontend.databinding.ActivityLoginBinding;
+import com.example.cupetfrontend.ui.register.RegisterActivity;
 
 public class LoginActivity extends AppCompatActivity {
 

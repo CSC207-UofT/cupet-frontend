@@ -1,4 +1,4 @@
-package com.example.cupetfrontend.ui.login;
+package com.example.cupetfrontend.ui.register;
 
 import androidx.annotation.Nullable;
 
@@ -16,27 +16,18 @@ public class RegisterFormState {
     @Nullable
     private Integer passwordError;
     @Nullable
+    private Integer confirmPasswordError;
+    @Nullable
     private Integer addressError;
     private boolean isDataValid;
 
-    RegisterFormState(@Nullable Integer firstnameError, @Nullable Integer lastnameError,
-                      @Nullable Integer emailError, @Nullable Integer passwordError, @Nullable Integer addressError) {
-        this.firstnameError = firstnameError;
-        this.lastnameError = lastnameError;
-        this.emailError = emailError;
-        this.passwordError = passwordError;
-        this.addressError = addressError;
-        this.isDataValid = false;
-
-    }
-
-    RegisterFormState(boolean isDataValid) {
+    public RegisterFormState() {
         this.firstnameError = null;
         this.lastnameError = null;
         this.emailError = null;
         this.passwordError = null;
         this.addressError = null;
-        this.isDataValid = isDataValid;
+        this.isDataValid = false;
     }
 
     @Nullable
@@ -62,6 +53,39 @@ public class RegisterFormState {
     @Nullable
     public Integer getAddressError() {
         return addressError;
+    }
+
+    @Nullable
+    public Integer getConfirmPasswordError() {
+        return confirmPasswordError;
+    }
+
+    public void setFirstnameError(@Nullable Integer firstnameError) {
+        this.firstnameError = firstnameError;
+    }
+
+    public void setLastnameError(@Nullable Integer lastnameError) {
+        this.lastnameError = lastnameError;
+    }
+
+    public void setEmailError(@Nullable Integer emailError) {
+        this.emailError = emailError;
+    }
+
+    public void setPasswordError(@Nullable Integer passwordError) {
+        this.passwordError = passwordError;
+    }
+
+    public void setConfirmPasswordError(@Nullable Integer confirmPasswordError) {
+        this.confirmPasswordError = confirmPasswordError;
+    }
+
+    public void setAddressError(@Nullable Integer addressError) {
+        this.addressError = addressError;
+    }
+
+    public void setDataValid(boolean dataValid) {
+        isDataValid = dataValid;
     }
 
     public boolean isDataValid() {

@@ -1,10 +1,11 @@
 package com.example.cupetfrontend.dependency_selector;
 
 import com.example.cupetfrontend.presenters.CreateUserPresenter;
+import com.example.cupetfrontend.presenters.abstracts.ICreateUserPresenter;
 import com.example.cupetfrontend.use_cases.output_boundaries.UserCreatorOutputBoundary;
 
 public class PresenterDependencies {
-    private UserCreatorOutputBoundary createUserPresenter;
+    private ICreateUserPresenter createUserPresenter;
 
     public PresenterDependencies() {
         selectCreateUserPresenter();
@@ -14,7 +15,7 @@ public class PresenterDependencies {
         createUserPresenter = new CreateUserPresenter();
     }
 
-    public UserCreatorOutputBoundary getCreateUserPresenter() {
+    public ICreateUserPresenter getCreateUserPresenter() {
         return createUserPresenter;
     }
 }
