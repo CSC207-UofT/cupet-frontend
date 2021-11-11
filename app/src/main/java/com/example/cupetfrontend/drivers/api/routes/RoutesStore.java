@@ -6,11 +6,10 @@ package com.example.cupetfrontend.drivers.api.routes;
 public class RoutesStore {
     /**
      * The root url for the routes to the server.
-     * TODO: Replace this with a .env.
      * The android VM runs with a virtual network, so you should set
      * this to http://<your local ip address>:8080.
      */
-    public static final String ROOT_ROUTE = "http://192.168.1.72:8080";
+    public static String ROOT_ROUTE = "http://192.168.1.73:8080";
 
     /**
      * Given a relative route, return its absolute route in context

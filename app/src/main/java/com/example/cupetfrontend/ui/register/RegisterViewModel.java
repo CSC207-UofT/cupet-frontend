@@ -8,6 +8,10 @@ import com.example.cupetfrontend.R;
 import com.example.cupetfrontend.controllers.abstracts.IUserController;
 import com.example.cupetfrontend.presenters.view_model_abstracts.IRegisterViewModel;
 
+/**
+ * A ViewModel class for the Registration page.
+ * This class is responsible for storing and updating the state of the registration form.
+ */
 public class RegisterViewModel extends ViewModel implements IRegisterViewModel {
 
     private final MutableLiveData<RegisterFormState> registerFormState = new MutableLiveData<>();
@@ -26,12 +30,20 @@ public class RegisterViewModel extends ViewModel implements IRegisterViewModel {
         return registerResult;
     }
 
+    /**
+     * Create a new register request
+     * @param formData The registration data entered into the form
+     */
     public void register(RegisterFormData formData){
         userController.createUser(formData.getFirstName(), formData.getLastName(),
                 formData.getHomeAddress(), formData.getPassword(), formData.getEmail());
     }
 
-    public void registerDataChanged(RegisterFormData formData) {
+    /**
+     * Update the state of the registration form.
+     * @param formData The data entered into the form.
+     */
+    public void updateFormState(RegisterFormData formData) {
         RegisterFormState newFormState = new RegisterFormState();
 
         if (!isFirstNameValid(formData.getFirstName())) {
@@ -115,6 +127,10 @@ public class RegisterViewModel extends ViewModel implements IRegisterViewModel {
         return homeAddress != null && homeAddress.trim().length() > 5;
     }
 
+
+    /**
+     * @see IRegisterViewModel#onCreateUserSuccess()
+     */
     @Override
     public void onCreateUserSuccess() {
         RegisterResult newRegisterResult = new RegisterResult(false);
@@ -122,6 +138,9 @@ public class RegisterViewModel extends ViewModel implements IRegisterViewModel {
         registerResult.setValue(newRegisterResult);
     }
 
+    /**
+     * @see IRegisterViewModel#onCreateUserFailure(String)
+     */
     @Override
     public void onCreateUserFailure(String message) {
         RegisterResult newRegisterResult = new RegisterResult(true, message);

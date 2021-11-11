@@ -7,13 +7,13 @@ import static org.junit.Assert.*;
 public class RoutesStoreTest {
     /**
      * Test that the RoutesStore.toAbsoluteRoute method correctly
-     * converts a relative route to an absolute route, provided
-     * that RoutesStore.ROOT_ROUTE is equal to "http://localhost:3000"
+     * converts a relative route to an absolute route.
      */
     @Test
     public void testCorrectAbsoluteRoute() {
         String relativeRoute = "/pet/create";
-        String expected = "http://localhost:3000/pet/create";
+        RoutesStore.ROOT_ROUTE = "http://example.route";
+        String expected = "http://example.route/pet/create";
 
         String actual = RoutesStore.toAbsoluteRoute(relativeRoute);
         assertEquals(actual, expected);

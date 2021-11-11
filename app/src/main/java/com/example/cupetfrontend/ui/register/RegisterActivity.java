@@ -19,6 +19,9 @@ import com.example.cupetfrontend.dependency_selector.DependencySelector;
 import com.example.cupetfrontend.presenters.abstracts.ICreateUserPresenter;
 import com.example.cupetfrontend.ui.login.LoginActivity;
 
+/**
+ * The activity for the Register page.
+ */
 public class RegisterActivity extends AppCompatActivity {
     private EditText firstNameField;
     private EditText lastNameField;
@@ -54,6 +57,9 @@ public class RegisterActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Setup views and state on creation of the activity.
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,6 +80,10 @@ public class RegisterActivity extends AppCompatActivity {
         setUpRegisterButtonClickedListener();
     }
 
+    /**
+     * Set up a listener that alerts registerViewModel when the text
+     * in the form has changed.
+     */
     private void setUpFormEditedListener() {
         TextWatcher listener = new TextWatcher() {
             @Override
@@ -89,7 +99,7 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 RegisterFormData formData = getRegisterFormData();
-                registerViewModel.registerDataChanged(formData);
+                registerViewModel.updateFormState(formData);
             }
         };
 
@@ -101,6 +111,10 @@ public class RegisterActivity extends AppCompatActivity {
         addressField.addTextChangedListener(listener);
     }
 
+    /**
+     * Set up a listener that sends a register request when registerButton
+     * is clicked.
+     */
     private void setUpRegisterButtonClickedListener() {
         registerButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
@@ -110,7 +124,11 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
-
+    /**
+     * Return the data entered into the registration form.
+     *
+     * @return The data entered into the registration form.
+     */
     private RegisterFormData getRegisterFormData() {
         RegisterFormData formData = new RegisterFormData();
 
@@ -124,6 +142,11 @@ public class RegisterActivity extends AppCompatActivity {
         return formData;
     }
 
+    /**
+     * Set up this activity as an observer that observes the result of registration.
+     *
+     * Update the displayed views when the registration result has changed.
+     */
     private void setUpObserveRegisterResult() {
         registerViewModel.getRegisterResult().observe(this, new Observer<RegisterResult>() {
             @Override
@@ -143,6 +166,12 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Set up this activity as an observer that observes the error states of the
+     * registration form.
+     *
+     * Update the fields accordingly to whether or not they have errors.
+     */
     private void setUpObserveRegisterFormState() {
         registerViewModel.getRegisterFormState().observe(this, new Observer<RegisterFormState>() {
             @Override
@@ -163,13 +192,20 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Display a Registration Success toast message and move to the login view.
+     */
     private void onRegisterSuccess() {
-        Toast.makeText(getApplicationContext(), "Registration Succeeded", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "Registration Success", Toast.LENGTH_SHORT).show();
 
         Intent moveToLoginIntent = new Intent(RegisterActivity.this, LoginActivity.class);
         startActivity(moveToLoginIntent);
     }
 
+    /**
+     * Display a Registration failed toast message.
+     * @param errorMessage The error message to display
+     */
     private void onRegisterFailure (String errorMessage) {
         System.out.println("Registration failed");
         Toast.makeText(getApplicationContext(), "Registration failed: " + errorMessage, Toast.LENGTH_SHORT).show();

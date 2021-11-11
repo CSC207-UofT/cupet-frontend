@@ -1,5 +1,8 @@
 package com.example.cupetfrontend.ui.register;
 
+/**
+ * Class that stores the data entered into the registration form.
+ */
 public class RegisterFormData {
     private String firstName;
     private String lastName;

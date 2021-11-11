@@ -3,9 +3,9 @@ package com.example.cupetfrontend.ui.register;
 import androidx.annotation.Nullable;
 
 /**
- * Data validation state of the register form.
+ * A class that stores all the error states for the registration form.
+ * (i.e. which fields are in an error state)
  */
-
 public class RegisterFormState {
     @Nullable
     private Integer firstnameError;
