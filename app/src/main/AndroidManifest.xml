@@ -1,12 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.example.cupetfrontend">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.cupetfrontend">
 
-    <application android:allowBackup="true" android:icon="@mipmap/ic_launcher" android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round" android:supportsRtl="true"
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
         android:theme="@style/Theme.CupetFrontEnd">
-        <activity android:name=".MainActivity" android:label="@string/app_name"
-            android:theme="@style/Theme.CupetFrontEnd.NoActionBar"
+
+        <activity
+            android:name=".Pet1MatchingActivity"
+            android:label="@string/title_activity_pet1_matching"
             android:exported="true">
+            <intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".AccountSettingsActivity"
+            android:exported="true"
+            android:label="@string/title_activity_account_settings"
+            android:parentActivityName=".UserPetsV2">
+            <intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".UserPetsV2"
+            android:exported="true"
+            android:label="@string/title_activity_user_pets_v2"
+            android:theme="@style/Theme.CupetFrontEnd.NoActionBar">
+            <intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.CupetFrontEnd.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
