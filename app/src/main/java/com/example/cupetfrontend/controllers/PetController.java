@@ -32,4 +32,24 @@ public class PetController implements IPetController {
 
         fetchPetProfile.fetchPetProfile(request);
     }
+
+    @Override
+    public void editPet(String newName, String newAge, String newBreed, String newBiography) {
+
+    }
+
+    @Override
+    public void getPotentialMatches(String token, String petId) {
+
+    }
+
+    @Override
+    public void intendToMatch(String token, String myPetId, String otherPetId) {
+
+    }
+
+    @Override
+    public void getMatches(String token, String myPetId) {
+
+    }
 }
