@@ -6,6 +6,7 @@ import com.example.cupetfrontend.use_cases.api_abstracts.IPetAPIGateway;
 import com.example.cupetfrontend.use_cases.api_abstracts.IServerRequestManager;
 import com.example.cupetfrontend.use_cases.api_abstracts.IServerResponseListener;
 import com.example.cupetfrontend.use_cases.api_abstracts.request_models.APICreatePetRequestModel;
+import com.example.cupetfrontend.use_cases.api_abstracts.request_models.APIFetchPetProfileRequestModel;
 import org.json.JSONObject;
 
 import java.util.HashMap;
@@ -29,7 +30,19 @@ public class PetAPIGateway extends APIGateway implements IPetAPIGateway {
 
         JSONObject requestBody = new JSONObject(requestDataMap);
 
-        String url = PetRoutesStore.toAbsoluteRoute(PetRoutesStore.ROOT_ROUTE);
+        String url = PetRoutesStore.toAbsoluteRoute(PetRoutesStore.CREATE_PET);
+
+        requestManager.makePostRequest(url, requestBody, createAuthHeaders(requestData.getToken()), responseListener);
+    }
+
+    @Override
+    public void fetchPetProfile(APIFetchPetProfileRequestModel requestData, IServerResponseListener responseListener) {
+        Map<String, String> requestDataMap = new HashMap<>();
+
+        requestDataMap.put("petId", requestData.getPetId());
+        JSONObject requestBody = new JSONObject(requestDataMap);
+
+        String url = PetRoutesStore.toAbsoluteRoute(PetRoutesStore.FETCH_PET_PROFILE);
 
         requestManager.makePostRequest(url, requestBody, createAuthHeaders(requestData.getToken()), responseListener);
     }

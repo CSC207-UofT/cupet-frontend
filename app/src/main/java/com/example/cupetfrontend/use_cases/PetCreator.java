@@ -41,15 +41,18 @@ public class PetCreator implements PetCreatorInputBoundary {
 
     /**
      * Convert a JSONObject response to an instance of
-     * UserCreatorSuccessResponseModel.
+     * PetCreatorSuccessResponseModel.
      *
      * @param jsonResponse A JSON representation of the response.
-     * @return The response as a UserCreatorSuccessResponseModel
+     * @return The response as a PetCreatorSuccessResponseModel
      */
     private PetCreatorSuccessResponseModel toSuccessResponseModel(JSONObject jsonResponse) {
         try {
             return new PetCreatorSuccessResponseModel(
                     jsonResponse.getString("name"),
+                    jsonResponse.getString("age"),
+                    jsonResponse.getString("name"),
+                    jsonResponse.getString("age"),
                     jsonResponse.getString("age")
             );
         } catch (JSONException e) {
@@ -59,10 +62,10 @@ public class PetCreator implements PetCreatorInputBoundary {
 
     /**
      * Convert a JSONObject response to an instance of
-     * UserCreatorFailResponseModel.
+     * PetCreatorFailResponseModel.
      *
      * @param jsonResponse A JSON representation of the response.
-     * @return The response as a UserCreatorFailResponseModel
+     * @return The response as a PetCreatorFailResponseModel
      */
     private PetCreatorFailResponseModel toFailResponseModel(JSONObject jsonResponse) {
         // TODO: The current API does not return a message; include a dummy message
