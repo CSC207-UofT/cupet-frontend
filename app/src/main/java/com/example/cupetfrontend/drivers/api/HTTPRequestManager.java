@@ -79,6 +79,8 @@ public class HTTPRequestManager implements IServerRequestManager {
     private void makeJSONRequest(int method, String url, JSONObject requestBody,
                                  IServerResponseListener listener) {
         JSONRequestWithHeaders request = makeJSONRequestNoHeaders(method, url, requestBody, listener);
+        request.setHeaders(new HashMap<>());
+
         requestQueue.add(request);
     }
 
@@ -138,20 +140,27 @@ public class HTTPRequestManager implements IServerRequestManager {
     private JSONObject getErrorJsonResponse(VolleyError error) {
         JSONObject response;
 
-        try {
-            String responseJSON = new String(error.networkResponse.data,
-                    HttpHeaderParser.parseCharset(error.networkResponse.headers));
+        if (error.networkResponse == null){
+            response = new JSONObject(new HashMap<String, String>() {{
+                put("message", error.getMessage());
+            }});
 
-            response = new JSONObject(responseJSON);
-        } catch (UnsupportedEncodingException | JSONException e) {
-            // In this case, we are unable to decode the body of the response
-            // We instead send a default response JSON instead.
+        }else{
+            try {
+                String responseJSON = new String(error.networkResponse.data,
+                        HttpHeaderParser.parseCharset(error.networkResponse.headers));
 
-            String defaultMessage = "Unable to decode response body";
-            Map<String, String> responseMap = new HashMap<>();
-            responseMap.put("message", defaultMessage);
+                response = new JSONObject(responseJSON);
+            } catch (UnsupportedEncodingException | JSONException e) {
+                // In this case, we are unable to decode the body of the response
+                // We instead send a default response JSON instead.
 
-            response = new JSONObject(responseMap);
+                String defaultMessage = "Unable to decode response body";
+                Map<String, String> responseMap = new HashMap<>();
+                responseMap.put("message", defaultMessage);
+
+                response = new JSONObject(responseMap);
+            }
         }
         return response;
     }
