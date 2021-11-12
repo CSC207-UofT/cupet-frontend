@@ -1,5 +1,9 @@
 package com.example.cupetfrontend.controllers.abstracts;
 
+/**
+ * An interface for a controller which accesses all use cases relating
+ * to users.
+ */
 public interface IUserController {
     /**
      * Create a new user.

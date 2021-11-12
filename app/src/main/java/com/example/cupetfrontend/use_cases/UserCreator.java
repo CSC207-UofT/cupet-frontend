@@ -47,10 +47,7 @@ public class UserCreator implements UserCreatorInputBoundary {
      */
     private UserCreatorSuccessResponseModel toSuccessResponseModel(JSONObject jsonResponse) {
         try {
-            // TODO: The current API does not return a message; include a dummy message
-            //  replace with actual message once API is updated
             return new UserCreatorSuccessResponseModel(
-                    "temp_message",
                     jsonResponse.getString("firstName"),
                     jsonResponse.getString("lastName"),
                     jsonResponse.getString("homeAddress"),

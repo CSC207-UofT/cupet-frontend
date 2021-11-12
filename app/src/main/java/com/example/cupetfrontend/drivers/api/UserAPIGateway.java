@@ -13,7 +13,7 @@ import java.util.Map;
 /**
  * A class responsible for making API requests relating to users.
  */
-public class UserAPIGateway implements IUserAPIGateway {
+public class UserAPIGateway extends APIGateway implements IUserAPIGateway {
     IServerRequestManager requestManager;
 
     public UserAPIGateway(IServerRequestManager requestManager) {

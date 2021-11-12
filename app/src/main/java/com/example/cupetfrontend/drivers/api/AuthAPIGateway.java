@@ -13,7 +13,7 @@ import java.util.Map;
 /**
  * A class responsible for making API requests relating to authentication.
  */
-public class AuthAPIGateway implements IAuthAPIGateway {
+public class AuthAPIGateway extends APIGateway implements IAuthAPIGateway {
     IServerRequestManager requestManager;
 
     public AuthAPIGateway(IServerRequestManager requestManager) {
