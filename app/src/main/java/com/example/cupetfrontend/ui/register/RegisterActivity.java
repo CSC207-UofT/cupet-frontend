@@ -29,6 +29,7 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText addressField;
     private EditText passwordField;
     private EditText passwordConfirmField;
+    private EditText cityField;
     private Button registerButton;
     private RegisterViewModel registerViewModel;
 
@@ -43,6 +44,7 @@ public class RegisterActivity extends AppCompatActivity {
         passwordField = findViewById(R.id.reg_password);
         passwordConfirmField = findViewById(R.id.reg_password_confirm);
         registerButton = findViewById(R.id.confirm_register_button);
+        cityField = findViewById(R.id.reg_city);
     }
 
     /**
@@ -109,6 +111,7 @@ public class RegisterActivity extends AppCompatActivity {
         passwordField.addTextChangedListener(listener);
         passwordConfirmField.addTextChangedListener(listener);
         addressField.addTextChangedListener(listener);
+        cityField.addTextChangedListener(listener);
     }
 
     /**
@@ -138,6 +141,7 @@ public class RegisterActivity extends AppCompatActivity {
         formData.setPassword(passwordField.getText().toString());
         formData.setConfirmPassword(passwordConfirmField.getText().toString());
         formData.setHomeAddress(addressField.getText().toString());
+        formData.setCity(cityField.getText().toString());
 
         return formData;
     }
@@ -186,6 +190,7 @@ public class RegisterActivity extends AppCompatActivity {
                 setFieldError(passwordField, registerFormState.getPasswordError());
                 setFieldError(passwordConfirmField, registerFormState.getConfirmPasswordError());
                 setFieldError(addressField, registerFormState.getAddressError());
+                setFieldError(cityField, registerFormState.getCityError());
 
                 registerButton.setEnabled(registerFormState.isDataValid());
             }

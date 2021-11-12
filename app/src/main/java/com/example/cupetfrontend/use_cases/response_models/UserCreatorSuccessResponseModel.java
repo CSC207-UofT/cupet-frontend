@@ -5,14 +5,17 @@ public class UserCreatorSuccessResponseModel {
     private final String lastName;
     private final String email;
     private final String homeAddress;
+    private final String city;
     private final String userId;
 
     public UserCreatorSuccessResponseModel(String firstName, String lastName,
-                                           String email, String homeAddress, String userId) {
+                                           String email, String homeAddress, String city,
+                                           String userId) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.homeAddress = homeAddress;
+        this.city = city;
         this.userId = userId;
     }
 
@@ -36,5 +39,7 @@ public class UserCreatorSuccessResponseModel {
         return userId;
     }
 
-
+    public String getCity() {
+        return city;
+    }
 }

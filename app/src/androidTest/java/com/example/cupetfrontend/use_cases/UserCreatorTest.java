@@ -22,7 +22,7 @@ public class UserCreatorTest extends UserUseCaseTestClass{
                 "1234password", "1234 home st");
 
         UserCreatorSuccessResponseModel expected = new UserCreatorSuccessResponseModel(
-                "bob", "joe", "bob@email.com", "1234 home st", "any"
+                "bob", "joe", "bob@email.com", "1234 home st", city, "any"
         );
 
         UserCreator userCreator = new UserCreator(userAPIGateway, new UserCreatorOutputBoundary() {

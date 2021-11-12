@@ -10,6 +10,7 @@ public class RegisterFormData {
     private String password;
     private String confirmPassword;
     private String homeAddress;
+    private String city;
 
     public String getFirstName() {
         return firstName;
@@ -57,5 +58,13 @@ public class RegisterFormData {
 
     public void setHomeAddress(String homeAddress) {
         this.homeAddress = homeAddress;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 }

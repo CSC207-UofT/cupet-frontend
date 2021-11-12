@@ -23,7 +23,8 @@ public class UserCreator implements UserCreatorInputBoundary {
     public void createUser(UserCreatorRequestModel request) {
         APICreateUserRequestModel apiRequest = new APICreateUserRequestModel(
                 request.getFirstName(), request.getLastName(),
-                request.getEmail(), request.getPassword(), request.getHomeAddress());
+                request.getEmail(), request.getPassword(), request.getHomeAddress(),
+                request.getCity());
 
         userAPIGateway.createUser(apiRequest, new IServerResponseListener() {
             @Override
@@ -52,6 +53,7 @@ public class UserCreator implements UserCreatorInputBoundary {
                     jsonResponse.getString("lastName"),
                     jsonResponse.getString("homeAddress"),
                     jsonResponse.getString("email"),
+                    jsonResponse.getString("city"),
                     jsonResponse.getString("userId")
             );
         } catch (JSONException e) {

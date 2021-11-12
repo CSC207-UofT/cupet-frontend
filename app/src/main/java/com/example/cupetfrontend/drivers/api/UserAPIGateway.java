@@ -29,6 +29,7 @@ public class UserAPIGateway extends APIGateway implements IUserAPIGateway {
         requestDataMap.put("homeAddress", requestData.getHomeAddress());
         requestDataMap.put("password", requestData.getPassword());
         requestDataMap.put("email", requestData.getEmail());
+        requestDataMap.put("city", requestData.getCity());
 
         JSONObject requestBody = new JSONObject(requestDataMap);
         String url = UserRoutesStore.toAbsoluteRoute(UserRoutesStore.CREATE_USER);

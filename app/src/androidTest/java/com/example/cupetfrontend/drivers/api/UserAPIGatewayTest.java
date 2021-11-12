@@ -5,8 +5,6 @@ import androidx.test.platform.app.InstrumentationRegistry;
 import com.example.cupetfrontend.AsyncTestClass;
 import com.example.cupetfrontend.use_cases.api_abstracts.IServerResponseListener;
 import com.example.cupetfrontend.use_cases.api_abstracts.request_models.APICreateUserRequestModel;
-import com.example.cupetfrontend.use_cases.request_models.UserCreatorRequestModel;
-import com.example.cupetfrontend.use_cases.response_models.UserCreatorSuccessResponseModel;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Before;
@@ -34,7 +32,8 @@ public class UserAPIGatewayTest extends AsyncTestClass {
     public void testCreateUserSuccess() {
         APICreateUserRequestModel request = new APICreateUserRequestModel(
                 "bob", "joe", "AndroidTest@test.com",
-                "1234password", "1234 home st");
+                "1234password", "27 King's College Cir",
+                "Toronto");
 
         userAPIGateway.createUser(request, new IServerResponseListener() {
             @Override
@@ -42,8 +41,9 @@ public class UserAPIGatewayTest extends AsyncTestClass {
                 try {
                     assertEquals("bob", response.get("firstName"));
                     assertEquals("joe", response.get("lastName"));
-                    assertEquals("AndroidTest@test.com", response.get("firstName"));
-                    assertEquals("1234password", response.get("firstName"));
+                    assertEquals("AndroidTest@test.com", response.get("email"));
+                    assertEquals("27 King's College Cir", response.get("homeAddress"));
+                    assertEquals("Toronto", response.get("city"));
                     assert response.has("userId");
 
                 } catch (JSONException e) {
