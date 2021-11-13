@@ -1,5 +1,6 @@
 package com.example.cupetfrontend;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,4 +16,8 @@ public class UserPetSlotsFragment2 extends Fragment{
         return inflater.inflate(R.layout.petslot2_layout,container, false);
     }
 
+    public void openPet2MatchingActivity(){
+        Intent intent = new Intent(getActivity(), UserPetSlot1MatchingActivity.class);
+        startActivity(intent);
+    }
 }

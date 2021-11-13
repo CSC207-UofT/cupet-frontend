@@ -122,7 +122,7 @@
     <string name="attachment_summary_on">Automatically download attachments for incoming emails</string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
     <string name="title_activity_pet1_matching">MainActivity</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_back">Back</string>
+    <string name="title_edit_profile">Edit Profile</string>
+    <string name="title_edit_preferences">Edit Preferences</string>
 </resources>

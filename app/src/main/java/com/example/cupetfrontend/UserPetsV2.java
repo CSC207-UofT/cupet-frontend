@@ -16,6 +16,7 @@ import com.example.cupetfrontend.databinding.ActivityUserPetsV2Binding;
 
 public class UserPetsV2 extends AppCompatActivity {
     private Button button;
+    private Button slot1_button;
     private ActivityUserPetsV2Binding binding;
 
     @Override
@@ -32,19 +33,20 @@ public class UserPetsV2 extends AppCompatActivity {
         tabs.setupWithViewPager(viewPager);
 
         button = (Button) findViewById(R.id.account_settings_button);
+
         button.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                openSettingsAcitivity2();
+                openSettingsActivity();
             }
                                   }
 
         );
 
+    }
+    public void openSettingsActivity(){
+        Intent int1 = new Intent(this, AccountSettingsActivity.class);
+        startActivity(int1);
+    }
 
-    }
-    public void openSettingsAcitivity2(){
-        Intent intent = new Intent(this, AccountSettingsActivity.class);
-        startActivity(intent);
-    }
 }
