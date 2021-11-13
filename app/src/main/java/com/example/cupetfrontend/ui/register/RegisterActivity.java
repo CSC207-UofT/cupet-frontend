@@ -71,7 +71,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         IUserController userController = dependencySelector.getControllers().getUserController();
 
-        ICreateUserPresenter createUserPresenter = dependencySelector.getPresenters().getCreateUserPresenter();
+        ICreateUserPresenter createUserPresenter = dependencySelector.getUserPresenters().getCreateUserPresenter();
         registerViewModel = new RegisterViewModel(userController);
         createUserPresenter.setRegisterViewModel(registerViewModel);
 

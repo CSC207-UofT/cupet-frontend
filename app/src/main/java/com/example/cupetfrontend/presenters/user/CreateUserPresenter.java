@@ -1,4 +1,4 @@
-package com.example.cupetfrontend.presenters;
+package com.example.cupetfrontend.presenters.user;
 
 import com.example.cupetfrontend.presenters.abstracts.ICreateUserPresenter;
 import com.example.cupetfrontend.presenters.view_model_abstracts.IRegisterViewModel;

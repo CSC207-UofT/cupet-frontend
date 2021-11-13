@@ -50,6 +50,17 @@ public interface IPetAPIGateway {
     void intendToMatch(APIIntendToMatchRequestModel requestData, IServerResponseListener responseListener);
 
     /**
+     * Given a potential match with another pet, reject the match.
+     *
+     * This is equivalent to swiping left.
+     *
+     * @param requestData The data needed to intend to match
+     * @param responseListener A class with callback methods for when a response is received
+     */
+    void rejectMatch(APIRejectMatchRequestModel requestData, IServerResponseListener responseListener);
+
+
+    /**
      * Return a list of matches your pet has made.
      *
      * @param requestData The data needed to get a list of matches

@@ -1,9 +1,10 @@
 package com.example.cupetfrontend.dependency_selector;
 
-import com.example.cupetfrontend.presenters.*;
 import com.example.cupetfrontend.presenters.abstracts.ICreateUserPresenter;
+import com.example.cupetfrontend.presenters.user.GetPetsPresenter;
+import com.example.cupetfrontend.presenters.user.*;
 
-public class PresenterDependencies {
+public class UserPresenterDependencies {
     private ICreateUserPresenter createUserPresenter;
     private EditUserAccountPresenter editUserAccountPresenter;
     private EditUserProfilePresenter editUserProfilePresenter;
@@ -11,7 +12,7 @@ public class PresenterDependencies {
     private FetchUserProfilePresenter fetchUserProfilePresenter;
     private GetPetsPresenter getPetsPresenter;
 
-    public PresenterDependencies() {
+    public UserPresenterDependencies() {
         selectCreateUserPresenter();
         selectEditUserProfilePresenter();
         selectFetchUserAccountPresenter();

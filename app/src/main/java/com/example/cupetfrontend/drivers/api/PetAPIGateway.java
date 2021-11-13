@@ -63,7 +63,14 @@ public class PetAPIGateway extends APIGateway implements IPetAPIGateway {
     }
 
     @Override
+    public void rejectMatch(APIRejectMatchRequestModel requestData, IServerResponseListener responseListener) {
+        responseListener.onRequestSuccess(null);
+    }
+
+    @Override
     public void getMatches(APIGetMatchesRequestModel requestData, IServerResponseListener responseListener) {
         responseListener.onRequestSuccess(null);
     }
+
+
 }

@@ -55,6 +55,17 @@ public interface IPetController {
     void intendToMatch(String token, String myPetId, String otherPetId);
 
     /**
+     * Given a potential match with another pet, reject the other pet.
+     *
+     * This is equivalent to swiping left.
+     *
+     * @param token The user's session token
+     * @param myPetId My pet's id
+     * @param otherPetId The other user's pet's id
+     */
+    void rejectMatch(String token, String myPetId, String otherPetId);
+
+    /**
      * Return a list of matches your pet has made.
      *
      * @param token The user's session token
