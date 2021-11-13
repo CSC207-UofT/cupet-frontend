@@ -2,17 +2,14 @@ package com.example.cupetfrontend.use_cases;
 
 import com.example.cupetfrontend.use_cases.api_abstracts.IServerResponseListener;
 import com.example.cupetfrontend.use_cases.api_abstracts.IUserAPIGateway;
-import com.example.cupetfrontend.use_cases.api_abstracts.request_models.APIGetPetsRequestModel;
-import com.example.cupetfrontend.use_cases.input_boundaries.GetPetsInputBoundary;
-import com.example.cupetfrontend.use_cases.output_boundaries.GetPetsOutputBoundary;
-import com.example.cupetfrontend.use_cases.request_models.GetPetsRequestModel;
-import com.example.cupetfrontend.use_cases.response_models.EditUserAccountFailResponseModel;
-import com.example.cupetfrontend.use_cases.response_models.EditUserAccountSuccessResponseModel;
-import com.example.cupetfrontend.use_cases.response_models.GetPetsFailResponseModel;
-import com.example.cupetfrontend.use_cases.response_models.GetPetsSuccessResponseModel;
+import com.example.cupetfrontend.use_cases.api_abstracts.request_models.user.APIGetPetsRequestModel;
+import com.example.cupetfrontend.use_cases.input_boundaries.user.GetPetsInputBoundary;
+import com.example.cupetfrontend.use_cases.output_boundaries.user.GetPetsOutputBoundary;
+import com.example.cupetfrontend.use_cases.request_models.user.GetPetsRequestModel;
+import com.example.cupetfrontend.use_cases.response_models.user.GetPetsFailResponseModel;
+import com.example.cupetfrontend.use_cases.response_models.user.GetPetsSuccessResponseModel;
 import org.json.JSONObject;
 
-import java.sql.Array;
 import java.util.ArrayList;
 
 public class GetPets implements GetPetsInputBoundary {

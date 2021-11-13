@@ -4,7 +4,7 @@ import com.example.cupetfrontend.drivers.api.routes.UserRoutesStore;
 import com.example.cupetfrontend.use_cases.api_abstracts.IServerRequestManager;
 import com.example.cupetfrontend.use_cases.api_abstracts.IServerResponseListener;
 import com.example.cupetfrontend.use_cases.api_abstracts.IUserAPIGateway;
-import com.example.cupetfrontend.use_cases.api_abstracts.request_models.*;
+import com.example.cupetfrontend.use_cases.api_abstracts.request_models.user.*;
 import org.json.JSONObject;
 
 import java.util.HashMap;

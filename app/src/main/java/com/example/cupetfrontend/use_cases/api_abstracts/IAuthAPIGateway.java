@@ -1,6 +1,5 @@
 package com.example.cupetfrontend.use_cases.api_abstracts;
 
-import com.example.cupetfrontend.use_cases.api_abstracts.request_models.APICreateUserRequestModel;
 import com.example.cupetfrontend.use_cases.api_abstracts.request_models.APILoginRequestModel;
 
 /**

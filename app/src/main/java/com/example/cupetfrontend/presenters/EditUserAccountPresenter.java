@@ -1,8 +1,8 @@
 package com.example.cupetfrontend.presenters;
 
-import com.example.cupetfrontend.use_cases.output_boundaries.EditUserAccountOutputBoundary;
-import com.example.cupetfrontend.use_cases.response_models.EditUserAccountFailResponseModel;
-import com.example.cupetfrontend.use_cases.response_models.EditUserAccountSuccessResponseModel;
+import com.example.cupetfrontend.use_cases.output_boundaries.user.EditUserAccountOutputBoundary;
+import com.example.cupetfrontend.use_cases.response_models.user.EditUserAccountFailResponseModel;
+import com.example.cupetfrontend.use_cases.response_models.user.EditUserAccountSuccessResponseModel;
 
 public class EditUserAccountPresenter implements EditUserAccountOutputBoundary {
     // TODO: Attach to view model

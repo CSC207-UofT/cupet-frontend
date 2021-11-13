@@ -27,12 +27,13 @@ public interface IPetController {
     /**
      * Edit a pet's profile
      *
+     * @param token The user's session token
      * @param newName The pet's new name
      * @param newAge The pet's new age
      * @param newBreed The pet's new breed
      * @param newBiography The pet's new biography
      */
-    void editPet(String newName, String newAge, String newBreed, String newBiography);
+    void editPet(String token, String newName, String newAge, String newBreed, String newBiography);
 
     /**
      * Given a pet, return a list of potential matches for the pet.

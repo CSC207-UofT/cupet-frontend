@@ -2,9 +2,8 @@ package com.example.cupetfrontend.presenters;
 
 import com.example.cupetfrontend.presenters.abstracts.ICreateUserPresenter;
 import com.example.cupetfrontend.presenters.view_model_abstracts.IRegisterViewModel;
-import com.example.cupetfrontend.use_cases.output_boundaries.UserCreatorOutputBoundary;
-import com.example.cupetfrontend.use_cases.response_models.UserCreatorFailResponseModel;
-import com.example.cupetfrontend.use_cases.response_models.UserCreatorSuccessResponseModel;
+import com.example.cupetfrontend.use_cases.response_models.user.UserCreatorFailResponseModel;
+import com.example.cupetfrontend.use_cases.response_models.user.UserCreatorSuccessResponseModel;
 
 public class CreateUserPresenter implements ICreateUserPresenter {
     IRegisterViewModel registerViewModel;

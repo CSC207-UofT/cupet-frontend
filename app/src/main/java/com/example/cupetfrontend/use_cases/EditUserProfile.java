@@ -2,17 +2,12 @@ package com.example.cupetfrontend.use_cases;
 
 import com.example.cupetfrontend.use_cases.api_abstracts.IServerResponseListener;
 import com.example.cupetfrontend.use_cases.api_abstracts.IUserAPIGateway;
-import com.example.cupetfrontend.use_cases.api_abstracts.request_models.APIEditUserAccountRequestModel;
-import com.example.cupetfrontend.use_cases.api_abstracts.request_models.APIEditUserProfileRequestModel;
-import com.example.cupetfrontend.use_cases.input_boundaries.EditUserProfileInputBoundary;
-import com.example.cupetfrontend.use_cases.output_boundaries.EditUserAccountOutputBoundary;
-import com.example.cupetfrontend.use_cases.output_boundaries.EditUserProfileOutputBoundary;
-import com.example.cupetfrontend.use_cases.request_models.EditUserAccountRequestModel;
-import com.example.cupetfrontend.use_cases.request_models.EditUserProfileRequestModel;
-import com.example.cupetfrontend.use_cases.response_models.EditUserAccountFailResponseModel;
-import com.example.cupetfrontend.use_cases.response_models.EditUserAccountSuccessResponseModel;
-import com.example.cupetfrontend.use_cases.response_models.EditUserProfileFailResponseModel;
-import com.example.cupetfrontend.use_cases.response_models.EditUserProfileSuccessResponseModel;
+import com.example.cupetfrontend.use_cases.api_abstracts.request_models.user.APIEditUserProfileRequestModel;
+import com.example.cupetfrontend.use_cases.input_boundaries.user.EditUserProfileInputBoundary;
+import com.example.cupetfrontend.use_cases.output_boundaries.user.EditUserProfileOutputBoundary;
+import com.example.cupetfrontend.use_cases.request_models.user.EditUserProfileRequestModel;
+import com.example.cupetfrontend.use_cases.response_models.user.EditUserProfileFailResponseModel;
+import com.example.cupetfrontend.use_cases.response_models.user.EditUserProfileSuccessResponseModel;
 import org.json.JSONObject;
 
 public class EditUserProfile implements EditUserProfileInputBoundary {

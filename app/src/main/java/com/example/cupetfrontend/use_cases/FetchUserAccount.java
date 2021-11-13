@@ -2,14 +2,12 @@ package com.example.cupetfrontend.use_cases;
 
 import com.example.cupetfrontend.use_cases.api_abstracts.IServerResponseListener;
 import com.example.cupetfrontend.use_cases.api_abstracts.IUserAPIGateway;
-import com.example.cupetfrontend.use_cases.api_abstracts.request_models.APIFetchUserAccountRequestModel;
-import com.example.cupetfrontend.use_cases.input_boundaries.FetchUserAccountInputBoundary;
-import com.example.cupetfrontend.use_cases.output_boundaries.FetchUserAccountOutputBoundary;
-import com.example.cupetfrontend.use_cases.request_models.FetchUserAccountRequestModel;
-import com.example.cupetfrontend.use_cases.response_models.EditUserAccountFailResponseModel;
-import com.example.cupetfrontend.use_cases.response_models.EditUserAccountSuccessResponseModel;
-import com.example.cupetfrontend.use_cases.response_models.FetchUserAccountFailResponseModel;
-import com.example.cupetfrontend.use_cases.response_models.FetchUserAccountSuccessResponseModel;
+import com.example.cupetfrontend.use_cases.api_abstracts.request_models.user.APIFetchUserAccountRequestModel;
+import com.example.cupetfrontend.use_cases.input_boundaries.user.FetchUserAccountInputBoundary;
+import com.example.cupetfrontend.use_cases.output_boundaries.user.FetchUserAccountOutputBoundary;
+import com.example.cupetfrontend.use_cases.request_models.user.FetchUserAccountRequestModel;
+import com.example.cupetfrontend.use_cases.response_models.user.FetchUserAccountFailResponseModel;
+import com.example.cupetfrontend.use_cases.response_models.user.FetchUserAccountSuccessResponseModel;
 import org.json.JSONObject;
 
 public class FetchUserAccount implements FetchUserAccountInputBoundary {

@@ -2,7 +2,6 @@ package com.example.cupetfrontend.use_cases.output_boundaries;
 
 import com.example.cupetfrontend.use_cases.response_models.LoginFailResponseModel;
 import com.example.cupetfrontend.use_cases.response_models.LoginSuccessResponseModel;
-import com.example.cupetfrontend.use_cases.response_models.UserCreatorFailResponseModel;
 
 /**
  * An interface defining a class responsible for receiving the response of a

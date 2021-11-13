@@ -2,16 +2,12 @@ package com.example.cupetfrontend.use_cases;
 
 import com.example.cupetfrontend.use_cases.api_abstracts.IPetAPIGateway;
 import com.example.cupetfrontend.use_cases.api_abstracts.IServerResponseListener;
-import com.example.cupetfrontend.use_cases.api_abstracts.request_models.APICreatePetRequestModel;
-import com.example.cupetfrontend.use_cases.api_abstracts.request_models.APIFetchPetProfileRequestModel;
-import com.example.cupetfrontend.use_cases.input_boundaries.FetchPetProfileInputBoundary;
-import com.example.cupetfrontend.use_cases.output_boundaries.FetchPetProfileOutputBoundary;
-import com.example.cupetfrontend.use_cases.output_boundaries.PetCreatorOutputBoundary;
-import com.example.cupetfrontend.use_cases.request_models.FetchPetProfileRequestModel;
-import com.example.cupetfrontend.use_cases.response_models.FetchPetProfileFailResponseModel;
-import com.example.cupetfrontend.use_cases.response_models.FetchPetProfileSuccessResponseModel;
-import com.example.cupetfrontend.use_cases.response_models.PetCreatorFailResponseModel;
-import com.example.cupetfrontend.use_cases.response_models.PetCreatorSuccessResponseModel;
+import com.example.cupetfrontend.use_cases.api_abstracts.request_models.pet.APIFetchPetProfileRequestModel;
+import com.example.cupetfrontend.use_cases.input_boundaries.pet.FetchPetProfileInputBoundary;
+import com.example.cupetfrontend.use_cases.output_boundaries.pet.FetchPetProfileOutputBoundary;
+import com.example.cupetfrontend.use_cases.request_models.pet.FetchPetProfileRequestModel;
+import com.example.cupetfrontend.use_cases.response_models.pet.FetchPetProfileFailResponseModel;
+import com.example.cupetfrontend.use_cases.response_models.pet.FetchPetProfileSuccessResponseModel;
 import org.json.JSONException;
 import org.json.JSONObject;
 

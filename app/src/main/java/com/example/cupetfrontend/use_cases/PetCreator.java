@@ -2,12 +2,12 @@ package com.example.cupetfrontend.use_cases;
 
 import com.example.cupetfrontend.use_cases.api_abstracts.IPetAPIGateway;
 import com.example.cupetfrontend.use_cases.api_abstracts.IServerResponseListener;
-import com.example.cupetfrontend.use_cases.api_abstracts.request_models.APICreatePetRequestModel;
-import com.example.cupetfrontend.use_cases.input_boundaries.PetCreatorInputBoundary;
-import com.example.cupetfrontend.use_cases.output_boundaries.PetCreatorOutputBoundary;
-import com.example.cupetfrontend.use_cases.request_models.PetCreatorRequestModel;
-import com.example.cupetfrontend.use_cases.response_models.PetCreatorFailResponseModel;
-import com.example.cupetfrontend.use_cases.response_models.PetCreatorSuccessResponseModel;
+import com.example.cupetfrontend.use_cases.api_abstracts.request_models.pet.APICreatePetRequestModel;
+import com.example.cupetfrontend.use_cases.input_boundaries.pet.PetCreatorInputBoundary;
+import com.example.cupetfrontend.use_cases.output_boundaries.pet.PetCreatorOutputBoundary;
+import com.example.cupetfrontend.use_cases.request_models.pet.PetCreatorRequestModel;
+import com.example.cupetfrontend.use_cases.response_models.pet.PetCreatorFailResponseModel;
+import com.example.cupetfrontend.use_cases.response_models.pet.PetCreatorSuccessResponseModel;
 import org.json.JSONException;
 import org.json.JSONObject;
 

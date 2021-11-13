@@ -1,6 +1,6 @@
 package com.example.cupetfrontend.use_cases.api_abstracts;
 
-import com.example.cupetfrontend.use_cases.api_abstracts.request_models.*;
+import com.example.cupetfrontend.use_cases.api_abstracts.request_models.user.*;
 
 /**
  * Interface with methods for interacting with an external API

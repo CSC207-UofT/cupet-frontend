@@ -4,7 +4,7 @@ import android.content.Context;
 import androidx.test.platform.app.InstrumentationRegistry;
 import com.example.cupetfrontend.AsyncTestClass;
 import com.example.cupetfrontend.use_cases.api_abstracts.IServerResponseListener;
-import com.example.cupetfrontend.use_cases.api_abstracts.request_models.APICreateUserRequestModel;
+import com.example.cupetfrontend.use_cases.api_abstracts.request_models.user.APICreateUserRequestModel;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Before;

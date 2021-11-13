@@ -1,9 +1,9 @@
 package com.example.cupetfrontend.use_cases;
 
-import com.example.cupetfrontend.use_cases.output_boundaries.UserCreatorOutputBoundary;
-import com.example.cupetfrontend.use_cases.request_models.UserCreatorRequestModel;
-import com.example.cupetfrontend.use_cases.response_models.UserCreatorFailResponseModel;
-import com.example.cupetfrontend.use_cases.response_models.UserCreatorSuccessResponseModel;
+import com.example.cupetfrontend.use_cases.output_boundaries.user.UserCreatorOutputBoundary;
+import com.example.cupetfrontend.use_cases.request_models.user.UserCreatorRequestModel;
+import com.example.cupetfrontend.use_cases.response_models.user.UserCreatorFailResponseModel;
+import com.example.cupetfrontend.use_cases.response_models.user.UserCreatorSuccessResponseModel;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

@@ -3,11 +3,7 @@ package com.example.cupetfrontend.drivers.api;
 import android.content.Context;
 import androidx.test.platform.app.InstrumentationRegistry;
 import com.example.cupetfrontend.AsyncTestClass;
-import com.example.cupetfrontend.use_cases.api_abstracts.IServerResponseListener;
-import com.example.cupetfrontend.use_cases.api_abstracts.request_models.APICreatePetRequestModel;
-import com.example.cupetfrontend.use_cases.api_abstracts.request_models.APICreateUserRequestModel;
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.example.cupetfrontend.use_cases.api_abstracts.request_models.pet.APICreatePetRequestModel;
 import org.junit.Before;
 import org.junit.Test;
 

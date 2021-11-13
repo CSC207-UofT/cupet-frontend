@@ -1,8 +1,8 @@
 package com.example.cupetfrontend.presenters;
 
-import com.example.cupetfrontend.use_cases.output_boundaries.FetchUserAccountOutputBoundary;
-import com.example.cupetfrontend.use_cases.response_models.FetchUserAccountFailResponseModel;
-import com.example.cupetfrontend.use_cases.response_models.FetchUserAccountSuccessResponseModel;
+import com.example.cupetfrontend.use_cases.output_boundaries.user.FetchUserAccountOutputBoundary;
+import com.example.cupetfrontend.use_cases.response_models.user.FetchUserAccountFailResponseModel;
+import com.example.cupetfrontend.use_cases.response_models.user.FetchUserAccountSuccessResponseModel;
 
 public class FetchUserAccountPresenter implements FetchUserAccountOutputBoundary {
     // TODO: Attach to view model

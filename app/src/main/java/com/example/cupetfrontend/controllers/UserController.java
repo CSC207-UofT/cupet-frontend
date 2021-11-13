@@ -1,9 +1,8 @@
 package com.example.cupetfrontend.controllers;
 
 import com.example.cupetfrontend.controllers.abstracts.IUserController;
-import com.example.cupetfrontend.use_cases.FetchUserProfile;
-import com.example.cupetfrontend.use_cases.input_boundaries.*;
-import com.example.cupetfrontend.use_cases.request_models.*;
+import com.example.cupetfrontend.use_cases.input_boundaries.user.*;
+import com.example.cupetfrontend.use_cases.request_models.user.*;
 
 /**
  * A controller which accesses all use cases relating
