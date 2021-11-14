@@ -25,7 +25,9 @@ public class GetMatchesPresenter implements IGetMatchesPresenter {
     @Override
     public void onGetMatchesSuccess(GetMatchesSuccessResponseModel response) {
         // create list of names of all matched pets
+
         // TODO: Determine and provide all appropriate information for getMatchesViewModel
+
         ArrayList<String> matches = new ArrayList<>();
         for (PetData petData: response.getMatches()) {
             matches.add(petData.getName());

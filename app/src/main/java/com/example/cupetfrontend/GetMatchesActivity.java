@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,7 +16,6 @@ import com.example.cupetfrontend.R;
 import com.example.cupetfrontend.controllers.abstracts.IPetController;
 import com.example.cupetfrontend.dependency_selector.DependencySelector;
 import com.example.cupetfrontend.presenters.abstracts.IGetMatchesPresenter;
-
 
 import java.util.List;
 
@@ -38,27 +36,29 @@ public class GetMatchesActivity extends AppCompatActivity {
             final TableRow tr = new TableRow(this);
             tr.setLayoutParams(new TableRow.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
             // create TextView to display pet name
-            TextView et1 = new TextView(this);
-            et1.setText(petName);
-            et1.setLayoutParams(new TableRow.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
-            tr.addView(et1); // add tet view to row
+            TextView textPetName = new TextView(this);
+            textPetName.setText(petName);
+            textPetName.setLayoutParams(new TableRow.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
+            tr.addView(textPetName); // add tet view to row
             // create new button
-            Button contactInfoButton = new Button(this);
-            contactInfoButton.setText(R.string.contact_info);
-            contactInfoButton.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
-            contactInfoButton.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View view) {
-                    //TODO: Obtain and direct to Contact info page for specified pet's owner
-                }
-            });
-            // add button to row
-            tr.addView(contactInfoButton);
+//            Button contactInfoButton = new Button(this);
+//            contactInfoButton.setText(R.string.contact_info);
+//            contactInfoButton.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
+//            contactInfoButton.setOnClickListener(new View.OnClickListener() {
+//                public void onClick(View view) {
+//                    //TODO: Obtain and direct to Contact info page for specified pet's owner
+//                }
+//            });
+//            // add button to row
+//            tr.addView(contactInfoButton);
             // add row to layout
             matchesTable.addView(tr, new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
         }
     }
 
-
+    /**
+     * Setup views and state on creation of the activity.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,42 +69,50 @@ public class GetMatchesActivity extends AppCompatActivity {
         IGetMatchesPresenter getMatchesPresenter = dependencySelector.getPetPresenters().getGetMatchesPresenter();
         getMatchesViewModel = new GetMatchesViewModel(petController);
         getMatchesPresenter.setGetMatchesViewModel(getMatchesViewModel);
-        //TODO: generate table if get matches is successful
 
-
-
-
-//        getMatchesViewModel.onGetMatchesSuccess();
-//        generateTable(matches);
+        setUpObserveGetPetsResult();
 
     }
 
 
-    //TODO: Observe if result of get matches is successful
-//    /**
-//     * Set up this activity as an observer that observes the result of getting matches.
-//     *
-//     * Update the displayed views when the  has changed.
-//     */
-//    private void setUpObserveGetPetsResult() {
-//        getMatchesViewModel.getMatchesResult().observe(this, new Observer<>() {
-//            @Override
-//            public void onChanged(@Nullable ) {
-//                if (result == null) {
-//                    return;
-//                }
-//
-//                if (result.isError()){
-//                    onGetMatchesFailure(result.getErrorMessage());
-//                }else{
-//                    onGetMatchesSuccess();
-//                }
-//
-//            }
-//        });
-//    }
+    /**
+     * Set up this activity as an observer that observes the result of getting matches.
+     *
+     * Update the displayed views when the get matches result has changed.
+     */
+    private void setUpObserveGetPetsResult() {
+        getMatchesViewModel.getMatchesResult().observe(this, new Observer<GetMatchesResult>() {
+            @Override
+            public void onChanged(@Nullable GetMatchesResult getMatchesResult) {
+                if (getMatchesResult == null) {
+                    return;
+                }
+
+                if (getMatchesResult.isError()){
+                    onGetMatchesFailure(getMatchesResult.getErrorMessage());
+                }else{
+                    onGetMatchesSuccess(getMatchesResult.getMatches());
+                }
+            }
+        });
+    }
 
 
+    /**
+     * Display a Registration Success toast message and generate table
+     */
+    private void onGetMatchesSuccess(List<String> matches) {
+        Toast.makeText(getApplicationContext(), "Get Matches Success", Toast.LENGTH_SHORT).show();
+        generateTable(matches);
+    }
 
+    /**
+     * Display a Registration failed toast message.
+     * @param errorMessage The error message to display
+     */
+    private void onGetMatchesFailure (String errorMessage) {
+        System.out.println("Registration failed");
+        Toast.makeText(getApplicationContext(), "Registration failed: " + errorMessage, Toast.LENGTH_SHORT).show();
+    }
 
 }
