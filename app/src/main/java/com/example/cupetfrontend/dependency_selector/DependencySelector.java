@@ -50,4 +50,8 @@ public class DependencySelector {
     public AuthPresenterDependencies getAuthPresenters() {
         return authPresenters;
     }
+
+    public ISessionManager getSessionManager() {
+        return sessionManager;
+    }
 }
