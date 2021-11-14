@@ -74,12 +74,13 @@ public class GetMatchesActivity extends AppCompatActivity {
         IGetMatchesPresenter getMatchesPresenter = dependencySelector.getPetPresenters().getGetMatchesPresenter();
         getMatchesViewModel = new GetMatchesViewModel(petController);
         getMatchesPresenter.setGetMatchesViewModel(getMatchesViewModel);
-
         //TODO: generate table if get matches is successful
 
 
+
+
 //        getMatchesViewModel.onGetMatchesSuccess();
-//        generateTable();
+//        generateTable(matches);
 
     }
 
