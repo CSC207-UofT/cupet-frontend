@@ -1,27 +1,23 @@
 package com.example.cupetfrontend.ui.login;
 
+import android.app.Application;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.annotation.NonNull;
 
+import com.example.cupetfrontend.App;
+import com.example.cupetfrontend.controllers.abstracts.IAuthController;
 import com.example.cupetfrontend.data.LoginDataSource;
 import com.example.cupetfrontend.data.LoginRepository;
 
 /**
- * ViewModel provider factory to instantiate LoginViewModel.
- * Required given LoginViewModel has a non-empty constructor
+ * A LoginViewModel factory responsible for creating a LoginViewModel.
  */
-public class LoginViewModelFactory implements ViewModelProvider.Factory {
+public class LoginViewModelFactory {
+    public LoginViewModel createLoginViewModel(Application application){
+        IAuthController authController = ((App) application).getDependencySelector().
+                getControllers().getAuthController();
 
-    @NonNull
-    @Override
-    @SuppressWarnings("unchecked")
-
-    public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-        if (modelClass.isAssignableFrom(LoginViewModel.class)) {
-            return (T) new LoginViewModel(LoginRepository.getInstance(new LoginDataSource()));
-        } else {
-            throw new IllegalArgumentException("Unknown ViewModel class");
-        }
+        return new LoginViewModel(authController);
     }
 }

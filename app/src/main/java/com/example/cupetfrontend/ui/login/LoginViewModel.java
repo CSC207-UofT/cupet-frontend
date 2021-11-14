@@ -19,9 +19,6 @@ public class LoginViewModel extends ViewModel {
         this.authController = authController;
     }
 
-    LoginViewModel(LoginRepository loginRepository) {
-    }
-
     LiveData<LoginFormState> getLoginFormState() {
         return loginFormState;
     }

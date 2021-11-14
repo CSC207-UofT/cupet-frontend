@@ -6,26 +6,33 @@ import androidx.annotation.Nullable;
  * Authentication result : success (user details) or error message.
  */
 class LoginResult {
-    @Nullable
-    private LoggedInUserView success;
-    @Nullable
-    private Integer error;
+    private final boolean isError;
+    private final String errorMessage;
+    private String token;
 
-    LoginResult(@Nullable Integer error) {
-        this.error = error;
+    public LoginResult(boolean isError, String errorMessage) {
+        this.isError = isError;
+        this.errorMessage = errorMessage;
     }
 
-    LoginResult(@Nullable LoggedInUserView success) {
-        this.success = success;
+    public LoginResult(boolean isError) {
+        this.isError = isError;
+        errorMessage = "";
     }
 
-    @Nullable
-    LoggedInUserView getSuccess() {
-        return success;
+    public boolean isError() {
+        return isError;
     }
 
-    @Nullable
-    Integer getError() {
-        return error;
+    public String getErrorMessage() {
+        return errorMessage;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }
