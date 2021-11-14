@@ -13,8 +13,8 @@ import com.example.cupetfrontend.drivers.api.JWTParser;
 public class DependencySelector {
     private final APIDependencies apiDependencies;
     private final UserPresenterDependencies userPresenters;
-    private PetPresenterDependencies petPresenters;
-    private AuthPresenterDependencies authPresenters;
+    private final PetPresenterDependencies petPresenters;
+    private final AuthPresenterDependencies authPresenters;
     private final ISessionManager sessionManager;
 
     private final ControllerDependencies controllers;
