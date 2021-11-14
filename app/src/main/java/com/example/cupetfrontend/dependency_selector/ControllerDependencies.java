@@ -3,6 +3,7 @@ package com.example.cupetfrontend.dependency_selector;
 import com.example.cupetfrontend.controllers.AuthController;
 import com.example.cupetfrontend.controllers.PetController;
 import com.example.cupetfrontend.controllers.UserController;
+import com.example.cupetfrontend.controllers.abstracts.IPetController;
 import com.example.cupetfrontend.controllers.abstracts.IUserController;
 import com.example.cupetfrontend.use_cases.*;
 import com.example.cupetfrontend.use_cases.api_abstracts.IPetAPIGateway;
@@ -61,4 +62,6 @@ public class ControllerDependencies {
     public IUserController getUserController() {
         return userController;
     }
+
+    public IPetController getPetController(){return petController;}
 }
