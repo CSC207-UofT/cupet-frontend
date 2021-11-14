@@ -8,6 +8,8 @@ import com.example.cupetfrontend.presenters.abstracts.IGetMatchesPresenter;
 import com.example.cupetfrontend.presenters.pet.GetMatchesPresenter;
 import com.example.cupetfrontend.presenters.view_model_abstracts.IGetMatchesViewModel;
 
+import java.util.List;
+
 
 public class GetMatchesViewModel extends ViewModel implements IGetMatchesViewModel {
     private final MutableLiveData<IGetMatchesPresenter> getMatchesPresenterData = new MutableLiveData<>();
@@ -29,7 +31,7 @@ public class GetMatchesViewModel extends ViewModel implements IGetMatchesViewMod
 
 
     @Override
-    public void onGetMatchesSuccess() {
+    public void onGetMatchesSuccess(List<String> matches) {
 
     }
 

@@ -2,8 +2,11 @@ package com.example.cupetfrontend.presenters.pet;
 
 import com.example.cupetfrontend.presenters.abstracts.IGetMatchesPresenter;
 import com.example.cupetfrontend.presenters.view_model_abstracts.IGetMatchesViewModel;
+import com.example.cupetfrontend.use_cases.response_models.PetData;
 import com.example.cupetfrontend.use_cases.response_models.pet.GetMatchesFailResponseModel;
 import com.example.cupetfrontend.use_cases.response_models.pet.GetMatchesSuccessResponseModel;
+
+import java.util.ArrayList;
 
 public class GetMatchesPresenter implements IGetMatchesPresenter {
     IGetMatchesViewModel getMatchesViewModel;
@@ -21,7 +24,13 @@ public class GetMatchesPresenter implements IGetMatchesPresenter {
      */
     @Override
     public void onGetMatchesSuccess(GetMatchesSuccessResponseModel response) {
-        getMatchesViewModel.onGetMatchesSuccess();
+        // create list of names of all matched pets
+        // TODO: Determine and provide all appropriate information for getMatchesViewModel
+        ArrayList<String> matches = new ArrayList<>();
+        for (PetData petData: response.getMatches()) {
+            matches.add(petData.getName());
+        }
+        getMatchesViewModel.onGetMatchesSuccess(matches);
 
     }
 
