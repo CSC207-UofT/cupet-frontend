@@ -16,8 +16,9 @@ public class LoginUseCase implements LoginInputBoundary {
     IAuthAPIGateway authAPIGateway;
     LoginOutputBoundary outputBoundary;
 
-    public LoginUseCase(IAuthAPIGateway authAPIGateway) {
+    public LoginUseCase(IAuthAPIGateway authAPIGateway, LoginOutputBoundary outputBoundary) {
         this.authAPIGateway = authAPIGateway;
+        this.outputBoundary = outputBoundary;
     }
 
     @Override

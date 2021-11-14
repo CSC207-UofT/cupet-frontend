@@ -5,6 +5,7 @@ import com.example.cupetfrontend.controllers.PetController;
 import com.example.cupetfrontend.controllers.UserController;
 import com.example.cupetfrontend.controllers.abstracts.IUserController;
 import com.example.cupetfrontend.use_cases.*;
+import com.example.cupetfrontend.use_cases.api_abstracts.IAuthAPIGateway;
 import com.example.cupetfrontend.use_cases.api_abstracts.IPetAPIGateway;
 import com.example.cupetfrontend.use_cases.api_abstracts.IUserAPIGateway;
 
@@ -15,9 +16,11 @@ public class ControllerDependencies {
 
     public ControllerDependencies(APIDependencies apiDependencies,
                                   UserPresenterDependencies userPresenters,
-                                  PetPresenterDependencies petPresenters) {
+                                  PetPresenterDependencies petPresenters,
+                                  AuthPresenterDependencies authPresenters) {
         selectUserController(apiDependencies.getUserAPIGateway(), userPresenters);
         setPetController(apiDependencies.getPetAPIGateway(), petPresenters);
+        setAuthController(apiDependencies.getAuthAPIGateway(), authPresenters);
     }
 
     private void selectUserController(IUserAPIGateway userAPIGateway, UserPresenterDependencies presenters) {
@@ -54,11 +57,21 @@ public class ControllerDependencies {
                 petPresenters.getRejectMatchPresenter()));
     }
 
-    private void setAuthController(){
-        // TODO setup auth for login
+    private void setAuthController(IAuthAPIGateway authAPIGateway,
+                                   AuthPresenterDependencies authPresenters){
+        authController = new AuthController(new LoginUseCase(authAPIGateway,
+                authPresenters.getLoginPresenter()));
     }
 
     public IUserController getUserController() {
         return userController;
+    }
+
+    public PetController getPetController() {
+        return petController;
+    }
+
+    public AuthController getAuthController() {
+        return authController;
     }
 }

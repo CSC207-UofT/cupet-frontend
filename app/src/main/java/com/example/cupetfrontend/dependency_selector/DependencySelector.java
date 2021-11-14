@@ -8,16 +8,19 @@ import android.content.Context;
  * use cases, etc. are we using)
  */
 public class DependencySelector {
-    private APIDependencies apiDependencies;
-    private UserPresenterDependencies userPresenters;
+    private final APIDependencies apiDependencies;
+    private final UserPresenterDependencies userPresenters;
     private PetPresenterDependencies petPresenters;
+    private AuthPresenterDependencies authPresenters;
 
-    private ControllerDependencies controllers;
+    private final ControllerDependencies controllers;
 
     public DependencySelector(Context applicationContext) {
         apiDependencies = new APIDependencies(applicationContext);
         userPresenters = new UserPresenterDependencies();
-        controllers = new ControllerDependencies(apiDependencies, userPresenters, petPresenters);
+        authPresenters = new AuthPresenterDependencies();
+        controllers = new ControllerDependencies(apiDependencies, userPresenters,
+                petPresenters, authPresenters);
     }
 
     public APIDependencies getApiDependencies() {

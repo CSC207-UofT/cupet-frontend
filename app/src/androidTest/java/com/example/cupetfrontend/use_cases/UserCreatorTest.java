@@ -19,10 +19,10 @@ public class UserCreatorTest extends UserUseCaseTestClass{
     public void testCreateUserSuccess() {
         UserCreatorRequestModel request = new UserCreatorRequestModel(
                 "bob", "joe", "bob@email.com",
-                "1234password", "1234 home st");
+                "1234password", "1234 home st", "city");
 
         UserCreatorSuccessResponseModel expected = new UserCreatorSuccessResponseModel(
-                "bob", "joe", "bob@email.com", "1234 home st", city, "any"
+                "bob", "joe", "bob@email.com", "1234 home st", "city", "any"
         );
 
         UserCreator userCreator = new UserCreator(userAPIGateway, new UserCreatorOutputBoundary() {
