@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 public class UserPetSlotsFragment extends Fragment{
     View view;
     Button slot1_button;
+    Button slot1_button_create_profile;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState){
@@ -24,12 +25,27 @@ public class UserPetSlotsFragment extends Fragment{
                 openPet1MatchingActivity();
             }
         });
+
+        slot1_button_create_profile = (Button) view.findViewById(R.id.slot1_createprofile_button);
+        slot1_button_create_profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openPet1CreatorActivity();
+            }
+        });
         return view;
     }
 
     public void openPet1MatchingActivity(){
-    Intent intent = new Intent(getActivity(), UserPetSlot1MatchingActivity.class);
-    startActivity(intent);
+        Intent intent = new Intent(getActivity(), UserPetSlot1MatchingActivity.class);
+        startActivity(intent);
+
+    }
+
+
+    public void openPet1CreatorActivity(){
+        Intent intent = new Intent(getActivity(), CreatePetActivity.class);
+        startActivity(intent);
 
     }
 }

@@ -37,7 +37,7 @@ public class CreatePetViewModel extends ViewModel implements ICreaterPetViewMode
      *                 NEED TOKEN FOR PET
      */
     public void createPetProfile(CreatePetProfileData formData){
-        petController.createPet(formData.getName(), String.valueOf(formData.getAge()), formData.getBiography(), formData.getBreed());
+        petController.createPet(, formData.getName(), String.valueOf(formData.getAge()), formData.getBiography(), formData.getBreed());
     }
 
     /**
@@ -47,97 +47,58 @@ public class CreatePetViewModel extends ViewModel implements ICreaterPetViewMode
     public void updateFormState(CreatePetProfileData formData) {
         CreatePetState newFormState = new CreatePetState();
 
-        if (!isFirstNameValid(formData.getFirstName())) {
-            newFormState.setFirstnameError(R.string.invalid_first_name);
-        } else if (!isLastNameValid(formData.getLastName())) {
-            newFormState.setLastnameError(R.string.invalid_last_name);
-        } else if (!isEmailValid(formData.getEmail())) {
-            newFormState.setEmailError(R.string.invalid_email);
-        } else if (!isPasswordValid(formData.getPassword())) {
-            newFormState.setPasswordError(R.string.invalid_password);
-        } else if (!doesConfirmPasswordMatch(formData.getPassword(), formData.getConfirmPassword())) {
-            newFormState.setConfirmPasswordError(R.string.invalid_confirm_password);
-        } else if (!isHomeAddressValid(formData.getHomeAddress())) {
-            newFormState.setAddressError(R.string.invalid_home_address);
-        } else if (!isCityValid(formData.getCity())){
-            newFormState.setAddressError(R.string.invalid_city);
+        if (!isNameValid(formData.getName())) {
+            newFormState.setNameError(R.string.invalid_name);
+        } else if (!isAgeValid(String.valueOf(formData.getAge()))) {
+            newFormState.setAgeError(R.string.invalid_age);
+        } else if (!isBiographyValid(formData.getBiography())) {
+            newFormState.setBiographyError(R.string.invalid_biography);
+        } else if (!isBreedValid(formData.getBreed())) {
+            newFormState.setBreedError(R.string.invalid_breed);
         }else {
             newFormState.setDataValid(true);
         }
 
-        registerFormState.setValue(newFormState);
+        createPetState.setValue(newFormState);
     }
 
     /**
-     * Return whether firstName is valid.
-     * @param firstName The user's first name
-     * @return whether firstName is valid
+     * Return whether name is valid.
+     * @param name The pet's name
+     * @return whether name is valid
      */
-    private boolean isFirstNameValid(String firstName){
-        return firstName != null && firstName.trim().length() > 2;
+    private boolean isNameValid(String name){
+        return name != null && name.trim().length() > 1;
     }
 
     /**
-     * Return whether lastName is valid.
-     * @param lName The user's last name
-     * @return whether lastName is valid
+     * Return whether age is valid.
+     * @param age The pet's age.
+     * @return whether age is valid
      */
-    private boolean isLastNameValid(String lName){
-        return lName != null && lName.trim().length() > 2;
+    private boolean isAgeValid(String age){
+        return age != null && age.trim().length() < 3;
     }
 
     /**
-     * Return whether email is valid
-     * @param email The user's email
+     * Return whether biography is valid
+     * @param biography The pet's biography
      * @return whether email is valid
      */
-    private boolean isEmailValid(String email) {
-        if (email == null) {
-            return false;
-        }
-        if (email.contains("@")) {
-            return Patterns.EMAIL_ADDRESS.matcher(email).matches();
-        } else {
-            return !email.trim().isEmpty();
-        }
+    private boolean isBiographyValid(String biography) {
+        return biography != null;
     }
 
     /**
-     * Return whether password is valid
-     * @param password The user's password
-     * @return whether password is valid
+     * Return whether breed is valid
+     * @param breed The user's password
+     * @return whether breed is valid
      */
-    private boolean isPasswordValid(String password) {
-        return password != null && password.length() > 5;
+    private boolean isBreedValid(String breed) {
+        return breed != null;
     }
 
-    /**
-     * Return whether password matches confirmPassword
-     * @param password The user's password
-     * @param confirmPassword The confirmPassword field value
-     * @return whether the two passwords match
-     */
-    private boolean doesConfirmPasswordMatch(String password, String confirmPassword) {
-        return password.equals(confirmPassword);
-    }
 
-    /**
-     * Return whether homeAddress is valid
-     * @param homeAddress The user's home address
-     * @return whether homeAddress is valid
-     */
-    private boolean isHomeAddressValid(String homeAddress) {
-        return homeAddress != null && homeAddress.trim().length() > 5;
-    }
-
-    /**
-     * Return whether city is valid
-     * @param city The user's city
-     * @return whether city is valid
-     */
-    private boolean isCityValid(String city) {
-        return city != null && city.trim().length() > 2;
-    }
 
 
     @Override

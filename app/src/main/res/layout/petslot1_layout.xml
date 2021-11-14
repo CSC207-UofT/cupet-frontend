@@ -21,5 +21,11 @@
         android:layout_height="wrap_content"
         android:text="Sign in" />
 
+    <Button
+        android:id="@+id/slot1_createprofile_button"
+        android:layout_width="178dp"
+        android:layout_height="wrap_content"
+        android:text="Create Profile" />
+
 
 </LinearLayout>

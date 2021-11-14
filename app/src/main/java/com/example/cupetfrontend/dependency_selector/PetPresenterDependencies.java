@@ -1,9 +1,10 @@
 package com.example.cupetfrontend.dependency_selector;
 
+import com.example.cupetfrontend.presenters.abstracts.ICreatePetPresenter;
 import com.example.cupetfrontend.presenters.pet.*;
 
 public class PetPresenterDependencies {
-    private CreatePetPresenter createPetPresenter;
+    private ICreatePetPresenter createPetPresenter;
     private EditPetPresenter editPetPresenter;
     private FetchPetProfilePresenter fetchPetProfilePresenter;
     private GetMatchesPresenter getMatchesPresenter;
@@ -21,8 +22,7 @@ public class PetPresenterDependencies {
         selectRejectMatchPresenter();
     }
 
-    private void selectCreatePetPresenter(){
-        createPetPresenter = new CreatePetPresenter();
+    private void selectCreatePetPresenter(){createPetPresenter = new CreatePetPresenter();
     }
 
     private void selectEditPetPresenter(){
@@ -49,7 +49,7 @@ public class PetPresenterDependencies {
         rejectMatchPresenter = new RejectMatchPresenter();
     }
 
-    public CreatePetPresenter getCreatePetPresenter() {
+    public ICreatePetPresenter getCreatePetPresenter() {
         return createPetPresenter;
     }
 

@@ -1,9 +1,20 @@
 package com.example.cupetfrontend;
 
+import android.content.Intent;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.*;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import androidx.lifecycle.Observer;
+import com.example.cupetfrontend.controllers.abstracts.IPetController;
+import com.example.cupetfrontend.dependency_selector.DependencySelector;
+import com.example.cupetfrontend.presenters.abstracts.ICreatePetPresenter;
+import com.example.cupetfrontend.presenters.abstracts.ICreateUserPresenter;
+import com.example.cupetfrontend.ui.login.LoginActivity;
+import com.example.cupetfrontend.ui.register.*;
 
 public class CreatePetActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     private Button confirm_button;
@@ -11,15 +22,29 @@ public class CreatePetActivity extends AppCompatActivity implements AdapterView.
     private String biography;
     private int age;
     private String breed;
+    private CreatePetViewModel createPetViewModel;
 
     EditText nameInput;
     EditText ageInput;
     EditText biographyInput;
 
+    private void setFieldError(EditText field, Integer errorState){
+        if (errorState != null){
+            field.setError(getString(errorState));
+        }
+    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_pet);
+
+
+        DependencySelector dependencySelector = ((App) getApplication()).getDependencySelector();
+        IPetController petController = dependencySelector.getControllers().getPetController();
+
+        ICreatePetPresenter createPetPresenter = dependencySelector.getPetPresenters().getCreatePetPresenter();
+        createPetViewModel = new CreatePetViewModel(petController);
+        createPetPresenter.setCreatePetViewModel(createPetViewModel);
 
         nameInput = (EditText) findViewById(R.id.Create_Pet_Name_Input);
         ageInput = (EditText) findViewById(R.id.Create_Pet_Age_Input);
@@ -33,40 +58,11 @@ public class CreatePetActivity extends AppCompatActivity implements AdapterView.
         breed_spinner.setAdapter(breedAdapter);
         breed_spinner.setOnItemSelectedListener(this);
 
-        Button confirm_button = (Button) findViewById(R.id.Confirm_pet_creation_button);
-        confirm_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                boolean is_valid = true;
-                String error = "The following errors occured: ";
-                name = nameInput.getText().toString();
-                age = Integer.parseInt(ageInput.getText().toString());
-                biography = biographyInput.getText().toString();
+        setUpObserveCreatePetState();
+        setUpObserveCreatePetResult();
+        setUpPetCreatedListener();
+        setUpCreatePetProfileButtonClickedListener();
 
-
-                if (age < 0) {
-                    is_valid = false;
-                    error += "The age must be greater than 0. ";
-                }
-                ;
-
-                if (name.length() <= 1) {
-                    is_valid = false;
-                    error += "The name of the pet must be longer than one character. ";
-
-                }
-                ;
-
-                if (!is_valid) {
-                    Toast.makeText(getApplicationContext(), error, Toast.LENGTH_LONG).show();
-                } else {
-                    CreatePetProfileData createPetProfileData= new CreatePetProfileData(name, age, biography, breed);
-                    String jsonData = createPetProfileData.toJSON();
-                    Toast.makeText(getApplicationContext(), jsonData, Toast.LENGTH_LONG).show();
-
-                };
-            }
-        });
     }
 
     @Override
@@ -79,5 +75,94 @@ public class CreatePetActivity extends AppCompatActivity implements AdapterView.
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
 
+    }
+
+    private void setUpObserveCreatePetState() {
+        createPetViewModel.getCreatePetState().observe(this, new Observer<CreatePetState>() {
+            @Override
+            public void onChanged(@Nullable CreatePetState createPetState) {
+                if (createPetState == null) {
+                    return;
+                }
+
+                setFieldError(nameInput, createPetState.getNameError());
+                setFieldError(ageInput, createPetState.getAgeError());
+                setFieldError(biographyInput, createPetState.getBiographyError());
+            }
+        });
+    }
+
+    private void setUpObserveCreatePetResult() {
+        createPetViewModel.getCreatePetResult().observe(this, new Observer<CreatePetResult>() {
+            @Override
+            public void onChanged(@Nullable CreatePetResult createPetResult) {
+                if (createPetResult == null) {
+                    return;
+                }
+
+                if (createPetResult.isError()){
+                    onCreatePetFailure(createPetResult.getErrorMessage());
+                }else{
+                    onCreatePetSuccess();
+                }
+
+                finish();
+            }
+        });
+    }
+
+    private void onCreatePetSuccess() {
+        Toast.makeText(getApplicationContext(), "Pet Profile Creation Success", Toast.LENGTH_SHORT).show();
+
+        Intent moveToLoginIntent = new Intent(CreatePetActivity.this, UserPetSlot1MatchingActivity.class);
+        startActivity(moveToLoginIntent);
+    }
+
+    private void onCreatePetFailure (String errorMessage) {
+        System.out.println("Pet Profile Creation failed");
+        Toast.makeText(getApplicationContext(), "Pet Profile Creation failed: " + errorMessage, Toast.LENGTH_SHORT).show();
+    }
+
+    private void setUpPetCreatedListener() {
+        TextWatcher listener = new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                // Override with empty method
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                // Override with empty method
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                CreatePetProfileData createPetProfileData = getCreatePetData();
+                createPetViewModel.updateFormState(createPetProfileData);
+            }
+        };
+
+        nameInput.addTextChangedListener(listener);
+        ageInput.addTextChangedListener(listener);
+        biographyInput.addTextChangedListener(listener);
+    }
+
+    private CreatePetProfileData getCreatePetData() {
+        CreatePetProfileData createPetProfileData = new CreatePetProfileData();
+        createPetProfileData.setName(nameInput.getText().toString());
+        createPetProfileData.setAge(Integer.parseInt(ageInput.getText().toString()));
+        createPetProfileData.setBiography(biographyInput.getText().toString());
+        createPetProfileData.setBreed(breed);
+
+        return createPetProfileData;
+    }
+
+    private void setUpCreatePetProfileButtonClickedListener() {
+        confirm_button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                CreatePetProfileData createPetProfileData = getCreatePetData();
+                createPetViewModel.createPetProfile(createPetProfileData);
+            }
+        });
     }
 }

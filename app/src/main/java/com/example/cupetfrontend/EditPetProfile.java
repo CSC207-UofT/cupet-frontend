@@ -57,8 +57,7 @@ public class EditPetProfile extends AppCompatActivity {
                     String jsonData = editprofiledata.toJSON();
                     Toast.makeText(getApplicationContext(), jsonData, Toast.LENGTH_LONG).show();
 
-                }
-                ;
+                };
 
             }
 

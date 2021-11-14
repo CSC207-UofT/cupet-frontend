@@ -9,13 +9,6 @@ public class CreatePetProfileData {
     private String biography;
     private String breed;
 
-    public CreatePetProfileData(String name, int age, String biography, String breed){
-        this.name = name;
-        this.age = age;
-        this.biography = biography;
-        this.breed = breed;
-
-    };
 
     public String getName(){
         return name;
