@@ -1,6 +1,5 @@
 package com.example.cupetfrontend;
 
-import android.view.ViewGroup;
 import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,13 +15,9 @@ import androidx.lifecycle.Observer;
 import com.example.cupetfrontend.App;
 import com.example.cupetfrontend.R;
 import com.example.cupetfrontend.controllers.abstracts.IPetController;
-import com.example.cupetfrontend.controllers.abstracts.IUserController;
 import com.example.cupetfrontend.dependency_selector.DependencySelector;
-import com.example.cupetfrontend.presenters.abstracts.ICreateUserPresenter;
 import com.example.cupetfrontend.presenters.abstracts.IGetMatchesPresenter;
-import com.example.cupetfrontend.ui.register.RegisterResult;
-import com.example.cupetfrontend.ui.register.RegisterViewModel;
-import com.example.cupetfrontend.use_cases.response_models.PetData;
+
 
 import java.util.List;
 
@@ -34,7 +29,7 @@ public class GetMatchesActivity extends AppCompatActivity {
 
     /**
      * Generate a table containing a list of pet names that have been successfully matched
-     * @param matches
+     * @param matches a list of the names of all matched pets
      */
 
     private void generateTable(List<String> matches){
