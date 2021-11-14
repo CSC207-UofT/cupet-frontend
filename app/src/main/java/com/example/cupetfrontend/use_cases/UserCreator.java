@@ -2,12 +2,12 @@ package com.example.cupetfrontend.use_cases;
 
 import com.example.cupetfrontend.use_cases.api_abstracts.IServerResponseListener;
 import com.example.cupetfrontend.use_cases.api_abstracts.IUserAPIGateway;
-import com.example.cupetfrontend.use_cases.api_abstracts.request_models.APICreateUserRequestModel;
-import com.example.cupetfrontend.use_cases.input_boundaries.UserCreatorInputBoundary;
-import com.example.cupetfrontend.use_cases.output_boundaries.UserCreatorOutputBoundary;
-import com.example.cupetfrontend.use_cases.request_models.UserCreatorRequestModel;
-import com.example.cupetfrontend.use_cases.response_models.UserCreatorFailResponseModel;
-import com.example.cupetfrontend.use_cases.response_models.UserCreatorSuccessResponseModel;
+import com.example.cupetfrontend.use_cases.api_abstracts.request_models.user.APICreateUserRequestModel;
+import com.example.cupetfrontend.use_cases.input_boundaries.user.UserCreatorInputBoundary;
+import com.example.cupetfrontend.use_cases.output_boundaries.user.UserCreatorOutputBoundary;
+import com.example.cupetfrontend.use_cases.request_models.user.UserCreatorRequestModel;
+import com.example.cupetfrontend.use_cases.response_models.user.UserCreatorFailResponseModel;
+import com.example.cupetfrontend.use_cases.response_models.user.UserCreatorSuccessResponseModel;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -23,7 +23,8 @@ public class UserCreator implements UserCreatorInputBoundary {
     public void createUser(UserCreatorRequestModel request) {
         APICreateUserRequestModel apiRequest = new APICreateUserRequestModel(
                 request.getFirstName(), request.getLastName(),
-                request.getEmail(), request.getPassword(), request.getHomeAddress());
+                request.getEmail(), request.getPassword(), request.getHomeAddress(),
+                request.getCity());
 
         userAPIGateway.createUser(apiRequest, new IServerResponseListener() {
             @Override
@@ -38,16 +39,21 @@ public class UserCreator implements UserCreatorInputBoundary {
         });
     }
 
+    /**
+     * Convert a JSONObject response to an instance of
+     * UserCreatorSuccessResponseModel.
+     *
+     * @param jsonResponse A JSON representation of the response.
+     * @return The response as a UserCreatorSuccessResponseModel
+     */
     private UserCreatorSuccessResponseModel toSuccessResponseModel(JSONObject jsonResponse) {
         try {
-            // TODO: The current API does not return a message; include a dummy message
-            //  replace with actual message once API is updated
             return new UserCreatorSuccessResponseModel(
-                    "temp_message",
                     jsonResponse.getString("firstName"),
                     jsonResponse.getString("lastName"),
                     jsonResponse.getString("homeAddress"),
                     jsonResponse.getString("email"),
+                    jsonResponse.getString("city"),
                     jsonResponse.getString("userId")
             );
         } catch (JSONException e) {
@@ -55,6 +61,13 @@ public class UserCreator implements UserCreatorInputBoundary {
         }
     }
 
+    /**
+     * Convert a JSONObject response to an instance of
+     * UserCreatorFailResponseModel.
+     *
+     * @param jsonResponse A JSON representation of the response.
+     * @return The response as a UserCreatorFailResponseModel
+     */
     private UserCreatorFailResponseModel toFailResponseModel(JSONObject jsonResponse) {
         // TODO: The current API does not return a message; include a dummy message
         //  replace with actual message once API is updated

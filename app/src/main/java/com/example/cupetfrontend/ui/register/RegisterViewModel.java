@@ -36,7 +36,8 @@ public class RegisterViewModel extends ViewModel implements IRegisterViewModel {
      */
     public void register(RegisterFormData formData){
         userController.createUser(formData.getFirstName(), formData.getLastName(),
-                formData.getEmail(), formData.getPassword(), formData.getHomeAddress());
+                formData.getEmail(), formData.getPassword(), formData.getHomeAddress(),
+                formData.getCity());
     }
 
     /**
@@ -58,6 +59,8 @@ public class RegisterViewModel extends ViewModel implements IRegisterViewModel {
             newFormState.setConfirmPasswordError(R.string.invalid_confirm_password);
         } else if (!isHomeAddressValid(formData.getHomeAddress())) {
             newFormState.setAddressError(R.string.invalid_home_address);
+        } else if (!isCityValid(formData.getCity())){
+            newFormState.setAddressError(R.string.invalid_city);
         }else {
             newFormState.setDataValid(true);
         }
@@ -127,10 +130,15 @@ public class RegisterViewModel extends ViewModel implements IRegisterViewModel {
         return homeAddress != null && homeAddress.trim().length() > 5;
     }
 
-
     /**
-     * @see IRegisterViewModel#onCreateUserSuccess()
+     * Return whether city is valid
+     * @param city The user's city
+     * @return whether city is valid
      */
+    private boolean isCityValid(String city) {
+        return city != null && city.trim().length() > 2;
+    }
+
     @Override
     public void onCreateUserSuccess() {
         RegisterResult newRegisterResult = new RegisterResult(false);
@@ -138,9 +146,6 @@ public class RegisterViewModel extends ViewModel implements IRegisterViewModel {
         registerResult.setValue(newRegisterResult);
     }
 
-    /**
-     * @see IRegisterViewModel#onCreateUserFailure(String)
-     */
     @Override
     public void onCreateUserFailure(String message) {
         RegisterResult newRegisterResult = new RegisterResult(true, message);

@@ -15,7 +15,6 @@
     <string name="action_sign_in">Sign in or register</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="welcome">"Welcome !"</string>
-    <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be longer than 5 characters</string>
     <string name="login_failed">"Login failed"</string>
     <string name="welcome_to_cupet">Welcome to Cupet!</string>
@@ -27,9 +26,11 @@
     <string name="password">Password:</string>
     <string name="last_name">Last Name</string>
     <string name="first_name">First Name</string>
+    <string name="city">City</string>
     <string name="invalid_first_name">Invalid First Name</string>
     <string name="invalid_last_name">Invalid Last Name</string>
     <string name="invalid_email">Invalid Email</string>
     <string name="invalid_confirm_password">Password\'s don\'t match</string>
     <string name="invalid_home_address">Invalid Home Address</string>
+    <string name="invalid_city">Invalid City</string>
 </resources>

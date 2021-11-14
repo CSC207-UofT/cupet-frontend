@@ -1,22 +1,77 @@
 package com.example.cupetfrontend.dependency_selector;
 
+import com.example.cupetfrontend.controllers.AuthController;
+import com.example.cupetfrontend.controllers.PetController;
 import com.example.cupetfrontend.controllers.UserController;
 import com.example.cupetfrontend.controllers.abstracts.IUserController;
-import com.example.cupetfrontend.use_cases.UserCreator;
+import com.example.cupetfrontend.use_cases.*;
+import com.example.cupetfrontend.use_cases.api_abstracts.IAuthAPIGateway;
+import com.example.cupetfrontend.use_cases.api_abstracts.IPetAPIGateway;
 import com.example.cupetfrontend.use_cases.api_abstracts.IUserAPIGateway;
 
 public class ControllerDependencies {
-    private IUserController userController;
+    private UserController userController;
+    private PetController petController;
+    private AuthController authController;
 
-    public ControllerDependencies(APIDependencies apiDependencies, PresenterDependencies presenters) {
-        selectUserController(apiDependencies.getUserAPIGateway(), presenters);
+    public ControllerDependencies(APIDependencies apiDependencies,
+                                  UserPresenterDependencies userPresenters,
+                                  PetPresenterDependencies petPresenters,
+                                  AuthPresenterDependencies authPresenters) {
+        selectUserController(apiDependencies.getUserAPIGateway(), userPresenters);
+        setPetController(apiDependencies.getPetAPIGateway(), petPresenters);
+        setAuthController(apiDependencies.getAuthAPIGateway(), authPresenters);
     }
 
-    private void selectUserController(IUserAPIGateway userAPIGateway, PresenterDependencies presenters) {
-        userController = new UserController(new UserCreator(userAPIGateway, presenters.getCreateUserPresenter()));
+    private void selectUserController(IUserAPIGateway userAPIGateway, UserPresenterDependencies presenters) {
+        userController = new UserController();
+
+        userController.setUserCreator(new UserCreator(userAPIGateway,
+                presenters.getCreateUserPresenter()));
+        userController.setEditUserAccount(new EditUserAccount(userAPIGateway,
+                presenters.getEditUserAccountPresenter()));
+        userController.setFetchUserAccount(new FetchUserAccount(userAPIGateway,
+                presenters.getFetchUserAccountPresenter()));
+        userController.setFetchUserProfile(new FetchUserProfile(userAPIGateway,
+                presenters.getFetchUserProfilePresenter()));
+        userController.setEditUserProfile(new EditUserProfile(userAPIGateway,
+                presenters.getEditUserProfilePresenter()));
+        userController.setGetPets(new GetPets(userAPIGateway,
+                presenters.getGetPetsPresenter()));
+    }
+
+    private void setPetController(IPetAPIGateway petAPIGateway, PetPresenterDependencies petPresenters){
+        petController = new PetController();
+
+        petController.setEditPet(new EditPet(petAPIGateway,
+                petPresenters.getEditPetPresenter()));
+        petController.setPetCreator(new PetCreator(petAPIGateway,
+                petPresenters.getCreatePetPresenter()));
+        petController.setFetchPetProfile(new FetchPetProfile(petAPIGateway,
+                petPresenters.getFetchPetProfilePresenter()));
+        petController.setGetMatches(new GetMatches(petAPIGateway,
+                petPresenters.getGetMatchesPresenter()));
+        petController.setIntendToMatch(new IntendToMatch(petAPIGateway,
+                petPresenters.getIntendToMatchPresenter()));
+        petController.setRejectMatch(new RejectMatch(petAPIGateway,
+                petPresenters.getRejectMatchPresenter()));
+    }
+
+    private void setAuthController(IAuthAPIGateway authAPIGateway,
+                                   AuthPresenterDependencies authPresenters){
+        authController = new AuthController(new LoginUseCase(authAPIGateway,
+                authPresenters.getLoginPresenter()));
     }
 
     public IUserController getUserController() {
         return userController;
+    }
+
+    public PetController getPetController() {
+        return petController;
+    }
+
+    public AuthController getAuthController() {
+        return authController;
     }
 }

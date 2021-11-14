@@ -19,6 +19,9 @@ public class RegisterFormState {
     private Integer confirmPasswordError;
     @Nullable
     private Integer addressError;
+    @Nullable
+    private Integer cityError;
+
     private boolean isDataValid;
 
     public RegisterFormState() {
@@ -28,6 +31,7 @@ public class RegisterFormState {
         this.passwordError = null;
         this.addressError = null;
         this.isDataValid = false;
+        this.cityError = null;
     }
 
     @Nullable
@@ -60,6 +64,11 @@ public class RegisterFormState {
         return confirmPasswordError;
     }
 
+    @Nullable
+    public Integer getCityError() {
+        return cityError;
+    }
+
     public void setFirstnameError(@Nullable Integer firstnameError) {
         this.firstnameError = firstnameError;
     }
@@ -82,6 +91,10 @@ public class RegisterFormState {
 
     public void setAddressError(@Nullable Integer addressError) {
         this.addressError = addressError;
+    }
+
+    public void setCityError(@Nullable Integer cityError) {
+        this.cityError = cityError;
     }
 
     public void setDataValid(boolean dataValid) {
