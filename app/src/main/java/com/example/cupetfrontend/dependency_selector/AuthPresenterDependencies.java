@@ -1,20 +1,21 @@
 package com.example.cupetfrontend.dependency_selector;
 
 import com.example.cupetfrontend.presenters.LoginPresenter;
+import com.example.cupetfrontend.presenters.abstracts.ILoginPresenter;
 import com.example.cupetfrontend.use_cases.output_boundaries.LoginOutputBoundary;
 
 public class AuthPresenterDependencies {
-    LoginOutputBoundary loginPresenter;
+    ILoginPresenter loginPresenter;
 
     public AuthPresenterDependencies() {
-
+        selectLoginPresenter();
     }
 
-    public void selectLoginPresenter() {
+    private void selectLoginPresenter() {
         loginPresenter = new LoginPresenter();
     }
 
-    public LoginOutputBoundary getLoginPresenter() {
+    public ILoginPresenter getLoginPresenter() {
         return loginPresenter;
     }
 }

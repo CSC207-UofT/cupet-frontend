@@ -13,11 +13,11 @@ import org.json.JSONObject;
  */
 public class JWTParser implements IJWTParser {
     @Override
-    public JSONObject parseJWT(String jwt) throws InvalidJWTException {
+    public String getSubject(String jwt) throws InvalidJWTException {
         try {
             DecodedJWT decodedJWT = JWT.decode(jwt);
-            return new JSONObject(decodedJWT.getPayload());
-        } catch (JWTDecodeException | JSONException exception){
+            return decodedJWT.getSubject();
+        } catch (JWTDecodeException e){
             throw new InvalidJWTException();
         }
     }

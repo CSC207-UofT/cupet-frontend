@@ -2,6 +2,7 @@ package com.example.cupetfrontend.ui.login;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.se.omapi.Session;
 import androidx.lifecycle.Observer;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
@@ -13,7 +14,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.cupetfrontend.App;
 import com.example.cupetfrontend.R;
+import com.example.cupetfrontend.controllers.InvalidJWTException;
+import com.example.cupetfrontend.controllers.abstracts.ISessionManager;
+import com.example.cupetfrontend.dependency_selector.DependencySelector;
+import com.example.cupetfrontend.ui.register.RegisterActivity;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -36,6 +42,8 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         loginViewModel = new LoginViewModelFactory().createLoginViewModel(this.getApplication());
+        DependencySelector dependencySelector = ((App) this.getApplication()).getDependencySelector();
+        dependencySelector.getAuthPresenters().getLoginPresenter().setLoginViewModel(loginViewModel);
 
         initializeViews();
 
@@ -43,6 +51,18 @@ public class LoginActivity extends AppCompatActivity {
         setUpObserveLoginResult();
         setUpFormEditedListener();
         setUpLoginButtonClickedListener();
+        setUpRegisterButtonClickedListener();
+
+    }
+
+    private void setUpRegisterButtonClickedListener() {
+        registerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent moveToRegisterIntent = new Intent(LoginActivity.this, RegisterActivity.class);
+                startActivity(moveToRegisterIntent);
+            }
+        });
     }
 
     private void setUpLoginButtonClickedListener() {
@@ -93,7 +113,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
 
                 // Complete and destroy login activity once successful
-                finish();
+//                finish();
             }
         });
     }
@@ -117,7 +137,21 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void onLoginSuccess(String token) {
-        Toast.makeText(getApplicationContext(), "Registration Success", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "Login Success", Toast.LENGTH_SHORT).show();
+        System.out.println("Successful login with token " + token);
+
+        DependencySelector dependencySelector = ((App) this.getApplication()).getDependencySelector();
+        ISessionManager sessionManager = dependencySelector.getSessionManager();
+
+        // TODO: Move the set token call into use cases through dependency injection
+        try {
+            sessionManager.setToken(token);
+            System.out.println("Logged in with user " + sessionManager.getUserId());
+        } catch (InvalidJWTException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("Successful login with token " + token);
 
         // TODO: Direct to new view
 //        Intent moveToLoginIntent = new Intent(LoginActivity.this, LoginActivity.class);

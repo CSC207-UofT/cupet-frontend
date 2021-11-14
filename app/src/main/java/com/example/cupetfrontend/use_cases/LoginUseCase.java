@@ -47,9 +47,10 @@ public class LoginUseCase implements LoginInputBoundary {
      */
     private LoginSuccessResponseModel toSuccessResponseModel(JSONObject jsonResponse) {
         try {
-            return new LoginSuccessResponseModel(jsonResponse.getString("token"));
+            JSONObject dataObj = new JSONObject(jsonResponse.getString("data"));
+            return new LoginSuccessResponseModel(dataObj.getString("jwt"));
         } catch (JSONException e) {
-            throw new InvalidAPIResponseException("The API gave an invalid successful create user response.");
+            throw new InvalidAPIResponseException("The API gave an invalid successful login response:" + jsonResponse);
         }
     }
 
@@ -61,8 +62,10 @@ public class LoginUseCase implements LoginInputBoundary {
      * @return The response as a LoginFailResponseModel
      */
     private LoginFailResponseModel toFailResponseModel(JSONObject jsonResponse) {
-        // TODO: The current API does not return a message; include a dummy message
-        //  replace with actual message once API is updated
-        return new LoginFailResponseModel("dummy_message");
+        try {
+            return new LoginFailResponseModel(jsonResponse.getString("message"));
+        } catch (JSONException e) {
+            throw new InvalidAPIResponseException("The API gave an invalid failed login response: " + jsonResponse);
+        }
     }
 }

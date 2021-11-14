@@ -8,12 +8,13 @@ import android.util.Patterns;
 import com.example.cupetfrontend.controllers.abstracts.IAuthController;
 import com.example.cupetfrontend.R;
 import com.example.cupetfrontend.data.LoginRepository;
+import com.example.cupetfrontend.presenters.view_model_abstracts.ILoginViewModel;
 
-public class LoginViewModel extends ViewModel {
+public class LoginViewModel extends ViewModel implements ILoginViewModel {
 
-    private MutableLiveData<LoginFormState> loginFormState = new MutableLiveData<>();
-    private MutableLiveData<LoginResult> loginResult = new MutableLiveData<>();
-    private IAuthController authController;
+    private final MutableLiveData<LoginFormState> loginFormState = new MutableLiveData<>();
+    private final MutableLiveData<LoginResult> loginResult = new MutableLiveData<>();
+    private final IAuthController authController;
 
     LoginViewModel(IAuthController authController) {
         this.authController = authController;
@@ -54,5 +55,18 @@ public class LoginViewModel extends ViewModel {
 
     private boolean isPasswordValid(String password) {
         return password != null && password.trim().length() > 5;
+    }
+
+    @Override
+    public void onLoginSuccess(String token) {
+        LoginResult newLoginResult = new LoginResult(false);
+        newLoginResult.setToken(token);
+
+        loginResult.setValue(newLoginResult);
+    }
+
+    @Override
+    public void onLoginFailure(String message) {
+        loginResult.setValue(new LoginResult(true, message));
     }
 }
