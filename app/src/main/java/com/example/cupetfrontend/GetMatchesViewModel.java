@@ -4,10 +4,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.cupetfrontend.controllers.abstracts.IPetController;
-import com.example.cupetfrontend.presenters.abstracts.IGetMatchesPresenter;
-import com.example.cupetfrontend.presenters.pet.GetMatchesPresenter;
 import com.example.cupetfrontend.presenters.view_model_abstracts.IGetMatchesViewModel;
-import com.example.cupetfrontend.ui.register.RegisterResult;
 
 import java.util.List;
 

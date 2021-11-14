@@ -103,5 +103,4 @@ public class GetMatchesActivity extends AppCompatActivity {
         System.out.println("Registration failed");
         Toast.makeText(getApplicationContext(), "Registration failed: " + errorMessage, Toast.LENGTH_SHORT).show();
     }
-
 }
