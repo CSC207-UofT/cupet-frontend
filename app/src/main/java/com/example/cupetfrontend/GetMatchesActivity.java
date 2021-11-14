@@ -39,18 +39,7 @@ public class GetMatchesActivity extends AppCompatActivity {
             TextView textPetName = new TextView(this);
             textPetName.setText(petName);
             textPetName.setLayoutParams(new TableRow.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
-            tr.addView(textPetName); // add tet view to row
-            // create new button
-//            Button contactInfoButton = new Button(this);
-//            contactInfoButton.setText(R.string.contact_info);
-//            contactInfoButton.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
-//            contactInfoButton.setOnClickListener(new View.OnClickListener() {
-//                public void onClick(View view) {
-//                    //TODO: Obtain and direct to Contact info page for specified pet's owner
-//                }
-//            });
-//            // add button to row
-//            tr.addView(contactInfoButton);
+            tr.addView(textPetName); // add text view to row
             // add row to layout
             matchesTable.addView(tr, new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
         }
