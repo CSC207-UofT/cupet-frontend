@@ -9,7 +9,8 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
-    <string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_login">Login Activity</string>
+    <string name="title_Get_Matches_Activity">Get Matches Activity</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
     <string name="action_sign_in">Sign in</string>
@@ -33,4 +34,5 @@
     <string name="invalid_confirm_password">Password\'s don\'t match</string>
     <string name="invalid_home_address">Invalid Home Address</string>
     <string name="invalid_city">Invalid City</string>
+    <string name="contact_info">Contact Info</string>
 </resources>
