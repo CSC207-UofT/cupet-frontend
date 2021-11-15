@@ -62,6 +62,10 @@ public class LoginViewModel extends ViewModel implements ILoginViewModel {
         LoginResult newLoginResult = new LoginResult(false);
         newLoginResult.setToken(token);
 
+        // TODO: Remove after demo
+        System.out.println("Login success with token: " + token);
+        System.out.println("Login success with user id: " + token);
+
         loginResult.setValue(newLoginResult);
     }
 

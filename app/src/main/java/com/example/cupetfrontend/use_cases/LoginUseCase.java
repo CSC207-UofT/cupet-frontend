@@ -28,7 +28,23 @@ public class LoginUseCase implements LoginInputBoundary {
         authAPIGateway.login(apiRequest, new IServerResponseListener() {
             @Override
             public void onRequestSuccess(JSONObject jsonResponse) {
-                outputBoundary.onLoginSuccess(toSuccessResponseModel(jsonResponse));
+                // TODO: Remove temporary code
+                //  The API currently does not support HTTP status codes, so we need this
+                //  code to prevent a runtime exception from crashing the application
+
+                try {
+                    if (jsonResponse.get("isSuccess").equals("true")){
+                        outputBoundary.onLoginSuccess(toSuccessResponseModel(jsonResponse));
+                    }else{
+                        outputBoundary.onLoginFailure(toFailResponseModel(jsonResponse));
+                    }
+                } catch (JSONException e) {
+                    throw new InvalidAPIResponseException(
+                            "The API gave an invalid login response:" + jsonResponse);
+                }
+
+                // TODO: Uncomment when API is updated.
+//                outputBoundary.onLoginSuccess(toSuccessResponseModel(jsonResponse));
             }
 
             @Override
