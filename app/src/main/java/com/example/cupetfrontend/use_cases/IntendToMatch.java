@@ -8,6 +8,9 @@ import com.example.cupetfrontend.use_cases.output_boundaries.pet.IntendToMatchOu
 import com.example.cupetfrontend.use_cases.request_models.pet.IntendToMatchRequestModel;
 import com.example.cupetfrontend.use_cases.response_models.pet.IntendToMatchFailResponseModel;
 import com.example.cupetfrontend.use_cases.response_models.pet.IntendToMatchSuccessResponseModel;
+import com.example.cupetfrontend.use_cases.response_models.user.FetchUserProfileFailResponseModel;
+import com.example.cupetfrontend.use_cases.response_models.user.FetchUserProfileSuccessResponseModel;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 public class IntendToMatch implements IntendToMatchInputBoundary {
@@ -46,11 +49,7 @@ public class IntendToMatch implements IntendToMatchInputBoundary {
      * @return The response as a IntendToMatchSuccessResponseModel
      */
     private IntendToMatchSuccessResponseModel toSuccessResponseModel(JSONObject jsonResponse) {
-//        try {
-            return new IntendToMatchSuccessResponseModel();
-//        } catch (JSONException e) {
-//            throw new InvalidAPIResponseException("The API gave an invalid successful create user response.");
-//        }
+        return new IntendToMatchSuccessResponseModel();
     }
 
     /**
@@ -61,8 +60,10 @@ public class IntendToMatch implements IntendToMatchInputBoundary {
      * @return The response as a IntendToMatchFailResponseModel
      */
     private IntendToMatchFailResponseModel toFailResponseModel(JSONObject jsonResponse) {
-        // TODO: The current API does not return a message; include a dummy message
-        //  replace with actual message once API is updated
-        return new IntendToMatchFailResponseModel("Sample Error Message");
+        try {
+            return new IntendToMatchFailResponseModel(jsonResponse.getString("message"));
+        } catch (JSONException e) {
+            throw new InvalidAPIResponseException("The API gave an invalid fail intend to match response");
+        }
     }
 }

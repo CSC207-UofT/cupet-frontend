@@ -8,6 +8,9 @@ import com.example.cupetfrontend.use_cases.output_boundaries.user.EditUserProfil
 import com.example.cupetfrontend.use_cases.request_models.user.EditUserProfileRequestModel;
 import com.example.cupetfrontend.use_cases.response_models.user.EditUserProfileFailResponseModel;
 import com.example.cupetfrontend.use_cases.response_models.user.EditUserProfileSuccessResponseModel;
+import com.example.cupetfrontend.use_cases.response_models.user.FetchUserAccountFailResponseModel;
+import com.example.cupetfrontend.use_cases.response_models.user.FetchUserAccountSuccessResponseModel;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 public class EditUserProfile implements EditUserProfileInputBoundary {
@@ -22,7 +25,8 @@ public class EditUserProfile implements EditUserProfileInputBoundary {
     @Override
     public void editUserProfile(EditUserProfileRequestModel request) {
         APIEditUserProfileRequestModel apiRequest = new APIEditUserProfileRequestModel(
-                request.getToken(), request.getNewBiography()
+                request.getToken(), request.getNewBiography(),
+                request.getNewInstagram(), request.getNewFacebook(), request.getNewPhoneNumber()
         );
 
         userAPIGateway.editUserProfile(apiRequest, new IServerResponseListener() {
@@ -46,12 +50,18 @@ public class EditUserProfile implements EditUserProfileInputBoundary {
      * @return The response as a FetchPetProfileSuccessResponseModel
      */
     private EditUserProfileSuccessResponseModel toSuccessResponseModel(JSONObject jsonResponse) {
-        // TODO: Waiting on backend implementation
-//        try {
-        return new EditUserProfileSuccessResponseModel();
-//        } catch (JSONException e) {
-//            throw new InvalidAPIResponseException("The API gave an invalid successful create user response.");
-//        }
+        try {
+            JSONObject dataObj = new JSONObject(jsonResponse.getString("data"));
+
+            return new EditUserProfileSuccessResponseModel(
+                    dataObj.getString("newBiography"),
+                    dataObj.getString("newInstagram"),
+                    dataObj.getString("newFacebook"),
+                    dataObj.getString("newPhoneNumber")
+            );
+        } catch (JSONException e) {
+            throw new InvalidAPIResponseException("The API gave an invalid successful edit user profile response.");
+        }
     }
 
     /**
@@ -62,8 +72,10 @@ public class EditUserProfile implements EditUserProfileInputBoundary {
      * @return The response as a FetchPetProfileFailResponseModel
      */
     private EditUserProfileFailResponseModel toFailResponseModel(JSONObject jsonResponse) {
-        // TODO: The current API does not return a message; include a dummy message
-        //  replace with actual message once API is updated
-        return new EditUserProfileFailResponseModel("Sample Error Message");
+        try {
+            return new EditUserProfileFailResponseModel(jsonResponse.getString("message"));
+        } catch (JSONException e) {
+            throw new InvalidAPIResponseException("The API gave an invalid edit user profile response");
+        }
     }
 }

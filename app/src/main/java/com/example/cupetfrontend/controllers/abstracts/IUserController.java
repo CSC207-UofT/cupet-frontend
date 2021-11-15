@@ -29,11 +29,14 @@ public interface IUserController {
     /**
      * Edit a user's profile
      *
-     * // TODO: add images and other contact info (other social media links)
      * @param token The login session token
      * @param newBiography The user's new biography
+     * @param newInstagram The user's new instagram handle
+     * @param newFacebook The user's new facebook handle
+     * @param newPhoneNumber The user's new phone number
      */
-    void editUserProfile(String token, String newBiography);
+    void editUserProfile(String token, String newBiography, String newInstagram,
+                         String newFacebook, String newPhoneNumber);
 
     /**
      * Fetch a user's account information

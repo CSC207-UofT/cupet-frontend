@@ -13,7 +13,7 @@ import org.json.JSONObject;
  */
 public class JWTParser implements IJWTParser {
     @Override
-    public String getSubject(String jwt) throws InvalidJWTException {
+    public String getSubject(String jwt) {
         try {
             DecodedJWT decodedJWT = JWT.decode(jwt);
             return decodedJWT.getSubject();

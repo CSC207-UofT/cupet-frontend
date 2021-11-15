@@ -18,12 +18,13 @@ public class ControllerDependencies {
                                   UserPresenterDependencies userPresenters,
                                   PetPresenterDependencies petPresenters,
                                   AuthPresenterDependencies authPresenters) {
-        selectUserController(apiDependencies.getUserAPIGateway(), userPresenters);
+        selectUserController(apiDependencies.getPetAPIGateway(),
+                apiDependencies.getUserAPIGateway(), userPresenters);
         setPetController(apiDependencies.getPetAPIGateway(), petPresenters);
         setAuthController(apiDependencies.getAuthAPIGateway(), authPresenters);
     }
 
-    private void selectUserController(IUserAPIGateway userAPIGateway, UserPresenterDependencies presenters) {
+    private void selectUserController(IPetAPIGateway petAPIGateway, IUserAPIGateway userAPIGateway, UserPresenterDependencies presenters) {
         userController = new UserController();
 
         userController.setUserCreator(new UserCreator(userAPIGateway,
@@ -36,7 +37,7 @@ public class ControllerDependencies {
                 presenters.getFetchUserProfilePresenter()));
         userController.setEditUserProfile(new EditUserProfile(userAPIGateway,
                 presenters.getEditUserProfilePresenter()));
-        userController.setGetPets(new GetPets(userAPIGateway,
+        userController.setGetPets(new GetPets(petAPIGateway, userAPIGateway,
                 presenters.getGetPetsPresenter()));
     }
 

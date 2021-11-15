@@ -1,6 +1,7 @@
 package com.example.cupetfrontend.drivers.api;
 
 import com.example.cupetfrontend.drivers.api.routes.PetRoutesStore;
+import com.example.cupetfrontend.drivers.api.routes.UserRoutesStore;
 import com.example.cupetfrontend.use_cases.api_abstracts.IPetAPIGateway;
 import com.example.cupetfrontend.use_cases.api_abstracts.IServerRequestManager;
 import com.example.cupetfrontend.use_cases.api_abstracts.IServerResponseListener;
@@ -21,6 +22,7 @@ public class PetAPIGateway extends APIGateway implements IPetAPIGateway {
     public void createPet(APICreatePetRequestModel requestData, IServerResponseListener responseListener) {
         Map<String, String> requestDataMap = new HashMap<>();
 
+        requestDataMap.put("userId", UserIdFetcher.getUserId(requestData.getToken()));
         requestDataMap.put("name", requestData.getName());
         requestDataMap.put("age", requestData.getAge());
         requestDataMap.put("breed", requestData.getBreed());
@@ -35,42 +37,78 @@ public class PetAPIGateway extends APIGateway implements IPetAPIGateway {
 
     @Override
     public void fetchPetProfile(APIFetchPetProfileRequestModel requestData, IServerResponseListener responseListener) {
-        Map<String, String> requestDataMap = new HashMap<>();
+        Map<String, String> queryParams = new HashMap<>();
 
-        requestDataMap.put("petId", requestData.getPetId());
-        JSONObject requestBody = new JSONObject(requestDataMap);
+        queryParams.put("petId", requestData.getPetId());
 
         String url = PetRoutesStore.toAbsoluteRoute(PetRoutesStore.FETCH_PET_PROFILE);
 
-        requestManager.makePostRequest(url, requestBody, createAuthHeaders(requestData.getToken()), responseListener);
+        requestManager.makeGetRequest(url, queryParams, createAuthHeaders(requestData.getToken()), responseListener);
     }
-
-    // TODO: Fill with dummy data until back-end is done
 
     @Override
     public void editPet(APIEditPetRequestModel requestData, IServerResponseListener responseListener) {
-        responseListener.onRequestSuccess(null);
+        JSONObject requestBody = new JSONObject(new HashMap<String, String>(){{
+            put("newName", requestData.getNewName());
+            put("newAge", requestData.getNewAge());
+            put("newBreed", requestData.getNewBreed());
+            put("newBiography", requestData.getNewBiography());
+            put("petId", requestData.getPetId());
+        }});
+
+        String url = PetRoutesStore.toAbsoluteRoute(PetRoutesStore.EDIT_PET_PROFILE);
+
+        requestManager.makePostRequest(url, requestBody,
+                createAuthHeaders(requestData.getToken()), responseListener);
     }
 
     @Override
     public void getPotentialMatches(APIGetPotentialMatchesRequestModel requestData, IServerResponseListener responseListener) {
-        responseListener.onRequestSuccess(null);
+        HashMap<String, String> queryParams = new HashMap<String, String>(){{
+            put("petId", requestData.getPetId());
+        }};
+
+        String url = PetRoutesStore.toAbsoluteRoute(PetRoutesStore.FETCH_PET_SWIPES);
+
+        requestManager.makeGetRequest(url, queryParams,
+                createAuthHeaders(requestData.getToken()), responseListener);
     }
 
     @Override
     public void intendToMatch(APIIntendToMatchRequestModel requestData, IServerResponseListener responseListener) {
-        responseListener.onRequestSuccess(null);
+        JSONObject requestBody = new JSONObject(new HashMap<String, String>(){{
+            put("pet1Id", requestData.getMyPetId());
+            put("pet2Id", requestData.getOtherPetId());
+        }});
+
+        String url = PetRoutesStore.toAbsoluteRoute(PetRoutesStore.REJECT_PETS);
+
+        requestManager.makePostRequest(url, requestBody,
+                createAuthHeaders(requestData.getToken()), responseListener);
     }
 
     @Override
     public void rejectMatch(APIRejectMatchRequestModel requestData, IServerResponseListener responseListener) {
-        responseListener.onRequestSuccess(null);
+        JSONObject requestBody = new JSONObject(new HashMap<String, String>(){{
+            put("pet1Id", requestData.getMyPetId());
+            put("pet2Id", requestData.getOtherPetId());
+        }});
+
+        String url = PetRoutesStore.toAbsoluteRoute(PetRoutesStore.SWIPE_PETS);
+
+        requestManager.makePostRequest(url, requestBody,
+                createAuthHeaders(requestData.getToken()), responseListener);
     }
 
     @Override
     public void getMatches(APIGetMatchesRequestModel requestData, IServerResponseListener responseListener) {
-        responseListener.onRequestSuccess(null);
+        HashMap<String, String> queryParams = new HashMap<String, String>(){{
+            put("petId", requestData.getMyPetId());
+        }};
+
+        String url = PetRoutesStore.toAbsoluteRoute(PetRoutesStore.FETCH_MATCHES);
+
+        requestManager.makeGetRequest(url, queryParams,
+                createAuthHeaders(requestData.getToken()), responseListener);
     }
-
-
 }

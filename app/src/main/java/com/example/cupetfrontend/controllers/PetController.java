@@ -62,8 +62,8 @@ public class PetController implements IPetController {
     }
 
     @Override
-    public void editPet(String token, String newName, String newAge, String newBreed, String newBiography) {
-        EditPetRequestModel request = new EditPetRequestModel(token, newName, newAge, newBreed, newBiography);
+    public void editPet(String token, String petId, String newName, String newAge, String newBreed, String newBiography) {
+        EditPetRequestModel request = new EditPetRequestModel(token, petId, newName, newAge, newBreed, newBiography);
 
         editPet.editPet(request);
     }

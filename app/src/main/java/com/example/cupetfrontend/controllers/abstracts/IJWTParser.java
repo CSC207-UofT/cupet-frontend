@@ -8,5 +8,5 @@ public interface IJWTParser {
      * Parse a JSON Web token and return the JWT's subject
      * @param jwt The JSON web token
      */
-    String getSubject(String jwt) throws InvalidJWTException;
+    String getSubject(String jwt);
 }

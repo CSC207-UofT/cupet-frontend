@@ -1,4 +1,4 @@
 package com.example.cupetfrontend.controllers;
 
-public class InvalidJWTException extends Exception{
+public class InvalidJWTException extends RuntimeException{
 }

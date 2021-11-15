@@ -8,6 +8,8 @@ import com.example.cupetfrontend.use_cases.output_boundaries.pet.FetchPetProfile
 import com.example.cupetfrontend.use_cases.request_models.pet.FetchPetProfileRequestModel;
 import com.example.cupetfrontend.use_cases.response_models.pet.FetchPetProfileFailResponseModel;
 import com.example.cupetfrontend.use_cases.response_models.pet.FetchPetProfileSuccessResponseModel;
+import com.example.cupetfrontend.use_cases.response_models.pet.PetCreatorSuccessResponseModel;
+import com.example.cupetfrontend.use_cases.response_models.user.FetchUserAccountFailResponseModel;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -48,14 +50,16 @@ public class FetchPetProfile implements FetchPetProfileInputBoundary {
      */
     private FetchPetProfileSuccessResponseModel toSuccessResponseModel(JSONObject jsonResponse) {
         try {
+            JSONObject dataObj = new JSONObject(jsonResponse.getString("data"));
+
             return new FetchPetProfileSuccessResponseModel(
-                    jsonResponse.getString("name"),
-                    jsonResponse.getString("age"),
-                    jsonResponse.getString("breed"),
-                    jsonResponse.getString("biography")
+                    dataObj.getString("name"),
+                    dataObj.getString("age"),
+                    dataObj.getString("breed"),
+                    dataObj.getString("biography")
             );
         } catch (JSONException e) {
-            throw new InvalidAPIResponseException("The API gave an invalid successful create user response.");
+            throw new InvalidAPIResponseException("The API gave an invalid successful fetch pet profile response.");
         }
     }
 
@@ -67,8 +71,10 @@ public class FetchPetProfile implements FetchPetProfileInputBoundary {
      * @return The response as a FetchPetProfileFailResponseModel
      */
     private FetchPetProfileFailResponseModel toFailResponseModel(JSONObject jsonResponse) {
-        // TODO: The current API does not return a message; include a dummy message
-        //  replace with actual message once API is updated
-        return new FetchPetProfileFailResponseModel("Sample Error Message");
+        try {
+            return new FetchPetProfileFailResponseModel(jsonResponse.getString("message"));
+        } catch (JSONException e) {
+            throw new InvalidAPIResponseException("The API gave an invalid fail fetch pet profile response");
+        }
     }
 }

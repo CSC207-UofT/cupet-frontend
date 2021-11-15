@@ -8,6 +8,9 @@ import com.example.cupetfrontend.use_cases.output_boundaries.user.EditUserAccoun
 import com.example.cupetfrontend.use_cases.request_models.user.EditUserAccountRequestModel;
 import com.example.cupetfrontend.use_cases.response_models.user.EditUserAccountFailResponseModel;
 import com.example.cupetfrontend.use_cases.response_models.user.EditUserAccountSuccessResponseModel;
+import com.example.cupetfrontend.use_cases.response_models.user.EditUserProfileFailResponseModel;
+import com.example.cupetfrontend.use_cases.response_models.user.EditUserProfileSuccessResponseModel;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 public class EditUserAccount implements EditUserAccountInputBoundary {
@@ -48,12 +51,19 @@ public class EditUserAccount implements EditUserAccountInputBoundary {
      * @return The response as a FetchPetProfileSuccessResponseModel
      */
     private EditUserAccountSuccessResponseModel toSuccessResponseModel(JSONObject jsonResponse) {
-        // TODO: Waiting on backend implementation
-//        try {
-            return new EditUserAccountSuccessResponseModel();
-//        } catch (JSONException e) {
-//            throw new InvalidAPIResponseException("The API gave an invalid successful create user response.");
-//        }
+        try {
+            JSONObject dataObj = new JSONObject(jsonResponse.getString("data"));
+
+            return new EditUserAccountSuccessResponseModel(
+                    dataObj.getString("newFirstName"),
+                    dataObj.getString("newLastName"),
+                    dataObj.getString("newEmail"),
+                    dataObj.getString("newCurrentAddress"),
+                    dataObj.getString("newCurrentCity")
+            );
+        } catch (JSONException e) {
+            throw new InvalidAPIResponseException("The API gave an invalid successful edit user account response.");
+        }
     }
 
     /**
@@ -64,8 +74,10 @@ public class EditUserAccount implements EditUserAccountInputBoundary {
      * @return The response as a FetchPetProfileFailResponseModel
      */
     private EditUserAccountFailResponseModel toFailResponseModel(JSONObject jsonResponse) {
-        // TODO: The current API does not return a message; include a dummy message
-        //  replace with actual message once API is updated
-        return new EditUserAccountFailResponseModel("Sample Error Message");
+        try {
+            return new EditUserAccountFailResponseModel(jsonResponse.getString("message"));
+        } catch (JSONException e) {
+            throw new InvalidAPIResponseException("The API gave an invalid edit user account response");
+        }
     }
 }

@@ -8,6 +8,8 @@ import com.example.cupetfrontend.use_cases.output_boundaries.pet.PetCreatorOutpu
 import com.example.cupetfrontend.use_cases.request_models.pet.PetCreatorRequestModel;
 import com.example.cupetfrontend.use_cases.response_models.pet.PetCreatorFailResponseModel;
 import com.example.cupetfrontend.use_cases.response_models.pet.PetCreatorSuccessResponseModel;
+import com.example.cupetfrontend.use_cases.response_models.user.FetchUserProfileFailResponseModel;
+import com.example.cupetfrontend.use_cases.response_models.user.FetchUserProfileSuccessResponseModel;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -48,15 +50,17 @@ public class PetCreator implements PetCreatorInputBoundary {
      */
     private PetCreatorSuccessResponseModel toSuccessResponseModel(JSONObject jsonResponse) {
         try {
+            JSONObject dataObj = new JSONObject(jsonResponse.getString("data"));
+
             return new PetCreatorSuccessResponseModel(
-                    jsonResponse.getString("name"),
-                    jsonResponse.getString("age"),
-                    jsonResponse.getString("name"),
-                    jsonResponse.getString("age"),
-                    jsonResponse.getString("age")
-            );
+                    dataObj.getString("name"),
+                    dataObj.getString("age"),
+                    dataObj.getString("breed"),
+                    dataObj.getString("biography"),
+                    dataObj.getString("petId")
+                    );
         } catch (JSONException e) {
-            throw new InvalidAPIResponseException("The API gave an invalid successful create user response.");
+            throw new InvalidAPIResponseException("The API gave an invalid successful create pet response.");
         }
     }
 
@@ -68,8 +72,10 @@ public class PetCreator implements PetCreatorInputBoundary {
      * @return The response as a PetCreatorFailResponseModel
      */
     private PetCreatorFailResponseModel toFailResponseModel(JSONObject jsonResponse) {
-        // TODO: The current API does not return a message; include a dummy message
-        //  replace with actual message once API is updated
-        return new PetCreatorFailResponseModel("Sample Error Message");
+        try {
+            return new PetCreatorFailResponseModel(jsonResponse.getString("message"));
+        } catch (JSONException e) {
+            throw new InvalidAPIResponseException("The API gave an invalid fail create pet response");
+        }
     }
 }

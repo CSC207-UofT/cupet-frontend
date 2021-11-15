@@ -13,9 +13,9 @@ public class APIGateway {
      * @param token The user's session token
      * @return An authentication header for a request
      */
-    public Map<String, String> createAuthHeaders(String token){
+    public Map<String, String> createAuthHeaders(String token) {
         return new HashMap<String, String>() {{
-            put("token", token);
+            put("Authorization", "Bearer " + token);
         }};
     }
 }

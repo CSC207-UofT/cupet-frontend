@@ -33,38 +33,77 @@ public class UserAPIGateway extends APIGateway implements IUserAPIGateway {
 
         JSONObject requestBody = new JSONObject(requestDataMap);
         String url = UserRoutesStore.toAbsoluteRoute(UserRoutesStore.CREATE_USER);
-        System.out.println("Sending out" + requestBody);
 
         requestManager.makePostRequest(url, requestBody, responseListener);
     }
 
     @Override
     public void fetchUserProfile(APIFetchUserProfileRequestModel requestData, IServerResponseListener responseListener) {
-        // TODO: Fill with real API calls once backend endpoints are done
-        responseListener.onRequestSuccess(null);
+        HashMap<String, String> queryParams = new HashMap<String, String>(){{
+            put("userId", UserIdFetcher.getUserId(requestData.getToken()));
+        }};
+
+        String url = UserRoutesStore.toAbsoluteRoute(UserRoutesStore.FETCH_USER_PROFILE);
+
+        requestManager.makeGetRequest(url, queryParams,
+                createAuthHeaders(requestData.getToken()), responseListener);
     }
 
     @Override
     public void editUserProfile(APIEditUserProfileRequestModel requestData, IServerResponseListener responseListener) {
-        // TODO: Fill with real API calls once backend endpoints are done
-        responseListener.onRequestSuccess(null);
+        JSONObject requestBody = new JSONObject(new HashMap<String, String>(){{
+            put("newBiography", requestData.getNewBiography());
+            put("newInstagram", requestData.getNewInstagram());
+            put("newFacebook", requestData.getNewFacebook());
+            put("newPhoneNumber", requestData.getNewPhoneNumber());
+            put("userId", UserIdFetcher.getUserId(requestData.getToken()));
+        }});
+
+        String url = UserRoutesStore.toAbsoluteRoute(UserRoutesStore.EDIT_USER_PROFILE);
+
+        requestManager.makePostRequest(url, requestBody,
+                createAuthHeaders(requestData.getToken()), responseListener);
     }
 
     @Override
     public void fetchUserAccount(APIFetchUserAccountRequestModel requestData, IServerResponseListener responseListener) {
-        // TODO: Fill with real API calls once backend endpoints are done
-        responseListener.onRequestSuccess(null);
+        HashMap<String, String> queryParams = new HashMap<String, String>(){{
+            put("userId", UserIdFetcher.getUserId(requestData.getToken()));
+        }};
+
+        String url = UserRoutesStore.toAbsoluteRoute(UserRoutesStore.FETCH_USER_ACCOUNT);
+
+        requestManager.makeGetRequest(url, queryParams,
+                createAuthHeaders(requestData.getToken()), responseListener);
     }
 
     @Override
     public void editUserAccount(APIEditUserAccountRequestModel requestData, IServerResponseListener responseListener) {
-        // TODO: Fill with real API calls once backend endpoints are done
-        responseListener.onRequestSuccess(null);
+        JSONObject requestBody = new JSONObject(new HashMap<String, String>(){{
+            put("newFirstName", requestData.getNewFirstName());
+            put("newLastName", requestData.getNewLastName());
+            put("newAddress", requestData.getNewHomeAddress());
+            put("newCity", requestData.getNewCity());
+            put("newPassword", requestData.getNewPassword());
+            put("newEmail", requestData.getNewEmail());
+            put("userId", UserIdFetcher.getUserId(requestData.getToken()));
+        }});
+
+        String url = UserRoutesStore.toAbsoluteRoute(UserRoutesStore.EDIT_USER_ACCOUNT);
+
+        requestManager.makePostRequest(url, requestBody,
+                createAuthHeaders(requestData.getToken()), responseListener);
     }
 
     @Override
     public void getPets(APIGetPetsRequestModel requestData, IServerResponseListener responseListener) {
-        // TODO: Fill with real API calls once backend endpoints are done
-        responseListener.onRequestSuccess(null);
+        HashMap<String, String> queryParams = new HashMap<String, String>(){{
+            put("userId", UserIdFetcher.getUserId(requestData.getToken()));
+        }};
+
+        String url = UserRoutesStore.toAbsoluteRoute(UserRoutesStore.FETCH_PETS);
+
+        requestManager.makeGetRequest(url, queryParams,
+                createAuthHeaders(requestData.getToken()), responseListener);
     }
 }
