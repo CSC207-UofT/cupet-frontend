@@ -20,7 +20,7 @@ public class SessionManager implements ISessionManager {
     }
 
     @Override
-    public void setToken(String token) throws InvalidJWTException{
+    public void setToken(String token) {
         userId = jwtParser.getSubject(token);
         jwtToken = token;
     }

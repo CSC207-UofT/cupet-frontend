@@ -17,7 +17,7 @@ public interface ISessionManager {
      * Set the current user's login token
      * @param token The user's token
      */
-    void setToken(String token) throws InvalidJWTException;
+    void setToken(String token);
 
     /**
      * Return the user id associated with the user's login token

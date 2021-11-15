@@ -39,7 +39,9 @@ public class UserAPIGateway extends APIGateway implements IUserAPIGateway {
 
     @Override
     public void fetchUserProfile(APIFetchUserProfileRequestModel requestData, IServerResponseListener responseListener) {
-        JSONObject requestBody = new JSONObject();
+        JSONObject requestBody = new JSONObject(new HashMap<String, String>(){{
+            put("userId", UserIdFetcher.getUserId(requestData.getToken()));
+        }});
 
         String url = UserRoutesStore.toAbsoluteRoute(UserRoutesStore.FETCH_USER_PROFILE);
 
@@ -51,6 +53,7 @@ public class UserAPIGateway extends APIGateway implements IUserAPIGateway {
     public void editUserProfile(APIEditUserProfileRequestModel requestData, IServerResponseListener responseListener) {
         JSONObject requestBody = new JSONObject(new HashMap<String, String>(){{
             put("newBiography", requestData.getNewBiography());
+            put("userId", UserIdFetcher.getUserId(requestData.getToken()));
         }});
 
         String url = UserRoutesStore.toAbsoluteRoute(UserRoutesStore.EDIT_USER_PROFILE);
@@ -61,7 +64,9 @@ public class UserAPIGateway extends APIGateway implements IUserAPIGateway {
 
     @Override
     public void fetchUserAccount(APIFetchUserAccountRequestModel requestData, IServerResponseListener responseListener) {
-        JSONObject requestBody = new JSONObject();
+        JSONObject requestBody = new JSONObject(new HashMap<String, String>(){{
+            put("userId", UserIdFetcher.getUserId(requestData.getToken()));
+        }});
 
         String url = UserRoutesStore.toAbsoluteRoute(UserRoutesStore.FETCH_USER_ACCOUNT);
 
@@ -78,6 +83,7 @@ public class UserAPIGateway extends APIGateway implements IUserAPIGateway {
             put("newCurrentCity", requestData.getNewCity());
             put("newPassword", requestData.getNewPassword());
             put("newEmail", requestData.getNewEmail());
+            put("userId", UserIdFetcher.getUserId(requestData.getToken()));
         }});
 
         String url = UserRoutesStore.toAbsoluteRoute(UserRoutesStore.EDIT_USER_ACCOUNT);
@@ -88,7 +94,9 @@ public class UserAPIGateway extends APIGateway implements IUserAPIGateway {
 
     @Override
     public void getPets(APIGetPetsRequestModel requestData, IServerResponseListener responseListener) {
-        JSONObject requestBody = new JSONObject();
+        JSONObject requestBody = new JSONObject(new HashMap<String, String>(){{
+            put("userId", UserIdFetcher.getUserId(requestData.getToken()));
+        }});
 
         String url = UserRoutesStore.toAbsoluteRoute(UserRoutesStore.FETCH_PETS);
 
