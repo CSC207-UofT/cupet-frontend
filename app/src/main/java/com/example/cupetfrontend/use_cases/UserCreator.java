@@ -29,7 +29,23 @@ public class UserCreator implements UserCreatorInputBoundary {
         userAPIGateway.createUser(apiRequest, new IServerResponseListener() {
             @Override
             public void onRequestSuccess(JSONObject jsonResponse) {
-                outputBoundary.onCreateUserSuccess(toSuccessResponseModel(jsonResponse));
+                // TODO: Remove temporary code
+                //  The API currently does not support HTTP status codes, so we need this
+                //  code to prevent a runtime exception from crashing the application
+
+                try {
+                    if (jsonResponse.get("isSuccess").equals("true")){
+                        outputBoundary.onCreateUserSuccess(toSuccessResponseModel(jsonResponse));
+                    }else{
+                        outputBoundary.onCreateUserFailure(toFailResponseModel(jsonResponse));
+                    }
+                } catch (JSONException e) {
+                    throw new InvalidAPIResponseException(
+                            "The API gave an invalid create user response:" + jsonResponse);
+                }
+
+                // TODO: Uncomment when API is updated.
+//                outputBoundary.onCreateUserSuccess(toSuccessResponseModel(jsonResponse));
             }
 
             @Override
@@ -60,7 +76,8 @@ public class UserCreator implements UserCreatorInputBoundary {
                     dataObj.getString("userId")
             );
         } catch (JSONException e) {
-            throw new InvalidAPIResponseException("The API gave an invalid successful create user response.");
+            throw new InvalidAPIResponseException(
+                    "The API gave an invalid successful create user response: " + jsonResponse);
         }
     }
 
@@ -75,7 +92,8 @@ public class UserCreator implements UserCreatorInputBoundary {
         try {
             return new UserCreatorFailResponseModel(jsonResponse.getString("message"));
         } catch (JSONException e) {
-            throw new InvalidAPIResponseException("The API gave an invalid failed create user response.");
+            throw new InvalidAPIResponseException(
+                    "The API gave an invalid failed create user response: " + jsonResponse);
         }
     }
 }
