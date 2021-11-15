@@ -39,13 +39,13 @@ public class UserAPIGateway extends APIGateway implements IUserAPIGateway {
 
     @Override
     public void fetchUserProfile(APIFetchUserProfileRequestModel requestData, IServerResponseListener responseListener) {
-        JSONObject requestBody = new JSONObject(new HashMap<String, String>(){{
+        HashMap<String, String> queryParams = new HashMap<String, String>(){{
             put("userId", UserIdFetcher.getUserId(requestData.getToken()));
-        }});
+        }};
 
         String url = UserRoutesStore.toAbsoluteRoute(UserRoutesStore.FETCH_USER_PROFILE);
 
-        requestManager.makeGetRequest(url, requestBody,
+        requestManager.makeGetRequest(url, queryParams,
                 createAuthHeaders(requestData.getToken()), responseListener);
     }
 
@@ -53,6 +53,9 @@ public class UserAPIGateway extends APIGateway implements IUserAPIGateway {
     public void editUserProfile(APIEditUserProfileRequestModel requestData, IServerResponseListener responseListener) {
         JSONObject requestBody = new JSONObject(new HashMap<String, String>(){{
             put("newBiography", requestData.getNewBiography());
+            put("newInstagram", requestData.getNewInstagram());
+            put("newFacebook", requestData.getNewFacebook());
+            put("newPhoneNumber", requestData.getNewPhoneNumber());
             put("userId", UserIdFetcher.getUserId(requestData.getToken()));
         }});
 
@@ -64,13 +67,13 @@ public class UserAPIGateway extends APIGateway implements IUserAPIGateway {
 
     @Override
     public void fetchUserAccount(APIFetchUserAccountRequestModel requestData, IServerResponseListener responseListener) {
-        JSONObject requestBody = new JSONObject(new HashMap<String, String>(){{
+        HashMap<String, String> queryParams = new HashMap<String, String>(){{
             put("userId", UserIdFetcher.getUserId(requestData.getToken()));
-        }});
+        }};
 
         String url = UserRoutesStore.toAbsoluteRoute(UserRoutesStore.FETCH_USER_ACCOUNT);
 
-        requestManager.makeGetRequest(url, requestBody,
+        requestManager.makeGetRequest(url, queryParams,
                 createAuthHeaders(requestData.getToken()), responseListener);
     }
 
@@ -79,8 +82,8 @@ public class UserAPIGateway extends APIGateway implements IUserAPIGateway {
         JSONObject requestBody = new JSONObject(new HashMap<String, String>(){{
             put("newFirstName", requestData.getNewFirstName());
             put("newLastName", requestData.getNewLastName());
-            put("newCurrentAddress", requestData.getNewHomeAddress());
-            put("newCurrentCity", requestData.getNewCity());
+            put("newAddress", requestData.getNewHomeAddress());
+            put("newCity", requestData.getNewCity());
             put("newPassword", requestData.getNewPassword());
             put("newEmail", requestData.getNewEmail());
             put("userId", UserIdFetcher.getUserId(requestData.getToken()));
@@ -94,13 +97,13 @@ public class UserAPIGateway extends APIGateway implements IUserAPIGateway {
 
     @Override
     public void getPets(APIGetPetsRequestModel requestData, IServerResponseListener responseListener) {
-        JSONObject requestBody = new JSONObject(new HashMap<String, String>(){{
+        HashMap<String, String> queryParams = new HashMap<String, String>(){{
             put("userId", UserIdFetcher.getUserId(requestData.getToken()));
-        }});
+        }};
 
         String url = UserRoutesStore.toAbsoluteRoute(UserRoutesStore.FETCH_PETS);
 
-        requestManager.makeGetRequest(url, requestBody,
+        requestManager.makeGetRequest(url, queryParams,
                 createAuthHeaders(requestData.getToken()), responseListener);
     }
 }

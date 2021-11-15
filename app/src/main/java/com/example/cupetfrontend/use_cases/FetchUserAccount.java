@@ -54,9 +54,9 @@ public class FetchUserAccount implements FetchUserAccountInputBoundary {
             return new FetchUserAccountSuccessResponseModel(
                     dataObj.getString("firstName"),
                     dataObj.getString("lastName"),
+                    dataObj.getString("email"),
                     dataObj.getString("currentAddress"),
-                    dataObj.getString("currentCity"),
-                    dataObj.getString("email")
+                    dataObj.getString("currentCity")
                     );
         } catch (JSONException e) {
             throw new InvalidAPIResponseException("The API gave an invalid successful fetch user response.");

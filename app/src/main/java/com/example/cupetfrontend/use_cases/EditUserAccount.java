@@ -58,7 +58,6 @@ public class EditUserAccount implements EditUserAccountInputBoundary {
                     dataObj.getString("newFirstName"),
                     dataObj.getString("newLastName"),
                     dataObj.getString("newEmail"),
-                    dataObj.getString("newPassword"),
                     dataObj.getString("newCurrentAddress"),
                     dataObj.getString("newCurrentCity")
             );

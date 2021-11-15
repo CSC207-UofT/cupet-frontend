@@ -35,9 +35,9 @@ public class AsyncTestClass {
      */
     public void awaitForTask(int ms) {
         try {
-            boolean didTimeElapseBeforeTask = latch.await(ms, TimeUnit.MILLISECONDS);
+            boolean didCompleteInTime = latch.await(ms, TimeUnit.MILLISECONDS);
 
-            if (didTimeElapseBeforeTask) {
+            if (!didCompleteInTime) {
                 fail("Async task ran out of time");
             }
         } catch (InterruptedException e) {

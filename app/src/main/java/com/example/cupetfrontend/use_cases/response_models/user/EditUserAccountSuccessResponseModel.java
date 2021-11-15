@@ -4,15 +4,13 @@ public class EditUserAccountSuccessResponseModel {
     private final String newFirstName;
     private final String newLastName;
     private final String newEmail;
-    private final String newPassword;
     private final String newCurrentAddress;
     private final String newCity;
 
-    public EditUserAccountSuccessResponseModel(String newFirstName, String newLastName, String newEmail, String newPassword, String newCurrentAddress, String newCity) {
+    public EditUserAccountSuccessResponseModel(String newFirstName, String newLastName, String newEmail, String newCurrentAddress, String newCity) {
         this.newFirstName = newFirstName;
         this.newLastName = newLastName;
         this.newEmail = newEmail;
-        this.newPassword = newPassword;
         this.newCurrentAddress = newCurrentAddress;
         this.newCity = newCity;
     }
@@ -27,10 +25,6 @@ public class EditUserAccountSuccessResponseModel {
 
     public String getNewEmail() {
         return newEmail;
-    }
-
-    public String getNewPassword() {
-        return newPassword;
     }
 
     public String getNewCurrentAddress() {

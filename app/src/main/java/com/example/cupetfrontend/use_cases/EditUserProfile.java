@@ -25,7 +25,8 @@ public class EditUserProfile implements EditUserProfileInputBoundary {
     @Override
     public void editUserProfile(EditUserProfileRequestModel request) {
         APIEditUserProfileRequestModel apiRequest = new APIEditUserProfileRequestModel(
-                request.getToken(), request.getNewBiography()
+                request.getToken(), request.getNewBiography(),
+                request.getNewInstagram(), request.getNewFacebook(), request.getNewPhoneNumber()
         );
 
         userAPIGateway.editUserProfile(apiRequest, new IServerResponseListener() {
@@ -53,7 +54,10 @@ public class EditUserProfile implements EditUserProfileInputBoundary {
             JSONObject dataObj = new JSONObject(jsonResponse.getString("data"));
 
             return new EditUserProfileSuccessResponseModel(
-                    dataObj.getString("newBiography")
+                    dataObj.getString("newBiography"),
+                    dataObj.getString("newInstagram"),
+                    dataObj.getString("newFacebook"),
+                    dataObj.getString("newPhoneNumber")
             );
         } catch (JSONException e) {
             throw new InvalidAPIResponseException("The API gave an invalid successful edit user profile response.");

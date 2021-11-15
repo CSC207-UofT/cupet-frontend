@@ -55,7 +55,10 @@ public class FetchUserProfile implements FetchUserProfileInputBoundary {
             return new FetchUserProfileSuccessResponseModel(
                     dataObj.getString("firstName"),
                     dataObj.getString("lastName"),
-                    dataObj.getString("biography")
+                    dataObj.getString("biography"),
+                    dataObj.getString("instagram"),
+                    dataObj.getString("facebook"),
+                    dataObj.getString("phoneNumber")
             );
         } catch (JSONException e) {
             throw new InvalidAPIResponseException("The API gave an invalid successful fetch user profile response.");

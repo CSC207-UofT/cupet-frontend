@@ -37,14 +37,13 @@ public class PetAPIGateway extends APIGateway implements IPetAPIGateway {
 
     @Override
     public void fetchPetProfile(APIFetchPetProfileRequestModel requestData, IServerResponseListener responseListener) {
-        Map<String, String> requestDataMap = new HashMap<>();
+        Map<String, String> queryParams = new HashMap<>();
 
-        requestDataMap.put("petId", requestData.getPetId());
-        JSONObject requestBody = new JSONObject(requestDataMap);
+        queryParams.put("petId", requestData.getPetId());
 
         String url = PetRoutesStore.toAbsoluteRoute(PetRoutesStore.FETCH_PET_PROFILE);
 
-        requestManager.makeGetRequest(url, requestBody, createAuthHeaders(requestData.getToken()), responseListener);
+        requestManager.makeGetRequest(url, queryParams, createAuthHeaders(requestData.getToken()), responseListener);
     }
 
     @Override
@@ -54,6 +53,7 @@ public class PetAPIGateway extends APIGateway implements IPetAPIGateway {
             put("newAge", requestData.getNewAge());
             put("newBreed", requestData.getNewBreed());
             put("newBiography", requestData.getNewBiography());
+            put("petId", requestData.getPetId());
         }});
 
         String url = PetRoutesStore.toAbsoluteRoute(PetRoutesStore.EDIT_PET_PROFILE);
@@ -64,13 +64,13 @@ public class PetAPIGateway extends APIGateway implements IPetAPIGateway {
 
     @Override
     public void getPotentialMatches(APIGetPotentialMatchesRequestModel requestData, IServerResponseListener responseListener) {
-        JSONObject requestBody = new JSONObject(new HashMap<String, String>(){{
+        HashMap<String, String> queryParams = new HashMap<String, String>(){{
             put("petId", requestData.getPetId());
-        }});
+        }};
 
         String url = PetRoutesStore.toAbsoluteRoute(PetRoutesStore.FETCH_PET_SWIPES);
 
-        requestManager.makeGetRequest(url, requestBody,
+        requestManager.makeGetRequest(url, queryParams,
                 createAuthHeaders(requestData.getToken()), responseListener);
     }
 
@@ -102,13 +102,13 @@ public class PetAPIGateway extends APIGateway implements IPetAPIGateway {
 
     @Override
     public void getMatches(APIGetMatchesRequestModel requestData, IServerResponseListener responseListener) {
-        JSONObject requestBody = new JSONObject(new HashMap<String, String>(){{
+        HashMap<String, String> queryParams = new HashMap<String, String>(){{
             put("petId", requestData.getMyPetId());
-        }});
+        }};
 
         String url = PetRoutesStore.toAbsoluteRoute(PetRoutesStore.FETCH_MATCHES);
 
-        requestManager.makePostRequest(url, requestBody,
+        requestManager.makeGetRequest(url, queryParams,
                 createAuthHeaders(requestData.getToken()), responseListener);
     }
 }

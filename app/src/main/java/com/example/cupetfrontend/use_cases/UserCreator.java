@@ -54,8 +54,8 @@ public class UserCreator implements UserCreatorInputBoundary {
             return new UserCreatorSuccessResponseModel(
                     dataObj.getString("firstName"),
                     dataObj.getString("lastName"),
-                    dataObj.getString("currentAddress"),
                     dataObj.getString("email"),
+                    dataObj.getString("currentAddress"),
                     dataObj.getString("currentCity"),
                     dataObj.getString("userId")
             );

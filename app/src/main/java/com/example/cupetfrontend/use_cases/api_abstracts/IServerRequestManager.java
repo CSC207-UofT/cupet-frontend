@@ -9,16 +9,17 @@ import java.util.Map;
  * requests to the back-end server.
  */
 public interface IServerRequestManager {
+
     /**
      * Make an HTTP GET request with a JSON body that expects a JSON
      * response.
      *
      * @param url The url of the HTTP request
-     * @param requestBody The body of the HTTP request as a JSONObject
+     * @param queryMap The query parameters for the request
      * @param headers The headers from the HTTP request
      * @param listener An object that listens to the server response
      */
-    void makeGetRequest(String url, JSONObject requestBody,
+    void makeGetRequest(String url, Map<String, String> queryMap,
                         Map<String, String> headers, IServerResponseListener listener);
 
     /**
@@ -26,10 +27,10 @@ public interface IServerRequestManager {
      * response.
      *
      * @param url The url of the HTTP request
-     * @param requestBody The body of the HTTP request as a JSONObject
+     * @param queryMap The query parameters for the request
      * @param listener An object that listens to the server response
      */
-    void makeGetRequest(String url, JSONObject requestBody, IServerResponseListener listener);
+    void makeGetRequest(String url, Map<String, String> queryMap, IServerResponseListener listener);
 
     /**
      * Make an HTTP POST request with a JSON body that expects a JSON

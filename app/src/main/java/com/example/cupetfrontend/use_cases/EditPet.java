@@ -30,7 +30,7 @@ public class EditPet implements EditPetInputBoundary {
     @Override
     public void editPet(EditPetRequestModel request) {
         APIEditPetRequestModel apiRequest = new APIEditPetRequestModel(
-                request.getToken(), request.getNewName(), request.getNewAge(),
+                request.getToken(), request.getPetId(), request.getNewName(), request.getNewAge(),
                 request.getNewBreed(), request.getNewBiography()
         );
 

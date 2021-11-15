@@ -1,6 +1,7 @@
 package com.example.cupetfrontend.drivers.api;
 
 import android.content.Context;
+import android.net.Uri;
 import android.os.Build;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
@@ -64,6 +65,22 @@ public class HTTPRequestManager implements IServerRequestManager {
      */
     public HTTPRequestManager(RequestQueue requestQueue) {
         this.requestQueue = requestQueue;
+    }
+
+    /**
+     * Attach query parameters to a URL.
+     *
+     * @param url The url
+     * @param queryMap A map representing the query parameters to add to the url
+     */
+    public String attachQueryParamsToUrl(String url, Map<String, String> queryMap){
+        Uri.Builder uriBuilder = Uri.parse(url).buildUpon();
+
+        for (String key : queryMap.keySet()){
+            uriBuilder.appendQueryParameter(key, queryMap.get(key));
+        }
+
+        return uriBuilder.toString();
     }
 
     /**
@@ -155,6 +172,8 @@ public class HTTPRequestManager implements IServerRequestManager {
                 // In this case, we are unable to decode the body of the response
                 // We instead send a default response JSON instead.
 
+                e.printStackTrace();
+
                 String defaultMessage = "Unable to decode response body";
                 Map<String, String> responseMap = new HashMap<>();
                 responseMap.put("message", defaultMessage);
@@ -170,12 +189,13 @@ public class HTTPRequestManager implements IServerRequestManager {
      * response.
      *
      * @param url The url of the HTTP request
-     * @param requestBody The body of the HTTP request as a JSONObject
+     * @param queryMap A map of query parameters
      * @param listener An object that listens to the server response
      */
     @Override
-    public void makeGetRequest(String url, JSONObject requestBody, IServerResponseListener listener) {
-        makeJSONRequest(Request.Method.GET, url, requestBody, listener);
+    public void makeGetRequest(String url, Map<String, String> queryMap, IServerResponseListener listener) {
+        makeJSONRequest(Request.Method.GET, attachQueryParamsToUrl(url, queryMap),
+                null, listener);
     }
 
     /**
@@ -183,14 +203,15 @@ public class HTTPRequestManager implements IServerRequestManager {
      * response.
      *
      * @param url The url of the HTTP request
-     * @param requestBody The body of the HTTP request as a JSONObject
+     * @param queryMap A map of query parameters
      * @param headers The headers of the HTTP request
      * @param listener An object that listens to the server response
      */
     @Override
-    public void makeGetRequest(String url, JSONObject requestBody,
+    public void makeGetRequest(String url, Map<String, String> queryMap,
                                Map<String, String> headers, IServerResponseListener listener) {
-        makeJSONRequest(Request.Method.GET, url, requestBody, headers, listener);
+        makeJSONRequest(Request.Method.GET, attachQueryParamsToUrl(url, queryMap),
+                null, headers, listener);
     }
 
     /**

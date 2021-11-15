@@ -8,6 +8,7 @@ import com.example.cupetfrontend.use_cases.response_models.PetData;
 import com.example.cupetfrontend.use_cases.response_models.pet.FetchPetProfileFailResponseModel;
 import com.example.cupetfrontend.use_cases.response_models.pet.FetchPetProfileSuccessResponseModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -27,6 +28,9 @@ public class GetPetDataList {
     public GetPetDataList(String token, IPetAPIGateway petAPIGateway,
                           GetPetDataListOutputBoundary outputBoundary) {
         this.token = token;
+        this.petDataList = new ArrayList<>();
+        this.petIds = new ArrayList<>();
+
         fetchPetProfile = new FetchPetProfile(petAPIGateway, new FetchPetProfileOutputBoundary() {
             @Override
             public void onFetchPetProfileSuccess(FetchPetProfileSuccessResponseModel response) {
@@ -62,7 +66,11 @@ public class GetPetDataList {
      */
     public void getPetDataList (List<String> petIds) {
         this.petIds = petIds;
-        sendNextRequest();
+        if (petIds.size() > 0){
+            sendNextRequest();
+        }else{
+            this.outputBoundary.onGetPetDataListSuccess(petDataList);
+        }
     }
 
     private void onFetchSingleProfileSuccess(FetchPetProfileSuccessResponseModel response) {
@@ -70,7 +78,7 @@ public class GetPetDataList {
                 response.getBreed(), response.getBiography(), petIds.get(currentIndex));
         petDataList.add(newPetData);
 
-        if (currentIndex < petIds.size()){
+        if (currentIndex + 1 < petIds.size()){
             sendNextRequest();
             currentIndex += 1;
         }else{

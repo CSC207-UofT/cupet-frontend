@@ -57,9 +57,10 @@ public class UserController implements IUserController {
     }
 
     @Override
-    public void editUserProfile(String token, String newBiography) {
+    public void editUserProfile(String token, String newBiography, String newInstagram,
+                                String newFacebook, String newPhoneNumber) {
         EditUserProfileRequestModel request = new EditUserProfileRequestModel(
-                token, newBiography);
+                token, newBiography, newInstagram, newFacebook, newPhoneNumber);
 
         editUserProfile.editUserProfile(request);
     }
