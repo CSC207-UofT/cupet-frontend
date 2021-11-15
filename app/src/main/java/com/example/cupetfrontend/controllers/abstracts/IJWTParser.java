@@ -5,8 +5,8 @@ import org.json.JSONObject;
 
 public interface IJWTParser {
     /**
-     * Parse a JSON Web token and return the payload inside as a JSONObject.
+     * Parse a JSON Web token and return the JWT's subject
      * @param jwt The JSON web token
      */
-    JSONObject parseJWT(String jwt) throws InvalidJWTException;
+    String getSubject(String jwt) throws InvalidJWTException;
 }

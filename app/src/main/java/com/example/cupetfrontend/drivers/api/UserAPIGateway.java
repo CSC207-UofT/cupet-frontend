@@ -26,9 +26,9 @@ public class UserAPIGateway extends APIGateway implements IUserAPIGateway {
 
         requestDataMap.put("firstName", requestData.getFirstName());
         requestDataMap.put("lastName", requestData.getLastName());
-        requestDataMap.put("homeAddress", requestData.getHomeAddress());
+        requestDataMap.put("currentAddress", requestData.getHomeAddress());
         requestDataMap.put("password", requestData.getPassword());
-        requestDataMap.put("email", requestData.getEmail());
+        requestDataMap.put("emailAddress", requestData.getEmail());
         requestDataMap.put("currentCity", requestData.getCity());
 
         JSONObject requestBody = new JSONObject(requestDataMap);
