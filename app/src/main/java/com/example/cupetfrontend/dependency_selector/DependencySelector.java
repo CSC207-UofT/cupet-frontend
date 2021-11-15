@@ -1,6 +1,9 @@
 package com.example.cupetfrontend.dependency_selector;
 
 import android.content.Context;
+import com.example.cupetfrontend.controllers.SessionManager;
+import com.example.cupetfrontend.controllers.abstracts.ISessionManager;
+import com.example.cupetfrontend.drivers.api.JWTParser;
 
 /**
  * This class stores all the dependencies used in the entire
@@ -12,6 +15,7 @@ public class DependencySelector {
     private final UserPresenterDependencies userPresenters;
     private final PetPresenterDependencies petPresenters;
     private final AuthPresenterDependencies authPresenters;
+    private final ISessionManager sessionManager;
 
     private final ControllerDependencies controllers;
 
@@ -23,6 +27,8 @@ public class DependencySelector {
 
         controllers = new ControllerDependencies(apiDependencies, userPresenters,
                 petPresenters, authPresenters);
+
+        sessionManager = new SessionManager(new JWTParser());
     }
 
     public APIDependencies getApiDependencies() {
@@ -43,5 +49,9 @@ public class DependencySelector {
 
     public AuthPresenterDependencies getAuthPresenters() {
         return authPresenters;
+    }
+
+    public ISessionManager getSessionManager() {
+        return sessionManager;
     }
 }
