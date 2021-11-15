@@ -11,7 +11,7 @@ import java.util.List;
 
 public class GetMatchesViewModel extends ViewModel implements IGetMatchesViewModel {
     private final MutableLiveData<GetMatchesResult> getMatchesResult = new MutableLiveData<>();
-    private IPetController petController;
+    private final IPetController petController;
 
 
     public GetMatchesViewModel(IPetController petController) {

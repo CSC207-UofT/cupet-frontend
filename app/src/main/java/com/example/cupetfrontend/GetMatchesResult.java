@@ -5,7 +5,7 @@ import androidx.annotation.Nullable;
 import java.util.List;
 
 /**
- * Registration result : success (user details) or error message.
+ * Get Matches result : success (user details) or error message.
  */
 
 public class GetMatchesResult {

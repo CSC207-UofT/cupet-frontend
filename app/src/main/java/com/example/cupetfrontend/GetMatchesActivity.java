@@ -3,16 +3,9 @@ package com.example.cupetfrontend;
 import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.content.Intent;
-import android.os.Bundle;
-import android.text.Editable;
-import android.view.View;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 
 import androidx.lifecycle.Observer;
-import com.example.cupetfrontend.App;
-import com.example.cupetfrontend.R;
 import com.example.cupetfrontend.controllers.abstracts.IPetController;
 import com.example.cupetfrontend.dependency_selector.DependencySelector;
 import com.example.cupetfrontend.presenters.abstracts.IGetMatchesPresenter;
@@ -23,7 +16,7 @@ public class GetMatchesActivity extends AppCompatActivity {
 
     private GetMatchesViewModel getMatchesViewModel;
 
-    final TableLayout matchesTable = findViewById(R.id.matches_table);
+    TableLayout matchesTable;
 
     /**
      * Generate a table containing a list of pet names that have been successfully matched
@@ -51,7 +44,7 @@ public class GetMatchesActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_successful_matches);
+        setContentView(R.layout.activity_get_matches);
         DependencySelector dependencySelector = ((App) getApplication()).getDependencySelector();
         IPetController petController = dependencySelector.getControllers().getPetController();
 
@@ -59,7 +52,9 @@ public class GetMatchesActivity extends AppCompatActivity {
         getMatchesViewModel = new GetMatchesViewModel(petController);
         getMatchesPresenter.setGetMatchesViewModel(getMatchesViewModel);
 
-        setUpObserveGetPetsResult();
+        matchesTable = findViewById(R.id.matches_table);
+
+        setUpObserveGetMatchesResult();
 
     }
 
@@ -69,7 +64,7 @@ public class GetMatchesActivity extends AppCompatActivity {
      *
      * Update the displayed views when the get matches result has changed.
      */
-    private void setUpObserveGetPetsResult() {
+    private void setUpObserveGetMatchesResult() {
         getMatchesViewModel.getMatchesResult().observe(this, new Observer<GetMatchesResult>() {
             @Override
             public void onChanged(@Nullable GetMatchesResult getMatchesResult) {
@@ -101,6 +96,6 @@ public class GetMatchesActivity extends AppCompatActivity {
      */
     private void onGetMatchesFailure (String errorMessage) {
         System.out.println("Registration failed");
-        Toast.makeText(getApplicationContext(), "Registration failed: " + errorMessage, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "Get Matches failed: " + errorMessage, Toast.LENGTH_SHORT).show();
     }
 }
