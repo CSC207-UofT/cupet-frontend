@@ -15,7 +15,14 @@
             android:theme="@style/Theme.CupetFrontEnd"
             android:usesCleartextTraffic="true"
             tools:targetApi="m">
-        <activity android:name=".GetMatchesActivity">
+        <activity android:name=".GetMatchesActivity"
+            android:exported="true"
+            android:label="@string/title_Get_Matches_Activity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
         </activity>
         <activity
                 android:name=".ui.login.LoginActivity"
