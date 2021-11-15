@@ -15,7 +15,7 @@ public class APIGateway {
      */
     public Map<String, String> createAuthHeaders(String token){
         return new HashMap<String, String>() {{
-            put("token", token);
+            put("Authorization", "Bearer " + token);
         }};
     }
 }
