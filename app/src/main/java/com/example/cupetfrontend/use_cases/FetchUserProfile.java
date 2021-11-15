@@ -6,8 +6,11 @@ import com.example.cupetfrontend.use_cases.api_abstracts.request_models.user.API
 import com.example.cupetfrontend.use_cases.input_boundaries.user.FetchUserProfileInputBoundary;
 import com.example.cupetfrontend.use_cases.output_boundaries.user.FetchUserProfileOutputBoundary;
 import com.example.cupetfrontend.use_cases.request_models.user.FetchUserProfileRequestModel;
+import com.example.cupetfrontend.use_cases.response_models.user.EditUserAccountSuccessResponseModel;
+import com.example.cupetfrontend.use_cases.response_models.user.FetchUserAccountFailResponseModel;
 import com.example.cupetfrontend.use_cases.response_models.user.FetchUserProfileFailResponseModel;
 import com.example.cupetfrontend.use_cases.response_models.user.FetchUserProfileSuccessResponseModel;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 public class FetchUserProfile implements FetchUserProfileInputBoundary {
@@ -46,13 +49,17 @@ public class FetchUserProfile implements FetchUserProfileInputBoundary {
      * @return The response as a FetchPetProfileSuccessResponseModel
      */
     private FetchUserProfileSuccessResponseModel toSuccessResponseModel(JSONObject jsonResponse) {
-        // TODO: Waiting on backend implementation
-//        try {
-        return new FetchUserProfileSuccessResponseModel(
-                "a", "b", "c");
-//        } catch (JSONException e) {
-//            throw new InvalidAPIResponseException("The API gave an invalid successful create user response.");
-//        }
+        try {
+            JSONObject dataObj = new JSONObject(jsonResponse.getString("data"));
+
+            return new FetchUserProfileSuccessResponseModel(
+                    dataObj.getString("firstName"),
+                    dataObj.getString("lastName"),
+                    dataObj.getString("biography")
+            );
+        } catch (JSONException e) {
+            throw new InvalidAPIResponseException("The API gave an invalid successful fetch user profile response.");
+        }
     }
 
     /**
@@ -63,8 +70,10 @@ public class FetchUserProfile implements FetchUserProfileInputBoundary {
      * @return The response as a FetchPetProfileFailResponseModel
      */
     private FetchUserProfileFailResponseModel toFailResponseModel(JSONObject jsonResponse) {
-        // TODO: The current API does not return a message; include a dummy message
-        //  replace with actual message once API is updated
-        return new FetchUserProfileFailResponseModel("Sample Error Message");
+        try {
+            return new FetchUserProfileFailResponseModel(jsonResponse.getString("message"));
+        } catch (JSONException e) {
+            throw new InvalidAPIResponseException("The API gave an invalid fail fetch user response");
+        }
     }
 }

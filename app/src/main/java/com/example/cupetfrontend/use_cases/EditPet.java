@@ -13,6 +13,8 @@ import com.example.cupetfrontend.use_cases.response_models.pet.EditPetFailRespon
 import com.example.cupetfrontend.use_cases.response_models.pet.EditPetSuccessResponseModel;
 import com.example.cupetfrontend.use_cases.response_models.pet.PetCreatorFailResponseModel;
 import com.example.cupetfrontend.use_cases.response_models.pet.PetCreatorSuccessResponseModel;
+import com.example.cupetfrontend.use_cases.response_models.user.EditUserAccountFailResponseModel;
+import com.example.cupetfrontend.use_cases.response_models.user.EditUserAccountSuccessResponseModel;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -53,11 +55,18 @@ public class EditPet implements EditPetInputBoundary {
      * @return The response as a EditPetSuccessResponseModel
      */
     private EditPetSuccessResponseModel toSuccessResponseModel(JSONObject jsonResponse) {
-//        try {
-            return new EditPetSuccessResponseModel();
-//        } catch (JSONException e) {
-//            throw new InvalidAPIResponseException("The API gave an invalid successful create user response.");
-//        }
+        try {
+            JSONObject dataObj = new JSONObject(jsonResponse.getString("data"));
+
+            return new EditPetSuccessResponseModel(
+                    dataObj.getString("name"),
+                    dataObj.getString("age"),
+                    dataObj.getString("breed"),
+                    dataObj.getString("biography")
+            );
+        } catch (JSONException e) {
+            throw new InvalidAPIResponseException("The API gave an invalid successful edit petresponse.");
+        }
     }
 
     /**
@@ -68,8 +77,10 @@ public class EditPet implements EditPetInputBoundary {
      * @return The response as a EditPetFailResponseModel
      */
     private EditPetFailResponseModel toFailResponseModel(JSONObject jsonResponse) {
-        // TODO: The current API does not return a message; include a dummy message
-        //  replace with actual message once API is updated
-        return new EditPetFailResponseModel("Sample Error Message");
+        try {
+            return new EditPetFailResponseModel(jsonResponse.getString("message"));
+        } catch (JSONException e) {
+            throw new InvalidAPIResponseException("The API gave an invalid edit pet response");
+        }
     }
 }
