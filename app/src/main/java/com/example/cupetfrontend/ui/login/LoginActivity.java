@@ -146,12 +146,10 @@ public class LoginActivity extends AppCompatActivity {
         // TODO: Move the set token call into use cases through dependency injection
         try {
             sessionManager.setToken(token);
-            System.out.println("Logged in with user " + sessionManager.getUserId());
+            System.out.println("Successful login with user " + sessionManager.getUserId());
         } catch (InvalidJWTException e) {
             e.printStackTrace();
         }
-
-        System.out.println("Successful login with token " + token);
 
         // TODO: Direct to new view
 //        Intent moveToLoginIntent = new Intent(LoginActivity.this, LoginActivity.class);

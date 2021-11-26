@@ -60,7 +60,7 @@ public class RegisterViewModel extends ViewModel implements IRegisterViewModel {
         } else if (!isHomeAddressValid(formData.getHomeAddress())) {
             newFormState.setAddressError(R.string.invalid_home_address);
         } else if (!isCityValid(formData.getCity())){
-            newFormState.setAddressError(R.string.invalid_city);
+            newFormState.setCityError(R.string.invalid_city);
         }else {
             newFormState.setDataValid(true);
         }

@@ -16,8 +16,9 @@ public class PetController implements IPetController {
     EditPetInputBoundary editPet;
     GetPotentialMatchesInputBoundary getPotentialMatches;
     IntendToMatchInputBoundary intendToMatch;
-    RejectMatch rejectMatch;
+    RejectMatchInputBoundary rejectMatch;
     GetMatchesInputBoundary getMatches;
+    UnMatchPetInputBoundary unMatchPet;
 
     public void setPetCreator(PetCreatorInputBoundary petCreator) {
         this.petCreator = petCreator;
@@ -39,12 +40,16 @@ public class PetController implements IPetController {
         this.intendToMatch = intendToMatch;
     }
 
-    public void setRejectMatch(RejectMatch rejectMatch) {
+    public void setRejectMatch(RejectMatchInputBoundary rejectMatch) {
         this.rejectMatch = rejectMatch;
     }
 
     public void setGetMatches(GetMatchesInputBoundary getMatches) {
         this.getMatches = getMatches;
+    }
+
+    public void setUnMatchPet(UnMatchPetInputBoundary unMatchPet) {
+        this.unMatchPet = unMatchPet;
     }
 
     @Override
@@ -94,5 +99,12 @@ public class PetController implements IPetController {
         RejectMatchRequestModel request = new RejectMatchRequestModel(token, myPetId, otherPetId);
 
         rejectMatch.rejectMatch(request);
+    }
+
+    @Override
+    public void unMatchPet(String token, String myPetId, String otherPetId) {
+        UnMatchPetRequestModel request = new UnMatchPetRequestModel(token, myPetId, otherPetId);
+
+        unMatchPet.unMatchPet(request);
     }
 }
