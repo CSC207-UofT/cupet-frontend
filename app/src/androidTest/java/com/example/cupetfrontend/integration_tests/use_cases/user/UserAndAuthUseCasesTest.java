@@ -14,8 +14,8 @@ import com.example.cupetfrontend.use_cases.output_boundaries.LoginOutputBoundary
 import com.example.cupetfrontend.use_cases.output_boundaries.user.*;
 import com.example.cupetfrontend.use_cases.request_models.LoginRequestModel;
 import com.example.cupetfrontend.use_cases.request_models.user.*;
-import com.example.cupetfrontend.use_cases.response_models.LoginFailResponseModel;
 import com.example.cupetfrontend.use_cases.response_models.LoginSuccessResponseModel;
+import com.example.cupetfrontend.use_cases.response_models.pet.DefaultFailureResponseModel;
 import com.example.cupetfrontend.use_cases.response_models.user.*;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
@@ -95,7 +95,7 @@ public class UserAndAuthUseCasesTest extends AsyncTestClass {
             }
 
             @Override
-            public void onCreateUserFailure(UserCreatorFailResponseModel response) {
+            public void onCreateUserFailure(DefaultFailureResponseModel response) {
                 fail("Request incorrectly failed " + response.getErrorMessage());
             }
         }).createUser(newUserRequest);
@@ -116,7 +116,7 @@ public class UserAndAuthUseCasesTest extends AsyncTestClass {
             }
 
             @Override
-            public void onLoginFailure(LoginFailResponseModel response) {
+            public void onLoginFailure(DefaultFailureResponseModel response) {
                 fail("Request incorrectly failed " + response.getErrorMessage());
             }
         }).login(request);
@@ -142,7 +142,7 @@ public class UserAndAuthUseCasesTest extends AsyncTestClass {
             }
 
             @Override
-            public void onFetchUserAccountFailure(FetchUserAccountFailResponseModel response) {
+            public void onFetchUserAccountFailure(DefaultFailureResponseModel response) {
                 fail("Request incorrectly failed " + response.getErrorMessage());
             }
         }).fetchUserAccount(request);
@@ -170,7 +170,7 @@ public class UserAndAuthUseCasesTest extends AsyncTestClass {
             }
 
             @Override
-            public void onEditUserAccountFailure(EditUserAccountFailResponseModel response) {
+            public void onEditUserAccountFailure(DefaultFailureResponseModel response) {
                 fail("Request incorrectly failed " + response.getErrorMessage());
             }
         }).editUserAccount(request);
@@ -198,7 +198,7 @@ public class UserAndAuthUseCasesTest extends AsyncTestClass {
             }
 
             @Override
-            public void onEditUserProfileFailure(EditUserProfileFailResponseModel response) {
+            public void onEditUserProfileFailure(DefaultFailureResponseModel response) {
                 fail("Request incorrectly failed " + response.getErrorMessage());
             }
         }).editUserProfile(request);
@@ -223,7 +223,7 @@ public class UserAndAuthUseCasesTest extends AsyncTestClass {
             }
 
             @Override
-            public void onFetchUserProfileFailure(FetchUserProfileFailResponseModel response) {
+            public void onFetchUserProfileFailure(DefaultFailureResponseModel response) {
                 fail("Request incorrectly failed " + response.getErrorMessage());
             }
         }).fetchUserProfile(request);

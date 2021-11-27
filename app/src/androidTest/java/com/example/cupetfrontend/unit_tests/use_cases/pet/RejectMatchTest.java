@@ -1,15 +1,10 @@
 package com.example.cupetfrontend.unit_tests.use_cases.pet;
 
 import com.example.cupetfrontend.unit_tests.use_cases.UseCaseTestClass;
-import com.example.cupetfrontend.use_cases.IntendToMatch;
 import com.example.cupetfrontend.use_cases.RejectMatch;
-import com.example.cupetfrontend.use_cases.output_boundaries.pet.IntendToMatchOutputBoundary;
 import com.example.cupetfrontend.use_cases.output_boundaries.pet.RejectMatchOutputBoundary;
-import com.example.cupetfrontend.use_cases.request_models.pet.IntendToMatchRequestModel;
 import com.example.cupetfrontend.use_cases.request_models.pet.RejectMatchRequestModel;
-import com.example.cupetfrontend.use_cases.response_models.pet.IntendToMatchFailResponseModel;
-import com.example.cupetfrontend.use_cases.response_models.pet.IntendToMatchSuccessResponseModel;
-import com.example.cupetfrontend.use_cases.response_models.pet.RejectMatchFailResponseModel;
+import com.example.cupetfrontend.use_cases.response_models.pet.DefaultFailureResponseModel;
 import com.example.cupetfrontend.use_cases.response_models.pet.RejectMatchSuccessResponseModel;
 import org.junit.Test;
 
@@ -29,7 +24,7 @@ public class RejectMatchTest extends UseCaseTestClass {
             }
 
             @Override
-            public void onRejectMatchFailure(RejectMatchFailResponseModel response) {
+            public void onRejectMatchFailure(DefaultFailureResponseModel response) {
                 fail("Request incorrectly failed");
             }
         }).rejectMatch(request);
@@ -49,7 +44,7 @@ public class RejectMatchTest extends UseCaseTestClass {
             }
 
             @Override
-            public void onRejectMatchFailure(RejectMatchFailResponseModel response) {
+            public void onRejectMatchFailure(DefaultFailureResponseModel response) {
                 assertEquals(response.getErrorMessage(), "dummy error message");
 
                 setTaskComplete();            }

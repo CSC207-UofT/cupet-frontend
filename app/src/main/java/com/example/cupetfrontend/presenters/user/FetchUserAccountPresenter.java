@@ -1,7 +1,7 @@
 package com.example.cupetfrontend.presenters.user;
 
 import com.example.cupetfrontend.use_cases.output_boundaries.user.FetchUserAccountOutputBoundary;
-import com.example.cupetfrontend.use_cases.response_models.user.FetchUserAccountFailResponseModel;
+import com.example.cupetfrontend.use_cases.response_models.pet.DefaultFailureResponseModel;
 import com.example.cupetfrontend.use_cases.response_models.user.FetchUserAccountSuccessResponseModel;
 
 public class FetchUserAccountPresenter implements FetchUserAccountOutputBoundary {
@@ -13,7 +13,7 @@ public class FetchUserAccountPresenter implements FetchUserAccountOutputBoundary
     }
 
     @Override
-    public void onFetchUserAccountFailure(FetchUserAccountFailResponseModel response) {
+    public void onFetchUserAccountFailure(DefaultFailureResponseModel response) {
 
     }
 }

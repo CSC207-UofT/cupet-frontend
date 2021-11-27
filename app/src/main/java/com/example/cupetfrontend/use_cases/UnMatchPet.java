@@ -6,12 +6,10 @@ import com.example.cupetfrontend.use_cases.api_abstracts.request_models.pet.APIU
 import com.example.cupetfrontend.use_cases.input_boundaries.pet.UnMatchPetInputBoundary;
 import com.example.cupetfrontend.use_cases.output_boundaries.pet.UnMatchPetOutputBoundary;
 import com.example.cupetfrontend.use_cases.request_models.pet.UnMatchPetRequestModel;
-import com.example.cupetfrontend.use_cases.response_models.pet.UnMatchPetFailureResponseModel;
 import com.example.cupetfrontend.use_cases.response_models.pet.UnMatchPetSuccessResponseModel;
-import org.json.JSONException;
 import org.json.JSONObject;
 
-public class UnMatchPet implements UnMatchPetInputBoundary {
+public class UnMatchPet extends DefaultFailResponseUseCase implements UnMatchPetInputBoundary {
     IPetAPIGateway petAPIGateway;
     UnMatchPetOutputBoundary outputBoundary;
 
@@ -48,20 +46,5 @@ public class UnMatchPet implements UnMatchPetInputBoundary {
      */
     private UnMatchPetSuccessResponseModel toSuccessResponseModel(JSONObject jsonResponse) {
         return new UnMatchPetSuccessResponseModel();
-    }
-
-    /**
-     * Convert a JSONObject response to an instance of
-     * UnMatchPetFailureResponseModel.
-     *
-     * @param jsonResponse A JSON representation of the response.
-     * @return The response as a PetCreatorFailResponseModel
-     */
-    private UnMatchPetFailureResponseModel toFailResponseModel(JSONObject jsonResponse) {
-        try {
-            return new UnMatchPetFailureResponseModel(jsonResponse.getString("message"));
-        } catch (JSONException e) {
-            throw new InvalidAPIResponseException("The API gave an invalid reject match response");
-        }
     }
 }

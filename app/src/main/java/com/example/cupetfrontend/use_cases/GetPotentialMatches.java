@@ -43,9 +43,7 @@ public class GetPotentialMatches extends UsesPetDataWrapper implements GetPotent
 
                     @Override
                     public void onGetPetDataListFailure(String errorMessage) {
-                        outputBoundary.onGetPotentialMatchesFailure(new GetPotentialMatchesFailResponseModel(
-                                errorMessage
-                        ));
+                        outputBoundary.onGetPotentialMatchesFailure(toFailResponseModel(errorMessage));
                     }
                 });
             }
@@ -55,20 +53,5 @@ public class GetPotentialMatches extends UsesPetDataWrapper implements GetPotent
                 outputBoundary.onGetPotentialMatchesFailure(toFailResponseModel(jsonResponse));
             }
         });
-    }
-
-    /**
-     * Convert a JSONObject response to an instance of
-     * PetCreatorFailResponseModel.
-     *
-     * @param jsonResponse A JSON representation of the response.
-     * @return The response as a PetCreatorFailResponseModel
-     */
-    private GetPotentialMatchesFailResponseModel toFailResponseModel(JSONObject jsonResponse) {
-        try {
-            return new GetPotentialMatchesFailResponseModel(jsonResponse.getString("message"));
-        } catch (JSONException e) {
-            throw new InvalidAPIResponseException("The API gave an invalid fail intend to match response");
-        }
     }
 }

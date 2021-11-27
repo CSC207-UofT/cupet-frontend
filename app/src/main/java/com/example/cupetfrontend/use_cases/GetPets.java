@@ -9,9 +9,7 @@ import com.example.cupetfrontend.use_cases.output_boundaries.pet.GetPetDataListO
 import com.example.cupetfrontend.use_cases.output_boundaries.user.GetPetsOutputBoundary;
 import com.example.cupetfrontend.use_cases.request_models.user.GetPetsRequestModel;
 import com.example.cupetfrontend.use_cases.response_models.PetData;
-import com.example.cupetfrontend.use_cases.response_models.user.GetPetsFailResponseModel;
 import com.example.cupetfrontend.use_cases.response_models.user.GetPetsSuccessResponseModel;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.List;
@@ -46,9 +44,7 @@ public class GetPets extends UsesPetDataWrapper implements GetPetsInputBoundary 
 
                     @Override
                     public void onGetPetDataListFailure(String errorMessage) {
-                        outputBoundary.onGetPetsFailure(new GetPetsFailResponseModel(
-                                errorMessage
-                        ));
+                        outputBoundary.onGetPetsFailure(toFailResponseModel(errorMessage));
                     }
                 });
             }
@@ -58,20 +54,5 @@ public class GetPets extends UsesPetDataWrapper implements GetPetsInputBoundary 
                 outputBoundary.onGetPetsFailure(toFailResponseModel(jsonResponse));
             }
         });
-    }
-
-    /**
-     * Convert a JSONObject response to an instance of
-     * GetPetsFailResponseModel.
-     *
-     * @param jsonResponse A JSON representation of the response.
-     * @return The response as a GetPetsFailResponseModel
-     */
-    private GetPetsFailResponseModel toFailResponseModel(JSONObject jsonResponse) {
-        try {
-            return new GetPetsFailResponseModel(jsonResponse.getString("message"));
-        } catch (JSONException e) {
-            throw new InvalidAPIResponseException("The API gave an invalid fail intend to match response");
-        }
     }
 }

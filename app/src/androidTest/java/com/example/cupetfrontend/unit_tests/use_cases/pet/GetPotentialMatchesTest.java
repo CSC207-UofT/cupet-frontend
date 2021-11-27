@@ -5,7 +5,7 @@ import com.example.cupetfrontend.use_cases.GetPotentialMatches;
 import com.example.cupetfrontend.use_cases.output_boundaries.pet.GetPotentialMatchesOutputBoundary;
 import com.example.cupetfrontend.use_cases.request_models.pet.GetPotentialMatchesRequestModel;
 import com.example.cupetfrontend.use_cases.response_models.PetData;
-import com.example.cupetfrontend.use_cases.response_models.pet.GetPotentialMatchesFailResponseModel;
+import com.example.cupetfrontend.use_cases.response_models.pet.DefaultFailureResponseModel;
 import com.example.cupetfrontend.use_cases.response_models.pet.GetPotentialMatchesSuccessResponseModel;
 import org.junit.Test;
 
@@ -32,7 +32,7 @@ public class GetPotentialMatchesTest extends UseCaseTestClass {
             }
 
             @Override
-            public void onGetPotentialMatchesFailure(GetPotentialMatchesFailResponseModel response) {
+            public void onGetPotentialMatchesFailure(DefaultFailureResponseModel response) {
                 fail("Request incorrectly failed");
 
             }
@@ -53,7 +53,7 @@ public class GetPotentialMatchesTest extends UseCaseTestClass {
             }
 
             @Override
-            public void onGetPotentialMatchesFailure(GetPotentialMatchesFailResponseModel response) {
+            public void onGetPotentialMatchesFailure(DefaultFailureResponseModel response) {
                 assertEquals(response.getErrorMessage(), "dummy error message");
 
                 setTaskComplete();

@@ -1,6 +1,6 @@
 package com.example.cupetfrontend.use_cases.output_boundaries.user;
 
-import com.example.cupetfrontend.use_cases.response_models.user.EditUserAccountFailResponseModel;
+import com.example.cupetfrontend.use_cases.response_models.pet.DefaultFailureResponseModel;
 import com.example.cupetfrontend.use_cases.response_models.user.EditUserAccountSuccessResponseModel;
 
 /**
@@ -20,5 +20,5 @@ public interface EditUserAccountOutputBoundary {
      *
      * @param response The response data
      */
-    void onEditUserAccountFailure(EditUserAccountFailResponseModel response);
+    void onEditUserAccountFailure(DefaultFailureResponseModel response);
 }

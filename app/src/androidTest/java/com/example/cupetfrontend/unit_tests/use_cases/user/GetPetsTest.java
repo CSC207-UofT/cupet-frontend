@@ -5,7 +5,7 @@ import com.example.cupetfrontend.use_cases.GetPets;
 import com.example.cupetfrontend.use_cases.output_boundaries.user.GetPetsOutputBoundary;
 import com.example.cupetfrontend.use_cases.request_models.user.GetPetsRequestModel;
 import com.example.cupetfrontend.use_cases.response_models.PetData;
-import com.example.cupetfrontend.use_cases.response_models.user.GetPetsFailResponseModel;
+import com.example.cupetfrontend.use_cases.response_models.pet.DefaultFailureResponseModel;
 import com.example.cupetfrontend.use_cases.response_models.user.GetPetsSuccessResponseModel;
 import org.junit.Test;
 
@@ -32,7 +32,7 @@ public class GetPetsTest extends UseCaseTestClass {
             }
 
             @Override
-            public void onGetPetsFailure(GetPetsFailResponseModel response) {
+            public void onGetPetsFailure(DefaultFailureResponseModel response) {
                 fail("Request incorrectly failed");
             }
         }).getPets(request);
@@ -52,7 +52,7 @@ public class GetPetsTest extends UseCaseTestClass {
             }
 
             @Override
-            public void onGetPetsFailure(GetPetsFailResponseModel response) {
+            public void onGetPetsFailure(DefaultFailureResponseModel response) {
                 assertEquals(response.getErrorMessage(), "dummy error message");
 
                 setTaskComplete();

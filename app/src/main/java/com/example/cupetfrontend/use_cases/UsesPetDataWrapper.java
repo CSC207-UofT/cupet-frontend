@@ -13,7 +13,7 @@ import java.util.List;
  * A superclass for use cases which need to convert
  * pet ids to PetData
  */
-public class UsesPetDataWrapper {
+public class UsesPetDataWrapper extends DefaultFailResponseUseCase {
     private final IPetAPIGateway petAPIGateway;
 
     UsesPetDataWrapper(IPetAPIGateway petAPIGateway) {

@@ -4,7 +4,7 @@ import com.example.cupetfrontend.unit_tests.use_cases.UseCaseTestClass;
 import com.example.cupetfrontend.use_cases.IntendToMatch;
 import com.example.cupetfrontend.use_cases.output_boundaries.pet.IntendToMatchOutputBoundary;
 import com.example.cupetfrontend.use_cases.request_models.pet.IntendToMatchRequestModel;
-import com.example.cupetfrontend.use_cases.response_models.pet.IntendToMatchFailResponseModel;
+import com.example.cupetfrontend.use_cases.response_models.pet.DefaultFailureResponseModel;
 import com.example.cupetfrontend.use_cases.response_models.pet.IntendToMatchSuccessResponseModel;
 import org.junit.Test;
 
@@ -24,7 +24,7 @@ public class IntendToMatchTest extends UseCaseTestClass {
             }
 
             @Override
-            public void onIntendToMatchFailure(IntendToMatchFailResponseModel response) {
+            public void onIntendToMatchFailure(DefaultFailureResponseModel response) {
                 fail("Request incorrectly failed");
 
             }
@@ -45,7 +45,7 @@ public class IntendToMatchTest extends UseCaseTestClass {
             }
 
             @Override
-            public void onIntendToMatchFailure(IntendToMatchFailResponseModel response) {
+            public void onIntendToMatchFailure(DefaultFailureResponseModel response) {
                 assertEquals(response.getErrorMessage(), "dummy error message");
 
                 setTaskComplete();

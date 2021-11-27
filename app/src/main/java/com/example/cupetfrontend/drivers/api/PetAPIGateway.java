@@ -103,7 +103,7 @@ public class PetAPIGateway extends APIGateway implements IPetAPIGateway {
     @Override
     public void getMatches(APIGetMatchesRequestModel requestData, IServerResponseListener responseListener) {
         HashMap<String, String> queryParams = new HashMap<String, String>(){{
-            put("petId", requestData.getMyPetId());
+            put("petId", requestData.getPetId());
         }};
 
         String url = PetRoutesStore.toAbsoluteRoute(PetRoutesStore.FETCH_MATCHES);
