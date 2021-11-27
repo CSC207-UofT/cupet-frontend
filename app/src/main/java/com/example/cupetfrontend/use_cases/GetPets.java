@@ -9,15 +9,11 @@ import com.example.cupetfrontend.use_cases.output_boundaries.pet.GetPetDataListO
 import com.example.cupetfrontend.use_cases.output_boundaries.user.GetPetsOutputBoundary;
 import com.example.cupetfrontend.use_cases.request_models.user.GetPetsRequestModel;
 import com.example.cupetfrontend.use_cases.response_models.PetData;
-import com.example.cupetfrontend.use_cases.response_models.pet.GetPotentialMatchesFailResponseModel;
-import com.example.cupetfrontend.use_cases.response_models.pet.GetPotentialMatchesSuccessResponseModel;
-import com.example.cupetfrontend.use_cases.response_models.pet.IntendToMatchFailResponseModel;
 import com.example.cupetfrontend.use_cases.response_models.user.GetPetsFailResponseModel;
 import com.example.cupetfrontend.use_cases.response_models.user.GetPetsSuccessResponseModel;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class GetPets extends UsesPetDataWrapper implements GetPetsInputBoundary {

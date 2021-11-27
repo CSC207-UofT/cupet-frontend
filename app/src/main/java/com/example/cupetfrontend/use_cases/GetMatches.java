@@ -10,12 +10,9 @@ import com.example.cupetfrontend.use_cases.request_models.pet.GetMatchesRequestM
 import com.example.cupetfrontend.use_cases.response_models.PetData;
 import com.example.cupetfrontend.use_cases.response_models.pet.GetMatchesFailResponseModel;
 import com.example.cupetfrontend.use_cases.response_models.pet.GetMatchesSuccessResponseModel;
-import com.example.cupetfrontend.use_cases.response_models.user.FetchUserAccountFailResponseModel;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class GetMatches extends UsesPetDataWrapper implements GetMatchesInputBoundary{
