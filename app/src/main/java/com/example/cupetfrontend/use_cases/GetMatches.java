@@ -31,7 +31,7 @@ public class GetMatches extends UsesPetDataWrapper implements GetMatchesInputBou
     @Override
     public void getMatches(GetMatchesRequestModel request) {
         APIGetMatchesRequestModel apiRequest = new APIGetMatchesRequestModel(
-                request.getToken(), request.getMyPetId()
+                request.getToken(), request.getPetId()
         );
 
         petAPIGateway.getMatches(apiRequest, new IServerResponseListener() {
