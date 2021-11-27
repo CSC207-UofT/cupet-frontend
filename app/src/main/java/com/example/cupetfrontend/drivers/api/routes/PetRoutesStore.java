@@ -8,4 +8,5 @@ public class PetRoutesStore extends RoutesStore{
     public static final String FETCH_MATCHES = "/pets/fetchmatches";
     public static final String REJECT_PETS = "/pets/reject";
     public static final String SWIPE_PETS = "/pets/swipe";
+    public static final String UN_SWIPE_PETS = "/pets/unswipe";
 }

@@ -19,7 +19,6 @@ import com.example.cupetfrontend.use_cases.response_models.LoginSuccessResponseM
 import com.example.cupetfrontend.use_cases.response_models.user.*;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
@@ -97,7 +96,7 @@ public class UserAndAuthUseCasesTest extends AsyncTestClass {
 
             @Override
             public void onCreateUserFailure(UserCreatorFailResponseModel response) {
-                fail("Request incorrectly failed " + response.getMessage());
+                fail("Request incorrectly failed " + response.getErrorMessage());
             }
         }).createUser(newUserRequest);
 

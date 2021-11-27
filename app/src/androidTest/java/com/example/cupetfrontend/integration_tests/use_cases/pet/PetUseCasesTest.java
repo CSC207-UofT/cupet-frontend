@@ -306,7 +306,7 @@ public class PetUseCasesTest extends NUsersTestClass {
                 // TODO: uncomment test once matching algorithm on back-end is complete
                 //  For now, test that we are able to access the endpoint correctly
 
-//                PetData petData = response.getMatches().get(0);
+                PetData petData = response.getMatches().get(0);
 //
 //                assertEquals(petIds.get(1), petData.getPetId());
 //                assertEquals("second pet", petData.getName());

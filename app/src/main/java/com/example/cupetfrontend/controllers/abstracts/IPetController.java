@@ -73,4 +73,13 @@ public interface IPetController {
      * @param myPetId The pet's id
      */
     void getMatches(String token, String myPetId);
+
+    /**
+     * Un-match with a pet you've already matched with.
+     *
+     * @param token The user's session token
+     * @param myPetId The pet's id
+     * @param otherPetId The other user's pet's id
+     */
+    void unMatchPet(String token, String myPetId, String otherPetId);
 }

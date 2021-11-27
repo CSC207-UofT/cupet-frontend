@@ -79,8 +79,8 @@ public class GetPetDataList {
         petDataList.add(newPetData);
 
         if (currentIndex + 1 < petIds.size()){
-            sendNextRequest();
             currentIndex += 1;
+            sendNextRequest();
         }else{
             this.outputBoundary.onGetPetDataListSuccess(petDataList);
         }

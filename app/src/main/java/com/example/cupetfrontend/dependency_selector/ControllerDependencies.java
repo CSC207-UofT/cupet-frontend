@@ -56,6 +56,8 @@ public class ControllerDependencies {
                 petPresenters.getIntendToMatchPresenter()));
         petController.setRejectMatch(new RejectMatch(petAPIGateway,
                 petPresenters.getRejectMatchPresenter()));
+        petController.setUnMatchPet(new UnMatchPet(petAPIGateway,
+                petPresenters.getUnMatchPresenter()));
     }
 
     private void setAuthController(IAuthAPIGateway authAPIGateway,

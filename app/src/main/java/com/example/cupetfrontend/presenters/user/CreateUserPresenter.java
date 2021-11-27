@@ -37,6 +37,6 @@ public class CreateUserPresenter implements ICreateUserPresenter {
      */
     @Override
     public void onCreateUserFailure(UserCreatorFailResponseModel response) {
-        registerViewModel.onCreateUserFailure(response.getMessage());
+        registerViewModel.onCreateUserFailure(response.getErrorMessage());
     }
 }
