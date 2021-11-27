@@ -9,7 +9,7 @@ import com.example.cupetfrontend.use_cases.output_boundaries.pet.*;
 import com.example.cupetfrontend.use_cases.output_boundaries.user.GetPetsOutputBoundary;
 import com.example.cupetfrontend.use_cases.request_models.pet.*;
 import com.example.cupetfrontend.use_cases.request_models.user.GetPetsRequestModel;
-import com.example.cupetfrontend.use_cases.response_models.PetData;
+import com.example.cupetfrontend.use_cases.data_models.PetData;
 import com.example.cupetfrontend.use_cases.response_models.pet.*;
 import com.example.cupetfrontend.use_cases.response_models.user.GetPetsSuccessResponseModel;
 import org.junit.BeforeClass;
@@ -176,10 +176,10 @@ public class PetUseCasesTest extends NUsersTestClass {
             public void onEditPetSuccess(EditPetSuccessResponseModel response) {
                 setTaskComplete();
 
-                assertEquals("joe", response.getNewName());
-                assertEquals("8", response.getNewAge());
-                assertEquals("another dog breed", response.getNewBreed());
-                assertEquals("hello world!", response.getNewBiography());
+                assertEquals("joe", response.getName());
+                assertEquals("8", response.getAge());
+                assertEquals("another dog breed", response.getBreed());
+                assertEquals("hello world!", response.getBiography());
             }
 
             @Override

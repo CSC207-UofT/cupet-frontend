@@ -22,11 +22,11 @@ public class EditUserAccountTest extends UseCaseTestClass {
         new EditUserAccount(successUserAPIGateway, new EditUserAccountOutputBoundary() {
             @Override
             public void onEditUserAccountSuccess(EditUserAccountSuccessResponseModel response) {
-                assertEquals(response.getNewFirstName(), "dummy first name");
-                assertEquals(response.getNewLastName(), "dummy last name");
-                assertEquals(response.getNewCurrentAddress(), "dummy address");
-                assertEquals(response.getNewCity(), "dummy city");
-                assertEquals(response.getNewEmail(), "dummy email");
+                assertEquals(response.getFirstName(), "dummy first name");
+                assertEquals(response.getLastName(), "dummy last name");
+                assertEquals(response.getHomeAddress(), "dummy address");
+                assertEquals(response.getCity(), "dummy city");
+                assertEquals(response.getEmail(), "dummy email");
 
                 setTaskComplete();
             }

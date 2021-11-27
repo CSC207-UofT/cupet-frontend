@@ -22,8 +22,8 @@ public class EditUserProfile extends DefaultFailResponseUseCase implements EditU
     @Override
     public void editUserProfile(EditUserProfileRequestModel request) {
         APIEditUserProfileRequestModel apiRequest = new APIEditUserProfileRequestModel(
-                request.getToken(), request.getNewBiography(),
-                request.getNewInstagram(), request.getNewFacebook(), request.getNewPhoneNumber()
+                request.getToken(), request.getBiography(),
+                request.getInstagram(), request.getFacebook(), request.getPhoneNumber()
         );
 
         userAPIGateway.editUserProfile(apiRequest, new IServerResponseListener() {

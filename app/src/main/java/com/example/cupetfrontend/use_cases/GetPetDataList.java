@@ -4,7 +4,7 @@ import com.example.cupetfrontend.use_cases.api_abstracts.IPetAPIGateway;
 import com.example.cupetfrontend.use_cases.output_boundaries.pet.FetchPetProfileOutputBoundary;
 import com.example.cupetfrontend.use_cases.output_boundaries.pet.GetPetDataListOutputBoundary;
 import com.example.cupetfrontend.use_cases.request_models.pet.FetchPetProfileRequestModel;
-import com.example.cupetfrontend.use_cases.response_models.PetData;
+import com.example.cupetfrontend.use_cases.data_models.PetData;
 import com.example.cupetfrontend.use_cases.response_models.pet.DefaultFailureResponseModel;
 import com.example.cupetfrontend.use_cases.response_models.pet.FetchPetProfileSuccessResponseModel;
 

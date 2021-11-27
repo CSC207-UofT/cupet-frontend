@@ -22,8 +22,8 @@ public class EditPet extends DefaultFailResponseUseCase implements EditPetInputB
     @Override
     public void editPet(EditPetRequestModel request) {
         APIEditPetRequestModel apiRequest = new APIEditPetRequestModel(
-                request.getToken(), request.getPetId(), request.getNewName(), request.getNewAge(),
-                request.getNewBreed(), request.getNewBiography()
+                request.getToken(), request.getPetId(), request.getName(), request.getAge(),
+                request.getBreed(), request.getBiography()
         );
 
         petAPIGateway.editPet(apiRequest, new IServerResponseListener() {

@@ -162,11 +162,11 @@ public class UserAndAuthUseCasesTest extends AsyncTestClass {
             public void onEditUserAccountSuccess(EditUserAccountSuccessResponseModel response) {
                 setTaskComplete();
 
-                assertEquals("android_edited_first", response.getNewFirstName());
-                assertEquals("android_edited_last", response.getNewLastName());
-                assertEquals("android_edited_email@email.com", response.getNewEmail());
-                assertEquals("new home", response.getNewCurrentAddress());
-                assertEquals("new city", response.getNewCity());
+                assertEquals("android_edited_first", response.getFirstName());
+                assertEquals("android_edited_last", response.getLastName());
+                assertEquals("android_edited_email@email.com", response.getEmail());
+                assertEquals("new home", response.getHomeAddress());
+                assertEquals("new city", response.getCity());
             }
 
             @Override
@@ -190,10 +190,10 @@ public class UserAndAuthUseCasesTest extends AsyncTestClass {
             public void onEditUserProfileSuccess(EditUserProfileSuccessResponseModel response) {
                 setTaskComplete();
 
-                assertEquals("android test biography", response.getNewBiography());
-                assertEquals("test instagram", response.getNewInstagram());
-                assertEquals("test facebook", response.getNewFacebook());
-                assertEquals("123456789", response.getNewPhoneNumber());
+                assertEquals("android test biography", response.getBiography());
+                assertEquals("test instagram", response.getInstagram());
+                assertEquals("test facebook", response.getFacebook());
+                assertEquals("123456789", response.getPhoneNumber());
 
             }
 

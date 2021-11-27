@@ -7,7 +7,7 @@ import com.example.cupetfrontend.use_cases.input_boundaries.pet.GetMatchesInputB
 import com.example.cupetfrontend.use_cases.output_boundaries.pet.GetMatchesOutputBoundary;
 import com.example.cupetfrontend.use_cases.output_boundaries.pet.GetPetDataListOutputBoundary;
 import com.example.cupetfrontend.use_cases.request_models.pet.GetMatchesRequestModel;
-import com.example.cupetfrontend.use_cases.response_models.PetData;
+import com.example.cupetfrontend.use_cases.data_models.PetData;
 import com.example.cupetfrontend.use_cases.response_models.pet.GetMatchesSuccessResponseModel;
 import org.json.JSONObject;
 

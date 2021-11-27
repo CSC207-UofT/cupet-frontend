@@ -22,9 +22,9 @@ public class EditUserAccount extends DefaultFailResponseUseCase implements EditU
     @Override
     public void editUserAccount(EditUserAccountRequestModel request) {
         APIEditUserAccountRequestModel apiRequest = new APIEditUserAccountRequestModel(
-                request.getToken(), request.getNewFirstName(), request.getNewLastName(),
-                request.getNewEmail(), request.getNewPassword(), request.getNewHomeAddress(),
-                request.getNewCity()
+                request.getToken(), request.getFirstName(), request.getLastName(),
+                request.getEmail(), request.getPassword(), request.getHomeAddress(),
+                request.getCity()
         );
 
         userAPIGateway.editUserAccount(apiRequest, new IServerResponseListener() {

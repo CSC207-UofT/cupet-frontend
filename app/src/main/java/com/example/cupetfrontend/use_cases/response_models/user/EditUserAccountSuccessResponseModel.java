@@ -1,37 +1,9 @@
 package com.example.cupetfrontend.use_cases.response_models.user;
 
-public class EditUserAccountSuccessResponseModel {
-    private final String newFirstName;
-    private final String newLastName;
-    private final String newEmail;
-    private final String newCurrentAddress;
-    private final String newCity;
+import com.example.cupetfrontend.use_cases.data_models.UserAccountWithoutPassword;
 
-    public EditUserAccountSuccessResponseModel(String newFirstName, String newLastName, String newEmail, String newCurrentAddress, String newCity) {
-        this.newFirstName = newFirstName;
-        this.newLastName = newLastName;
-        this.newEmail = newEmail;
-        this.newCurrentAddress = newCurrentAddress;
-        this.newCity = newCity;
-    }
-
-    public String getNewFirstName() {
-        return newFirstName;
-    }
-
-    public String getNewLastName() {
-        return newLastName;
-    }
-
-    public String getNewEmail() {
-        return newEmail;
-    }
-
-    public String getNewCurrentAddress() {
-        return newCurrentAddress;
-    }
-
-    public String getNewCity() {
-        return newCity;
+public class EditUserAccountSuccessResponseModel extends UserAccountWithoutPassword {
+    public EditUserAccountSuccessResponseModel(String firstName, String lastName, String email, String homeAddress, String city) {
+        super(firstName, lastName, email, homeAddress, city);
     }
 }

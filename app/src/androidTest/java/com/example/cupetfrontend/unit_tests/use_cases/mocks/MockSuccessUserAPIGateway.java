@@ -39,10 +39,10 @@ public class MockSuccessUserAPIGateway extends MockSuccessAPIGateway implements 
     @Override
     public void editUserProfile(APIEditUserProfileRequestModel requestData, IServerResponseListener responseListener) {
         responseListener.onRequestSuccess(createDummySuccessJSON(new HashMap<String, String>(){{
-            put("newBiography", requestData.getNewBiography());
-            put("newPhoneNumber", requestData.getNewPhoneNumber());
-            put("newInstagram", requestData.getNewInstagram());
-            put("newFacebook", requestData.getNewFacebook());
+            put("newBiography", requestData.getBiography());
+            put("newPhoneNumber", requestData.getPhoneNumber());
+            put("newInstagram", requestData.getInstagram());
+            put("newFacebook", requestData.getFacebook());
         }}));
     }
 
@@ -60,11 +60,11 @@ public class MockSuccessUserAPIGateway extends MockSuccessAPIGateway implements 
     @Override
     public void editUserAccount(APIEditUserAccountRequestModel requestData, IServerResponseListener responseListener) {
         responseListener.onRequestSuccess(createDummySuccessJSON(new HashMap<String, String>(){{
-            put("newFirstName", requestData.getNewFirstName());
-            put("newLastName", requestData.getNewLastName());
-            put("newCurrentAddress", requestData.getNewHomeAddress());
-            put("newCurrentCity", requestData.getNewCity());
-            put("newEmail", requestData.getNewEmail());
+            put("newFirstName", requestData.getFirstName());
+            put("newLastName", requestData.getLastName());
+            put("newCurrentAddress", requestData.getHomeAddress());
+            put("newCurrentCity", requestData.getCity());
+            put("newEmail", requestData.getEmail());
         }}));
     }
 

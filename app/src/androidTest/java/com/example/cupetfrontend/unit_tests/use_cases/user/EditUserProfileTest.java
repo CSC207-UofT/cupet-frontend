@@ -21,10 +21,10 @@ public class EditUserProfileTest extends UseCaseTestClass {
         new EditUserProfile(successUserAPIGateway, new EditUserProfileOutputBoundary() {
             @Override
             public void onEditUserProfileSuccess(EditUserProfileSuccessResponseModel response) {
-                assertEquals(response.getNewBiography(), "dummy biography");
-                assertEquals(response.getNewInstagram(), "dummy instagram");
-                assertEquals(response.getNewFacebook(), "dummy facebook");
-                assertEquals(response.getNewPhoneNumber(), "dummy phone number");
+                assertEquals(response.getBiography(), "dummy biography");
+                assertEquals(response.getInstagram(), "dummy instagram");
+                assertEquals(response.getFacebook(), "dummy facebook");
+                assertEquals(response.getPhoneNumber(), "dummy phone number");
 
                 setTaskComplete();
             }

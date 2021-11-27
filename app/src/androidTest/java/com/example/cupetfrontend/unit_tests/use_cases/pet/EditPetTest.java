@@ -21,10 +21,10 @@ public class EditPetTest extends UseCaseTestClass {
         new EditPet(successPetAPIGateway, new EditPetOutputBoundary() {
             @Override
             public void onEditPetSuccess(EditPetSuccessResponseModel response) {
-                assertEquals(response.getNewName(), "dummy name");
-                assertEquals(response.getNewAge(), "dummy age");
-                assertEquals(response.getNewBreed(), "dummy breed");
-                assertEquals(response.getNewBiography(), "dummy biography");
+                assertEquals(response.getName(), "dummy name");
+                assertEquals(response.getAge(), "dummy age");
+                assertEquals(response.getBreed(), "dummy breed");
+                assertEquals(response.getBiography(), "dummy biography");
 
                 setTaskComplete();
             }

@@ -7,9 +7,8 @@ import com.example.cupetfrontend.use_cases.input_boundaries.pet.GetPotentialMatc
 import com.example.cupetfrontend.use_cases.output_boundaries.pet.GetPetDataListOutputBoundary;
 import com.example.cupetfrontend.use_cases.output_boundaries.pet.GetPotentialMatchesOutputBoundary;
 import com.example.cupetfrontend.use_cases.request_models.pet.GetPotentialMatchesRequestModel;
-import com.example.cupetfrontend.use_cases.response_models.PetData;
+import com.example.cupetfrontend.use_cases.data_models.PetData;
 import com.example.cupetfrontend.use_cases.response_models.pet.*;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.List;
