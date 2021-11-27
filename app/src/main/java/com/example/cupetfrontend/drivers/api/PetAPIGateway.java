@@ -111,4 +111,17 @@ public class PetAPIGateway extends APIGateway implements IPetAPIGateway {
         requestManager.makeGetRequest(url, queryParams,
                 createAuthHeaders(requestData.getToken()), responseListener);
     }
+
+    @Override
+    public void unMatchPet(APIUnMatchPetRequestModel requestData, IServerResponseListener responseListener) {
+        JSONObject requestBody = new JSONObject(new HashMap<String, String>(){{
+            put("pet1Id", requestData.getMyPetId());
+            put("pet2Id", requestData.getOtherPetId());
+        }});
+
+        String url = PetRoutesStore.toAbsoluteRoute(PetRoutesStore.UN_SWIPE_PETS);
+
+        requestManager.makePostRequest(url, requestBody,
+                createAuthHeaders(requestData.getToken()), responseListener);
+    }
 }

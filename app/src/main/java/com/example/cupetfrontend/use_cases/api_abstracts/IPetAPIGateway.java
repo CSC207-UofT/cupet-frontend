@@ -67,4 +67,12 @@ public interface IPetAPIGateway {
      * @param responseListener A class with callback methods for when a response is received
      */
     void getMatches(APIGetMatchesRequestModel requestData, IServerResponseListener responseListener);
+
+    /**
+     * Un-match with a pet you've already matched with.
+     *
+     * @param requestData The data needed to get to un-match
+     * @param responseListener A class with callback methods for when a response is received
+     */
+    void unMatchPet(APIUnMatchPetRequestModel requestData, IServerResponseListener responseListener);
 }
