@@ -2,13 +2,21 @@ package com.example.cupetfrontend;
 
 import android.util.Log;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.widget.Toast;
+
+import com.example.cupetfrontend.controllers.abstracts.IPetController;
+import com.example.cupetfrontend.dependency_selector.DependencySelector;
+import com.example.cupetfrontend.presenters.abstracts.IGetMatchesPresenter;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class NewGetMatchesActivity extends AppCompatActivity{
 
@@ -28,10 +36,19 @@ public class NewGetMatchesActivity extends AppCompatActivity{
         setContentView(R.layout.activity_get_matches_new);
         Log.d(TAG, "onCreate: started.");
 
+        DependencySelector dependencySelector = ((App) getApplication()).getDependencySelector();
+        IPetController petController = dependencySelector.getControllers().getPetController();
+
+        IGetMatchesPresenter getMatchesPresenter = dependencySelector.getPetPresenters().getGetMatchesPresenter();
+        getMatchesViewModel = new GetMatchesViewModel(petController);
+        getMatchesPresenter.setGetMatchesViewModel(getMatchesViewModel);
+
         initImageBitmaps(); // gets the bitmaps
 
-
+        // setUpObserveGetMatchesResult();
     }
+
+
 
     private void initImageBitmaps(){
         Log.d(TAG, "initImageBitmaps: preparing bitmaps.");
@@ -84,7 +101,6 @@ public class NewGetMatchesActivity extends AppCompatActivity{
         mPetBreeds.add("Breed");
 
         initRecyclerView(); // once it has img urls, it initializes the recycler view
-
     }
 
     // method for actually setting up our recycler view
@@ -95,6 +111,53 @@ public class NewGetMatchesActivity extends AppCompatActivity{
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
+
+    /**
+     * Set up this activity as an observer that observes the result of getting matches.
+     *
+     * Update the displayed views when the get matches result has changed.
+     */
+    private void setUpObserveGetMatchesResult() {
+        getMatchesViewModel.getMatchesResult().observe(this, new Observer<GetMatchesResult>() {
+            @Override
+            public void onChanged(@Nullable GetMatchesResult getMatchesResult) {
+                Log.d(TAG, "onChanged: setUpObserveGetMatchesResult");
+                if (getMatchesResult == null) {
+                    return;
+                }
+
+                if (getMatchesResult.isError()){
+                    Log.e(TAG, "onChanged: get matches result Error ");
+                    onGetMatchesFailure(getMatchesResult.getErrorMessage());
+                }else{
+                    Log.d(TAG, "onChanged: get matches result success");
+                    onGetMatchesSuccess(getMatchesResult.getMatches());
+                }
+            }
+        });
+    }
+
+
+    /**
+     * Get Matches Success toast message and generate table
+     */
+    private void onGetMatchesSuccess(List<String> matches) {
+        Log.d(TAG, "onGetMatchesSuccess: success - matches:" + matches);
+        Toast.makeText(getApplicationContext(), "Get Matches Success", Toast.LENGTH_SHORT).show();
+        // TODO: On Success
+    }
+
+    /**
+     * Display a Get Matches failed toast message.
+     * @param errorMessage The error message to display
+     */
+    private void onGetMatchesFailure (String errorMessage) {
+        Log.e(TAG, "onGetMatchesFailure: Get Matches Failure");
+        System.out.println("Get Matches failed");
+        Toast.makeText(getApplicationContext(), "Get Matches failed: " + errorMessage, Toast.LENGTH_SHORT).show();
+    }
+
+
 
 
 }
