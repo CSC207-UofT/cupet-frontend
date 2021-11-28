@@ -1,4 +1,4 @@
-package com.example.cupetfrontend.use_cases.response_models.pet;
+package com.example.cupetfrontend.use_cases.response_models.user;
 
 public class SetUserProfileImageSuccessResponseModel {
     private final String imgUrl;
