@@ -37,6 +37,7 @@
     <!-- Strings used for create pet page -->
     <string name="add_a_new_pet">Add a New Pet</string>
     <string name="add_pet">Add</string>
+    <string name="edit_pet">Edit</string>
     <string name="pet_name">Pet Name</string>
     <string name="pet_age">Pet Age</string>
     <string name="pet_breed">Pet Breed</string>
