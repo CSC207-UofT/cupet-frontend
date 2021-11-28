@@ -1,11 +1,8 @@
-package com.example.cupetfrontend.drivers.api;
+package com.example.cupetfrontend.unit_tests.drivers.api;
 
-import com.auth0.jwt.interfaces.DecodedJWT;
 import com.example.cupetfrontend.controllers.InvalidJWTException;
 import com.example.cupetfrontend.controllers.abstracts.IJWTParser;
-import junit.framework.TestCase;
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.example.cupetfrontend.drivers.api.JWTParser;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

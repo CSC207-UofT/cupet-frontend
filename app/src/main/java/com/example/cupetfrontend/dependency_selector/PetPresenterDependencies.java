@@ -10,6 +10,7 @@ public class PetPresenterDependencies {
     private GetPotentialMatchesPresenter getPotentialMatchesPresenter;
     private IntendToMatchPresenter intendToMatchPresenter;
     private RejectMatchPresenter rejectMatchPresenter;
+    private UnMatchPresenter unMatchPresenter;
 
     public PetPresenterDependencies() {
         selectCreatePetPresenter();
@@ -49,6 +50,10 @@ public class PetPresenterDependencies {
         rejectMatchPresenter = new RejectMatchPresenter();
     }
 
+    private void selectUnMatchPresenter() {
+        unMatchPresenter = new UnMatchPresenter();
+    }
+
     public CreatePetPresenter getCreatePetPresenter() {
         return createPetPresenter;
     }
@@ -75,5 +80,9 @@ public class PetPresenterDependencies {
 
     public RejectMatchPresenter getRejectMatchPresenter() {
         return rejectMatchPresenter;
+    }
+
+    public UnMatchPresenter getUnMatchPresenter() {
+        return unMatchPresenter;
     }
 }

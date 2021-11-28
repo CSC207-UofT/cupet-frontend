@@ -1,7 +1,6 @@
-package com.example.cupetfrontend.drivers.api;
+package com.example.cupetfrontend.unit_tests.drivers.api;
 
 import org.junit.Before;
-import org.junit.Assert.*;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
