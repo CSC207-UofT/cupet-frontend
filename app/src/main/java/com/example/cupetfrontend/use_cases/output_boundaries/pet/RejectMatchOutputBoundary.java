@@ -1,6 +1,6 @@
 package com.example.cupetfrontend.use_cases.output_boundaries.pet;
 
-import com.example.cupetfrontend.use_cases.response_models.pet.RejectMatchFailResponseModel;
+import com.example.cupetfrontend.use_cases.response_models.pet.DefaultFailureResponseModel;
 import com.example.cupetfrontend.use_cases.response_models.pet.RejectMatchSuccessResponseModel;
 
 /**
@@ -17,5 +17,5 @@ public interface RejectMatchOutputBoundary {
      * Method called when a failed response is received.
      * @param response The response data
      */
-    void onRejectMatchFailure(RejectMatchFailResponseModel response);
+    void onRejectMatchFailure(DefaultFailureResponseModel response);
 }

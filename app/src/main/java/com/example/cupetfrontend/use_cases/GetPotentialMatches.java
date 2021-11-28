@@ -7,13 +7,10 @@ import com.example.cupetfrontend.use_cases.input_boundaries.pet.GetPotentialMatc
 import com.example.cupetfrontend.use_cases.output_boundaries.pet.GetPetDataListOutputBoundary;
 import com.example.cupetfrontend.use_cases.output_boundaries.pet.GetPotentialMatchesOutputBoundary;
 import com.example.cupetfrontend.use_cases.request_models.pet.GetPotentialMatchesRequestModel;
-import com.example.cupetfrontend.use_cases.response_models.PetData;
+import com.example.cupetfrontend.use_cases.data_models.PetData;
 import com.example.cupetfrontend.use_cases.response_models.pet.*;
-import com.example.cupetfrontend.use_cases.response_models.user.FetchUserProfileSuccessResponseModel;
-import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class GetPotentialMatches extends UsesPetDataWrapper implements GetPotentialMatchesInputBoundary {
@@ -45,9 +42,7 @@ public class GetPotentialMatches extends UsesPetDataWrapper implements GetPotent
 
                     @Override
                     public void onGetPetDataListFailure(String errorMessage) {
-                        outputBoundary.onGetPotentialMatchesFailure(new GetPotentialMatchesFailResponseModel(
-                                errorMessage
-                        ));
+                        outputBoundary.onGetPotentialMatchesFailure(toFailResponseModel(errorMessage));
                     }
                 });
             }
@@ -57,20 +52,5 @@ public class GetPotentialMatches extends UsesPetDataWrapper implements GetPotent
                 outputBoundary.onGetPotentialMatchesFailure(toFailResponseModel(jsonResponse));
             }
         });
-    }
-
-    /**
-     * Convert a JSONObject response to an instance of
-     * PetCreatorFailResponseModel.
-     *
-     * @param jsonResponse A JSON representation of the response.
-     * @return The response as a PetCreatorFailResponseModel
-     */
-    private GetPotentialMatchesFailResponseModel toFailResponseModel(JSONObject jsonResponse) {
-        try {
-            return new GetPotentialMatchesFailResponseModel(jsonResponse.getString("message"));
-        } catch (JSONException e) {
-            throw new InvalidAPIResponseException("The API gave an invalid fail intend to match response");
-        }
     }
 }

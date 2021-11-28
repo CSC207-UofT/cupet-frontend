@@ -4,7 +4,7 @@ import com.example.cupetfrontend.unit_tests.use_cases.UseCaseTestClass;
 import com.example.cupetfrontend.use_cases.FetchUserProfile;
 import com.example.cupetfrontend.use_cases.output_boundaries.user.FetchUserProfileOutputBoundary;
 import com.example.cupetfrontend.use_cases.request_models.user.FetchUserProfileRequestModel;
-import com.example.cupetfrontend.use_cases.response_models.user.FetchUserProfileFailResponseModel;
+import com.example.cupetfrontend.use_cases.response_models.pet.DefaultFailureResponseModel;
 import com.example.cupetfrontend.use_cases.response_models.user.FetchUserProfileSuccessResponseModel;
 import org.junit.Test;
 
@@ -29,7 +29,7 @@ public class FetchUserProfileTest extends UseCaseTestClass {
             }
 
             @Override
-            public void onFetchUserProfileFailure(FetchUserProfileFailResponseModel response) {
+            public void onFetchUserProfileFailure(DefaultFailureResponseModel response) {
                 fail("Request incorrectly failed");
             }
         }).fetchUserProfile(request);
@@ -49,7 +49,7 @@ public class FetchUserProfileTest extends UseCaseTestClass {
             }
 
             @Override
-            public void onFetchUserProfileFailure(FetchUserProfileFailResponseModel response) {
+            public void onFetchUserProfileFailure(DefaultFailureResponseModel response) {
                 assertEquals(response.getErrorMessage(), "dummy error message");
 
                 setTaskComplete();

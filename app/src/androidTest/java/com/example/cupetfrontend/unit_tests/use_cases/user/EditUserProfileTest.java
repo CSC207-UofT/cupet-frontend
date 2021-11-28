@@ -4,7 +4,7 @@ import com.example.cupetfrontend.unit_tests.use_cases.UseCaseTestClass;
 import com.example.cupetfrontend.use_cases.EditUserProfile;
 import com.example.cupetfrontend.use_cases.output_boundaries.user.EditUserProfileOutputBoundary;
 import com.example.cupetfrontend.use_cases.request_models.user.EditUserProfileRequestModel;
-import com.example.cupetfrontend.use_cases.response_models.user.EditUserProfileFailResponseModel;
+import com.example.cupetfrontend.use_cases.response_models.pet.DefaultFailureResponseModel;
 import com.example.cupetfrontend.use_cases.response_models.user.EditUserProfileSuccessResponseModel;
 import org.junit.Test;
 
@@ -21,16 +21,16 @@ public class EditUserProfileTest extends UseCaseTestClass {
         new EditUserProfile(successUserAPIGateway, new EditUserProfileOutputBoundary() {
             @Override
             public void onEditUserProfileSuccess(EditUserProfileSuccessResponseModel response) {
-                assertEquals(response.getNewBiography(), "dummy biography");
-                assertEquals(response.getNewInstagram(), "dummy instagram");
-                assertEquals(response.getNewFacebook(), "dummy facebook");
-                assertEquals(response.getNewPhoneNumber(), "dummy phone number");
+                assertEquals(response.getBiography(), "dummy biography");
+                assertEquals(response.getInstagram(), "dummy instagram");
+                assertEquals(response.getFacebook(), "dummy facebook");
+                assertEquals(response.getPhoneNumber(), "dummy phone number");
 
                 setTaskComplete();
             }
 
             @Override
-            public void onEditUserProfileFailure(EditUserProfileFailResponseModel response) {
+            public void onEditUserProfileFailure(DefaultFailureResponseModel response) {
                 fail("Request incorrectly failed");
 
             }
@@ -52,7 +52,7 @@ public class EditUserProfileTest extends UseCaseTestClass {
             }
 
             @Override
-            public void onEditUserProfileFailure(EditUserProfileFailResponseModel response) {
+            public void onEditUserProfileFailure(DefaultFailureResponseModel response) {
                 assertEquals(response.getErrorMessage(), "dummy error message");
 
                 setTaskComplete();

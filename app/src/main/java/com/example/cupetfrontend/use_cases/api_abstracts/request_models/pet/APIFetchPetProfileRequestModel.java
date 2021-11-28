@@ -1,19 +1,9 @@
 package com.example.cupetfrontend.use_cases.api_abstracts.request_models.pet;
 
-public class APIFetchPetProfileRequestModel {
-    private final String token;
-    private final String petId;
+import com.example.cupetfrontend.use_cases.request_models.pet.FetchPetProfileRequestModel;
 
+public class APIFetchPetProfileRequestModel extends FetchPetProfileRequestModel {
     public APIFetchPetProfileRequestModel(String token, String petId) {
-        this.token = token;
-        this.petId = petId;
-    }
-
-    public String getToken() {
-        return token;
-    }
-
-    public String getPetId() {
-        return petId;
+        super(token, petId);
     }
 }

@@ -4,8 +4,8 @@ import com.example.cupetfrontend.use_cases.api_abstracts.IPetAPIGateway;
 import com.example.cupetfrontend.use_cases.output_boundaries.pet.FetchPetProfileOutputBoundary;
 import com.example.cupetfrontend.use_cases.output_boundaries.pet.GetPetDataListOutputBoundary;
 import com.example.cupetfrontend.use_cases.request_models.pet.FetchPetProfileRequestModel;
-import com.example.cupetfrontend.use_cases.response_models.PetData;
-import com.example.cupetfrontend.use_cases.response_models.pet.FetchPetProfileFailResponseModel;
+import com.example.cupetfrontend.use_cases.data_models.PetData;
+import com.example.cupetfrontend.use_cases.response_models.pet.DefaultFailureResponseModel;
 import com.example.cupetfrontend.use_cases.response_models.pet.FetchPetProfileSuccessResponseModel;
 
 import java.util.ArrayList;
@@ -38,7 +38,7 @@ public class GetPetDataList {
             }
 
             @Override
-            public void onFetchPetProfileFailure(FetchPetProfileFailResponseModel response) {
+            public void onFetchPetProfileFailure(DefaultFailureResponseModel response) {
                 onFetchSingleProfileFailure(response);
             }
         });
@@ -86,7 +86,7 @@ public class GetPetDataList {
         }
     }
 
-    private void onFetchSingleProfileFailure(FetchPetProfileFailResponseModel response) {
+    private void onFetchSingleProfileFailure(DefaultFailureResponseModel response) {
         this.outputBoundary.onGetPetDataListFailure("Fetching a profile failed on the " +
                 currentIndex + "th profile: " + response.getErrorMessage());
     }

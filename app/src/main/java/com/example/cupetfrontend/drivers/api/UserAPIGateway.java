@@ -52,10 +52,10 @@ public class UserAPIGateway extends APIGateway implements IUserAPIGateway {
     @Override
     public void editUserProfile(APIEditUserProfileRequestModel requestData, IServerResponseListener responseListener) {
         JSONObject requestBody = new JSONObject(new HashMap<String, String>(){{
-            put("newBiography", requestData.getNewBiography());
-            put("newInstagram", requestData.getNewInstagram());
-            put("newFacebook", requestData.getNewFacebook());
-            put("newPhoneNumber", requestData.getNewPhoneNumber());
+            put("newBiography", requestData.getBiography());
+            put("newInstagram", requestData.getInstagram());
+            put("newFacebook", requestData.getFacebook());
+            put("newPhoneNumber", requestData.getPhoneNumber());
             put("userId", UserIdFetcher.getUserId(requestData.getToken()));
         }});
 
@@ -80,12 +80,12 @@ public class UserAPIGateway extends APIGateway implements IUserAPIGateway {
     @Override
     public void editUserAccount(APIEditUserAccountRequestModel requestData, IServerResponseListener responseListener) {
         JSONObject requestBody = new JSONObject(new HashMap<String, String>(){{
-            put("newFirstName", requestData.getNewFirstName());
-            put("newLastName", requestData.getNewLastName());
-            put("newAddress", requestData.getNewHomeAddress());
-            put("newCity", requestData.getNewCity());
-            put("newPassword", requestData.getNewPassword());
-            put("newEmail", requestData.getNewEmail());
+            put("newFirstName", requestData.getFirstName());
+            put("newLastName", requestData.getLastName());
+            put("newAddress", requestData.getHomeAddress());
+            put("newCity", requestData.getCity());
+            put("newPassword", requestData.getPassword());
+            put("newEmail", requestData.getEmail());
             put("userId", UserIdFetcher.getUserId(requestData.getToken()));
         }});
 

@@ -1,7 +1,6 @@
 package com.example.cupetfrontend.use_cases.output_boundaries.pet;
 
-import com.example.cupetfrontend.use_cases.request_models.pet.IntendToMatchRequestModel;
-import com.example.cupetfrontend.use_cases.response_models.pet.IntendToMatchFailResponseModel;
+import com.example.cupetfrontend.use_cases.response_models.pet.DefaultFailureResponseModel;
 import com.example.cupetfrontend.use_cases.response_models.pet.IntendToMatchSuccessResponseModel;
 
 /**
@@ -21,5 +20,5 @@ public interface IntendToMatchOutputBoundary {
      *
      * @param response The response data
      */
-    void onIntendToMatchFailure(IntendToMatchFailResponseModel response);
+    void onIntendToMatchFailure(DefaultFailureResponseModel response);
 }

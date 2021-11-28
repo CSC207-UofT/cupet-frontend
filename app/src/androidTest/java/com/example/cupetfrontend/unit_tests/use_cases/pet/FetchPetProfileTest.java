@@ -1,15 +1,10 @@
 package com.example.cupetfrontend.unit_tests.use_cases.pet;
 
 import com.example.cupetfrontend.unit_tests.use_cases.UseCaseTestClass;
-import com.example.cupetfrontend.use_cases.EditPet;
 import com.example.cupetfrontend.use_cases.FetchPetProfile;
-import com.example.cupetfrontend.use_cases.output_boundaries.pet.EditPetOutputBoundary;
 import com.example.cupetfrontend.use_cases.output_boundaries.pet.FetchPetProfileOutputBoundary;
-import com.example.cupetfrontend.use_cases.request_models.pet.EditPetRequestModel;
 import com.example.cupetfrontend.use_cases.request_models.pet.FetchPetProfileRequestModel;
-import com.example.cupetfrontend.use_cases.response_models.pet.EditPetFailResponseModel;
-import com.example.cupetfrontend.use_cases.response_models.pet.EditPetSuccessResponseModel;
-import com.example.cupetfrontend.use_cases.response_models.pet.FetchPetProfileFailResponseModel;
+import com.example.cupetfrontend.use_cases.response_models.pet.DefaultFailureResponseModel;
 import com.example.cupetfrontend.use_cases.response_models.pet.FetchPetProfileSuccessResponseModel;
 import org.junit.Test;
 
@@ -34,7 +29,7 @@ public class FetchPetProfileTest extends UseCaseTestClass {
             }
 
             @Override
-            public void onFetchPetProfileFailure(FetchPetProfileFailResponseModel response) {
+            public void onFetchPetProfileFailure(DefaultFailureResponseModel response) {
                 fail("Request incorrectly failed");
 
             }
@@ -55,7 +50,7 @@ public class FetchPetProfileTest extends UseCaseTestClass {
             }
 
             @Override
-            public void onFetchPetProfileFailure(FetchPetProfileFailResponseModel response) {
+            public void onFetchPetProfileFailure(DefaultFailureResponseModel response) {
                 assertEquals(response.getErrorMessage(), "dummy error message");
 
                 setTaskComplete();
