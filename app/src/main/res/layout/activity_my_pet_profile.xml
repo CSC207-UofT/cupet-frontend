@@ -9,8 +9,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/pet_image"
-            app:srcCompat="@android:drawable/ic_menu_edit"/>
+            app:srcCompat="@android:drawable/ic_menu_edit" app:layout_constraintTop_toTopOf="parent"/>
     <ImageButton
             android:id="@+id/menu_button_pet_profile"
             android:layout_width="wrap_content"
