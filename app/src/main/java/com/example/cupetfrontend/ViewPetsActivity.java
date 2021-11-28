@@ -23,6 +23,8 @@ public class ViewPetsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_pets);
         Log.d(TAG, "onCreate: started.");
+
+        initImageBitmaps(); // gets the bitmaps
     }
 
     private void initImageBitmaps(){
@@ -65,7 +67,7 @@ public class ViewPetsActivity extends AppCompatActivity {
         Log.d(TAG, "initRecyclerView: init recyclerview");
         RecyclerView recyclerView = findViewById(R.id.card_recylcer_view);
         CardRecyclerViewAdapter adapter = new CardRecyclerViewAdapter(this, mPetNames, mPetImageUrls);
-        //recyclerView.setAdapter(adapter);
+        recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager((new GridLayoutManager(this, 2)));
     }
 
