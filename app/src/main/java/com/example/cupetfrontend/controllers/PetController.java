@@ -3,6 +3,7 @@ package com.example.cupetfrontend.controllers;
 import com.example.cupetfrontend.controllers.abstracts.IPetController;
 import com.example.cupetfrontend.use_cases.GetPotentialMatches;
 import com.example.cupetfrontend.use_cases.RejectMatch;
+import com.example.cupetfrontend.use_cases.SetPetProfileImage;
 import com.example.cupetfrontend.use_cases.input_boundaries.pet.*;
 import com.example.cupetfrontend.use_cases.request_models.pet.*;
 
@@ -19,6 +20,9 @@ public class PetController implements IPetController {
     RejectMatchInputBoundary rejectMatch;
     GetMatchesInputBoundary getMatches;
     UnMatchPetInputBoundary unMatchPet;
+    SetPetProfileImageInputBoundary setPetProfileImage;
+    AddToPetImageGalleryInputBoundary addToPetImageGallery;
+    RemoveFromPetImageGalleryInputBoundary removeFromPetImageGallery;
 
     public void setPetCreator(PetCreatorInputBoundary petCreator) {
         this.petCreator = petCreator;
@@ -50,6 +54,18 @@ public class PetController implements IPetController {
 
     public void setUnMatchPet(UnMatchPetInputBoundary unMatchPet) {
         this.unMatchPet = unMatchPet;
+    }
+
+    public void setSetPetProfileImage(SetPetProfileImageInputBoundary setPetProfileImage) {
+        this.setPetProfileImage = setPetProfileImage;
+    }
+
+    public void setAddToPetImageGallery(AddToPetImageGalleryInputBoundary addToPetImageGallery) {
+        this.addToPetImageGallery = addToPetImageGallery;
+    }
+
+    public void setRemoveFromPetImageGallery(RemoveFromPetImageGalleryInputBoundary removeFromPetImageGallery) {
+        this.removeFromPetImageGallery = removeFromPetImageGallery;
     }
 
     @Override
@@ -106,5 +122,32 @@ public class PetController implements IPetController {
         UnMatchPetRequestModel request = new UnMatchPetRequestModel(token, myPetId, otherPetId);
 
         unMatchPet.unMatchPet(request);
+    }
+
+    @Override
+    public void setPetProfileImage(String token, String petId, String imgB64) {
+        SetPetProfileImageRequestModel request = new SetPetProfileImageRequestModel(
+                token, petId, imgB64
+        );
+
+        setPetProfileImage.setPetProfile(request);
+    }
+
+    @Override
+    public void addToPetImageGallery(String token, String petId, String imgB64) {
+        AddToPetImageGalleryRequestModel request = new AddToPetImageGalleryRequestModel(
+                token, petId, imgB64
+        );
+
+        addToPetImageGallery.addToPetImageGallery(request);
+    }
+
+    @Override
+    public void removeFromPetImageGallery(String token, String petId, String assetId) {
+        RemoveFromPetImageGalleryRequestModel request = new RemoveFromPetImageGalleryRequestModel(
+                token, petId, assetId
+        );
+
+        removeFromPetImageGallery.removeFromPetImageGallery(request);
     }
 }

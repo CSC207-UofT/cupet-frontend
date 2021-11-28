@@ -1,6 +1,7 @@
 package com.example.cupetfrontend.controllers;
 
 import com.example.cupetfrontend.controllers.abstracts.IUserController;
+import com.example.cupetfrontend.use_cases.SetUserProfileImage;
 import com.example.cupetfrontend.use_cases.input_boundaries.user.*;
 import com.example.cupetfrontend.use_cases.request_models.user.*;
 
@@ -15,6 +16,7 @@ public class UserController implements IUserController {
     FetchUserAccountInputBoundary fetchUserAccount;
     EditUserAccountInputBoundary editUserAccount;
     GetPetsInputBoundary getPets;
+    SetUserProfileImageInputBoundary setUserProfileImage;
 
     public void setUserCreator(UserCreatorInputBoundary userCreator) {
         this.userCreator = userCreator;
@@ -34,6 +36,10 @@ public class UserController implements IUserController {
 
     public void setEditUserAccount(EditUserAccountInputBoundary editUserAccount) {
         this.editUserAccount = editUserAccount;
+    }
+
+    public void setSetUserProfileImage(SetUserProfileImage setUserProfileImage){
+        this.setUserProfileImage = setUserProfileImage;
     }
 
     public void setGetPets(GetPetsInputBoundary getPets) {
@@ -87,5 +93,14 @@ public class UserController implements IUserController {
         );
 
         editUserAccount.editUserAccount(request);
+    }
+
+    @Override
+    public void setUserProfileImage(String token, String imgB64) {
+        SetUserProfileImageRequestModel request = new SetUserProfileImageRequestModel(
+                token, imgB64
+        );
+
+        setUserProfileImage.setUserProfileImage(request);
     }
 }

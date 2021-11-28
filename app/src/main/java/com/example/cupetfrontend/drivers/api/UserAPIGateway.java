@@ -106,4 +106,17 @@ public class UserAPIGateway extends APIGateway implements IUserAPIGateway {
         requestManager.makeGetRequest(url, queryParams,
                 createAuthHeaders(requestData.getToken()), responseListener);
     }
+
+    @Override
+    public void setUserProfileImage(APISetUserProfileImageRequestModel requestData,
+                                    IServerResponseListener responseListener) {
+        JSONObject requestBody = new JSONObject(new HashMap<String, String>(){{
+            put("base64Encoded", requestData.getImgB64());
+        }});
+
+        String url = UserRoutesStore.toAbsoluteRoute(UserRoutesStore.SET_PROFILE_IMAGE);
+
+        requestManager.makePostRequest(url, requestBody,
+                createAuthHeaders(requestData.getToken()), responseListener);
+    }
 }
