@@ -1,12 +1,11 @@
-package com.example.cupetfrontend.drivers.api.mock_volley;
+package com.example.cupetfrontend.unit_tests.drivers.api.mock_volley;
 
-import com.android.volley.*;
+import com.android.volley.Header;
+import com.android.volley.Network;
+import com.android.volley.NetworkResponse;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * A class that mimics the behaviour of a Volley network.

@@ -1,8 +1,8 @@
-package com.example.cupetfrontend.drivers.api;
+package com.example.cupetfrontend.unit_tests.drivers.api;
 
-import com.example.cupetfrontend.drivers.api.mock_volley.DummyNetwork;
-import com.example.cupetfrontend.drivers.api.mock_volley.MockNetwork;
-import com.example.cupetfrontend.drivers.api.mock_volley.MockRequestQueue;
+import com.example.cupetfrontend.drivers.api.HTTPRequestManager;
+import com.example.cupetfrontend.unit_tests.drivers.api.mock_volley.DummyNetwork;
+import com.example.cupetfrontend.unit_tests.drivers.api.mock_volley.MockRequestQueue;
 import com.example.cupetfrontend.use_cases.api_abstracts.IServerResponseListener;
 import org.json.JSONObject;
 import org.junit.Before;
@@ -30,15 +30,13 @@ public class HTTPRequestManagerTest extends AsyncTestClass{
      *
      * @return a dummy request body
      */
-    public JSONObject makeDummyRequestBody () {
+    public Map<String, String> makeDummyRequestBody () {
         Map<String, String> dummyDataMap = new HashMap<>();
         dummyDataMap.put("testParam1", "abc");
         dummyDataMap.put("testParam2", "1234");
         dummyDataMap.put("testParam3", "xef");
 
-        JSONObject requestBody = new JSONObject(dummyDataMap);
-
-        return requestBody;
+        return dummyDataMap;
     }
 
     /**
@@ -62,7 +60,7 @@ public class HTTPRequestManagerTest extends AsyncTestClass{
      */
     @Test
     public void testGETSuccess() {
-        JSONObject requestBody = makeDummyRequestBody();
+        Map<String, String> requestBody = makeDummyRequestBody();
         JSONObject responseBody = makeDummyResponseBody();
 
         IServerResponseListener listener = new IServerResponseListener() {
@@ -90,7 +88,7 @@ public class HTTPRequestManagerTest extends AsyncTestClass{
      */
     @Test
     public void testGETFailure() {
-        JSONObject requestBody = makeDummyRequestBody();
+        Map<String, String> requestBody = makeDummyRequestBody();
         JSONObject responseBody = makeDummyResponseBody();
 
         IServerResponseListener listener = new IServerResponseListener() {
@@ -119,7 +117,7 @@ public class HTTPRequestManagerTest extends AsyncTestClass{
      */
     @Test
     public void testPOSTSuccess() {
-        JSONObject requestBody = makeDummyRequestBody();
+        JSONObject requestBody = new JSONObject(makeDummyRequestBody());
         JSONObject responseBody = makeDummyResponseBody();
 
         IServerResponseListener listener = new IServerResponseListener() {
@@ -147,7 +145,7 @@ public class HTTPRequestManagerTest extends AsyncTestClass{
      */
     @Test
     public void testPOSTFailure() {
-        JSONObject requestBody = makeDummyRequestBody();
+        JSONObject requestBody = new JSONObject(makeDummyRequestBody());
         JSONObject responseBody = makeDummyResponseBody();
 
         IServerResponseListener listener = new IServerResponseListener() {
