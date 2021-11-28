@@ -6,13 +6,11 @@ import com.example.cupetfrontend.use_cases.api_abstracts.request_models.user.API
 import com.example.cupetfrontend.use_cases.input_boundaries.user.FetchUserAccountInputBoundary;
 import com.example.cupetfrontend.use_cases.output_boundaries.user.FetchUserAccountOutputBoundary;
 import com.example.cupetfrontend.use_cases.request_models.user.FetchUserAccountRequestModel;
-import com.example.cupetfrontend.use_cases.response_models.LoginSuccessResponseModel;
-import com.example.cupetfrontend.use_cases.response_models.user.FetchUserAccountFailResponseModel;
 import com.example.cupetfrontend.use_cases.response_models.user.FetchUserAccountSuccessResponseModel;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class FetchUserAccount implements FetchUserAccountInputBoundary {
+public class FetchUserAccount extends DefaultFailResponseUseCase implements FetchUserAccountInputBoundary {
     IUserAPIGateway userAPIGateway;
     FetchUserAccountOutputBoundary outputBoundary;
 
@@ -60,21 +58,6 @@ public class FetchUserAccount implements FetchUserAccountInputBoundary {
                     );
         } catch (JSONException e) {
             throw new InvalidAPIResponseException("The API gave an invalid successful fetch user response.");
-        }
-    }
-
-    /**
-     * Convert a JSONObject response to an instance of
-     * FetchPetProfileFailResponseModel.
-     *
-     * @param jsonResponse A JSON representation of the response.
-     * @return The response as a FetchPetProfileFailResponseModel
-     */
-    private FetchUserAccountFailResponseModel toFailResponseModel(JSONObject jsonResponse) {
-        try {
-            return new FetchUserAccountFailResponseModel(jsonResponse.getString("message"));
-        } catch (JSONException e) {
-            throw new InvalidAPIResponseException("The API gave an invalid fail fetch user response");
         }
     }
 }

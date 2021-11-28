@@ -1,6 +1,6 @@
 package com.example.cupetfrontend.use_cases.output_boundaries.user;
 
-import com.example.cupetfrontend.use_cases.response_models.user.UserCreatorFailResponseModel;
+import com.example.cupetfrontend.use_cases.response_models.pet.DefaultFailureResponseModel;
 import com.example.cupetfrontend.use_cases.response_models.user.UserCreatorSuccessResponseModel;
 
 /**
@@ -17,5 +17,5 @@ public interface UserCreatorOutputBoundary {
      * Method called when a failed response is received.
      * @param response The response data
      */
-    void onCreateUserFailure(UserCreatorFailResponseModel response);
+    void onCreateUserFailure(DefaultFailureResponseModel response);
 }

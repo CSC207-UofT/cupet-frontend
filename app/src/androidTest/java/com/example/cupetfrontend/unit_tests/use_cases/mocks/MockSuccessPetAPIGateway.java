@@ -3,7 +3,6 @@ package com.example.cupetfrontend.unit_tests.use_cases.mocks;
 import com.example.cupetfrontend.use_cases.api_abstracts.IPetAPIGateway;
 import com.example.cupetfrontend.use_cases.api_abstracts.IServerResponseListener;
 import com.example.cupetfrontend.use_cases.api_abstracts.request_models.pet.*;
-import org.json.JSONObject;
 
 import java.util.HashMap;
 
@@ -36,10 +35,10 @@ public class MockSuccessPetAPIGateway extends MockSuccessAPIGateway implements I
     public void editPet(APIEditPetRequestModel requestData, IServerResponseListener responseListener) {
         responseListener.onRequestSuccess(createDummySuccessJSON(new HashMap<String, String>(){{
             put("petId", requestData.getPetId());
-            put("name", requestData.getNewName());
-            put("age", requestData.getNewAge());
-            put("breed", requestData.getNewBreed());
-            put("biography", requestData.getNewBiography());
+            put("name", requestData.getName());
+            put("age", requestData.getAge());
+            put("breed", requestData.getBreed());
+            put("biography", requestData.getBiography());
         }}));
     }
 

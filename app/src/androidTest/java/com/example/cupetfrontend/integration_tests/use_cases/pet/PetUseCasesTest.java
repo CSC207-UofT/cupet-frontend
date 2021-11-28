@@ -9,9 +9,8 @@ import com.example.cupetfrontend.use_cases.output_boundaries.pet.*;
 import com.example.cupetfrontend.use_cases.output_boundaries.user.GetPetsOutputBoundary;
 import com.example.cupetfrontend.use_cases.request_models.pet.*;
 import com.example.cupetfrontend.use_cases.request_models.user.GetPetsRequestModel;
-import com.example.cupetfrontend.use_cases.response_models.PetData;
+import com.example.cupetfrontend.use_cases.data_models.PetData;
 import com.example.cupetfrontend.use_cases.response_models.pet.*;
-import com.example.cupetfrontend.use_cases.response_models.user.GetPetsFailResponseModel;
 import com.example.cupetfrontend.use_cases.response_models.user.GetPetsSuccessResponseModel;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
@@ -93,7 +92,7 @@ public class PetUseCasesTest extends NUsersTestClass {
             }
 
             @Override
-            public void onCreatePetFailure(PetCreatorFailResponseModel response) {
+            public void onCreatePetFailure(DefaultFailureResponseModel response) {
                 fail("Request incorrectly failed");
             }
         }).createPet(request);
@@ -125,7 +124,7 @@ public class PetUseCasesTest extends NUsersTestClass {
             }
 
             @Override
-            public void onCreatePetFailure(PetCreatorFailResponseModel response) {
+            public void onCreatePetFailure(DefaultFailureResponseModel response) {
                 fail("Request incorrectly failed");
             }
         }).createPet(request);
@@ -152,7 +151,7 @@ public class PetUseCasesTest extends NUsersTestClass {
             }
 
             @Override
-            public void onFetchPetProfileFailure(FetchPetProfileFailResponseModel response) {
+            public void onFetchPetProfileFailure(DefaultFailureResponseModel response) {
                 fail("Request incorrectly failed");
             }
 
@@ -177,14 +176,14 @@ public class PetUseCasesTest extends NUsersTestClass {
             public void onEditPetSuccess(EditPetSuccessResponseModel response) {
                 setTaskComplete();
 
-                assertEquals("joe", response.getNewName());
-                assertEquals("8", response.getNewAge());
-                assertEquals("another dog breed", response.getNewBreed());
-                assertEquals("hello world!", response.getNewBiography());
+                assertEquals("joe", response.getName());
+                assertEquals("8", response.getAge());
+                assertEquals("another dog breed", response.getBreed());
+                assertEquals("hello world!", response.getBiography());
             }
 
             @Override
-            public void onEditPetFailure(EditPetFailResponseModel response) {
+            public void onEditPetFailure(DefaultFailureResponseModel response) {
                 fail("Request incorrectly failed");
             }
         }).editPet(request);
@@ -212,7 +211,7 @@ public class PetUseCasesTest extends NUsersTestClass {
             }
 
             @Override
-            public void onGetPetsFailure(GetPetsFailResponseModel response) {
+            public void onGetPetsFailure(DefaultFailureResponseModel response) {
                 fail("Request incorrectly failed");
             }
         }).getPets(request);
@@ -237,7 +236,7 @@ public class PetUseCasesTest extends NUsersTestClass {
             }
 
             @Override
-            public void onGetPotentialMatchesFailure(GetPotentialMatchesFailResponseModel response) {
+            public void onGetPotentialMatchesFailure(DefaultFailureResponseModel response) {
                 fail("Request incorrectly failed");
 
             }
@@ -261,7 +260,7 @@ public class PetUseCasesTest extends NUsersTestClass {
             }
 
             @Override
-            public void onIntendToMatchFailure(IntendToMatchFailResponseModel response) {
+            public void onIntendToMatchFailure(DefaultFailureResponseModel response) {
                 fail("Request incorrectly failed");
             }
         }).intendToMatch(request);
@@ -284,7 +283,7 @@ public class PetUseCasesTest extends NUsersTestClass {
             }
 
             @Override
-            public void onIntendToMatchFailure(IntendToMatchFailResponseModel response) {
+            public void onIntendToMatchFailure(DefaultFailureResponseModel response) {
                 fail("Request incorrectly failed");
             }
         }).intendToMatch(request);
@@ -316,7 +315,7 @@ public class PetUseCasesTest extends NUsersTestClass {
             }
 
             @Override
-            public void onGetMatchesFailure(GetMatchesFailResponseModel response) {
+            public void onGetMatchesFailure(DefaultFailureResponseModel response) {
                 fail("Request incorrectly failed");
 
             }

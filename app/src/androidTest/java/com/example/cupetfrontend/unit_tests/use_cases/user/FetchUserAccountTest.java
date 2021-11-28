@@ -1,15 +1,10 @@
 package com.example.cupetfrontend.unit_tests.use_cases.user;
 
 import com.example.cupetfrontend.unit_tests.use_cases.UseCaseTestClass;
-import com.example.cupetfrontend.use_cases.EditUserAccount;
 import com.example.cupetfrontend.use_cases.FetchUserAccount;
-import com.example.cupetfrontend.use_cases.output_boundaries.user.EditUserAccountOutputBoundary;
 import com.example.cupetfrontend.use_cases.output_boundaries.user.FetchUserAccountOutputBoundary;
-import com.example.cupetfrontend.use_cases.request_models.user.EditUserAccountRequestModel;
 import com.example.cupetfrontend.use_cases.request_models.user.FetchUserAccountRequestModel;
-import com.example.cupetfrontend.use_cases.response_models.user.EditUserAccountFailResponseModel;
-import com.example.cupetfrontend.use_cases.response_models.user.EditUserAccountSuccessResponseModel;
-import com.example.cupetfrontend.use_cases.response_models.user.FetchUserAccountFailResponseModel;
+import com.example.cupetfrontend.use_cases.response_models.pet.DefaultFailureResponseModel;
 import com.example.cupetfrontend.use_cases.response_models.user.FetchUserAccountSuccessResponseModel;
 import org.junit.Test;
 
@@ -35,7 +30,7 @@ public class FetchUserAccountTest extends UseCaseTestClass {
             }
 
             @Override
-            public void onFetchUserAccountFailure(FetchUserAccountFailResponseModel response) {
+            public void onFetchUserAccountFailure(DefaultFailureResponseModel response) {
                 fail("Request incorrectly failed");
 
             }
@@ -56,7 +51,7 @@ public class FetchUserAccountTest extends UseCaseTestClass {
             }
 
             @Override
-            public void onFetchUserAccountFailure(FetchUserAccountFailResponseModel response) {
+            public void onFetchUserAccountFailure(DefaultFailureResponseModel response) {
                 assertEquals(response.getErrorMessage(), "dummy error message");
 
                 setTaskComplete();

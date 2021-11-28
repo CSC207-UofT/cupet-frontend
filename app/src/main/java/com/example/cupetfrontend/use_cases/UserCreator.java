@@ -6,12 +6,11 @@ import com.example.cupetfrontend.use_cases.api_abstracts.request_models.user.API
 import com.example.cupetfrontend.use_cases.input_boundaries.user.UserCreatorInputBoundary;
 import com.example.cupetfrontend.use_cases.output_boundaries.user.UserCreatorOutputBoundary;
 import com.example.cupetfrontend.use_cases.request_models.user.UserCreatorRequestModel;
-import com.example.cupetfrontend.use_cases.response_models.user.UserCreatorFailResponseModel;
 import com.example.cupetfrontend.use_cases.response_models.user.UserCreatorSuccessResponseModel;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class UserCreator implements UserCreatorInputBoundary {
+public class UserCreator extends DefaultFailResponseUseCase implements UserCreatorInputBoundary {
     IUserAPIGateway userAPIGateway;
     UserCreatorOutputBoundary outputBoundary;
 
@@ -78,22 +77,6 @@ public class UserCreator implements UserCreatorInputBoundary {
         } catch (JSONException e) {
             throw new InvalidAPIResponseException(
                     "The API gave an invalid successful create user response: " + jsonResponse);
-        }
-    }
-
-    /**
-     * Convert a JSONObject response to an instance of
-     * UserCreatorFailResponseModel.
-     *
-     * @param jsonResponse A JSON representation of the response.
-     * @return The response as a UserCreatorFailResponseModel
-     */
-    private UserCreatorFailResponseModel toFailResponseModel(JSONObject jsonResponse) {
-        try {
-            return new UserCreatorFailResponseModel(jsonResponse.getString("message"));
-        } catch (JSONException e) {
-            throw new InvalidAPIResponseException(
-                    "The API gave an invalid failed create user response: " + jsonResponse);
         }
     }
 }

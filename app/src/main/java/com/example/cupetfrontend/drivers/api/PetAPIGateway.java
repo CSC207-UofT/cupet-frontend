@@ -1,7 +1,6 @@
 package com.example.cupetfrontend.drivers.api;
 
 import com.example.cupetfrontend.drivers.api.routes.PetRoutesStore;
-import com.example.cupetfrontend.drivers.api.routes.UserRoutesStore;
 import com.example.cupetfrontend.use_cases.api_abstracts.IPetAPIGateway;
 import com.example.cupetfrontend.use_cases.api_abstracts.IServerRequestManager;
 import com.example.cupetfrontend.use_cases.api_abstracts.IServerResponseListener;
@@ -49,10 +48,10 @@ public class PetAPIGateway extends APIGateway implements IPetAPIGateway {
     @Override
     public void editPet(APIEditPetRequestModel requestData, IServerResponseListener responseListener) {
         JSONObject requestBody = new JSONObject(new HashMap<String, String>(){{
-            put("newName", requestData.getNewName());
-            put("newAge", requestData.getNewAge());
-            put("newBreed", requestData.getNewBreed());
-            put("newBiography", requestData.getNewBiography());
+            put("newName", requestData.getName());
+            put("newAge", requestData.getAge());
+            put("newBreed", requestData.getBreed());
+            put("newBiography", requestData.getBiography());
             put("petId", requestData.getPetId());
         }});
 
@@ -103,7 +102,7 @@ public class PetAPIGateway extends APIGateway implements IPetAPIGateway {
     @Override
     public void getMatches(APIGetMatchesRequestModel requestData, IServerResponseListener responseListener) {
         HashMap<String, String> queryParams = new HashMap<String, String>(){{
-            put("petId", requestData.getMyPetId());
+            put("petId", requestData.getPetId());
         }};
 
         String url = PetRoutesStore.toAbsoluteRoute(PetRoutesStore.FETCH_MATCHES);

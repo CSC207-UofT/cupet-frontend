@@ -1,6 +1,6 @@
 package com.example.cupetfrontend.use_cases.output_boundaries.pet;
 
-import com.example.cupetfrontend.use_cases.response_models.pet.EditPetFailResponseModel;
+import com.example.cupetfrontend.use_cases.response_models.pet.DefaultFailureResponseModel;
 import com.example.cupetfrontend.use_cases.response_models.pet.EditPetSuccessResponseModel;
 
 /**
@@ -20,5 +20,5 @@ public interface EditPetOutputBoundary {
      *
      * @param response The response data
      */
-    void onEditPetFailure(EditPetFailResponseModel response);
+    void onEditPetFailure(DefaultFailureResponseModel response);
 }

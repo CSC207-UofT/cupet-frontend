@@ -1,15 +1,10 @@
 package com.example.cupetfrontend.unit_tests.use_cases.pet;
 
 import com.example.cupetfrontend.unit_tests.use_cases.UseCaseTestClass;
-import com.example.cupetfrontend.use_cases.EditPet;
 import com.example.cupetfrontend.use_cases.PetCreator;
-import com.example.cupetfrontend.use_cases.output_boundaries.pet.EditPetOutputBoundary;
 import com.example.cupetfrontend.use_cases.output_boundaries.pet.PetCreatorOutputBoundary;
-import com.example.cupetfrontend.use_cases.request_models.pet.EditPetRequestModel;
 import com.example.cupetfrontend.use_cases.request_models.pet.PetCreatorRequestModel;
-import com.example.cupetfrontend.use_cases.response_models.pet.EditPetFailResponseModel;
-import com.example.cupetfrontend.use_cases.response_models.pet.EditPetSuccessResponseModel;
-import com.example.cupetfrontend.use_cases.response_models.pet.PetCreatorFailResponseModel;
+import com.example.cupetfrontend.use_cases.response_models.pet.DefaultFailureResponseModel;
 import com.example.cupetfrontend.use_cases.response_models.pet.PetCreatorSuccessResponseModel;
 import org.junit.Test;
 
@@ -35,7 +30,7 @@ public class CreatePetTest extends UseCaseTestClass {
             }
 
             @Override
-            public void onCreatePetFailure(PetCreatorFailResponseModel response) {
+            public void onCreatePetFailure(DefaultFailureResponseModel response) {
                 fail("Request incorrectly failed");
 
             }
@@ -57,7 +52,7 @@ public class CreatePetTest extends UseCaseTestClass {
             }
 
             @Override
-            public void onCreatePetFailure(PetCreatorFailResponseModel response) {
+            public void onCreatePetFailure(DefaultFailureResponseModel response) {
                 assertEquals(response.getErrorMessage(), "dummy error message");
 
                 setTaskComplete();

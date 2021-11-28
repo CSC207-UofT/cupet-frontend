@@ -4,7 +4,7 @@ import com.example.cupetfrontend.unit_tests.use_cases.UseCaseTestClass;
 import com.example.cupetfrontend.use_cases.UnMatchPet;
 import com.example.cupetfrontend.use_cases.output_boundaries.pet.UnMatchPetOutputBoundary;
 import com.example.cupetfrontend.use_cases.request_models.pet.UnMatchPetRequestModel;
-import com.example.cupetfrontend.use_cases.response_models.pet.UnMatchPetFailureResponseModel;
+import com.example.cupetfrontend.use_cases.response_models.pet.DefaultFailureResponseModel;
 import com.example.cupetfrontend.use_cases.response_models.pet.UnMatchPetSuccessResponseModel;
 import org.junit.Test;
 
@@ -24,7 +24,7 @@ public class UnMatchPetTest extends UseCaseTestClass {
             }
 
             @Override
-            public void onUnMatchPetFailure(UnMatchPetFailureResponseModel response) {
+            public void onUnMatchPetFailure(DefaultFailureResponseModel response) {
                 fail("Request incorrectly failed");
             }
         }).unMatchPet(request);
@@ -44,7 +44,7 @@ public class UnMatchPetTest extends UseCaseTestClass {
             }
 
             @Override
-            public void onUnMatchPetFailure(UnMatchPetFailureResponseModel response) {
+            public void onUnMatchPetFailure(DefaultFailureResponseModel response) {
                 assertEquals(response.getErrorMessage(), "dummy error message");
 
                 setTaskComplete();

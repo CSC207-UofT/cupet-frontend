@@ -1,19 +1,9 @@
 package com.example.cupetfrontend.use_cases.api_abstracts.request_models.user;
 
-public class APIFetchUserProfileRequestModel {
-    private final String token;
-    private final String userId;
+import com.example.cupetfrontend.use_cases.request_models.user.FetchUserProfileRequestModel;
 
+public class APIFetchUserProfileRequestModel extends FetchUserProfileRequestModel {
     public APIFetchUserProfileRequestModel(String token, String userId) {
-        this.token = token;
-        this.userId = userId;
-    }
-
-    public String getToken() {
-        return token;
-    }
-
-    public String getUserId() {
-        return userId;
+        super(token, userId);
     }
 }
