@@ -34,7 +34,7 @@
     <string name="invalid_home_address">Invalid Home Address</string>
     <string name="invalid_city">Invalid City</string>
 
-    <!-- Strings used for create pet page -->
+    <!-- Strings used for create/edit pet page -->
     <string name="add_a_new_pet">Add a New Pet</string>
     <string name="add_pet">Add</string>
     <string name="edit_pet">Edit</string>

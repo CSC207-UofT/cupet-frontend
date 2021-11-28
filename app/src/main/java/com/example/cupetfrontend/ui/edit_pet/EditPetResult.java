@@ -1,18 +1,18 @@
-package com.example.cupetfrontend.ui.create_pet;
+package com.example.cupetfrontend.ui.edit_pet;
 
 /**
- * Create Pet result : success (pet details) or error message.
+ * Edit Pet result : success (edited pet details) or error message.
  */
-public class CreatePetResult {
+public class EditPetResult {
     private final boolean isError;
     private final String errorMessage;
 
-    public CreatePetResult(boolean isError, String errorMessage) {
+    public EditPetResult(boolean isError, String errorMessage) {
         this.isError = isError;
         this.errorMessage = errorMessage;
     }
 
-    public CreatePetResult(boolean isError) {
+    public EditPetResult(boolean isError) {
         this.isError = isError;
         errorMessage = "";
     }

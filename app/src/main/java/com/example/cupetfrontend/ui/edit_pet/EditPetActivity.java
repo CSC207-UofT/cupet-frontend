@@ -1,4 +1,4 @@
-package com.example.cupetfrontend.ui.create_pet;
+package com.example.cupetfrontend.ui.edit_pet;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,28 +8,26 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
-
 import com.example.cupetfrontend.App;
 import com.example.cupetfrontend.R;
 import com.example.cupetfrontend.controllers.abstracts.IPetController;
 import com.example.cupetfrontend.dependency_selector.DependencySelector;
-import com.example.cupetfrontend.presenters.abstracts.ICreatePetPresenter;
+import com.example.cupetfrontend.presenters.abstracts.IEditPetPresenter;
 import com.example.cupetfrontend.ui.login.LoginActivity;
 
 /**
- * The activity for the Create Pet page.
+ * The activity for the Edit Pet page.
  */
-public class CreatePetActivity extends AppCompatActivity {
+public class EditPetActivity extends AppCompatActivity {
     private EditText petNameField;
     private EditText petAgeField;
     private EditText petBreedField;
     private EditText petBioField;
-    private Button createPetButton;
-    private CreatePetViewModel createPetViewModel;
+    private Button editPetButton;
+    private EditPetViewModel editPetViewModel;
 
     /**
      * Initialize the views of the form into the field instance variables.
@@ -39,7 +37,7 @@ public class CreatePetActivity extends AppCompatActivity {
         petAgeField = findViewById(R.id.pet_petAge);
         petBreedField = findViewById(R.id.pet_petBreed);
         petBioField = findViewById(R.id.pet_petBio);
-        createPetButton = findViewById(R.id.confirm_add_pet_button);
+        editPetButton = findViewById(R.id.confirm_edit_pet_button);
     }
 
     /**
@@ -55,30 +53,30 @@ public class CreatePetActivity extends AppCompatActivity {
     }
 
     /**
-     * Setup views and state on pet creation of the activity.
+     * Setup views and state on pet edition of the activity.
      */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_pet);
+        setContentView(R.layout.activity_edit_pet);
 
         DependencySelector dependencySelector = ((App) getApplication()).getDependencySelector();
 
         IPetController petController = dependencySelector.getControllers().getPetController();
 
-        ICreatePetPresenter createPetPresenter = dependencySelector.getPetPresenters().getCreatePetPresenter();
-        createPetViewModel = new CreatePetViewModel(petController);
-        createPetPresenter.setCreatePetViewModel(createPetViewModel);
+        IEditPetPresenter editPetPresenter = dependencySelector.getPetPresenters().getEditPetPresenter();
+        editPetViewModel = new EditPetViewModel(petController);
+        editPetPresenter.setEditPetViewModel(editPetViewModel);
 
         initializeViews();
-        setUpObserveCreatePetFormState();
-        setUpObserveCreatePetResult();
+        setUpObserveEditPetFormState();
+        setUpObserveEditPetResult();
         setUpFormEditedListener();
-        setUpCreatePetButtonClickedListener();
+        setUpEditPetButtonClickedListener();
     }
 
     /**
-     * Set up a listener that alerts createPetViewModel when the text
+     * Set up a listener that alerts editPetViewModel when the text
      * in the form has changed.
      */
     private void setUpFormEditedListener() {
@@ -95,8 +93,8 @@ public class CreatePetActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                CreatePetFormData formData = getCreatePetFormData();
-                createPetViewModel.updateFormState(formData);
+                EditPetFormData formData = getEditPetFormData();
+                editPetViewModel.updateFormState(formData);
             }
         };
 
@@ -107,25 +105,25 @@ public class CreatePetActivity extends AppCompatActivity {
     }
 
     /**
-     * Set up a listener that sends a create pet request when createPetButton
+     * Set up a listener that sends an edit pet request when editPetButton
      * is clicked.
      */
-    private void setUpCreatePetButtonClickedListener() {
-        createPetButton.setOnClickListener(new View.OnClickListener() {
+    private void setUpEditPetButtonClickedListener() {
+        editPetButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                CreatePetFormData formData = getCreatePetFormData();
-                createPetViewModel.createPet(formData);
+                EditPetFormData formData = getEditPetFormData();
+                editPetViewModel.editPet(formData);
             }
         });
     }
 
     /**
-     * Return the data entered into the pet creation form.
+     * Return the data entered into the pet edition form.
      *
-     * @return The data entered into the pet creation form.
+     * @return The data entered into the pet edition form.
      */
-    private CreatePetFormData getCreatePetFormData() {
-        CreatePetFormData formData = new CreatePetFormData();
+    private EditPetFormData getEditPetFormData() {
+        EditPetFormData formData = new EditPetFormData();
 
         formData.setPetName(petNameField.getText().toString());
         formData.setPetAge(petAgeField.getText().toString());
@@ -136,22 +134,22 @@ public class CreatePetActivity extends AppCompatActivity {
     }
 
     /**
-     * Set up this activity as an observer that observes the result of pet creation.
+     * Set up this activity as an observer that observes the result of pet edition.
      *
-     * Update the displayed views when the pet creation result has changed.
+     * Update the displayed views when the pet edition result has changed.
      */
-    private void setUpObserveCreatePetResult() {
-        createPetViewModel.getCreatePetResult().observe(this, new Observer<CreatePetResult>() {
+    private void setUpObserveEditPetResult() {
+        editPetViewModel.getEditPetResult().observe(this, new Observer<EditPetResult>() {
             @Override
-            public void onChanged(@Nullable CreatePetResult createPetResult) {
-                if (createPetResult == null) {
+            public void onChanged(@Nullable EditPetResult editPetResult) {
+                if (editPetResult == null) {
                     return;
                 }
 
-                if (createPetResult.isError()){
-                    onCreatePetFailure(createPetResult.getErrorMessage());
+                if (editPetResult.isError()){
+                    onEditPetFailure(editPetResult.getErrorMessage());
                 }else{
-                    onCreatePetSuccess();
+                    onEditPetSuccess();
                 }
 
                 finish();
@@ -161,44 +159,44 @@ public class CreatePetActivity extends AppCompatActivity {
 
     /**
      * Set up this activity as an observer that observes the error states of the
-     * pet creation form.
+     * pet edition form.
      *
      * Update the fields accordingly to whether or not they have errors.
      */
-    private void setUpObserveCreatePetFormState() {
-        createPetViewModel.getCreatePetFormState().observe(this, new Observer<CreatePetFormState>() {
+    private void setUpObserveEditPetFormState() {
+        editPetViewModel.getEditPetFormState().observe(this, new Observer<EditPetFormState>() {
             @Override
-            public void onChanged(@Nullable CreatePetFormState createPetFormState) {
-                if (createPetFormState == null) {
+            public void onChanged(@Nullable EditPetFormState editPetFormState) {
+                if (editPetFormState == null) {
                     return;
                 }
 
-                setFieldError(petNameField, createPetFormState.getPetNameError());
-                setFieldError(petAgeField, createPetFormState.getPetAgeError());
-                setFieldError(petBreedField, createPetFormState.getPetBreedError());
-                setFieldError(petBioField, createPetFormState.getPetBioError());
+                setFieldError(petNameField, editPetFormState.getPetNameError());
+                setFieldError(petAgeField, editPetFormState.getPetAgeError());
+                setFieldError(petBreedField, editPetFormState.getPetBreedError());
+                setFieldError(petBioField, editPetFormState.getPetBioError());
 
-                createPetButton.setEnabled(createPetFormState.isDataValid());
+                editPetButton.setEnabled(editPetFormState.isDataValid());
             }
         });
     }
 
     /**
-     * Display a Pet Creation Success toast message and move to the login view.
+     * Display a Pet Edition Success toast message and move to the login view.
      */
-    private void onCreatePetSuccess() {
-        Toast.makeText(getApplicationContext(), "Pet Creation Success", Toast.LENGTH_SHORT).show();
+    private void onEditPetSuccess() {
+        Toast.makeText(getApplicationContext(), "Pet Edition Success", Toast.LENGTH_SHORT).show();
 
-        Intent moveToLoginIntent = new Intent(CreatePetActivity.this, LoginActivity.class);
+        Intent moveToLoginIntent = new Intent(EditPetActivity.this, LoginActivity.class);
         startActivity(moveToLoginIntent);
     }
 
     /**
-     * Display a Pet Creation failed toast message.
+     * Display a Pet Edition failed toast message.
      * @param errorMessage The error message to display
      */
-    private void onCreatePetFailure (String errorMessage) {
-        System.out.println("Pet Creation failed");
-        Toast.makeText(getApplicationContext(), "Pet Creation failed: " + errorMessage, Toast.LENGTH_SHORT).show();
+    private void onEditPetFailure (String errorMessage) {
+        System.out.println("Pet Edition failed");
+        Toast.makeText(getApplicationContext(), "Pet Edition failed: " + errorMessage, Toast.LENGTH_SHORT).show();
     }
 }

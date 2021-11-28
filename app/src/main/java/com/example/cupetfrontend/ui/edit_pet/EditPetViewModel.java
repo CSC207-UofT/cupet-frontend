@@ -1,51 +1,50 @@
-package com.example.cupetfrontend.ui.create_pet;
+package com.example.cupetfrontend.ui.edit_pet;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
-
 import com.example.cupetfrontend.R;
 import com.example.cupetfrontend.controllers.abstracts.IPetController;
-import com.example.cupetfrontend.presenters.view_model_abstracts.ICreatePetViewModel;
+import com.example.cupetfrontend.presenters.view_model_abstracts.IEditPetViewModel;
 
 /**
- * A ViewModel class for the Create Pet page.
- * This class is responsible for storing and updating the state of the create pet form.
+ * A ViewModel class for the Edit Pet page.
+ * This class is responsible for storing and updating the state of the edit pet form.
  */
-public class CreatePetViewModel extends ViewModel implements ICreatePetViewModel {
-
-    private final MutableLiveData<CreatePetFormState> createPetFormState = new MutableLiveData<>();
-    private final MutableLiveData<CreatePetResult> createPetResult = new MutableLiveData<>();
+public class EditPetViewModel extends ViewModel implements IEditPetViewModel {
+    private final MutableLiveData<EditPetFormState> editPetFormState = new MutableLiveData<>();
+    private final MutableLiveData<EditPetResult> editPetResult = new MutableLiveData<>();
     private final IPetController petController;
 
-    public CreatePetViewModel(IPetController petController) {
+    public EditPetViewModel(IPetController petController) {
         this.petController = petController;
     }
 
-    LiveData<CreatePetFormState> getCreatePetFormState() {
-        return createPetFormState;
+    LiveData<EditPetFormState> getEditPetFormState() {
+        return editPetFormState;
     }
 
-    LiveData<CreatePetResult> getCreatePetResult() {
-        return createPetResult;
+    LiveData<EditPetResult> getEditPetResult() {
+        return editPetResult;
     }
 
     /**
-     * Create a new create pet request
-     * @param formData The pet creation data entered into the form
+     * Create a new edit pet request
+     * @param formData The registration data entered into the form
      */
-    public void createPet(CreatePetFormData formData){
+    public void editPet(EditPetFormData formData){
         // TODO: add token code
-        petController.createPet("token", formData.getPetName(), formData.getPetAge(),
+        // TODO: add petId code
+        petController.editPet("token", "petId", formData.getPetName(), formData.getPetAge(),
                 formData.getPetBreed(), formData.getPetBio());
     }
 
     /**
-     * Update the state of the create pet form.
+     * Update the state of the edit pet form.
      * @param formData The data entered into the form.
      */
-    public void updateFormState(CreatePetFormData formData) {
-        CreatePetFormState newFormState = new CreatePetFormState();
+    public void updateFormState(EditPetFormData formData) {
+        EditPetFormState newFormState = new EditPetFormState();
 
         if (!isPetNameValid(formData.getPetName())) {
             newFormState.setPetNameError(R.string.invalid_pet_name);
@@ -59,7 +58,7 @@ public class CreatePetViewModel extends ViewModel implements ICreatePetViewModel
             newFormState.setDataValid(true);
         }
 
-        createPetFormState.setValue(newFormState);
+        editPetFormState.setValue(newFormState);
     }
 
     /**
@@ -111,16 +110,16 @@ public class CreatePetViewModel extends ViewModel implements ICreatePetViewModel
     }
 
     @Override
-    public void onCreatePetSuccess() {
-        CreatePetResult newCreatePetResult = new CreatePetResult(false);
+    public void onEditPetSuccess() {
+        EditPetResult newEditPetResult = new EditPetResult(false);
 
-        createPetResult.setValue(newCreatePetResult);
+        editPetResult.setValue(newEditPetResult);
     }
 
     @Override
-    public void onCreatePetFailure(String message) {
-        CreatePetResult newCreatePetResult = new CreatePetResult(true, message);
+    public void onEditPetFailure(String message) {
+        EditPetResult newEditPetResult = new EditPetResult(true, message);
 
-        createPetResult.setValue(newCreatePetResult);
+        editPetResult.setValue(newEditPetResult);
     }
 }
