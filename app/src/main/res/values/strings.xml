@@ -41,4 +41,5 @@
     <string name="pet_type">Pet Type</string>
     <string name="pet_breed">Pet Breed</string>
     <string name="delete_button">Delete Match</string>
+    <string name="pet_profile_picture">Pet Profile Picture</string>
 </resources>
