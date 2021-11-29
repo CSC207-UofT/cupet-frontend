@@ -4,8 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="177dp"
     android:layout_height="211dp"
-    android:padding="15dp"
-    android:id="@+id/view_pets_card_layout">
+    android:padding="5dp"
+    android:id="@+id/view_pets_card_layout"
+    android:background="@drawable/border">
 
     <ImageView
         android:id="@+id/card_pet_image"
@@ -16,6 +17,7 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars"
         android:contentDescription="@string/pet_profile_picture"
+        android:scaleType="centerCrop"
         />
 
     <TextView
