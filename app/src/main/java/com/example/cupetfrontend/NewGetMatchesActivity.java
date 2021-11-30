@@ -18,6 +18,9 @@ import com.example.cupetfrontend.presenters.abstracts.IGetMatchesPresenter;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The activity for the Get Matches page.
+ */
 public class NewGetMatchesActivity extends AppCompatActivity{
 
     private GetMatchesViewModel getMatchesViewModel;
@@ -30,6 +33,9 @@ public class NewGetMatchesActivity extends AppCompatActivity{
     private final ArrayList<String> mPetTypes = new ArrayList<>();
     private final ArrayList<String> mPetBreeds = new ArrayList<>();
 
+    /**
+     * Setup views and state on creation of the activity.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
