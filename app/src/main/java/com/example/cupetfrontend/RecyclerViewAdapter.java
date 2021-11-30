@@ -21,6 +21,11 @@ import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
+/**
+ * An adapter for the RecyclerView of the Get Matches page.
+ * This class is responsible for providing a binding from the related data set to views that are
+ * displayed within the RecyclerView for the Get Matches page.
+ */
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>{
 
     private static final String TAG = "RecyclerViewAdapter";
