@@ -44,6 +44,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         this.mPetBreeds = mPetBreeds;
     }
 
+    /**
+     * Inflates the view. The new ViewHolder is used to display items of the adapter using onBindViewHolder.
+     * Called when RecyclerView needs a new RecyclerView.ViewHolder of the given type to represent an item.
+     * @param parent The ViewGroup into which the new View will be added after it is bound to an adapter position.
+     * @param viewType The view type of the new View.
+     * @return A new ViewHolder that holds a View of the given view type.
+     */
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -54,6 +61,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         return holder;
     }
 
+    /**
+     * Called by RecyclerView to display the data at the specified position.
+     * This method should update the contents of the RecyclerView.ViewHolder.itemView to reflect the item at the given position.
+     * @param holder The ViewHolder which should be updated to represent the contents of the item at the given position in the data set.
+     * @param position The position of the item within the adapter's data set.
+     */
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         // important method - will change based on our layouts and what they should look like
@@ -101,7 +114,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 alert.show();
             }
         });
-
+        // set on click listener for each view in the RecyclerView.
         holder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -114,14 +127,21 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
 
     // tells adapter how many list items are in the list
+
+    /**
+     * Return the number of items in the list which corresponds to the number of views to be
+     * displayed in the RecyclerView
+     * @return the number of items in the list mPetNames
+     */
     @Override
     public int getItemCount() {
         return mPetNames.size();
     }
 
-
+    /**
+     * Describes an item view and metadata about its place within the RecyclerView
+     */
     public class ViewHolder extends RecyclerView.ViewHolder {
-
         CircleImageView petImage;
         TextView petName;
         TextView petType;
