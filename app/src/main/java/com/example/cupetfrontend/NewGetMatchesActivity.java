@@ -48,11 +48,16 @@ public class NewGetMatchesActivity extends AppCompatActivity{
         // setUpObserveGetMatchesResult();
     }
 
-
-
+    /**
+     * Initialize Bitmaps of pet profile images to be displayed
+     *
+     * Initialize the displayed RecyclerView when the image Bitmaps have been initialized.
+     */
     private void initImageBitmaps(){
         Log.d(TAG, "initImageBitmaps: preparing bitmaps.");
+        //TODO: Initialize Bitmaps of images obtained from GetMatches on success
 
+        //Dummy Data
         mPetImageUrls.add("https://upload.wikimedia.org/wikipedia/commons/1/18/Dog_Breeds.jpg");
         mPetNames.add("Doggo A");
         mPetTypes.add("Dog");
@@ -139,12 +144,13 @@ public class NewGetMatchesActivity extends AppCompatActivity{
 
 
     /**
-     * Get Matches Success toast message and generate table
+     * Get Matches Success toast message
      */
     private void onGetMatchesSuccess(List<String> matches) {
         Log.d(TAG, "onGetMatchesSuccess: success - matches:" + matches);
         Toast.makeText(getApplicationContext(), "Get Matches Success", Toast.LENGTH_SHORT).show();
         // TODO: On Success
+        // initImageBitmaps()
     }
 
     /**
