@@ -33,7 +33,7 @@ public class UserPetSlot2MatchingActivity extends AppCompatActivity {
         });
     }
     public void openEditProfileEditor(){
-        Intent int1 = new Intent(this, EditPetProfile.class);
+        Intent int1 = new Intent(this, EditPetProfileActivity.class);
         startActivity(int1);
     }
 

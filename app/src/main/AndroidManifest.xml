@@ -11,7 +11,7 @@
         android:theme="@style/Theme.CupetFrontEnd">
         <activity android:name=".CreatePetActivity"></activity>
         <activity android:name=".EditPetPreferences" />
-        <activity android:name=".EditPetProfile" />
+        <activity android:name=".EditPetProfileActivity" />
         <activity android:name=".UserPetSlot1MatchingActivity" />
         <activity
             android:name=".AccountSettingsActivity"

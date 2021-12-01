@@ -37,7 +37,7 @@ public class CreatePetViewModel extends ViewModel implements ICreaterPetViewMode
      *                 NEED TOKEN FOR PET
      */
     public void createPetProfile(CreatePetProfileData formData){
-        petController.createPet(, formData.getName(), String.valueOf(formData.getAge()), formData.getBiography(), formData.getBreed());
+        petController.createPet("123", formData.getName(), String.valueOf(formData.getAge()), formData.getBiography(), formData.getBreed());
     }
 
     /**
