@@ -35,6 +35,24 @@
 
         </activity>
 
+        <activity android:name=".ui.create_pet.CreatePetActivity"
+            android:label="CreatePetActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.CreatePetActivity"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".ui.edit_pet.EditPetActivity"
+            android:label="EditPetActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.EditPetActivity"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
         <activity
                 android:name=".MainActivity"
 
