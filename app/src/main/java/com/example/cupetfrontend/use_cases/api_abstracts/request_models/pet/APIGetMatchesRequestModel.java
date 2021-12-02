@@ -1,19 +1,9 @@
 package com.example.cupetfrontend.use_cases.api_abstracts.request_models.pet;
 
-public class APIGetMatchesRequestModel {
-    private final String token;
-    private final String myPetId;
+import com.example.cupetfrontend.use_cases.request_models.pet.GetMatchesRequestModel;
 
-    public APIGetMatchesRequestModel(String token, String myPetId) {
-        this.token = token;
-        this.myPetId = myPetId;
-    }
-
-    public String getToken() {
-        return token;
-    }
-
-    public String getMyPetId() {
-        return myPetId;
+public class APIGetMatchesRequestModel extends GetMatchesRequestModel {
+    public APIGetMatchesRequestModel(String token, String petId) {
+        super(token, petId);
     }
 }

@@ -7,15 +7,10 @@ import com.example.cupetfrontend.use_cases.input_boundaries.pet.GetMatchesInputB
 import com.example.cupetfrontend.use_cases.output_boundaries.pet.GetMatchesOutputBoundary;
 import com.example.cupetfrontend.use_cases.output_boundaries.pet.GetPetDataListOutputBoundary;
 import com.example.cupetfrontend.use_cases.request_models.pet.GetMatchesRequestModel;
-import com.example.cupetfrontend.use_cases.response_models.PetData;
-import com.example.cupetfrontend.use_cases.response_models.pet.GetMatchesFailResponseModel;
+import com.example.cupetfrontend.use_cases.data_models.PetData;
 import com.example.cupetfrontend.use_cases.response_models.pet.GetMatchesSuccessResponseModel;
-import com.example.cupetfrontend.use_cases.response_models.user.FetchUserAccountFailResponseModel;
-import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class GetMatches extends UsesPetDataWrapper implements GetMatchesInputBoundary{
@@ -31,7 +26,7 @@ public class GetMatches extends UsesPetDataWrapper implements GetMatchesInputBou
     @Override
     public void getMatches(GetMatchesRequestModel request) {
         APIGetMatchesRequestModel apiRequest = new APIGetMatchesRequestModel(
-                request.getToken(), request.getMyPetId()
+                request.getToken(), request.getPetId()
         );
 
         petAPIGateway.getMatches(apiRequest, new IServerResponseListener() {
@@ -47,9 +42,7 @@ public class GetMatches extends UsesPetDataWrapper implements GetMatchesInputBou
 
                     @Override
                     public void onGetPetDataListFailure(String errorMessage) {
-                        outputBoundary.onGetMatchesFailure(new GetMatchesFailResponseModel(
-                                errorMessage
-                        ));
+                        outputBoundary.onGetMatchesFailure(toFailResponseModel(errorMessage));
                     }
                 });
             }
@@ -59,21 +52,5 @@ public class GetMatches extends UsesPetDataWrapper implements GetMatchesInputBou
                 outputBoundary.onGetMatchesFailure(toFailResponseModel(jsonResponse));
             }
         });
-    }
-
-
-    /**
-     * Convert a JSONObject response to an instance of
-     * GetMatchesFailResponseModel.
-     *
-     * @param jsonResponse A JSON representation of the response.
-     * @return The response as a GetMatchesFailResponseModel
-     */
-    private GetMatchesFailResponseModel toFailResponseModel(JSONObject jsonResponse) {
-        try {
-            return new GetMatchesFailResponseModel(jsonResponse.getString("message"));
-        } catch (JSONException e) {
-            throw new InvalidAPIResponseException("The API gave an invalid fail fetch user response");
-        }
     }
 }

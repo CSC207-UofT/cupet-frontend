@@ -2,7 +2,7 @@ package com.example.cupetfrontend.presenters.user;
 
 import com.example.cupetfrontend.presenters.abstracts.ICreateUserPresenter;
 import com.example.cupetfrontend.presenters.view_model_abstracts.IRegisterViewModel;
-import com.example.cupetfrontend.use_cases.response_models.user.UserCreatorFailResponseModel;
+import com.example.cupetfrontend.use_cases.response_models.pet.DefaultFailureResponseModel;
 import com.example.cupetfrontend.use_cases.response_models.user.UserCreatorSuccessResponseModel;
 
 public class CreateUserPresenter implements ICreateUserPresenter {
@@ -36,7 +36,7 @@ public class CreateUserPresenter implements ICreateUserPresenter {
      * @param response The response from the use case's layer
      */
     @Override
-    public void onCreateUserFailure(UserCreatorFailResponseModel response) {
-        registerViewModel.onCreateUserFailure(response.getMessage());
+    public void onCreateUserFailure(DefaultFailureResponseModel response) {
+        registerViewModel.onCreateUserFailure(response.getErrorMessage());
     }
 }

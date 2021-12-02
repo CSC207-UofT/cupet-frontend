@@ -39,6 +39,12 @@ public class ControllerDependencies {
                 presenters.getEditUserProfilePresenter()));
         userController.setGetPets(new GetPets(petAPIGateway, userAPIGateway,
                 presenters.getGetPetsPresenter()));
+        userController.setSetUserProfileImage(new SetUserProfileImage(
+                userAPIGateway, presenters.getSetUserProfileImagePresenter()
+        ));
+        userController.setFetchUserProfileImage(new FetchUserProfileImage(
+                userAPIGateway, presenters.getFetchUserProfileImagePresenter()
+        ));
     }
 
     private void setPetController(IPetAPIGateway petAPIGateway, PetPresenterDependencies petPresenters){
@@ -56,6 +62,16 @@ public class ControllerDependencies {
                 petPresenters.getIntendToMatchPresenter()));
         petController.setRejectMatch(new RejectMatch(petAPIGateway,
                 petPresenters.getRejectMatchPresenter()));
+        petController.setUnMatchPet(new UnMatchPet(petAPIGateway,
+                petPresenters.getUnMatchPresenter()));
+        petController.setSetPetProfileImage(new SetPetProfileImage(petAPIGateway,
+                petPresenters.getSetPetProfileImagePresenter()));
+        petController.setAddToPetImageGallery(new AddToPetImageGallery(petAPIGateway,
+                petPresenters.getAddToPetImageGalleryPresenter()));
+        petController.setRemoveFromPetImageGallery(new RemoveFromPetImageGallery(petAPIGateway,
+                petPresenters.getRemoveFromPetImageGalleryPresenter()));
+        petController.setFetchPetProfileImage(new FetchPetProfileImage(
+                petAPIGateway, petPresenters.getFetchPetProfileImagePresenter()));
     }
 
     private void setAuthController(IAuthAPIGateway authAPIGateway,

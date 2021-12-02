@@ -6,14 +6,11 @@ import com.example.cupetfrontend.use_cases.api_abstracts.request_models.pet.APIC
 import com.example.cupetfrontend.use_cases.input_boundaries.pet.PetCreatorInputBoundary;
 import com.example.cupetfrontend.use_cases.output_boundaries.pet.PetCreatorOutputBoundary;
 import com.example.cupetfrontend.use_cases.request_models.pet.PetCreatorRequestModel;
-import com.example.cupetfrontend.use_cases.response_models.pet.PetCreatorFailResponseModel;
 import com.example.cupetfrontend.use_cases.response_models.pet.PetCreatorSuccessResponseModel;
-import com.example.cupetfrontend.use_cases.response_models.user.FetchUserProfileFailResponseModel;
-import com.example.cupetfrontend.use_cases.response_models.user.FetchUserProfileSuccessResponseModel;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class PetCreator implements PetCreatorInputBoundary {
+public class PetCreator extends DefaultFailResponseUseCase implements PetCreatorInputBoundary {
     IPetAPIGateway petAPIGateway;
     PetCreatorOutputBoundary outputBoundary;
 
@@ -61,21 +58,6 @@ public class PetCreator implements PetCreatorInputBoundary {
                     );
         } catch (JSONException e) {
             throw new InvalidAPIResponseException("The API gave an invalid successful create pet response.");
-        }
-    }
-
-    /**
-     * Convert a JSONObject response to an instance of
-     * PetCreatorFailResponseModel.
-     *
-     * @param jsonResponse A JSON representation of the response.
-     * @return The response as a PetCreatorFailResponseModel
-     */
-    private PetCreatorFailResponseModel toFailResponseModel(JSONObject jsonResponse) {
-        try {
-            return new PetCreatorFailResponseModel(jsonResponse.getString("message"));
-        } catch (JSONException e) {
-            throw new InvalidAPIResponseException("The API gave an invalid fail create pet response");
         }
     }
 }
