@@ -32,4 +32,13 @@
     <string name="invalid_confirm_password">Password\'s don\'t match</string>
     <string name="invalid_home_address">Invalid Home Address</string>
     <string name="invalid_city">Invalid City</string>
+
+    <!-- Navigation Drawer  -->
+    <string name="title_activity_navigation_drawer">NavigationDrawerActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="nav_menu_account_settings">Home</string>
 </resources>
