@@ -25,7 +25,7 @@ public class SetPetProfileImage extends DefaultFailResponseUseCase implements Se
     }
 
     @Override
-    public void setPetProfile(SetPetProfileImageRequestModel request) {
+    public void setPetProfileImage(SetPetProfileImageRequestModel request) {
         APISetPetProfileImageRequestModel apiRequest = new APISetPetProfileImageRequestModel(
                 request.getToken(), request.getPetId(), request.getImgB64()
         );

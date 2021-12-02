@@ -6,5 +6,5 @@ public interface SetPetProfileImageInputBoundary {
     /**
      * Set a pet's profile image
      */
-    void setPetProfile(SetPetProfileImageRequestModel request);
+    void setPetProfileImage(SetPetProfileImageRequestModel request);
 }

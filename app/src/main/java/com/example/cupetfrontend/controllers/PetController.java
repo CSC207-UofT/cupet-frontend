@@ -1,9 +1,6 @@
 package com.example.cupetfrontend.controllers;
 
 import com.example.cupetfrontend.controllers.abstracts.IPetController;
-import com.example.cupetfrontend.use_cases.GetPotentialMatches;
-import com.example.cupetfrontend.use_cases.RejectMatch;
-import com.example.cupetfrontend.use_cases.SetPetProfileImage;
 import com.example.cupetfrontend.use_cases.input_boundaries.pet.*;
 import com.example.cupetfrontend.use_cases.request_models.pet.*;
 
@@ -137,7 +134,7 @@ public class PetController implements IPetController {
                 token, petId, imgB64
         );
 
-        setPetProfileImage.setPetProfile(request);
+        setPetProfileImage.setPetProfileImage(request);
     }
 
     @Override

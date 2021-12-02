@@ -5,7 +5,7 @@ import com.example.cupetfrontend.use_cases.data_models.PetData;
 public class EditPetRequestModel extends PetData {
     private final String token;
 
-    public EditPetRequestModel(String token, String name, String age, String breed, String biography, String petId) {
+    public EditPetRequestModel(String token, String petId, String name, String age, String breed, String biography) {
         super(name, age, breed, biography, petId);
         this.token = token;
     }

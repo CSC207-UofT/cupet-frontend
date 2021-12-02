@@ -72,4 +72,18 @@ public class MockSuccessUserAPIGateway extends MockSuccessAPIGateway implements 
     public void getPets(APIGetPetsRequestModel requestData, IServerResponseListener responseListener) {
         responseListener.onRequestSuccess(createPetIdSuccessJSON(new String[]{"a", "b", "c"}));
     }
+
+    @Override
+    public void setUserProfileImage(APISetUserProfileImageRequestModel requestData, IServerResponseListener responseListener) {
+        responseListener.onRequestSuccess(createDummySuccessJSON(new HashMap<String, String>(){{
+            put("url", "dummy url");
+        }}));
+    }
+
+    @Override
+    public void fetchUserProfileImage(APIFetchUserProfileImageRequestModel requestData, IServerResponseListener responseListener) {
+        responseListener.onRequestSuccess(createDummySuccessJSON(new HashMap<String, String>(){{
+            put("url", "dummy url");
+        }}));
+    }
 }

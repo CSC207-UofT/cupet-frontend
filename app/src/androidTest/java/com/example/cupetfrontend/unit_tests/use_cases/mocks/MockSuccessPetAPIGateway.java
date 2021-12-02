@@ -66,4 +66,30 @@ public class MockSuccessPetAPIGateway extends MockSuccessAPIGateway implements I
     public void unMatchPet(APIUnMatchPetRequestModel requestData, IServerResponseListener responseListener) {
         responseListener.onRequestSuccess(createDummySuccessJSON(new HashMap<>()));
     }
+
+    @Override
+    public void setPetProfileImage(APISetPetProfileImageRequestModel requestData, IServerResponseListener responseListener) {
+        responseListener.onRequestSuccess(createDummySuccessJSON(new HashMap<String, String>(){{
+            put("url", "dummy url");
+        }}));
+    }
+
+    @Override
+    public void addToPetImageGallery(APIAddToPetImageGalleryRequestModel requestData, IServerResponseListener responseListener) {
+        responseListener.onRequestSuccess(createDummySuccessJSON(new HashMap<String, String>(){{
+            put("url", "dummy url");
+        }}));
+    }
+
+    @Override
+    public void removeFromPetImageGallery(APIRemoveFromPetImageGalleryRequestModel requestData, IServerResponseListener responseListener) {
+        responseListener.onRequestSuccess(createDummySuccessJSON(new HashMap<>()));
+    }
+
+    @Override
+    public void fetchPetProfileImage(APIFetchPetProfileImageRequestModel requestData, IServerResponseListener responseListener) {
+        responseListener.onRequestSuccess(createDummySuccessJSON(new HashMap<String, String>(){{
+            put("url", "dummy url");
+        }}));
+    }
 }
