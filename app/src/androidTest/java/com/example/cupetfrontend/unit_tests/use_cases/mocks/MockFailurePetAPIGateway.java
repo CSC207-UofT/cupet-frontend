@@ -47,4 +47,24 @@ public class MockFailurePetAPIGateway extends MockFailureAPIGateway implements I
     public void unMatchPet(APIUnMatchPetRequestModel requestData, IServerResponseListener responseListener) {
         responseListener.onRequestError(createDummyFailResponse());
     }
+
+    @Override
+    public void setPetProfileImage(APISetPetProfileImageRequestModel requestData, IServerResponseListener responseListener) {
+        responseListener.onRequestError(createDummyFailResponse());
+    }
+
+    @Override
+    public void addToPetImageGallery(APIAddToPetImageGalleryRequestModel requestData, IServerResponseListener responseListener) {
+        responseListener.onRequestError(createDummyFailResponse());
+    }
+
+    @Override
+    public void removeFromPetImageGallery(APIRemoveFromPetImageGalleryRequestModel requestData, IServerResponseListener responseListener) {
+        responseListener.onRequestError(createDummyFailResponse());
+    }
+
+    @Override
+    public void fetchPetProfileImage(APIFetchPetProfileImageRequestModel requestData, IServerResponseListener responseListener) {
+        responseListener.onRequestError(createDummyFailResponse());
+    }
 }

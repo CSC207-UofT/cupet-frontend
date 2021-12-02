@@ -37,4 +37,14 @@ public class MockFailureUserAPIGateway extends MockFailureAPIGateway implements 
     public void getPets(APIGetPetsRequestModel requestData, IServerResponseListener responseListener) {
         responseListener.onRequestError(createDummyFailResponse());
     }
+
+    @Override
+    public void setUserProfileImage(APISetUserProfileImageRequestModel requestData, IServerResponseListener responseListener) {
+        responseListener.onRequestError(createDummyFailResponse());
+    }
+
+    @Override
+    public void fetchUserProfileImage(APIFetchUserProfileImageRequestModel requestData, IServerResponseListener responseListener) {
+        responseListener.onRequestError(createDummyFailResponse());
+    }
 }

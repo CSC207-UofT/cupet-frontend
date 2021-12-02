@@ -3,6 +3,7 @@ package com.example.cupetfrontend.dependency_selector;
 import com.example.cupetfrontend.presenters.pet.*;
 
 public class PetPresenterDependencies {
+    // TODO: Replace all with abstract presenter types
     private CreatePetPresenter createPetPresenter;
     private EditPetPresenter editPetPresenter;
     private FetchPetProfilePresenter fetchPetProfilePresenter;
@@ -11,6 +12,10 @@ public class PetPresenterDependencies {
     private IntendToMatchPresenter intendToMatchPresenter;
     private RejectMatchPresenter rejectMatchPresenter;
     private UnMatchPresenter unMatchPresenter;
+    private SetPetProfileImagePresenter setPetProfileImagePresenter;
+    private AddToPetImageGalleryPresenter addToPetImageGalleryPresenter;
+    private RemoveFromPetImageGalleryPresenter removeFromPetImageGalleryPresenter;
+    private FetchPetProfileImagePresenter fetchPetProfileImagePresenter;
 
     public PetPresenterDependencies() {
         selectCreatePetPresenter();
@@ -20,6 +25,9 @@ public class PetPresenterDependencies {
         selectGetMatchesPresenter();
         selectIntendToMatchPresenter();
         selectRejectMatchPresenter();
+        selectSetPetProfileImagePresenter();
+        selectAddToPetImageGalleryPresenter();
+        selectRemoveFromPetImageGalleryPresenter();
     }
 
     private void selectCreatePetPresenter(){
@@ -54,6 +62,22 @@ public class PetPresenterDependencies {
         unMatchPresenter = new UnMatchPresenter();
     }
 
+    private void selectSetPetProfileImagePresenter() {
+        unMatchPresenter = new UnMatchPresenter();
+    }
+
+    private void selectAddToPetImageGalleryPresenter() {
+        addToPetImageGalleryPresenter = new AddToPetImageGalleryPresenter();
+    }
+
+    private void selectRemoveFromPetImageGalleryPresenter() {
+        removeFromPetImageGalleryPresenter = new RemoveFromPetImageGalleryPresenter();
+    }
+
+    private void selectFetchPetProfileImagePresenter () {
+        fetchPetProfileImagePresenter = new FetchPetProfileImagePresenter();
+    }
+
     public CreatePetPresenter getCreatePetPresenter() {
         return createPetPresenter;
     }
@@ -84,5 +108,21 @@ public class PetPresenterDependencies {
 
     public UnMatchPresenter getUnMatchPresenter() {
         return unMatchPresenter;
+    }
+
+    public SetPetProfileImagePresenter getSetPetProfileImagePresenter() {
+        return setPetProfileImagePresenter;
+    }
+
+    public AddToPetImageGalleryPresenter getAddToPetImageGalleryPresenter() {
+        return addToPetImageGalleryPresenter;
+    }
+
+    public RemoveFromPetImageGalleryPresenter getRemoveFromPetImageGalleryPresenter() {
+        return removeFromPetImageGalleryPresenter;
+    }
+
+    public FetchPetProfileImagePresenter getFetchPetProfileImagePresenter() {
+        return fetchPetProfileImagePresenter;
     }
 }

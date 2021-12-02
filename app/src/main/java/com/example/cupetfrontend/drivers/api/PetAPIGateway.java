@@ -1,6 +1,7 @@
 package com.example.cupetfrontend.drivers.api;
 
 import com.example.cupetfrontend.drivers.api.routes.PetRoutesStore;
+import com.example.cupetfrontend.drivers.api.routes.UserRoutesStore;
 import com.example.cupetfrontend.use_cases.api_abstracts.IPetAPIGateway;
 import com.example.cupetfrontend.use_cases.api_abstracts.IServerRequestManager;
 import com.example.cupetfrontend.use_cases.api_abstracts.IServerResponseListener;
@@ -121,6 +122,56 @@ public class PetAPIGateway extends APIGateway implements IPetAPIGateway {
         String url = PetRoutesStore.toAbsoluteRoute(PetRoutesStore.UN_SWIPE_PETS);
 
         requestManager.makePostRequest(url, requestBody,
+                createAuthHeaders(requestData.getToken()), responseListener);
+    }
+
+    @Override
+    public void setPetProfileImage(APISetPetProfileImageRequestModel requestData, IServerResponseListener responseListener) {
+        JSONObject requestBody = new JSONObject(new HashMap<String, String>(){{
+            put("base64Encoded", requestData.getImgB64());
+        }});
+
+        String url = UserRoutesStore.toAbsoluteRoute(PetRoutesStore.SET_PET_PROFILE_IMAGE);
+
+        requestManager.makePostRequest(url, requestBody,
+                createAuthHeaders(requestData.getToken()), responseListener);
+    }
+
+    @Override
+    public void addToPetImageGallery(APIAddToPetImageGalleryRequestModel requestData, IServerResponseListener responseListener) {
+        JSONObject requestBody = new JSONObject(new HashMap<String, String>(){{
+            put("petId", requestData.getPetId());
+            put("base64Encoded", requestData.getImgB64());
+        }});
+
+        String url = UserRoutesStore.toAbsoluteRoute(PetRoutesStore.ADD_TO_PET_IMAGE_GALLERY);
+
+        requestManager.makePostRequest(url, requestBody,
+                createAuthHeaders(requestData.getToken()), responseListener);
+    }
+
+    @Override
+    public void removeFromPetImageGallery(APIRemoveFromPetImageGalleryRequestModel requestData, IServerResponseListener responseListener) {
+        JSONObject requestBody = new JSONObject(new HashMap<String, String>(){{
+            put("petId", requestData.getPetId());
+            put("assetId", requestData.getAssetId());
+        }});
+
+        String url = UserRoutesStore.toAbsoluteRoute(PetRoutesStore.REMOVE_FROM_PET_IMAGE_GALLERY);
+
+        requestManager.makePostRequest(url, requestBody,
+                createAuthHeaders(requestData.getToken()), responseListener);
+    }
+
+    @Override
+    public void fetchPetProfileImage(APIFetchPetProfileImageRequestModel requestData, IServerResponseListener responseListener) {
+        HashMap<String, String> queryParams = new HashMap<String, String>(){{
+                put("petId", requestData.getPetId());
+        }};
+
+        String url = UserRoutesStore.toAbsoluteRoute(PetRoutesStore.SET_PET_PROFILE_IMAGE);
+
+        requestManager.makeGetRequest(url, queryParams,
                 createAuthHeaders(requestData.getToken()), responseListener);
     }
 }

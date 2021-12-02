@@ -82,4 +82,39 @@ public interface IPetController {
      * @param otherPetId The other user's pet's id
      */
     void unMatchPet(String token, String myPetId, String otherPetId);
+
+    /**
+     * Set a pet's profile image
+     *
+     * @param token The user's session token
+     * @param petId The pet's id
+     * @param imgB64 The image as a base64 string
+     */
+    void setPetProfileImage(String token, String petId, String imgB64);
+
+    /**
+     * Add an image to a pet's image gallery
+     *
+     * @param token The user's session token
+     * @param petId The pet's id
+     * @param imgB64 The image as a base64 string
+     */
+    void addToPetImageGallery(String token, String petId, String imgB64);
+
+    /**
+     * Remove an image to a pet's image gallery
+     *
+     * @param token The user's session token
+     * @param petId The pet's id
+     * @param assetId The asset id of the image
+     */
+    void removeFromPetImageGallery(String token, String petId, String assetId);
+
+    /**
+     * Fetch a pet's profile picture
+     *
+     * @param token The user's session token
+     * @param petId The pet's id
+     */
+    void fetchPetProfileImage(String token, String petId);
 }
