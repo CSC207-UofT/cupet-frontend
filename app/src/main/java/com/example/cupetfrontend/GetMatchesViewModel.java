@@ -42,6 +42,5 @@ public class GetMatchesViewModel extends ViewModel implements IGetMatchesViewMod
     public void onGetMatchesFailure(String message) {
         GetMatchesResult newGetMatchesResult = new GetMatchesResult(true);
         getMatchesResult.setValue(newGetMatchesResult);
-
     }
 }
