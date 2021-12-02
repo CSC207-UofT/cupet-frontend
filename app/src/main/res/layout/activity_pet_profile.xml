@@ -5,12 +5,6 @@
                                                    android:layout_height="match_parent">
 
     <ImageButton
-            android:id="@+id/edit_pet_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:srcCompat="@android:drawable/ic_menu_edit" app:layout_constraintTop_toTopOf="parent"/>
-    <ImageButton
             android:id="@+id/menu_button_pet_profile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -51,4 +45,12 @@
             app:layout_constraintStart_toStartOf="@+id/pet_profile_breed" app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/pet_profile_breed" android:layout_marginTop="16dp"
             app:layout_constraintHorizontal_bias="0.0"/>
+
+    <ImageButton
+        android:id="@+id/edit_pet_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/ic_menu_edit" />
 </androidx.constraintlayout.widget.ConstraintLayout>
