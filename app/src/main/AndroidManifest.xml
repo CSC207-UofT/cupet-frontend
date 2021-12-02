@@ -14,15 +14,6 @@
             android:usesCleartextTraffic="true"
             android:theme="@style/Theme.CupetFrontEnd" tools:targetApi="m">
 
-        <activity android:name=".ui.splash.SplashActivity"
-            android:label="SplashActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.SplashActivity"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
-        </activity>
-
         <activity
                 android:name=".ui.login.LoginActivity"
                 android:label="@string/title_activity_login"
