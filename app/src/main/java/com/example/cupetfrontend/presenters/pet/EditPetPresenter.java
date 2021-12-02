@@ -2,7 +2,7 @@ package com.example.cupetfrontend.presenters.pet;
 
 import com.example.cupetfrontend.presenters.abstracts.IEditPetPresenter;
 import com.example.cupetfrontend.presenters.view_model_abstracts.IEditPetViewModel;
-import com.example.cupetfrontend.use_cases.response_models.pet.DefaultFailureResponseModel;
+import com.example.cupetfrontend.use_cases.response_models.pet.EditPetFailResponseModel;
 import com.example.cupetfrontend.use_cases.response_models.pet.EditPetSuccessResponseModel;
 
 public class EditPetPresenter implements IEditPetPresenter {
@@ -37,7 +37,7 @@ public class EditPetPresenter implements IEditPetPresenter {
      * @param response The response from the use case's layer
      */
     @Override
-    public void onEditPetFailure(DefaultFailureResponseModel response) {
+    public void onEditPetFailure(EditPetFailResponseModel response) {
         editPetViewModel.onEditPetFailure(response.getErrorMessage());
 
     }
