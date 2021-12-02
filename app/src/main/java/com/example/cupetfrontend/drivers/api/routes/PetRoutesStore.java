@@ -12,4 +12,5 @@ public class PetRoutesStore extends RoutesStore{
     public static final String SET_PET_PROFILE_IMAGE = "/pets/setprofileimage";
     public static final String ADD_TO_PET_IMAGE_GALLERY = "/pets/addimage";
     public static final String REMOVE_FROM_PET_IMAGE_GALLERY = "/pets/removeimage";
+    public static final String FETCH_PET_PROFILE_IMAGE = "/pets/fetchprofileimage";
 }

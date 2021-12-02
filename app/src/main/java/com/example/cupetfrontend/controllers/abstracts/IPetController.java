@@ -109,4 +109,12 @@ public interface IPetController {
      * @param assetId The asset id of the image
      */
     void removeFromPetImageGallery(String token, String petId, String assetId);
+
+    /**
+     * Fetch a pet's profile picture
+     *
+     * @param token The user's session token
+     * @param petId The pet's id
+     */
+    void fetchPetProfileImage(String token, String petId);
 }

@@ -162,4 +162,16 @@ public class PetAPIGateway extends APIGateway implements IPetAPIGateway {
         requestManager.makePostRequest(url, requestBody,
                 createAuthHeaders(requestData.getToken()), responseListener);
     }
+
+    @Override
+    public void fetchPetProfileImage(APIFetchPetProfileImageRequestModel requestData, IServerResponseListener responseListener) {
+        HashMap<String, String> queryParams = new HashMap<String, String>(){{
+                put("petId", requestData.getPetId());
+        }};
+
+        String url = UserRoutesStore.toAbsoluteRoute(PetRoutesStore.SET_PET_PROFILE_IMAGE);
+
+        requestManager.makeGetRequest(url, queryParams,
+                createAuthHeaders(requestData.getToken()), responseListener);
+    }
 }

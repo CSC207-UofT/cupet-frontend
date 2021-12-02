@@ -55,8 +55,7 @@ public class SetPetProfileImage extends DefaultFailResponseUseCase implements Se
             JSONObject dataObj = new JSONObject(jsonResponse.getString("data"));
 
             return new SetPetProfileImageSuccessResponseModel(
-                    dataObj.getString("imgUrl"),
-                    dataObj.getString("assetId")
+                    dataObj.getString("url")
             );
         } catch (JSONException e) {
             throw new InvalidAPIResponseException("The API gave an invalid successful set pet profile image response.");

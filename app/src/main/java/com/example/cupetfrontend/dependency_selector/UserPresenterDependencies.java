@@ -14,6 +14,7 @@ public class UserPresenterDependencies {
     private FetchUserProfilePresenter fetchUserProfilePresenter;
     private GetPetsPresenter getPetsPresenter;
     private SetUserProfileImagePresenter setUserProfileImagePresenter;
+    private FetchUserProfileImagePresenter fetchUserProfileImagePresenter;
 
     public UserPresenterDependencies() {
         selectCreateUserPresenter();
@@ -25,6 +26,7 @@ public class UserPresenterDependencies {
         selectSetUserProfileImagePresenter();
     }
 
+    // TODO: Just move all these select methods into the constructor
     private void selectCreateUserPresenter () {
         createUserPresenter = new CreateUserPresenter();
     }
@@ -53,6 +55,10 @@ public class UserPresenterDependencies {
         setUserProfileImagePresenter = new SetUserProfileImagePresenter();
     }
 
+    private void selectFetchUserProfileImagePresenter () {
+        fetchUserAccountPresenter = new FetchUserAccountPresenter();
+    }
+
     public ICreateUserPresenter getCreateUserPresenter() {
         return createUserPresenter;
     }
@@ -79,5 +85,9 @@ public class UserPresenterDependencies {
 
     public SetUserProfileImagePresenter getSetUserProfileImagePresenter() {
         return setUserProfileImagePresenter;
+    }
+
+    public FetchUserProfileImagePresenter getFetchUserProfileImagePresenter() {
+        return fetchUserProfileImagePresenter;
     }
 }

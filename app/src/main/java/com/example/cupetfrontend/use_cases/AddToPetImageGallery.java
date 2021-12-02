@@ -52,8 +52,7 @@ public class AddToPetImageGallery extends DefaultFailResponseUseCase
             JSONObject dataObj = new JSONObject(jsonResponse.getString("data"));
 
             return new AddToPetImageGallerySuccessResponseModel(
-                    dataObj.getString("imgUrl"),
-                    dataObj.getString("assetId")
+                    dataObj.getString("url")
             );
         } catch (JSONException e) {
             throw new InvalidAPIResponseException("The API gave an invalid successful add to pet image gallery response.");

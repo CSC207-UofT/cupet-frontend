@@ -1,5 +1,6 @@
 package com.example.cupetfrontend.drivers.api;
 
+import com.example.cupetfrontend.drivers.api.routes.PetRoutesStore;
 import com.example.cupetfrontend.drivers.api.routes.UserRoutesStore;
 import com.example.cupetfrontend.use_cases.api_abstracts.IServerRequestManager;
 import com.example.cupetfrontend.use_cases.api_abstracts.IServerResponseListener;
@@ -117,6 +118,18 @@ public class UserAPIGateway extends APIGateway implements IUserAPIGateway {
         String url = UserRoutesStore.toAbsoluteRoute(UserRoutesStore.SET_PROFILE_IMAGE);
 
         requestManager.makePostRequest(url, requestBody,
+                createAuthHeaders(requestData.getToken()), responseListener);
+    }
+
+    @Override
+    public void fetchUserProfileImage(APIFetchUserProfileImageRequestModel requestData, IServerResponseListener responseListener) {
+        HashMap<String, String> queryParams = new HashMap<String, String>(){{
+            put("userId", requestData.getUserId());
+        }};
+
+        String url = UserRoutesStore.toAbsoluteRoute(UserRoutesStore.FETCH_USER_PROFILE_IMAGE);
+
+        requestManager.makeGetRequest(url, queryParams,
                 createAuthHeaders(requestData.getToken()), responseListener);
     }
 }

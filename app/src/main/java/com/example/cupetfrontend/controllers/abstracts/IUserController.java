@@ -73,4 +73,12 @@ public interface IUserController {
      * @param imgB64 The image as a base64 string
      */
     void setUserProfileImage(String token, String imgB64);
+
+    /**
+     * Fetch a user's profile picture
+     *
+     * @param token The user's session token
+     * @param userId The target user's id
+     */
+    void fetchUserProfileImage(String token, String userId);
 }

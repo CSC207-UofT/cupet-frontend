@@ -15,6 +15,7 @@ public class PetPresenterDependencies {
     private SetPetProfileImagePresenter setPetProfileImagePresenter;
     private AddToPetImageGalleryPresenter addToPetImageGalleryPresenter;
     private RemoveFromPetImageGalleryPresenter removeFromPetImageGalleryPresenter;
+    private FetchPetProfileImagePresenter fetchPetProfileImagePresenter;
 
     public PetPresenterDependencies() {
         selectCreatePetPresenter();
@@ -73,6 +74,10 @@ public class PetPresenterDependencies {
         removeFromPetImageGalleryPresenter = new RemoveFromPetImageGalleryPresenter();
     }
 
+    private void selectFetchPetProfileImagePresenter () {
+        fetchPetProfileImagePresenter = new FetchPetProfileImagePresenter();
+    }
+
     public CreatePetPresenter getCreatePetPresenter() {
         return createPetPresenter;
     }
@@ -115,5 +120,9 @@ public class PetPresenterDependencies {
 
     public RemoveFromPetImageGalleryPresenter getRemoveFromPetImageGalleryPresenter() {
         return removeFromPetImageGalleryPresenter;
+    }
+
+    public FetchPetProfileImagePresenter getFetchPetProfileImagePresenter() {
+        return fetchPetProfileImagePresenter;
     }
 }

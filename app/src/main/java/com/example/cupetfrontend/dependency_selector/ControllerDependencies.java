@@ -42,6 +42,9 @@ public class ControllerDependencies {
         userController.setSetUserProfileImage(new SetUserProfileImage(
                 userAPIGateway, presenters.getSetUserProfileImagePresenter()
         ));
+        userController.setFetchUserProfileImage(new FetchUserProfileImage(
+                userAPIGateway, presenters.getFetchUserProfileImagePresenter()
+        ));
     }
 
     private void setPetController(IPetAPIGateway petAPIGateway, PetPresenterDependencies petPresenters){
@@ -67,6 +70,8 @@ public class ControllerDependencies {
                 petPresenters.getAddToPetImageGalleryPresenter()));
         petController.setRemoveFromPetImageGallery(new RemoveFromPetImageGallery(petAPIGateway,
                 petPresenters.getRemoveFromPetImageGalleryPresenter()));
+        petController.setFetchPetProfileImage(new FetchPetProfileImage(
+                petAPIGateway, petPresenters.getFetchPetProfileImagePresenter()));
     }
 
     private void setAuthController(IAuthAPIGateway authAPIGateway,

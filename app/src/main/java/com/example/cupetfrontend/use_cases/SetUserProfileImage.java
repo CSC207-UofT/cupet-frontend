@@ -52,7 +52,7 @@ public class SetUserProfileImage extends DefaultFailResponseUseCase implements S
             JSONObject dataObj = new JSONObject(jsonResponse.getString("data"));
 
             return new SetUserProfileImageSuccessResponseModel(
-                    dataObj.getString("imgUrl")
+                    dataObj.getString("url")
             );
         } catch (JSONException e) {
             throw new InvalidAPIResponseException("The API gave an invalid successful set user profile image response.");

@@ -88,7 +88,7 @@ public interface IPetAPIGateway {
     /**
      * Add an image to a pet's image gallery
      *
-     * @param requestData The data needed to set the pet's profile image
+     * @param requestData The data needed to add to the pet's image gallery
      * @param responseListener A class with callback methods for when a response is received
      */
     void addToPetImageGallery(APIAddToPetImageGalleryRequestModel requestData,
@@ -97,9 +97,18 @@ public interface IPetAPIGateway {
     /**
      * Remove an image from a pet's image gallery
      *
-     * @param requestData The data needed to set the pet's profile image
+     * @param requestData The data needed to remove from the pet's image gallery
      * @param responseListener A class with callback methods for when a response is received
      */
     void removeFromPetImageGallery(APIRemoveFromPetImageGalleryRequestModel requestData,
                             IServerResponseListener responseListener);
+
+    /**
+     * Fetch a pet's profile image
+     *
+     * @param requestData The data needed to fetch the pet's profile image
+     * @param responseListener A class with callback methods for when a response is received
+     */
+    void fetchPetProfileImage(APIFetchPetProfileImageRequestModel requestData,
+                              IServerResponseListener responseListener);
 }

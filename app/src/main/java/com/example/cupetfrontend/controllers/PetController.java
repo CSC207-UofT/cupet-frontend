@@ -12,6 +12,8 @@ import com.example.cupetfrontend.use_cases.request_models.pet.*;
  * to pets.
  */
 public class PetController implements IPetController {
+    // TODO: Refactor and move all of these instance attributes and setters
+    //  to a super class which this class extends (PetControllerUseCaseHolder)
     PetCreatorInputBoundary petCreator;
     FetchPetProfileInputBoundary fetchPetProfile;
     EditPetInputBoundary editPet;
@@ -23,6 +25,7 @@ public class PetController implements IPetController {
     SetPetProfileImageInputBoundary setPetProfileImage;
     AddToPetImageGalleryInputBoundary addToPetImageGallery;
     RemoveFromPetImageGalleryInputBoundary removeFromPetImageGallery;
+    FetchPetProfileImageInputBoundary fetchPetProfileImage;
 
     public void setPetCreator(PetCreatorInputBoundary petCreator) {
         this.petCreator = petCreator;
@@ -66,6 +69,10 @@ public class PetController implements IPetController {
 
     public void setRemoveFromPetImageGallery(RemoveFromPetImageGalleryInputBoundary removeFromPetImageGallery) {
         this.removeFromPetImageGallery = removeFromPetImageGallery;
+    }
+
+    public void setFetchPetProfileImage(FetchPetProfileImageInputBoundary fetchPetProfileImage) {
+        this.fetchPetProfileImage = fetchPetProfileImage;
     }
 
     @Override
@@ -149,5 +156,14 @@ public class PetController implements IPetController {
         );
 
         removeFromPetImageGallery.removeFromPetImageGallery(request);
+    }
+
+    @Override
+    public void fetchPetProfileImage(String token, String petId) {
+        FetchPetProfileImageRequestModel request = new FetchPetProfileImageRequestModel(
+                token, petId
+        );
+
+        fetchPetProfileImage.fetchPetProfileImage(request);
     }
 }

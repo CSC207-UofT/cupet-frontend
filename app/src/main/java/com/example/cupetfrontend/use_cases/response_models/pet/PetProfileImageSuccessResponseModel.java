@@ -2,8 +2,8 @@ package com.example.cupetfrontend.use_cases.response_models.pet;
 
 import com.example.cupetfrontend.use_cases.response_models.ImageActionSuccessResponseModel;
 
-public class AddToPetImageGallerySuccessResponseModel extends ImageActionSuccessResponseModel {
-    public AddToPetImageGallerySuccessResponseModel(String imgUrl) {
+public class PetProfileImageSuccessResponseModel extends ImageActionSuccessResponseModel {
+    public PetProfileImageSuccessResponseModel(String imgUrl) {
         super(imgUrl);
     }
 }
