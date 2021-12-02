@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,7 +21,7 @@ import com.example.cupetfrontend.ui.login.LoginActivity;
  * The activity for viewing my Pet Profile page.
  */
 public class PetProfileActivity extends AppCompatActivity {
-    private Button editPetButton;
+    private ImageButton editPetButton;
     private PetProfileViewModel petProfileViewModel;
 
     /**
