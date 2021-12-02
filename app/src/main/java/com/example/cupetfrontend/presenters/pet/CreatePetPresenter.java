@@ -8,6 +8,7 @@ import com.example.cupetfrontend.use_cases.response_models.pet.PetCreatorSuccess
 public class CreatePetPresenter implements ICreatePetPresenter {
     ICreatePetViewModel createPetViewModel;
 
+    @Override
     public void setCreatePetViewModel(ICreatePetViewModel createPetViewModel) {
         this.createPetViewModel = createPetViewModel;
     }
