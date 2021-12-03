@@ -120,4 +120,22 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    /**
+     * Hide the navigation drawer and bottom nav bar
+     */
+    private void hideNavigation() {
+        binding.bottomNavView.setVisibility(View.GONE);
+        binding.drawerNavView.setVisibility(View.GONE);
+        binding.mainDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+    }
+
+    /**
+     * Show the navigation drawer and bottom nav bar
+     */
+    private void showNavigation() {
+        binding.bottomNavView.setVisibility(View.VISIBLE);
+        binding.drawerNavView.setVisibility(View.VISIBLE);
+        binding.mainDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+    }
 }
