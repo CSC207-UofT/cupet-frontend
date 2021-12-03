@@ -7,7 +7,7 @@
 
     <Button
             android:id="@+id/splash_login_btn"
-            style="@style/outlined_button"
+            style="@style/OutlinedButton"
             android:layout_width="300dp"
             android:layout_height="60dp"
             android:layout_marginBottom="36dp"
@@ -20,7 +20,7 @@
 
     <Button
         android:id="@+id/splash_register_btn"
-        style="@style/outlined_button"
+        style="@style/OutlinedButton"
         android:layout_width="300dp"
         android:layout_height="60dp"
         android:layout_marginBottom="68dp"

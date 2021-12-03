@@ -14,7 +14,7 @@
 
     <Button
         android:id="@+id/login_button"
-        style="@style/outlined_button"
+        style="@style/OutlinedButton"
         android:layout_width="123dp"
         android:layout_height="56dp"
         android:text="@string/splash_screen_log_in"
@@ -26,7 +26,7 @@
 
     <EditText
         android:id="@+id/login_email"
-        style="@style/white_edit_text"
+        style="@style/WhiteEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="24dp"
@@ -43,7 +43,7 @@
 
     <EditText
         android:id="@+id/login_password"
-        style="@style/white_edit_text"
+        style="@style/WhiteEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="24dp"
@@ -60,7 +60,7 @@
 
     <TextView
         android:id="@+id/login_welcome"
-        style="@style/heading"
+        style="@style/Heading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="124dp"

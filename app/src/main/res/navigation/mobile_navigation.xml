@@ -2,13 +2,34 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_account_settings">
+    android:id="@+id/mobile_navigation_bar"
+    app:startDestination="@+id/nav_potential_matches">
 
     <fragment
         android:id="@+id/nav_account_settings"
+        android:name="com.example.cupetfrontend.ui.TestFragment"
+        android:label="@string/nav_account_settings"
+        tools:layout="@layout/fragment_test" />
+    <fragment
+        android:id="@+id/nav_my_user_profile"
+        android:name="com.example.cupetfrontend.ui.TestFragment"
+        android:label="@string/nav_my_user_profile"
+        tools:layout="@layout/fragment_test" />
+    <fragment
+        android:id="@+id/nav_potential_matches"
         android:name="com.example.cupetfrontend.ui.navigation_drawer.HomeFragment"
-        android:label="@string/nav_menu_account_settings"
+        android:label="@string/title_potential_matches"
         tools:layout="@layout/fragment_home" />
 
+    <fragment
+        android:id="@+id/nav_matches"
+        android:name="com.example.cupetfrontend.ui.navigation_drawer.HomeFragment"
+        android:label="@string/title_matches"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/nav_my_pet_profile"
+        android:name="com.example.cupetfrontend.ui.navigation_drawer.HomeFragment"
+        android:label="@string/title_my_pet_profile"
+        tools:layout="@layout/fragment_home" />
 </navigation>

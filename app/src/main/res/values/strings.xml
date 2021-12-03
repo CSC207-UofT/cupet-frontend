@@ -40,5 +40,15 @@
     <string name="nav_header_title">Android Studio</string>
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
-    <string name="nav_menu_account_settings">Home</string>
+    <string name="nav_account_settings">Account Settings</string>
+    <string name="nav_my_user_profile">User Profile</string>
+
+    <!-- MainActivity / Bottom Navigation -->
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_potential_matches">Potential Matches</string>
+    <string name="title_matches">Matches</string>
+    <string name="title_my_pet_profile">My Pet Profile</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="sign_out_btn">Sign Out</string>
 </resources>
