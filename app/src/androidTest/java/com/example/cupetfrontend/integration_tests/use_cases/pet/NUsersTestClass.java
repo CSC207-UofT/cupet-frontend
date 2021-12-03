@@ -17,11 +17,9 @@ import com.example.cupetfrontend.use_cases.output_boundaries.LoginOutputBoundary
 import com.example.cupetfrontend.use_cases.output_boundaries.user.UserCreatorOutputBoundary;
 import com.example.cupetfrontend.use_cases.request_models.LoginRequestModel;
 import com.example.cupetfrontend.use_cases.request_models.user.UserCreatorRequestModel;
-import com.example.cupetfrontend.use_cases.response_models.LoginFailResponseModel;
 import com.example.cupetfrontend.use_cases.response_models.LoginSuccessResponseModel;
-import com.example.cupetfrontend.use_cases.response_models.user.UserCreatorFailResponseModel;
+import com.example.cupetfrontend.use_cases.response_models.pet.DefaultFailureResponseModel;
 import com.example.cupetfrontend.use_cases.response_models.user.UserCreatorSuccessResponseModel;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.runners.MethodSorters;
@@ -98,14 +96,14 @@ public class NUsersTestClass extends AsyncTestClass {
                     }
 
                     @Override
-                    public void onLoginFailure(LoginFailResponseModel response) {
+                    public void onLoginFailure(DefaultFailureResponseModel response) {
                         throw new FailedInitializationException();
                     }
                 }).login(new LoginRequestModel(request.getEmail(), request.getPassword()));
             }
 
             @Override
-            public void onCreateUserFailure(UserCreatorFailResponseModel response) {
+            public void onCreateUserFailure(DefaultFailureResponseModel response) {
                 throw new FailedInitializationException();
             }
         }).createUser(request);

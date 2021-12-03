@@ -1,6 +1,6 @@
 package com.example.cupetfrontend.use_cases.response_models.user;
 
-import com.example.cupetfrontend.use_cases.response_models.PetData;
+import com.example.cupetfrontend.use_cases.data_models.PetData;
 
 import java.util.List;
 

@@ -1,8 +1,6 @@
 package com.example.cupetfrontend.use_cases.output_boundaries.pet;
 
-import com.example.cupetfrontend.use_cases.response_models.PetData;
-import com.example.cupetfrontend.use_cases.response_models.pet.GetPotentialMatchesFailResponseModel;
-import com.example.cupetfrontend.use_cases.response_models.pet.GetPotentialMatchesSuccessResponseModel;
+import com.example.cupetfrontend.use_cases.data_models.PetData;
 
 import java.util.List;
 

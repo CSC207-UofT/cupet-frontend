@@ -1,31 +1,9 @@
 package com.example.cupetfrontend.use_cases.response_models.pet;
 
-public class EditPetSuccessResponseModel {
-    private final String newName;
-    private final String newAge;
-    private final String newBreed;
-    private final String newBiography;
+import com.example.cupetfrontend.use_cases.data_models.PetProfile;
 
-    public EditPetSuccessResponseModel(String newName, String newAge, String newBreed, String newBiography) {
-        this.newName = newName;
-        this.newAge = newAge;
-        this.newBreed = newBreed;
-        this.newBiography = newBiography;
-    }
-
-    public String getNewName() {
-        return newName;
-    }
-
-    public String getNewAge() {
-        return newAge;
-    }
-
-    public String getNewBreed() {
-        return newBreed;
-    }
-
-    public String getNewBiography() {
-        return newBiography;
+public class EditPetSuccessResponseModel extends PetProfile {
+    public EditPetSuccessResponseModel(String name, String age, String breed, String biography) {
+        super(name, age, breed, biography);
     }
 }

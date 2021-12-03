@@ -1,6 +1,6 @@
 package com.example.cupetfrontend.use_cases.output_boundaries.user;
 
-import com.example.cupetfrontend.use_cases.response_models.user.FetchUserProfileFailResponseModel;
+import com.example.cupetfrontend.use_cases.response_models.pet.DefaultFailureResponseModel;
 import com.example.cupetfrontend.use_cases.response_models.user.FetchUserProfileSuccessResponseModel;
 
 /**
@@ -20,5 +20,5 @@ public interface FetchUserProfileOutputBoundary {
      *
      * @param response The response data
      */
-    void onFetchUserProfileFailure(FetchUserProfileFailResponseModel response);
+    void onFetchUserProfileFailure(DefaultFailureResponseModel response);
 }

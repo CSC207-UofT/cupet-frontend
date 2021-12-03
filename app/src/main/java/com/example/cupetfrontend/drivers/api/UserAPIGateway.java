@@ -1,5 +1,6 @@
 package com.example.cupetfrontend.drivers.api;
 
+import com.example.cupetfrontend.drivers.api.routes.PetRoutesStore;
 import com.example.cupetfrontend.drivers.api.routes.UserRoutesStore;
 import com.example.cupetfrontend.use_cases.api_abstracts.IServerRequestManager;
 import com.example.cupetfrontend.use_cases.api_abstracts.IServerResponseListener;
@@ -52,10 +53,10 @@ public class UserAPIGateway extends APIGateway implements IUserAPIGateway {
     @Override
     public void editUserProfile(APIEditUserProfileRequestModel requestData, IServerResponseListener responseListener) {
         JSONObject requestBody = new JSONObject(new HashMap<String, String>(){{
-            put("newBiography", requestData.getNewBiography());
-            put("newInstagram", requestData.getNewInstagram());
-            put("newFacebook", requestData.getNewFacebook());
-            put("newPhoneNumber", requestData.getNewPhoneNumber());
+            put("newBiography", requestData.getBiography());
+            put("newInstagram", requestData.getInstagram());
+            put("newFacebook", requestData.getFacebook());
+            put("newPhoneNumber", requestData.getPhoneNumber());
             put("userId", UserIdFetcher.getUserId(requestData.getToken()));
         }});
 
@@ -80,12 +81,12 @@ public class UserAPIGateway extends APIGateway implements IUserAPIGateway {
     @Override
     public void editUserAccount(APIEditUserAccountRequestModel requestData, IServerResponseListener responseListener) {
         JSONObject requestBody = new JSONObject(new HashMap<String, String>(){{
-            put("newFirstName", requestData.getNewFirstName());
-            put("newLastName", requestData.getNewLastName());
-            put("newAddress", requestData.getNewHomeAddress());
-            put("newCity", requestData.getNewCity());
-            put("newPassword", requestData.getNewPassword());
-            put("newEmail", requestData.getNewEmail());
+            put("newFirstName", requestData.getFirstName());
+            put("newLastName", requestData.getLastName());
+            put("newAddress", requestData.getHomeAddress());
+            put("newCity", requestData.getCity());
+            put("newPassword", requestData.getPassword());
+            put("newEmail", requestData.getEmail());
             put("userId", UserIdFetcher.getUserId(requestData.getToken()));
         }});
 
@@ -102,6 +103,31 @@ public class UserAPIGateway extends APIGateway implements IUserAPIGateway {
         }};
 
         String url = UserRoutesStore.toAbsoluteRoute(UserRoutesStore.FETCH_PETS);
+
+        requestManager.makeGetRequest(url, queryParams,
+                createAuthHeaders(requestData.getToken()), responseListener);
+    }
+
+    @Override
+    public void setUserProfileImage(APISetUserProfileImageRequestModel requestData,
+                                    IServerResponseListener responseListener) {
+        JSONObject requestBody = new JSONObject(new HashMap<String, String>(){{
+            put("base64Encoded", requestData.getImgB64());
+        }});
+
+        String url = UserRoutesStore.toAbsoluteRoute(UserRoutesStore.SET_PROFILE_IMAGE);
+
+        requestManager.makePostRequest(url, requestBody,
+                createAuthHeaders(requestData.getToken()), responseListener);
+    }
+
+    @Override
+    public void fetchUserProfileImage(APIFetchUserProfileImageRequestModel requestData, IServerResponseListener responseListener) {
+        HashMap<String, String> queryParams = new HashMap<String, String>(){{
+            put("userId", requestData.getUserId());
+        }};
+
+        String url = UserRoutesStore.toAbsoluteRoute(UserRoutesStore.FETCH_USER_PROFILE_IMAGE);
 
         requestManager.makeGetRequest(url, queryParams,
                 createAuthHeaders(requestData.getToken()), responseListener);

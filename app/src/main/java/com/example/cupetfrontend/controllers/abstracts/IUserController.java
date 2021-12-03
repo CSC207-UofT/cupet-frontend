@@ -47,7 +47,6 @@ public interface IUserController {
 
     /**
      * Edit a user's account
-     * // TODO: too many parameters code smell: combine into a request object
      *
      * @param token The login session token
      * @param newFirstName The user's new first name
@@ -66,4 +65,20 @@ public interface IUserController {
      * @param token The user's session token
      */
     void getPets(String token);
+
+    /**
+     * Set a user's profile image
+     *
+     * @param token The user's session token
+     * @param imgB64 The image as a base64 string
+     */
+    void setUserProfileImage(String token, String imgB64);
+
+    /**
+     * Fetch a user's profile picture
+     *
+     * @param token The user's session token
+     * @param userId The target user's id
+     */
+    void fetchUserProfileImage(String token, String userId);
 }
