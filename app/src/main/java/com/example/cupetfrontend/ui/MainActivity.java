@@ -14,6 +14,10 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.example.cupetfrontend.databinding.ActivityMainBinding;
 
+/**
+ * This is the main activity of the application which is presented to
+ * the user once they have signed in and chosen a pet to sign in as.
+ */
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;

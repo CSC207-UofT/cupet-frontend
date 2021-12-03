@@ -1,4 +1,4 @@
-package com.example.cupetfrontend.ui.navigation_drawer;
+package com.example.cupetfrontend.ui.test_fragments;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

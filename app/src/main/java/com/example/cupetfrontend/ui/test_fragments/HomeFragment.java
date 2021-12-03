@@ -1,4 +1,4 @@
-package com.example.cupetfrontend.ui.navigation_drawer;
+package com.example.cupetfrontend.ui.test_fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

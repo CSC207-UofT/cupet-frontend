@@ -17,19 +17,19 @@
         tools:layout="@layout/fragment_test" />
     <fragment
         android:id="@+id/nav_potential_matches"
-        android:name="com.example.cupetfrontend.ui.navigation_drawer.HomeFragment"
+        android:name="com.example.cupetfrontend.ui.test_fragments.HomeFragment"
         android:label="@string/title_potential_matches"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/nav_matches"
-        android:name="com.example.cupetfrontend.ui.navigation_drawer.HomeFragment"
+        android:name="com.example.cupetfrontend.ui.test_fragments.HomeFragment"
         android:label="@string/title_matches"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/nav_my_pet_profile"
-        android:name="com.example.cupetfrontend.ui.navigation_drawer.HomeFragment"
+        android:name="com.example.cupetfrontend.ui.test_fragments.HomeFragment"
         android:label="@string/title_my_pet_profile"
         tools:layout="@layout/fragment_home" />
 </navigation>
