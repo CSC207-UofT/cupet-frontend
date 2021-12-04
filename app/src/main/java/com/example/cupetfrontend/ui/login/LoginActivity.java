@@ -21,6 +21,9 @@ import com.example.cupetfrontend.controllers.abstracts.ISessionManager;
 import com.example.cupetfrontend.dependency_selector.DependencySelector;
 import com.example.cupetfrontend.ui.register.RegisterActivity;
 
+/**
+ * The activity for the login page.
+ */
 public class LoginActivity extends AppCompatActivity {
 
     private LoginViewModel loginViewModel;

@@ -4,7 +4,8 @@
         <item name="colorPrimary">@color/tinder_pink</item>
         <item name="colorPrimaryDark">@color/tinder_pink_dark</item>
         <item name="colorAccent">@color/tinder_pink_gray</item>
-        <item name="android:statusBarColor" tools:targetApi="lollipop">@color/tinder_pink_dark</item>
+        <item name="android:statusBarColor" tools:targetApi="lollipop">@color/tinder_pink_dark
+        </item>
         <item name="android:windowEnterAnimation">@android:anim/fade_in</item>
         <item name="android:windowExitAnimation">@android:anim/fade_out</item>
     </style>
@@ -15,5 +16,6 @@
     </style>
 
     <style name="Theme.CupetFrontEnd.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
     <style name="Theme.CupetFrontEnd.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>
