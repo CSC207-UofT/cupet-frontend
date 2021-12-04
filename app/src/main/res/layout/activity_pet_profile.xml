@@ -12,12 +12,16 @@
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@android:drawable/ic_menu_sort_by_size"
     />
+
     <ImageView
-            android:layout_width="410dp"
-            android:layout_height="347dp" tools:srcCompat="@tools:sample/avatars" android:id="@+id/pet_profile_image"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/menu_button_pet_profile"/>
+        android:id="@+id/pet_profile_image"
+        android:layout_width="410dp"
+        android:layout_height="347dp"
+        android:layout_marginTop="60dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/avatars" />
     <TextView
             android:text="@string/pet_name"
             android:layout_width="wrap_content"
