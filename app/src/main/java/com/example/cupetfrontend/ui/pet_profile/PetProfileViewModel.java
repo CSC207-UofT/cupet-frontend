@@ -5,6 +5,9 @@ import androidx.lifecycle.ViewModel;
 import com.example.cupetfrontend.controllers.abstracts.IPetController;
 import com.example.cupetfrontend.presenters.view_model_abstracts.IPetProfileViewModel;
 
+/**
+ * A ViewModel class for the viewing Pet Profile page.
+ */
 public class PetProfileViewModel extends ViewModel implements IPetProfileViewModel {
     private final IPetController petController;
 

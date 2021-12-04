@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,7 +16,7 @@ import com.example.cupetfrontend.R;
 import com.example.cupetfrontend.controllers.abstracts.IPetController;
 import com.example.cupetfrontend.dependency_selector.DependencySelector;
 import com.example.cupetfrontend.presenters.abstracts.IFetchPetProfilePresenter;
-import com.example.cupetfrontend.ui.login.LoginActivity;
+import com.example.cupetfrontend.ui.edit_pet.EditPetActivity;
 
 
 /**
@@ -22,6 +24,12 @@ import com.example.cupetfrontend.ui.login.LoginActivity;
  */
 public class PetProfileActivity extends AppCompatActivity {
     private ImageButton editPetButton;
+    private ImageButton menuButton;
+    private ImageView petImage;
+    private TextView petName;
+    private TextView petAge;
+    private TextView petBreed;
+    private TextView petBio;
     private PetProfileViewModel petProfileViewModel;
 
     /**
@@ -29,6 +37,12 @@ public class PetProfileActivity extends AppCompatActivity {
      */
     private void initializeViews() {
         editPetButton = findViewById(R.id.edit_pet_button);
+        menuButton = findViewById(R.id.menu_button);
+        petImage = findViewById(R.id.pet_image);
+        petName = findViewById(R.id.pet_petName);
+        petAge = findViewById(R.id.pet_petAge);
+        petBreed = findViewById(R.id.pet_petBreed);
+        petBio = findViewById(R.id.pet_petBio);
     }
 
     /**
@@ -49,36 +63,36 @@ public class PetProfileActivity extends AppCompatActivity {
 
         initializeViews();
         setUpEditPetButtonClickedListener();
+        setUpMenuButtonClickedListener();
     }
 
+    // TODO: set up pet info to expected field
+    private void setUpPetInfo() {}
+
     /**
-     * Set up a listener that sends a jump-to-edit request when editPetButton
+     * Set up a listener that opens menu fragment when menuButton (3-lines)
      * is clicked.
      */
-    private void setUpEditPetButtonClickedListener() {
-        editPetButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                // TODO: jump to edit pet page;
+    private void setUpMenuButtonClickedListener() {
+        menuButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO: open menu fragment
             }
         });
     }
 
     /**
-     * Display a Pet Profile Fetching Success toast message and move to the login view.
+     * Set up a listener that jumps to edit pet page when editPetButton
+     * is clicked.
      */
-    private void onFetchPetProfileSuccess() {
-        Toast.makeText(getApplicationContext(), "Fetch Pet Profile Success", Toast.LENGTH_SHORT).show();
-
-        Intent moveToLoginIntent = new Intent(PetProfileActivity.this, LoginActivity.class);
-        startActivity(moveToLoginIntent);
-    }
-
-    /**
-     * Display a Pet Profile Fetching failed toast message.
-     * @param errorMessage The error message to display
-     */
-    private void onFetchPetProfileFailure (String errorMessage) {
-        System.out.println("Fetch Pet Profile failed");
-        Toast.makeText(getApplicationContext(), "Fetch Pet Profile failed: " + errorMessage, Toast.LENGTH_SHORT).show();
+    private void setUpEditPetButtonClickedListener() {
+        editPetButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent moveToEditPet = new Intent(PetProfileActivity.this, EditPetActivity.class);
+                startActivity(moveToEditPet);
+            }
+        });
     }
 }
