@@ -100,6 +100,16 @@ public class UserController implements IUserController {
     }
 
     @Override
+    public void editUserAccount(String token, String newFirstName, String newLastName, String newEmail,
+                                String newHomeAddress, String newCity) {
+        EditUserAccountRequestModel request = new EditUserAccountRequestModel(
+                token, newFirstName, newLastName, newEmail, newHomeAddress, newCity
+        );
+
+        editUserAccount.editUserAccount(request);
+    }
+
+    @Override
     public void setUserProfileImage(String token, String imgB64) {
         SetUserProfileImageRequestModel request = new SetUserProfileImageRequestModel(
                 token, imgB64

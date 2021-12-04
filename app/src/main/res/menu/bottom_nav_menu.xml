@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_potential_matches"
+        android:icon="@drawable/tinder_fire"
+        android:title="@string/title_potential_matches" />
+
+    <item
+        android:id="@+id/nav_matches"
+        android:icon="@drawable/heart"
+        android:title="@string/title_matches" />
+
+    <item
+        android:id="@+id/nav_my_pet_profile"
+        android:icon="@drawable/profile"
+        android:title="@string/title_my_pet_profile" />
+
+</menu>

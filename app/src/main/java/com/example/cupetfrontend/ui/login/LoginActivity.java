@@ -19,8 +19,12 @@ import com.example.cupetfrontend.R;
 import com.example.cupetfrontend.controllers.InvalidJWTException;
 import com.example.cupetfrontend.controllers.abstracts.ISessionManager;
 import com.example.cupetfrontend.dependency_selector.DependencySelector;
+import com.example.cupetfrontend.ui.MainActivity;
 import com.example.cupetfrontend.ui.register.RegisterActivity;
 
+/**
+ * The activity for the login page.
+ */
 public class LoginActivity extends AppCompatActivity {
 
     private LoginViewModel loginViewModel;
@@ -129,7 +133,6 @@ public class LoginActivity extends AppCompatActivity {
         DependencySelector dependencySelector = ((App) this.getApplication()).getDependencySelector();
         ISessionManager sessionManager = dependencySelector.getSessionManager();
 
-        // TODO: Move the set token call into use cases through dependency injection
         try {
             sessionManager.setToken(token);
             System.out.println("Successful login with user " + sessionManager.getUserId());
@@ -137,9 +140,8 @@ public class LoginActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        // TODO: Direct to new view
-//        Intent moveToLoginIntent = new Intent(LoginActivity.this, LoginActivity.class);
-//        startActivity(moveToLoginIntent);
+        Intent moveToMainActivity = new Intent(LoginActivity.this, MainActivity.class);
+        startActivity(moveToMainActivity);
     }
 
     private void onLoginFailure(String errorMessage) {

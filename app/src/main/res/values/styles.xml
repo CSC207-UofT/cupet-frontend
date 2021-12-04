@@ -1,23 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-
-
-    <style name="heading">
+    <style name="Heading">
         <item name="android:textSize">48sp</item>
         <item name="android:fontFamily">@font/quicksand</item>
     </style>
 
-    <style name="white_edit_text">
+    <style name="WhiteEditText">
         <item name="android:textColor">@android:color/white</item>
         <item name="android:textColorHint">#FFFFFFDE</item>
         <item name="android:fontFamily">@font/quicksand</item>
     </style>
 
-    <style name="outlined_button">
+    <style name="OutlinedButton">
         <item name="android:background">@drawable/transparent_ripple_btn_background</item>
         <item name="android:fontFamily">@font/quicksand</item>
         <item name="android:textAllCaps">true</item>
         <item name="android:textColor">@android:color/white</item>
         <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="WhiteTextToolbar" parent="Theme.CupetFrontEnd">
+        <item name="android:textColorSecondary">@color/white</item>
+        <item name="android:textColor">@color/white</item>
     </style>
 </resources>
