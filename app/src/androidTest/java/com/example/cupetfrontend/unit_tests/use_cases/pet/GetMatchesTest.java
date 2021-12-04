@@ -26,6 +26,7 @@ public class GetMatchesTest extends UseCaseTestClass {
                     assertEquals(pet.getAge(), "dummy age");
                     assertEquals(pet.getBreed(), "dummy breed");
                     assertEquals(pet.getBiography(), "dummy biography");
+                    assertEquals(pet.getProfileImgUrl(), "dummy url");
                 }
 
                 setTaskComplete();
