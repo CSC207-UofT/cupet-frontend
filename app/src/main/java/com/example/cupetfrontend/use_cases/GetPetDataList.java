@@ -1,12 +1,15 @@
 package com.example.cupetfrontend.use_cases;
 
 import com.example.cupetfrontend.use_cases.api_abstracts.IPetAPIGateway;
+import com.example.cupetfrontend.use_cases.output_boundaries.pet.FetchPetProfileImageOutputBoundary;
 import com.example.cupetfrontend.use_cases.output_boundaries.pet.FetchPetProfileOutputBoundary;
 import com.example.cupetfrontend.use_cases.output_boundaries.pet.GetPetDataListOutputBoundary;
+import com.example.cupetfrontend.use_cases.request_models.pet.FetchPetProfileImageRequestModel;
 import com.example.cupetfrontend.use_cases.request_models.pet.FetchPetProfileRequestModel;
 import com.example.cupetfrontend.use_cases.data_models.PetData;
 import com.example.cupetfrontend.use_cases.response_models.pet.DefaultFailureResponseModel;
 import com.example.cupetfrontend.use_cases.response_models.pet.FetchPetProfileSuccessResponseModel;
+import com.example.cupetfrontend.use_cases.response_models.pet.PetProfileImageSuccessResponseModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,9 +24,12 @@ public class GetPetDataList {
     private List<PetData> petDataList;
     private List<String> petIds;
     private final FetchPetProfile fetchPetProfile;
+    private final FetchPetProfileImage fetchPetProfileImage;
     private final String token;
     private int currentIndex;
     private GetPetDataListOutputBoundary outputBoundary;
+    private FetchPetProfileSuccessResponseModel currentPetProfileResponse;
+    private PetProfileImageSuccessResponseModel currentPetProfileImgResponse;
 
     public GetPetDataList(String token, IPetAPIGateway petAPIGateway,
                           GetPetDataListOutputBoundary outputBoundary) {
@@ -43,6 +49,18 @@ public class GetPetDataList {
             }
         });
 
+        fetchPetProfileImage = new FetchPetProfileImage(petAPIGateway, new FetchPetProfileImageOutputBoundary() {
+            @Override
+            public void onFetchPetProfileImageSuccess(PetProfileImageSuccessResponseModel response) {
+                onFetchSingleProfileImgSuccess(response);
+            }
+
+            @Override
+            public void onFetchPetProfileImageFailure(DefaultFailureResponseModel response) {
+                onFetchSingleProfileFailure(response);
+            }
+        });
+
         this.outputBoundary = outputBoundary;
     }
 
@@ -50,12 +68,22 @@ public class GetPetDataList {
      * Send the next request to retrieve a singular pet profile.
      */
     private void sendNextRequest() {
+        currentPetProfileResponse = null;
+        currentPetProfileImgResponse = null;
+
         FetchPetProfileRequestModel request = new FetchPetProfileRequestModel(
                 token,
                 petIds.get(currentIndex)
         );
 
         fetchPetProfile.fetchPetProfile(request);
+
+        FetchPetProfileImageRequestModel profileImgRequest = new FetchPetProfileImageRequestModel(
+            token,
+            petIds.get(currentIndex)
+        );
+
+        fetchPetProfileImage.fetchPetProfileImage(profileImgRequest);
     }
 
     /**
@@ -73,9 +101,28 @@ public class GetPetDataList {
         }
     }
 
-    private void onFetchSingleProfileSuccess(FetchPetProfileSuccessResponseModel response) {
-        PetData newPetData = new PetData(response.getName(), response.getAge(),
-                response.getBreed(), response.getBiography(), petIds.get(currentIndex));
+    private void onFetchSingleProfileImgSuccess(PetProfileImageSuccessResponseModel response) {
+        currentPetProfileImgResponse = response;
+
+        if (currentPetProfileResponse != null){
+            onBothRequestSuccess();
+        }
+    }
+
+    /**
+     * Method called when both concurrent requests for the current pet id
+     * has successfully returned.
+     */
+    private void onBothRequestSuccess() {
+        PetData newPetData = new PetData(
+                currentPetProfileResponse.getName(),
+                currentPetProfileResponse.getAge(),
+                currentPetProfileResponse.getBreed(),
+                currentPetProfileResponse.getBiography(),
+                currentPetProfileImgResponse.getImgUrl(),
+                petIds.get(currentIndex)
+        );
+
         petDataList.add(newPetData);
 
         if (currentIndex + 1 < petIds.size()){
@@ -83,6 +130,14 @@ public class GetPetDataList {
             sendNextRequest();
         }else{
             this.outputBoundary.onGetPetDataListSuccess(petDataList);
+        }
+    }
+
+    private void onFetchSingleProfileSuccess(FetchPetProfileSuccessResponseModel response) {
+        currentPetProfileResponse = response;
+
+        if (currentPetProfileImgResponse != null){
+            onBothRequestSuccess();
         }
     }
 
