@@ -4,28 +4,33 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 
 import com.example.cupetfrontend.App;
 import com.example.cupetfrontend.R;
 import com.example.cupetfrontend.controllers.abstracts.IPetController;
+import com.example.cupetfrontend.databinding.FragmentCreatePetBinding;
+import com.example.cupetfrontend.databinding.FragmentEditPetBinding;
 import com.example.cupetfrontend.dependency_selector.DependencySelector;
 import com.example.cupetfrontend.presenters.abstracts.ICreatePetPresenter;
+import com.example.cupetfrontend.ui.MainActivityFragment;
 import com.example.cupetfrontend.ui.my_pet_profile.PetProfileFragment;
 
 /**
- * The activity for the Create Pet page.
+ * The fragment for the Create Pet page.
  */
-public class CreatePetActivity extends AppCompatActivity {
+public class CreatePetFragment extends MainActivityFragment {
     private EditText petNameField;
     private EditText petAgeField;
     private EditText petBreedField;
@@ -33,21 +38,20 @@ public class CreatePetActivity extends AppCompatActivity {
     private ImageView petImage;
     private Button createPetButton;
     private ImageButton editPetImageButton;
-    private ImageButton menuButton;
     private CreatePetViewModel createPetViewModel;
+    private FragmentCreatePetBinding binding;
 
     /**
      * Initialize the views of the form into the field instance variables.
      */
     private void initializeViews() {
-        petNameField = findViewById(R.id.pet_petName);
-        petAgeField = findViewById(R.id.pet_petAge);
-        petBreedField = findViewById(R.id.pet_petBreed);
-        petBioField = findViewById(R.id.pet_petBio);
-        petImage = findViewById(R.id.pet_image);
-        createPetButton = findViewById(R.id.confirm_add_pet_button);
-        editPetImageButton = findViewById(R.id.edit_pet_image_button);
-        menuButton = findViewById(R.id.menu_button);
+        petNameField = binding.petPetName;
+        petAgeField = binding.petPetAge;
+        petBreedField = binding.petPetBreed;
+        petBioField = binding.petPetBio;
+        petImage = binding.petImage;
+        createPetButton = binding.confirmAddPetButton;
+        editPetImageButton = binding.editPetImageButton;
     }
 
     /**
@@ -62,16 +66,14 @@ public class CreatePetActivity extends AppCompatActivity {
         }
     }
 
-    /**
-     * Setup views and state on pet creation of the activity.
-     */
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_pet);
+        binding = FragmentCreatePetBinding.inflate(inflater, container, false);
+        View root = binding.getRoot();
 
-        DependencySelector dependencySelector = ((App) getApplication()).getDependencySelector();
-
+        initializeDependencySelector();
         IPetController petController = dependencySelector.getControllers().getPetController();
 
         ICreatePetPresenter createPetPresenter = dependencySelector.getPetPresenters().getCreatePetPresenter();
@@ -84,8 +86,8 @@ public class CreatePetActivity extends AppCompatActivity {
         setUpFormEditedListener();
         setUpCreatePetButtonClickedListener();
         setUpEditPetImageButtonClickedListener();
-        setUpMenuButtonClickedListener();
 
+        return root;
     }
 
     /**
@@ -143,18 +145,6 @@ public class CreatePetActivity extends AppCompatActivity {
     }
 
     /**
-     * Set up a listener that opens menu fragment when menuButton (3-lines)
-     * is clicked.
-     */
-    private void setUpMenuButtonClickedListener() {
-        menuButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                // TODO: open menu fragment
-            }
-        });
-    }
-
-    /**
      * Return the data entered into the pet creation form.
      *
      * @return The data entered into the pet creation form.
@@ -188,8 +178,6 @@ public class CreatePetActivity extends AppCompatActivity {
                 }else{
                     onCreatePetSuccess();
                 }
-
-                finish();
             }
         });
     }
@@ -223,9 +211,9 @@ public class CreatePetActivity extends AppCompatActivity {
      */
     private void onCreatePetSuccess() {
         Toast.makeText(getApplicationContext(), "Pet Creation Success", Toast.LENGTH_SHORT).show();
-        // move to pet profile page
-        Intent moveToPetProfileIntent = new Intent(CreatePetActivity.this, PetProfileFragment.class);
-        startActivity(moveToPetProfileIntent);
+
+        // TODO: Eventually navigate to all pets page and sign in as the newly created pet.
+        getMainActivity().navigate(R.id.nav_my_pet_profile);
     }
 
     /**

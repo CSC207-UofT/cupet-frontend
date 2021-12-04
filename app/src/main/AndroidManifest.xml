@@ -42,7 +42,7 @@
             android:exported="true"
             android:label="RegisterActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
-        <activity android:name=".ui.create_pet.CreatePetActivity"
+        <activity android:name=".ui.create_pet.CreatePetFragment"
             android:label="Create a New Pet"
             android:exported="true">
             <intent-filter>
