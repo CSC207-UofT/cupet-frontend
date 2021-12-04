@@ -1,7 +1,10 @@
 package com.example.cupetfrontend.dependency_selector;
 
 import android.content.Context;
+
+import com.example.cupetfrontend.controllers.PetSessionManager;
 import com.example.cupetfrontend.controllers.SessionManager;
+import com.example.cupetfrontend.controllers.abstracts.IPetSessionManager;
 import com.example.cupetfrontend.controllers.abstracts.ISessionManager;
 import com.example.cupetfrontend.drivers.api.JWTParser;
 
@@ -16,6 +19,7 @@ public class DependencySelector {
     private final PetPresenterDependencies petPresenters;
     private final AuthPresenterDependencies authPresenters;
     private final ISessionManager sessionManager;
+    private final IPetSessionManager petSessionManager;
 
     private final ControllerDependencies controllers;
 
@@ -29,6 +33,7 @@ public class DependencySelector {
                 petPresenters, authPresenters);
 
         sessionManager = new SessionManager(new JWTParser());
+        petSessionManager = new PetSessionManager();
     }
 
     public APIDependencies getApiDependencies() {
@@ -53,5 +58,9 @@ public class DependencySelector {
 
     public ISessionManager getSessionManager() {
         return sessionManager;
+    }
+
+    public IPetSessionManager getPetSessionManager() {
+        return petSessionManager;
     }
 }
