@@ -1,4 +1,4 @@
-package com.example.cupetfrontend.ui.pet_profile;
+package com.example.cupetfrontend.ui.my_pet_profile;
 
 /**
  * Fetch Pet Profile result : success (pet details) or error message.

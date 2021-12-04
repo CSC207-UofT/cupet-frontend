@@ -60,7 +60,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.pet_profile.PetProfileActivity"
+        <activity android:name=".ui.my_pet_profile.PetProfileFragment"
             android:label="PetProfileActivity"
             android:exported="true">
             <intent-filter>

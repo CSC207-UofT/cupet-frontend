@@ -49,6 +49,7 @@
     <string name="title_potential_matches">Potential Matches</string>
     <string name="title_matches">Matches</string>
     <string name="title_my_pet_profile">My Pet Profile</string>
+    <string name="title_edit_pet">Edit Pet</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="sign_out_btn">Sign Out</string>

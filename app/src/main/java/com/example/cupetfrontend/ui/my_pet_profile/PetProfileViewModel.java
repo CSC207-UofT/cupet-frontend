@@ -1,4 +1,4 @@
-package com.example.cupetfrontend.ui.pet_profile;
+package com.example.cupetfrontend.ui.my_pet_profile;
 
 import androidx.lifecycle.ViewModel;
 
