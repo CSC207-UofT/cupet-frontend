@@ -23,17 +23,17 @@
             android:exported="true"
             android:label="@string/title_activity_navigation_drawer"
             android:theme="@style/Theme.CupetFrontEnd.NoActionBar" />
-        <activity
-            android:name=".ui.splash_screen.SplashScreenActivity"
-            android:exported="true"
-            android:label="SplashScreenActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar">
+        <activity android:name=".ui.splash_screen.SplashScreenActivity"
+                  android:label="SplashScreenActivity"
+                  android:theme="@style/Theme.AppCompat.NoActionBar"
+                  android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+      
         <activity
             android:name=".ui.login.LoginActivity"
             android:exported="true"
@@ -47,5 +47,55 @@
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />
+                android:name=".ui.login.LoginActivity"
+                android:label="@string/title_activity_login"
+                android:theme="@style/Theme.AppCompat.NoActionBar"
+                android:exported="true">
+        </activity>
+        <activity android:name=".ui.register.RegisterActivity"
+                  android:label="RegisterActivity"
+                  android:theme="@style/Theme.AppCompat.NoActionBar"
+                  android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.RegisterActivity"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".ui.create_pet.CreatePetActivity"
+            android:label="CreatePetActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.CreatePetActivity"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".ui.edit_pet.EditPetActivity"
+            android:label="EditPetActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.EditPetActivity"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".ui.pet_profile.PetProfileActivity"
+            android:label="PetProfileActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.PetProfileActivity"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
+
+        <activity
+                android:name=".MainActivity"
+
+                android:label="@string/app_name"
+                android:theme="@style/Theme.CupetFrontEnd.NoActionBar">
+        </activity>
+    </application>
 
 </manifest>

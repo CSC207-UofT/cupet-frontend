@@ -169,7 +169,7 @@ public class PetAPIGateway extends APIGateway implements IPetAPIGateway {
                 put("petId", requestData.getPetId());
         }};
 
-        String url = UserRoutesStore.toAbsoluteRoute(PetRoutesStore.SET_PET_PROFILE_IMAGE);
+        String url = UserRoutesStore.toAbsoluteRoute(PetRoutesStore.FETCH_PET_PROFILE_IMAGE);
 
         requestManager.makeGetRequest(url, queryParams,
                 createAuthHeaders(requestData.getToken()), responseListener);
