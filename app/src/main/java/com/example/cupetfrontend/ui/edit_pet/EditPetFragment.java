@@ -4,40 +4,49 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import com.example.cupetfrontend.App;
 import com.example.cupetfrontend.R;
 import com.example.cupetfrontend.controllers.abstracts.IPetController;
+import com.example.cupetfrontend.databinding.FragmentEditPetBinding;
+import com.example.cupetfrontend.databinding.FragmentMyPetProfileBinding;
 import com.example.cupetfrontend.dependency_selector.DependencySelector;
 import com.example.cupetfrontend.presenters.abstracts.IEditPetPresenter;
+import com.example.cupetfrontend.presenters.abstracts.IFetchPetProfilePresenter;
+import com.example.cupetfrontend.ui.MainActivityFragment;
 import com.example.cupetfrontend.ui.login.LoginActivity;
+import com.example.cupetfrontend.ui.my_pet_profile.PetProfileViewModel;
 
 /**
- * The activity for the Edit Pet page.
+ * The fragment for the Edit Pet page.
  */
-public class EditPetActivity extends AppCompatActivity {
+public class EditPetFragment extends MainActivityFragment {
     private EditText petNameField;
     private EditText petAgeField;
     private EditText petBreedField;
     private EditText petBioField;
     private Button editPetButton;
     private EditPetViewModel editPetViewModel;
+    private FragmentEditPetBinding binding;
 
     /**
      * Initialize the views of the form into the field instance variables.
      */
     private void initializeViews() {
-        petNameField = findViewById(R.id.pet_petName);
-        petAgeField = findViewById(R.id.pet_petAge);
-        petBreedField = findViewById(R.id.pet_petBreed);
-        petBioField = findViewById(R.id.pet_petBio);
-        editPetButton = findViewById(R.id.confirm_edit_pet_button);
+        petNameField = binding.petPetName;
+        petAgeField = binding.petPetAge;
+        petBreedField = binding.petPetBreed;
+        petBioField = binding.petPetBio;
+        editPetButton = binding.confirmEditPetButton;
     }
 
     /**
@@ -52,15 +61,14 @@ public class EditPetActivity extends AppCompatActivity {
         }
     }
 
-    /**
-     * Setup views and state on pet edition of the activity.
-     */
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_pet);
+        binding = FragmentEditPetBinding.inflate(inflater, container, false);
+        View root = binding.getRoot();
 
-        DependencySelector dependencySelector = ((App) getApplication()).getDependencySelector();
+        initializeDependencySelector();
 
         IPetController petController = dependencySelector.getControllers().getPetController();
 
@@ -73,6 +81,8 @@ public class EditPetActivity extends AppCompatActivity {
         setUpObserveEditPetResult();
         setUpFormEditedListener();
         setUpEditPetButtonClickedListener();
+
+        return root;
     }
 
     /**
@@ -151,8 +161,6 @@ public class EditPetActivity extends AppCompatActivity {
                 }else{
                     onEditPetSuccess();
                 }
-
-                finish();
             }
         });
     }
@@ -182,13 +190,12 @@ public class EditPetActivity extends AppCompatActivity {
     }
 
     /**
-     * Display a Pet Edition Success toast message and move to the login view.
+     * Display a Pet Edition Success toast message and move to the pet profile page.
      */
     private void onEditPetSuccess() {
         Toast.makeText(getApplicationContext(), "Pet Edition Success", Toast.LENGTH_SHORT).show();
 
-        Intent moveToLoginIntent = new Intent(EditPetActivity.this, LoginActivity.class);
-        startActivity(moveToLoginIntent);
+        getMainActivity().navigate(R.id.nav_my_pet_profile);
     }
 
     /**

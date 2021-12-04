@@ -34,7 +34,7 @@
     />
     <fragment
             android:id="@+id/nav_edit_pet"
-            android:name="com.example.cupetfrontend.ui.test_fragments.HomeFragment"
+            android:name="com.example.cupetfrontend.ui.edit_pet.EditPetFragment"
             android:label="@string/title_my_pet_profile"
-    />
+            tools:layout="@layout/fragment_edit_pet"/>
 </navigation>

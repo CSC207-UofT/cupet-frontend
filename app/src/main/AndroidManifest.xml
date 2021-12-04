@@ -51,7 +51,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.edit_pet.EditPetActivity"
+        <activity android:name=".ui.edit_pet.EditPetFragment"
             android:label="EditPetActivity"
             android:exported="true">
             <intent-filter>

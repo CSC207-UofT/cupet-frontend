@@ -26,6 +26,13 @@ public class MainActivityFragment extends Fragment {
     }
 
     /**
+     * Return the Application instance attached to the fragment.
+     */
+    public App getApplicationContext() {
+        return (App) getMainActivity().getApplicationContext();
+    }
+
+    /**
      * Initialize the dependency selector provided that the fragment
      * exists under an instance of MainActivity.
      */

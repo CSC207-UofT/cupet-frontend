@@ -55,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
                 "https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Jonathan_G_Meath_portrays_" +
                         "Santa_Claus.jpg/800px-Jonathan_G_Meath_portrays_Santa_Claus.jpg"
         ));
+        dependencySelector.getPetSessionManager().setPetId("1");
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -140,10 +141,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.main_appbar_edit) {
             if (editBtnNavTarget != 0) {
-                NavController navController = Navigation.findNavController(
-                        this, R.id.main_nav_fragment);
-
-                navController.navigate(editBtnNavTarget);
+                navigate(editBtnNavTarget);
             }
 
         }else{
@@ -185,6 +183,16 @@ public class MainActivity extends AppCompatActivity {
     public void showEditButton () {
         MenuItem item = appBarMenu.findItem(R.id.main_appbar_edit);
         item.setVisible(true);
+    }
+
+    /**
+     * Navigate to a page defined in mobile_navigation.xml.
+     */
+    public void navigate (int navTarget) {
+        NavController navController = Navigation.findNavController(
+                this, R.id.main_nav_fragment);
+
+        navController.navigate(navTarget);
     }
 
     /**
