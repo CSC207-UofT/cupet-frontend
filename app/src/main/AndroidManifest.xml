@@ -41,7 +41,7 @@
         </activity>
 
         <activity android:name=".ui.create_pet.CreatePetActivity"
-            android:label="CreatePetActivity"
+            android:label="Create a New Pet"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.CreatePetActivity"/>

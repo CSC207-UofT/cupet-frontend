@@ -11,6 +11,118 @@
         android:paddingTop="@dimen/activity_vertical_margin"
         tools:context=".ui.create_pet.CreatePetActivity">
 
+    <EditText
+        android:id="@+id/pet_petName"
+        style="@style/white_edit_text"
+        android:layout_width="331dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="24dp"
+        android:ems="10"
+        android:hint="@string/pet_name"
+        android:inputType="textPersonName"
+        android:textColor="@color/tinder_pink"
+        android:textColorHighlight="@color/tinder_pink_dark"
+        android:textColorHint="@color/tinder_pink_dark"
+        android:textColorLink="@color/tinder_pink_gray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pet_image" />
+
+    <EditText
+        android:id="@+id/pet_petAge"
+        style="@style/white_edit_text"
+        android:layout_width="331dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="24dp"
+        android:ems="10"
+        android:hint="@string/pet_age"
+        android:inputType="textPersonName"
+        android:textColor="@color/tinder_pink"
+        android:textColorHighlight="@color/tinder_pink_dark"
+        android:textColorHint="@color/tinder_pink_dark"
+        android:textColorLink="@color/tinder_pink_gray"
+        app:layout_constraintEnd_toEndOf="@+id/pet_petName"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/pet_petName"
+        app:layout_constraintTop_toBottomOf="@+id/pet_petName" />
+
+    <EditText
+        android:id="@+id/pet_petBreed"
+        style="@style/white_edit_text"
+        android:layout_width="331dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="24dp"
+        android:ems="10"
+        android:hint="@string/pet_breed"
+        android:inputType="textPersonName"
+        android:textColor="@color/tinder_pink"
+        android:textColorHighlight="@color/tinder_pink_dark"
+        android:textColorHint="@color/tinder_pink_dark"
+        android:textColorLink="@color/tinder_pink_gray"
+        app:layout_constraintEnd_toEndOf="@+id/pet_petAge"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/pet_petAge"
+        app:layout_constraintTop_toBottomOf="@+id/pet_petAge" />
+
+    <EditText
+        android:id="@+id/pet_petBio"
+        style="@style/white_edit_text"
+        android:layout_width="330dp"
+        android:layout_height="49dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="24dp"
+        android:ems="10"
+        android:hint="@string/pet_bio"
+        android:inputType="textPersonName"
+        android:textColor="@color/tinder_pink"
+        android:textColorHighlight="@color/tinder_pink_dark"
+        android:textColorHint="@color/tinder_pink_dark"
+        android:textColorLink="@color/tinder_pink_gray"
+        app:layout_constraintEnd_toEndOf="@+id/pet_petBreed"
+        app:layout_constraintStart_toStartOf="@+id/pet_petBreed"
+        app:layout_constraintTop_toBottomOf="@+id/pet_petBreed" />
+
+    <Button
+        android:id="@+id/confirm_add_pet_button"
+        style="@style/outlined_button"
+        android:layout_width="147dp"
+        android:layout_height="59dp"
+        android:layout_gravity="center"
+        android:text="@string/add_pet"
+        android:textColor="@color/tinder_pink"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:backgroundTint="@color/tinder_pink_dark"
+        app:iconTint="@color/tinder_pink_dark"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.522"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pet_petBio"
+        app:layout_constraintVertical_bias="0.275" />
+
+    <ImageView
+        android:id="@+id/pet_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <ImageButton
+        android:id="@+id/edit_pet_image_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/ic_menu_edit" />
+
     <ImageButton
         android:id="@+id/menu_button"
         android:layout_width="wrap_content"
@@ -18,150 +130,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@android:drawable/ic_menu_sort_by_size" />
-
-    <TextView
-        android:id="@+id/add_pet_textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="sans-serif"
-        android:text="@string/add_a_new_pet"
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/menu_button" />
-
-    <ImageView
-        android:id="@+id/pet_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="32dp"
-        app:layout_constraintBottom_toTopOf="@+id/pet_petName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/add_pet_textView"
-        tools:srcCompat="@tools:sample/avatars" />
-
-    <ImageButton
-        android:id="@+id/edit_pet_image_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="104dp"
-        android:layout_marginTop="96dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.525"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/pet_image"
-        app:srcCompat="@android:drawable/ic_menu_edit" />
-
-    <TextView
-        android:id="@+id/pet_name_textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="sans-serif"
-        android:text="@string/pet_name"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/pet_petName"
-        app:layout_constraintStart_toStartOf="@+id/pet_petName" />
-
-    <EditText
-        android:id="@+id/pet_petName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
-        android:ems="10"
-        android:hint="@string/pet_name"
-        android:inputType="textPersonName"
-        android:text="Pet Name"
-        app:layout_constraintBottom_toTopOf="@+id/pet_petAge"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/pet_age_textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/pet_age"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/pet_petAge"
-        app:layout_constraintStart_toStartOf="@+id/pet_petAge" />
-
-    <EditText
-        android:id="@+id/pet_petAge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
-        android:ems="10"
-        android:hint="@string/pet_age"
-        android:inputType="textPersonName"
-        android:text="@string/pet_age"
-        app:layout_constraintBottom_toTopOf="@+id/pet_petBreed"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/pet_breed_textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/pet_breed"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/pet_petBreed"
-        app:layout_constraintStart_toStartOf="@+id/pet_petBreed" />
-
-    <EditText
-        android:id="@+id/pet_petBreed"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="@string/pet_breed"
-        app:layout_constraintBottom_toTopOf="@+id/pet_petBio"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/pet_bio_textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/pet_bio"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/pet_petBio"
-        app:layout_constraintStart_toStartOf="@+id/pet_petBio" />
-
-    <EditText
-        android:id="@+id/pet_petBio"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="48dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="@string/pet_bio"
-        app:layout_constraintBottom_toTopOf="@+id/confirm_add_pet_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/confirm_add_pet_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="48dp"
-        android:text="@string/add_pet"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,6 +7,8 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -28,7 +30,10 @@ public class CreatePetActivity extends AppCompatActivity {
     private EditText petAgeField;
     private EditText petBreedField;
     private EditText petBioField;
+    private ImageView petImage;
     private Button createPetButton;
+    private ImageButton editPetImageButton;
+    private ImageButton menuButton;
     private CreatePetViewModel createPetViewModel;
 
     /**
@@ -39,7 +44,10 @@ public class CreatePetActivity extends AppCompatActivity {
         petAgeField = findViewById(R.id.pet_petAge);
         petBreedField = findViewById(R.id.pet_petBreed);
         petBioField = findViewById(R.id.pet_petBio);
+        petImage = findViewById(R.id.pet_image);
         createPetButton = findViewById(R.id.confirm_add_pet_button);
+        editPetImageButton = findViewById(R.id.edit_pet_image_button);
+        menuButton = findViewById(R.id.menu_button);
     }
 
     /**
@@ -75,6 +83,9 @@ public class CreatePetActivity extends AppCompatActivity {
         setUpObserveCreatePetResult();
         setUpFormEditedListener();
         setUpCreatePetButtonClickedListener();
+        setUpEditPetImageButtonClickedListener();
+        setUpMenuButtonClickedListener();
+
     }
 
     /**
@@ -115,6 +126,30 @@ public class CreatePetActivity extends AppCompatActivity {
             public void onClick(View view) {
                 CreatePetFormData formData = getCreatePetFormData();
                 createPetViewModel.createPet(formData);
+            }
+        });
+    }
+
+    /**
+     * Set up a listener that sends a upload pet image request when editPetImageButton (pen)
+     * is clicked.
+     */
+    private void setUpEditPetImageButtonClickedListener() {
+        editPetImageButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                // TODO: take-in image
+            }
+        });
+    }
+
+    /**
+     * Set up a listener that opens menu fragment when menuButton (3-lines)
+     * is clicked.
+     */
+    private void setUpMenuButtonClickedListener() {
+        menuButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                // TODO: open menu fragment
             }
         });
     }
