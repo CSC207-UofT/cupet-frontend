@@ -2,6 +2,9 @@ package com.example.cupetfrontend;
 
 import androidx.annotation.Nullable;
 
+import com.example.cupetfrontend.data.model.PetModel;
+import com.example.cupetfrontend.use_cases.data_models.PetData;
+
 import java.util.List;
 
 /**
@@ -12,7 +15,7 @@ public class GetMatchesResult {
     private final boolean isError;
     private final String errorMessage;
     @Nullable
-    private List<String> matches;
+    private final List<PetModel> matches;
 
     public GetMatchesResult(boolean isError) {
         this.isError = isError;
@@ -20,7 +23,7 @@ public class GetMatchesResult {
         matches = null;
     }
 
-    public GetMatchesResult(boolean isError, @Nullable List<String> matches) {
+    public GetMatchesResult(boolean isError, @Nullable List<PetModel> matches) {
         this.isError = isError;
         errorMessage = "";
         this.matches = matches;
@@ -35,7 +38,7 @@ public class GetMatchesResult {
     }
 
     @Nullable
-    public List<String> getMatches() {
+    public List<PetModel> getMatches() {
         return matches;
     }
 }

@@ -33,6 +33,15 @@
                   android:theme="@style/Theme.AppCompat.NoActionBar"
                   android:exported="true">
         </activity>
+        <activity android:name=".NewGetMatchesActivity"
+            android:exported="true"
+            android:label="@string/title_New_Get_Matches_Activity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

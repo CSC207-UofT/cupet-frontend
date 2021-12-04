@@ -16,8 +16,11 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+import com.example.cupetfrontend.data.model.PetModel;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -30,18 +33,29 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     private static final String TAG = "RecyclerViewAdapter";
 
-    private final ArrayList<String> mPetNames;
-    private final ArrayList<String> mPetImages;
-    private final ArrayList<String> mPetTypes;
-    private final ArrayList<String> mPetBreeds;
+//    private final ArrayList<String> mPetNames;
+//    private final ArrayList<String> mPetImages;
+//    private final ArrayList<String> mPetTypes;
+//    private final ArrayList<String> mPetBreeds;
+    private List<PetModel> mPetModels = new ArrayList<>();
     private final Context mContext;
 
-    public RecyclerViewAdapter(Context mContext, ArrayList<String> mPetNames, ArrayList<String> mPetImages, ArrayList<String> mPetTypes, ArrayList<String> mPetBreeds) {
+//    public RecyclerViewAdapter(Context mContext, ArrayList<String> mPetNames, ArrayList<String> mPetImages, ArrayList<String> mPetTypes, ArrayList<String> mPetBreeds) {
+//        this.mContext = mContext;
+//        this.mPetNames = mPetNames;
+//        this.mPetImages = mPetImages;
+//        this.mPetTypes = mPetTypes;
+//        this.mPetBreeds = mPetBreeds;
+//        this.mPetModels = new ArrayList<>();
+//    }
+
+    public RecyclerViewAdapter(Context mContext, List<PetModel> mPetModels) {
         this.mContext = mContext;
-        this.mPetNames = mPetNames;
-        this.mPetImages = mPetImages;
-        this.mPetTypes = mPetTypes;
-        this.mPetBreeds = mPetBreeds;
+//        this.mPetNames = new ArrayList<>();
+//        this.mPetImages = new ArrayList<>();
+//        this.mPetTypes = new ArrayList<>();
+//        this.mPetBreeds = new ArrayList<>();
+        this.mPetModels = mPetModels;
     }
 
     /**
@@ -72,21 +86,25 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         // important method - will change based on our layouts and what they should look like
         Log.d(TAG, "onBindViewHolder: called."); // debugging
 
+        RequestOptions defaultOptions = new RequestOptions()
+                .error(R.drawable.ic_launcher_background);
+
         Glide.with(mContext)
                 // tells Glide we it as bitmap
                 .asBitmap()
                 // where we would reference img URLs - resource where img is coming from
-                .load(mPetImages.get(holder.getAdapterPosition()))
+                .load(mPetModels.get(holder.getAdapterPosition()).getPetImageUrl())
                 // loading image into image view - so reference view holder -> image widget
                 .into(holder.petImage);
-        holder.petName.setText(mPetNames.get(holder.getAdapterPosition()));
-        holder.petType.setText(mPetTypes.get(holder.getAdapterPosition()));
-        holder.petBreed.setText(mPetBreeds.get(holder.getAdapterPosition()));
+
+        holder.petName.setText(mPetModels.get(holder.getAdapterPosition()).getPetName());
+        holder.petType.setText(mPetModels.get(holder.getAdapterPosition()).getPetId());
+        holder.petBreed.setText(mPetModels.get(holder.getAdapterPosition()).getPetBreed());
         // Create OnClick listener to observe if delete button for the matched pet is clicked
         holder.deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(TAG, "onClick: clicked on: delete" + mPetNames.get(holder.getAdapterPosition()));
+                Log.d(TAG, "onClick: clicked on: delete" + mPetModels.get(holder.getAdapterPosition()).getPetName());
 
                 Toast.makeText(mContext, "delete pet", Toast.LENGTH_SHORT).show();
 
@@ -118,9 +136,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(TAG, "onClick: clicked on:" + mPetNames.get(holder.getAdapterPosition()));
+                Log.d(TAG, "onClick: clicked on:" + mPetModels.get(holder.getAdapterPosition()).getPetName());
 
-                Toast.makeText(mContext, mPetNames.get(holder.getAdapterPosition()), Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, mPetModels.get(holder.getAdapterPosition()).getPetName(), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -135,7 +153,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
      */
     @Override
     public int getItemCount() {
-        return mPetNames.size();
+        return mPetModels.size();
     }
 
     /**

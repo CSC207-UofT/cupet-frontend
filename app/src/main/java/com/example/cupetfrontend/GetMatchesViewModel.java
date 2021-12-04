@@ -4,14 +4,17 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.cupetfrontend.controllers.abstracts.IPetController;
+import com.example.cupetfrontend.data.model.PetModel;
 import com.example.cupetfrontend.presenters.view_model_abstracts.IGetMatchesViewModel;
 
 import java.util.List;
 
 
 public class GetMatchesViewModel extends ViewModel implements IGetMatchesViewModel {
-    private final MutableLiveData<GetMatchesResult> getMatchesResult = new MutableLiveData<>();
+    private MutableLiveData<GetMatchesResult> getMatchesResult;
+    private MutableLiveData<List<PetModel>> mPetModelData;
     private final IPetController petController;
+    private TestGetMatchesRepository mRepo;
 
 
     public GetMatchesViewModel(IPetController petController) {
@@ -22,6 +25,19 @@ public class GetMatchesViewModel extends ViewModel implements IGetMatchesViewMod
         return getMatchesResult;
     }
 
+
+    public void init(){
+        if (getMatchesResult != null){
+            return;
+        }
+        mRepo = TestGetMatchesRepository.getInstance();
+        mPetModelData = mRepo.getPetModels();
+        //getMatchesResult =
+
+    }
+
+
+
     /**
      * Create a new get matches request
      * @param token The token
@@ -31,9 +47,21 @@ public class GetMatchesViewModel extends ViewModel implements IGetMatchesViewMod
         petController.getMatches(token, myPetId);
     }
 
+    public void fetchPetProfileImage(String token, String petId){
+        petController.fetchPetProfileImage(token, petId);
+    }
+
+    public LiveData<List<PetModel>> getPetModelData(){
+        return mPetModelData;
+    }
+
 
     @Override
-    public void onGetMatchesSuccess(List<String> matches) {
+    public void onGetMatchesSuccess(List<PetModel> matches) {
+//        for (PetData pet: matches){
+//            String token = "abc";
+//            fetchPetProfileImage(token, pet.getPetId());
+//        }
         GetMatchesResult newGetMatchesResult = new GetMatchesResult(false, matches);
         getMatchesResult.setValue(newGetMatchesResult);
     }

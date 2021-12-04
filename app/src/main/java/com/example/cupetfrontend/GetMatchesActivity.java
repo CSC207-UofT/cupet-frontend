@@ -8,7 +8,9 @@ import androidx.annotation.Nullable;
 import androidx.lifecycle.Observer;
 import com.example.cupetfrontend.controllers.abstracts.IPetController;
 import com.example.cupetfrontend.dependency_selector.DependencySelector;
-import com.example.cupetfrontend.presenters.abstracts.IGetMatchesPresenter;
+
+import com.example.cupetfrontend.presenters.pet.GetMatchesPresenter;
+import com.example.cupetfrontend.use_cases.data_models.PetData;
 
 import java.util.List;
 
@@ -23,18 +25,18 @@ public class GetMatchesActivity extends AppCompatActivity {
      * @param matches a list of the names of all matched pets
      */
 
-    private void generateTable(List<String> matches){
-        for (String petName : matches) {
-            // create new row
-            final TableRow tr = new TableRow(this);
-            tr.setLayoutParams(new TableRow.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
-            // create TextView to display pet name
-            TextView textPetName = new TextView(this);
-            textPetName.setText(petName);
-            textPetName.setLayoutParams(new TableRow.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
-            tr.addView(textPetName); // add text view to row
-            // add row to layout
-            matchesTable.addView(tr, new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
+    private void generateTable(List<PetData> matches){
+        for (PetData petName : matches) {
+//            // create new row
+//            final TableRow tr = new TableRow(this);
+//            tr.setLayoutParams(new TableRow.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
+//            // create TextView to display pet name
+//            TextView textPetName = new TextView(this);
+//            textPetName.setText(matches.petName);
+//            textPetName.setLayoutParams(new TableRow.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
+//            tr.addView(textPetName); // add text view to row
+//            // add row to layout
+//            matchesTable.addView(tr, new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
         }
     }
 
@@ -48,7 +50,7 @@ public class GetMatchesActivity extends AppCompatActivity {
         DependencySelector dependencySelector = ((App) getApplication()).getDependencySelector();
         IPetController petController = dependencySelector.getControllers().getPetController();
 
-        IGetMatchesPresenter getMatchesPresenter = dependencySelector.getPetPresenters().getGetMatchesPresenter();
+        GetMatchesPresenter getMatchesPresenter = dependencySelector.getPetPresenters().getGetMatchesPresenter();
         getMatchesViewModel = new GetMatchesViewModel(petController);
         getMatchesPresenter.setGetMatchesViewModel(getMatchesViewModel);
 
@@ -75,7 +77,7 @@ public class GetMatchesActivity extends AppCompatActivity {
                 if (getMatchesResult.isError()){
                     onGetMatchesFailure(getMatchesResult.getErrorMessage());
                 }else{
-                    onGetMatchesSuccess(getMatchesResult.getMatches());
+//                    onGetMatchesSuccess(getMatchesResult.getMatches());
                 }
             }
         });
@@ -87,7 +89,7 @@ public class GetMatchesActivity extends AppCompatActivity {
      */
     private void onGetMatchesSuccess(List<String> matches) {
         Toast.makeText(getApplicationContext(), "Get Matches Success", Toast.LENGTH_SHORT).show();
-        generateTable(matches);
+//        generateTable(matches);
     }
 
     /**
