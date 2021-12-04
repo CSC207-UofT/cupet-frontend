@@ -81,7 +81,11 @@ public class CreatePetViewModel extends ViewModel implements ICreatePetViewModel
 
     }
 
-    // Helper method
+    /**
+     * A helper method that check if petAge is an integer.
+     * @param str input string (eg. petAge)
+     * @return whether input string can be convert to integer.
+     */
     public static boolean isInt(String str) {
         try {
             @SuppressWarnings("unused")
