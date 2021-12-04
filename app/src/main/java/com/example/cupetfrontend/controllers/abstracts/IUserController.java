@@ -60,6 +60,19 @@ public interface IUserController {
                          String newEmail, String newPassword, String newHomeAddress, String newCity);
 
     /**
+     * Edit a user's account without changing their password
+     *
+     * @param token The login session token
+     * @param newFirstName The user's new first name
+     * @param newLastName The user's new last name
+     * @param newEmail The user's new email
+     * @param newHomeAddress The user's new home address
+     * @param newCity The user's new city
+     */
+    void editUserAccount(String token, String newFirstName, String newLastName,
+                         String newEmail, String newHomeAddress, String newCity);
+
+    /**
      * Return a user's list of pets
      *
      * @param token The user's session token

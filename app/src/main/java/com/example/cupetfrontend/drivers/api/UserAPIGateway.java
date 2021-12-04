@@ -85,7 +85,9 @@ public class UserAPIGateway extends APIGateway implements IUserAPIGateway {
             put("newLastName", requestData.getLastName());
             put("newAddress", requestData.getHomeAddress());
             put("newCity", requestData.getCity());
-            put("newPassword", requestData.getPassword());
+            if (requestData.getPassword() != null){
+                put("newPassword", requestData.getPassword());
+            }
             put("newEmail", requestData.getEmail());
             put("userId", UserIdFetcher.getUserId(requestData.getToken()));
         }});
