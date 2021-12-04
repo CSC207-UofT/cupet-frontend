@@ -42,6 +42,7 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="nav_account_settings">Account Settings</string>
     <string name="nav_my_user_profile">User Profile</string>
+    <string name="nav_edit_btn">Edit</string>
 
     <!-- MainActivity / Bottom Navigation -->
     <string name="title_activity_main">MainActivity</string>
