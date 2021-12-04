@@ -20,7 +20,7 @@ import com.example.cupetfrontend.R;
 import com.example.cupetfrontend.controllers.abstracts.IPetController;
 import com.example.cupetfrontend.dependency_selector.DependencySelector;
 import com.example.cupetfrontend.presenters.abstracts.ICreatePetPresenter;
-import com.example.cupetfrontend.ui.login.LoginActivity;
+import com.example.cupetfrontend.ui.pet_profile.PetProfileActivity;
 
 /**
  * The activity for the Create Pet page.
@@ -223,9 +223,9 @@ public class CreatePetActivity extends AppCompatActivity {
      */
     private void onCreatePetSuccess() {
         Toast.makeText(getApplicationContext(), "Pet Creation Success", Toast.LENGTH_SHORT).show();
-
-        Intent moveToLoginIntent = new Intent(CreatePetActivity.this, LoginActivity.class);
-        startActivity(moveToLoginIntent);
+        // move to pet profile page
+        Intent moveToPetProfileIntent = new Intent(CreatePetActivity.this, PetProfileActivity.class);
+        startActivity(moveToPetProfileIntent);
     }
 
     /**
