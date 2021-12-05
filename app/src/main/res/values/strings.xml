@@ -9,7 +9,8 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
-    <string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_login">Login Activity</string>
+    <string name="title_Get_Matches_Activity">Get Matches Activity</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
     <string name="action_sign_in">Sign in</string>
@@ -68,4 +69,8 @@
     <string name="invalid_pet_bio">Invalid Pet Biography</string>
     <string name="potential_no_matches_text">No Potential Matches</string>
 
+    <string name="pet_profile_picture">Pet Profile Picture</string>
+    <string name="your_pets">Your Pets</string>
+    <string name="delete_button">delete</string>
+    <string name="nav_view_my_pets">My Pets</string>
 </resources>

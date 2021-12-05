@@ -8,6 +8,15 @@
         </item>
         <item name="android:windowEnterAnimation">@android:anim/fade_in</item>
         <item name="android:windowExitAnimation">@android:anim/fade_out</item>
+        <!-- Primary brand color. -->
+        <item name="colorPrimaryVariant">@color/tinder_red</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondaryVariant">@color/teal_700</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <!-- Status bar color. -->
+        <!-- Customize your theme here. -->
     </style>
 
     <style name="Theme.CupetFrontEnd.NoActionBar">
@@ -18,4 +27,10 @@
     <style name="Theme.CupetFrontEnd.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.CupetFrontEnd.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="roundedCornersImageView" parent="">
+        <item name="cornerFamilyTopLeft">rounded</item>
+        <item name="cornerFamilyTopRight">rounded</item>
+        <item name="cornerSizeTopLeft">10dp</item>
+        <item name="cornerSizeTopRight">10dp</item>
+    </style>
 </resources>
