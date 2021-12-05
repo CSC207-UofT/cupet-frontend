@@ -162,4 +162,5 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             parentLayout = itemView.findViewById(R.id.new_get_matches_layout);
         }
     }
+
 }
