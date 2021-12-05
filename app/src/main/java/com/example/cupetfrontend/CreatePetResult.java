@@ -4,6 +4,7 @@ public class CreatePetResult {
     private final boolean isError;
     private final String errorMessage;
 
+
     public CreatePetResult(boolean isError, String errorMessage) {
         this.isError = isError;
         this.errorMessage = errorMessage;

@@ -51,11 +51,19 @@
     <!-- Strings used for registration page -->
     <string name="register">register</string>
     <string name="home_address">Home Address</string>
+    <string name="prompt_email">123abc@gmail.com</string>
+    <string name="action_sign_in_short"> signed in</string>
+    <string name="action_sign_in"> sign in</string>
+    <string name="welcome_to_cupet"> welcome</string>
+    <string name="welcome"> welcome</string>
+    <string name="prompt_password">123abc</string>
     <string name="confirm_password">Confirm Password:</string>
     <string name="password">Password:</string>
     <string name="last_name">Last Name</string>
     <string name="first_name">First Name</string>
     <string name="city">City</string>
+    <string name="invalid_username">Invalid Username</string>
+    <string name="login_failed">Invalid Login</string>
     <string name="invalid_first_name">Invalid First Name</string>
     <string name="invalid_last_name">Invalid Last Name</string>
     <string name="invalid_email">Invalid Email</string>

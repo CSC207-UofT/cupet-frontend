@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CupetFrontEnd">
-        <activity android:name=".CreatePetActivity"></activity>
+        <activity android:name=".PrivateUserProfileActivity"></activity>
+        <activity android:name=".CreatePetActivity" />
         <activity android:name=".EditPetPreferences" />
         <activity android:name=".EditPetProfileActivity" />
         <activity android:name=".UserPetSlot1MatchingActivity" />
