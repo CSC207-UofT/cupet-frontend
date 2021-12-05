@@ -2,18 +2,18 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <style name="Heading">
         <item name="android:textSize">48sp</item>
-        <item name="android:fontFamily">@font/quicksand</item>
+        <item name="android:fontFamily">@font/quicksand1</item>
     </style>
 
     <style name="WhiteEditText">
         <item name="android:textColor">@android:color/white</item>
         <item name="android:textColorHint">#FFFFFFDE</item>
-        <item name="android:fontFamily">@font/quicksand</item>
+        <item name="android:fontFamily">@font/quicksand1</item>
     </style>
 
     <style name="OutlinedButton">
         <item name="android:background">@drawable/transparent_ripple_btn_background</item>
-        <item name="android:fontFamily">@font/quicksand</item>
+        <item name="android:fontFamily">@font/quicksand1</item>
         <item name="android:textAllCaps">true</item>
         <item name="android:textColor">@android:color/white</item>
         <item name="android:textSize">16sp</item>

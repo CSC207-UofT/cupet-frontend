@@ -22,9 +22,9 @@
             android:label="@string/title_activity_main" />
 
         <activity android:name=".ui.splash_screen.SplashScreenActivity"
-                  android:label="SplashScreenActivity"
-                  android:theme="@style/Theme.AppCompat.NoActionBar"
-                  android:exported="true">
+            android:label="SplashScreenActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -70,7 +70,16 @@
         </activity>
         <activity android:name=".ui.get_matches.GetMatchesFragment"
             android:exported="true"
-            android:label="@string/title_New_Get_Matches_Activity">
+            android:label="">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <activity android:name=".GetPetsActivity"
+            android:exported="true"
+            android:label="">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
