@@ -23,9 +23,8 @@
 
     <fragment
         android:id="@+id/nav_matches"
-        android:name="com.example.cupetfrontend.ui.test_fragments.HomeFragment"
-        android:label="@string/title_matches"
-        tools:layout="@layout/fragment_home" />
+        android:name="com.example.cupetfrontend.ui.get_matches.GetMatchesFragment"
+        android:label="@string/title_matches" />
 
     <fragment
             android:id="@+id/nav_my_pet_profile"

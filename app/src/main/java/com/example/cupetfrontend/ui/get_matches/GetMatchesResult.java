@@ -1,4 +1,4 @@
-package com.example.cupetfrontend;
+package com.example.cupetfrontend.ui.get_matches;
 
 import androidx.annotation.Nullable;
 
@@ -38,7 +38,6 @@ public class GetMatchesResult {
         return errorMessage;
     }
 
-    @Nullable
     public List<PetModel> getMatches() {
         return matches;
     }

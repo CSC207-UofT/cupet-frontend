@@ -68,7 +68,7 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".GetMatchesActivity"
+        <activity android:name=".ui.get_matches.GetMatchesFragment"
             android:exported="true"
             android:label="@string/title_New_Get_Matches_Activity">
             <intent-filter>
