@@ -16,9 +16,7 @@ public class FetchPetProfilePresenter implements IFetchPetProfilePresenter {
     @Override
     public void onFetchPetProfileSuccess(FetchPetProfileSuccessResponseModel response) {
         petProfileViewModel.onPetProfileSuccess(
-                // TODO: uncomment the following line once fetch petImage is combined into fetch pet profile
-                // response.getImage(),
-                "",
+                response.getProfileImgUrl(),
                 response.getName(),
                 response.getAge(),
                 response.getBreed(),

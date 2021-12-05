@@ -85,9 +85,6 @@ public class PetProfileFragment extends MainActivityFragment {
         setUpObservePetProfileResult();
         setUpEditBtn();
 
-        // TODO: remove this test code later
-        petProfileViewModel.onPetProfileSuccess("", "Koko", "10", "Golden Retriever", "Hellooo!");
-
         return root;
     }
 
