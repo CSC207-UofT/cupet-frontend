@@ -1,15 +1,11 @@
 package com.example.cupetfrontend;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,23 +14,21 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.cupetfrontend.data.model.PetModel;
 
 import java.util.ArrayList;
-
-import de.hdodenhof.circleimageview.CircleImageView;
+import java.util.List;
 
 public class CardRecyclerViewAdapter extends RecyclerView.Adapter<CardRecyclerViewAdapter.ViewHolder>{
 
     private static final String TAG = "RecyclerViewAdapter";
 
-    private final ArrayList<String> mPetNames;
-    private final ArrayList<String> mPetImages;
+    private List<PetModel> mPetModels = new ArrayList<>();
     private final Context mContext;
 
-    public CardRecyclerViewAdapter(Context mContext, ArrayList<String> mPetNames, ArrayList<String> mPetImages) {
+    public CardRecyclerViewAdapter(Context mContext, List<PetModel> mPetModels) {
         this.mContext = mContext;
-        this.mPetNames = mPetNames;
-        this.mPetImages = mPetImages;
+        this.mPetModels = mPetModels;
     }
 
     @NonNull
@@ -56,27 +50,33 @@ public class CardRecyclerViewAdapter extends RecyclerView.Adapter<CardRecyclerVi
                 // tells Glide we it as bitmap
                 .asBitmap()
                 // where we would reference img URLs - resource where img is coming from
-                .load(mPetImages.get(holder.getAdapterPosition()))
+                .load(mPetModels.get(holder.getAdapterPosition()).getPetImageUrl())
                 // loading image into image view - so reference view holder -> image widget
                 .into(holder.petImage);
-        holder.petName.setText(mPetNames.get(holder.getAdapterPosition()));
+        holder.petName.setText(mPetModels.get(holder.getAdapterPosition()).getPetName());
 
-
+        // set on click listener for each view in the RecyclerView.
         holder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(TAG, "onClick: clicked on:" + mPetNames.get(holder.getAdapterPosition()));
+                Log.d(TAG, "onClick: clicked on:" + mPetModels.get(holder.getAdapterPosition()));
 
-                Toast.makeText(mContext, mPetNames.get(holder.getAdapterPosition()), Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, mPetModels.get(holder.getAdapterPosition()).getPetName(), Toast.LENGTH_SHORT).show();
+                //TODO: Send to appropriate page for selected pet
             }
         });
     }
 
 
     // tells adapter how many list items are in the list
+    /**
+     * Return the number of items in the list which corresponds to the number of views to be
+     * displayed in the RecyclerView
+     * @return the number of items in the list mPetModels
+     */
     @Override
     public int getItemCount() {
-        return mPetNames.size();
+        return mPetModels.size();
     }
 
 

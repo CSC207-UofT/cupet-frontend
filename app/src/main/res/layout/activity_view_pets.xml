@@ -27,7 +27,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="345dp"
-        android:fontFamily="@font/quicksand"
+        android:fontFamily="@font/quicksand1"
         android:text="@string/your_pets"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
