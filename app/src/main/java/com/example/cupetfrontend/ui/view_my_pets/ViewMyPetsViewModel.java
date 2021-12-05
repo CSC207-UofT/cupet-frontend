@@ -1,6 +1,4 @@
-package com.example.cupetfrontend;
-
-import android.view.View;
+package com.example.cupetfrontend.ui.view_my_pets;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -12,13 +10,13 @@ import com.example.cupetfrontend.presenters.view_model_abstracts.IGetPetsViewMod
 
 import java.util.List;
 
-public class GetPetsViewModel extends ViewModel implements IGetPetsViewModel {
+public class ViewMyPetsViewModel extends ViewModel implements IGetPetsViewModel {
     MutableLiveData<GetPetsResult> getPetsResults = new MutableLiveData<>();
     private final IUserController userController;
 
 
 
-    public GetPetsViewModel(IUserController userController) {
+    public ViewMyPetsViewModel(IUserController userController) {
         this.userController = userController;
     }
 

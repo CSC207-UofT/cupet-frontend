@@ -11,6 +11,11 @@
             android:label="@string/nav_account_settings"
             tools:layout="@layout/fragment_test"/>
     <fragment
+        android:id="@+id/nav_view_my_pets"
+        android:name="com.example.cupetfrontend.ui.view_my_pets.ViewMyPetsFragment"
+        android:label="@string/nav_view_my_pets"
+        tools:layout="@layout/fragment_view_my_pets" />
+    <fragment
         android:id="@+id/nav_my_user_profile"
         android:name="com.example.cupetfrontend.ui.TestFragment"
         android:label="@string/nav_my_user_profile"

@@ -77,7 +77,7 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".GetPetsActivity"
+        <activity android:name=".ui.view_my_pets.ViewMyPetsFragment"
             android:exported="true"
             android:label="">
             <intent-filter>
