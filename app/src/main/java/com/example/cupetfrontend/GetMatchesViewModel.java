@@ -4,22 +4,24 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.cupetfrontend.controllers.abstracts.IPetController;
+import com.example.cupetfrontend.data.model.PetModel;
 import com.example.cupetfrontend.presenters.view_model_abstracts.IGetMatchesViewModel;
 
 import java.util.List;
 
 
 public class GetMatchesViewModel extends ViewModel implements IGetMatchesViewModel {
-    private final MutableLiveData<GetMatchesResult> getMatchesResult = new MutableLiveData<>();
+    MutableLiveData<GetMatchesResult> getMatchesResults = new MutableLiveData<>();
     private final IPetController petController;
+
 
 
     public GetMatchesViewModel(IPetController petController) {
         this.petController = petController;
     }
 
-    LiveData<GetMatchesResult> getMatchesResult() {
-        return getMatchesResult;
+    public LiveData<GetMatchesResult> getMatchesResult() {
+        return getMatchesResults;
     }
 
     /**
@@ -32,16 +34,16 @@ public class GetMatchesViewModel extends ViewModel implements IGetMatchesViewMod
     }
 
 
+
     @Override
-    public void onGetMatchesSuccess(List<String> matches) {
+    public void onGetMatchesSuccess(List<PetModel> matches) {
         GetMatchesResult newGetMatchesResult = new GetMatchesResult(false, matches);
-        getMatchesResult.setValue(newGetMatchesResult);
+        getMatchesResults.setValue(newGetMatchesResult);
     }
 
     @Override
     public void onGetMatchesFailure(String message) {
         GetMatchesResult newGetMatchesResult = new GetMatchesResult(true);
-        getMatchesResult.setValue(newGetMatchesResult);
-
+        getMatchesResults.setValue(newGetMatchesResult);
     }
 }

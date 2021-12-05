@@ -66,11 +66,6 @@
     <string name="invalid_pet_breed">Invalid Pet Breed</string>
     <string name="invalid_pet_bio">Invalid Pet Biography</string>
 
-    <string name="contact_info">Contact Info</string>
-    <string name="pet_matches">Pet Matches</string>
-    <string name="title_New_Get_Matches_Activity">new Get Matches Activity</string>
-    <string name="pet_type">Pet Type</string>
-    <string name="delete_button">Delete Match</string>
     <string name="pet_profile_picture">Pet Profile Picture</string>
     <string name="your_pets">Your Pets</string>
 </resources>

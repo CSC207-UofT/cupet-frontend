@@ -25,13 +25,16 @@
             android:label="SplashScreenActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar"
             android:exported="true">
+                  android:label="SplashScreenActivity"
+                  android:theme="@style/Theme.AppCompat.NoActionBar"
+                  android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
+      
         <activity
             android:name=".ui.login.LoginActivity"
             android:exported="true"
@@ -70,7 +73,7 @@
         </activity>
         <activity android:name=".GetMatchesActivity"
             android:exported="true"
-            android:label="@string/title_New_Get_Matches_Activity">
+            android:label="">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
