@@ -55,8 +55,8 @@ public class MainActivity extends AppCompatActivity {
                 "https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Jonathan_G_Meath_portrays_" +
                         "Santa_Claus.jpg/800px-Jonathan_G_Meath_portrays_Santa_Claus.jpg"
         ));
-        dependencySelector.getSessionManager().setToken("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2IiwiZXhwIjoxNjM4NzEzMzMwLCJpYXQiOjE2Mzg2NzczMzB9.cwUIBzeQtQj7LzCOE6q44U6uEJ_-NEgZ4xJch7Jn2U4");
-        dependencySelector.getPetSessionManager().setPetId("6");
+        dependencySelector.getSessionManager().setToken("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMSIsImV4cCI6MTYzODc2OTY1OCwiaWF0IjoxNjM4NzMzNjU4fQ.Vj0aqiJ8J65mZJiFuKmsqW4lEhgNsnRdlehCMgxNxEE\\");
+        dependencySelector.getPetSessionManager().setPetId("9");
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
