@@ -56,7 +56,7 @@ public class GetPetsActivity extends AppCompatActivity {
         getPetsPresenter.setGetPetsViewModel(getPetsViewModel);
         sessionManager = dependencySelector.getSessionManager();
 
-        getPetsViewModel.getPets(sessionManager.getToken());
+//        getPetsViewModel.getPets(sessionManager.getToken());
 
         setUpObserveGetPetsResult();
         initCardRecyclerView();
@@ -65,8 +65,8 @@ public class GetPetsActivity extends AppCompatActivity {
         nAddPetButton = findViewById(R.id.add_pet_button);
         setUpAddPetButtonListener();
 
-        //testPetModels(); //test
-        //getPetsViewModel.onGetPetsSuccess(dataSet); //test
+        testPetModels(); //test
+        getPetsViewModel.onGetPetsSuccess(dataSet); //test
 
 
     }
