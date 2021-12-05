@@ -1,5 +1,9 @@
 package com.example.cupetfrontend.data.model;
 
+
+/**
+ * Data class that captures pet information retrieved from Responses
+ */
 public class PetModel {
 
     private String petId;
