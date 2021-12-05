@@ -3,7 +3,6 @@ package com.example.cupetfrontend.presenters.pet;
 import com.example.cupetfrontend.presenters.abstracts.IFetchPetProfilePresenter;
 import com.example.cupetfrontend.presenters.view_model_abstracts.IPetProfileViewModel;
 import com.example.cupetfrontend.use_cases.response_models.pet.DefaultFailureResponseModel;
-
 import com.example.cupetfrontend.use_cases.response_models.pet.FetchPetProfileSuccessResponseModel;
 
 public class FetchPetProfilePresenter implements IFetchPetProfilePresenter {
@@ -16,7 +15,12 @@ public class FetchPetProfilePresenter implements IFetchPetProfilePresenter {
 
     @Override
     public void onFetchPetProfileSuccess(FetchPetProfileSuccessResponseModel response) {
-        petProfileViewModel.onPetProfileSuccess();
+        petProfileViewModel.onPetProfileSuccess(
+                response.getName(),
+                response.getAge(),
+                response.getBreed(),
+                response.getBiography()
+        );
     }
 
     @Override

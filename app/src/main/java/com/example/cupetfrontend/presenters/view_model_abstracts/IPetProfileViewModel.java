@@ -4,7 +4,7 @@ public interface IPetProfileViewModel {
     /**
      * This method is called when the fetch pet profile request was successful.
      */
-    void onPetProfileSuccess();
+    void onPetProfileSuccess(String petName, String petAge, String petBreed, String petBio);
 
     /**
      * This method is called when the fetch pet profile request failed.

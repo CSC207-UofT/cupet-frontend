@@ -17,9 +17,16 @@ public class PetProfileResult {
         this.errorMessage = errorMessage;
     }
 
-    public PetProfileResult(boolean isError) {
-        this.isError = isError;
-        errorMessage = "";
+    /**
+     * Initialize a successful pet profile result
+     */
+    public PetProfileResult(String petName, String petAge, String petBreed, String petBio) {
+        this.isError = false;
+        this.errorMessage = null;
+        this.petName = petName;
+        this.petAge = petAge;
+        this.petBreed = petBreed;
+        this.petBio = petBio;
     }
 
     public boolean isError() {
