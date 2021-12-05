@@ -33,12 +33,10 @@ public class GetMatchesFragment extends MainActivityFragment {
 
     private FragmentGetMatchesBinding binding;
 
-    //vars
     private RecyclerView recyclerView;
     private RecyclerViewAdapter adapter;
     private GetMatchesViewModel getMatchesViewModel;
-    private List<PetModel> petModelList = new ArrayList<>();
-    private ArrayList<PetModel> dataSet = new ArrayList<>();  // for testing
+    private final List<PetModel> petModelList = new ArrayList<>();
 
     private void initializeViews() {
         recyclerView = binding.recyclerView;
@@ -121,8 +119,7 @@ public class GetMatchesFragment extends MainActivityFragment {
         Log.d(TAG, "onGetMatchesSuccess: success - matches:" + matches);
         Toast.makeText(getApplicationContext(), "Get Matches Success", Toast.LENGTH_SHORT).show();
 
-
-        petModelList.addAll(getMatchesViewModel.getMatchesResult().getValue().getMatches());
+        petModelList.addAll(matches);
         adapter.notifyDataSetChanged();
     }
 
