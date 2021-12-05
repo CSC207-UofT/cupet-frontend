@@ -4,7 +4,6 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -26,7 +25,7 @@ import java.util.List;
 /**
  * The activity for the Get Matches page.
  */
-public class NewGetMatchesActivity extends AppCompatActivity{
+public class GetMatchesActivity extends AppCompatActivity{
 
 
 
@@ -45,7 +44,7 @@ public class NewGetMatchesActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_get_matches_new);
+        setContentView(R.layout.activity_get_matches);
         Log.d(TAG, "onCreate: started.");
 
         DependencySelector dependencySelector = ((App) getApplication()).getDependencySelector();
@@ -88,7 +87,6 @@ public class NewGetMatchesActivity extends AppCompatActivity{
                 if (getMatchesResult == null) {
                     return;
                 }
-
                 if (getMatchesResult.isError()){
                     Log.e(TAG, "onChanged: get matches result Error ");
                     onGetMatchesFailure(getMatchesResult.getErrorMessage());
