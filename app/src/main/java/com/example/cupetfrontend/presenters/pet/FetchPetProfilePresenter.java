@@ -16,13 +16,13 @@ public class FetchPetProfilePresenter implements IFetchPetProfilePresenter {
 
     @Override
     public void onFetchPetProfileSuccess(FetchPetProfileSuccessResponseModel response) {
-        petProfileViewModel.onFetchPetSuccess();
+        petProfileViewModel.onPetProfileSuccess();
     }
 
     @Override
 
     public void onFetchPetProfileFailure(DefaultFailureResponseModel response) {
-        petProfileViewModel.onFetchPetFailure(response.getErrorMessage());
+        petProfileViewModel.onPetProfileFailure(response.getErrorMessage());
     }
 
 }
