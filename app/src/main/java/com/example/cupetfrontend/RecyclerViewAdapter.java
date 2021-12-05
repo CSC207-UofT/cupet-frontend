@@ -83,7 +83,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 .into(holder.petImage);
 
         holder.petName.setText(mPetModels.get(holder.getAdapterPosition()).getPetName());
-        //holder.petType.setText(mPetModels.get(holder.getAdapterPosition()).getPetId());
         holder.petBreed.setText(mPetModels.get(holder.getAdapterPosition()).getPetBreed());
         // Create OnClick listener to observe if delete button for the matched pet is clicked
         holder.deleteButton.setOnClickListener(new View.OnClickListener() {
@@ -147,7 +146,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public class ViewHolder extends RecyclerView.ViewHolder {
         CircleImageView petImage;
         TextView petName;
-        //TextView petType;
         TextView petBreed;
         ImageButton deleteButton;
         RelativeLayout parentLayout;
