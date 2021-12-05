@@ -90,6 +90,10 @@ public class MainActivity extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         appBarMenu = menu;
         getMenuInflater().inflate(R.menu.activity_main_appbar_menu, menu);
+
+        // Hide edit button as default behaviour
+        hideEditButton();
+
         return true;
     }
 
@@ -175,16 +179,20 @@ public class MainActivity extends AppCompatActivity {
      * Hide the edit action button.
      */
     public void hideEditButton () {
-        MenuItem item = appBarMenu.findItem(R.id.main_appbar_edit);
-        item.setVisible(false);
+        if (appBarMenu != null) {
+            MenuItem item = appBarMenu.findItem(R.id.main_appbar_edit);
+            item.setVisible(false);
+        }
     }
 
     /**
      * Show the edit action button.
      */
     public void showEditButton () {
-        MenuItem item = appBarMenu.findItem(R.id.main_appbar_edit);
-        item.setVisible(true);
+        if (appBarMenu != null) {
+            MenuItem item = appBarMenu.findItem(R.id.main_appbar_edit);
+            item.setVisible(true);
+        }
     }
 
     /**

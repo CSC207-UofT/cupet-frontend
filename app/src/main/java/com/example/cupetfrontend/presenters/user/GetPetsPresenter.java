@@ -1,19 +1,54 @@
 package com.example.cupetfrontend.presenters.user;
 
+import com.example.cupetfrontend.data.model.PetModel;
+import com.example.cupetfrontend.presenters.abstracts.IGetPetsPresenter;
+import com.example.cupetfrontend.presenters.view_model_abstracts.IGetPetsViewModel;
+import com.example.cupetfrontend.use_cases.data_models.PetData;
 import com.example.cupetfrontend.use_cases.output_boundaries.user.GetPetsOutputBoundary;
 import com.example.cupetfrontend.use_cases.response_models.pet.DefaultFailureResponseModel;
 import com.example.cupetfrontend.use_cases.response_models.user.GetPetsSuccessResponseModel;
 
-public class GetPetsPresenter implements GetPetsOutputBoundary {
-    // TODO: Attach to view model
+import java.util.ArrayList;
+
+public class GetPetsPresenter implements IGetPetsPresenter {
+    IGetPetsViewModel getPetsViewModel;
 
     @Override
-    public void onGetPetsSuccess(GetPetsSuccessResponseModel response) {
+    public void setGetPetsViewModel(IGetPetsViewModel getPetsViewModel) {
+        this.getPetsViewModel = getPetsViewModel;
 
     }
 
+    /**
+     * On the successful get pets, handover the presented
+     * data to the view model.
+     *
+     *
+     * @param response The response from the use case's layer
+     */
+    @Override
+    public void onGetPetsSuccess(GetPetsSuccessResponseModel response) {
+        ArrayList<PetModel> mPetModels = new ArrayList<>();
+
+        for (PetData pet: response.getPets()) {
+            mPetModels.add(new PetModel(pet.getPetId(), pet.getName(), pet.getAge(), pet.getBreed(), pet.getProfileImgUrl()));
+
+        }
+        getPetsViewModel.onGetPetsSuccess(mPetModels);
+
+    }
+
+
+    /**
+     * On the failed get pets, handover the presented
+     * data to the view model.
+     *
+     *
+     * @param response The response from the use case's layer
+     */
     @Override
     public void onGetPetsFailure(DefaultFailureResponseModel response) {
+        getPetsViewModel.onGetPetsFailure(response.getErrorMessage());
 
     }
 }
