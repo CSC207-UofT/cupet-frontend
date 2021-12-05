@@ -33,6 +33,7 @@ public class MockSuccessUserAPIGateway extends MockSuccessAPIGateway implements 
             put("email", "dummy email");
             put("instagram", "dummy instagram");
             put("facebook", "dummy facebook");
+            put("profileImgUrl", "dummy url");
         }}));
     }
 
