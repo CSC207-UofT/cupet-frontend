@@ -1,4 +1,4 @@
-package com.example.cupetfrontend;
+package com.example.cupetfrontend.ui.get_pets;
 
 import android.content.Context;
 import android.util.Log;
@@ -14,6 +14,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.cupetfrontend.R;
 import com.example.cupetfrontend.data.model.PetModel;
 
 import java.util.ArrayList;

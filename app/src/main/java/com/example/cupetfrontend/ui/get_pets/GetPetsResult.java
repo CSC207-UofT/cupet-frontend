@@ -1,4 +1,4 @@
-package com.example.cupetfrontend;
+package com.example.cupetfrontend.ui.get_pets;
 
 import androidx.annotation.Nullable;
 

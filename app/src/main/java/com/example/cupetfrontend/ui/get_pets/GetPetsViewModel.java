@@ -1,6 +1,4 @@
-package com.example.cupetfrontend;
-
-import android.view.View;
+package com.example.cupetfrontend.ui.get_pets;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -9,6 +7,7 @@ import androidx.lifecycle.ViewModel;
 import com.example.cupetfrontend.controllers.abstracts.IUserController;
 import com.example.cupetfrontend.data.model.PetModel;
 import com.example.cupetfrontend.presenters.view_model_abstracts.IGetPetsViewModel;
+import com.example.cupetfrontend.ui.get_pets.GetPetsResult;
 
 import java.util.List;
 

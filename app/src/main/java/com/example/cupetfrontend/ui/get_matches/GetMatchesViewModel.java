@@ -1,4 +1,4 @@
-package com.example.cupetfrontend;
+package com.example.cupetfrontend.ui.get_matches;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel;
 import com.example.cupetfrontend.controllers.abstracts.IPetController;
 import com.example.cupetfrontend.data.model.PetModel;
 import com.example.cupetfrontend.presenters.view_model_abstracts.IGetMatchesViewModel;
+import com.example.cupetfrontend.ui.get_matches.GetMatchesResult;
 
 import java.util.List;
 
