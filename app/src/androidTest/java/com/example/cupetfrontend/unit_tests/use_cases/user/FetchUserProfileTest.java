@@ -24,6 +24,7 @@ public class FetchUserProfileTest extends UseCaseTestClass {
                 assertEquals(response.getInstagram(), "dummy instagram");
                 assertEquals(response.getFacebook(), "dummy facebook");
                 assertEquals(response.getPhoneNumber(), "dummy phone number");
+                assertEquals(response.getProfileImgUrl(), "dummy url");
 
                 setTaskComplete();
             }
