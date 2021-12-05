@@ -9,7 +9,8 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
-    <string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_login">Login Activity</string>
+    <string name="title_Get_Matches_Activity">Get Matches Activity</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
     <string name="action_sign_in">Sign in</string>
@@ -51,7 +52,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="sign_out_btn">Sign Out</string>
-  
+
     <!-- Strings used for create/edit pet page -->
     <string name="add_a_new_pet">Add a New Pet</string>
     <string name="add_pet">Add</string>
@@ -65,4 +66,9 @@
     <string name="invalid_pet_breed">Invalid Pet Breed</string>
     <string name="invalid_pet_bio">Invalid Pet Biography</string>
 
+    <string name="contact_info">Contact Info</string>
+    <string name="pet_matches">Pet Matches</string>
+    <string name="title_New_Get_Matches_Activity">new Get Matches Activity</string>
+    <string name="pet_type">Pet Type</string>
+    <string name="delete_button">Delete Match</string>
 </resources>
