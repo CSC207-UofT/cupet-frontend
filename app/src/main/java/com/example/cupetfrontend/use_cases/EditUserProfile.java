@@ -6,14 +6,11 @@ import com.example.cupetfrontend.use_cases.api_abstracts.request_models.user.API
 import com.example.cupetfrontend.use_cases.input_boundaries.user.EditUserProfileInputBoundary;
 import com.example.cupetfrontend.use_cases.output_boundaries.user.EditUserProfileOutputBoundary;
 import com.example.cupetfrontend.use_cases.request_models.user.EditUserProfileRequestModel;
-import com.example.cupetfrontend.use_cases.response_models.user.EditUserProfileFailResponseModel;
 import com.example.cupetfrontend.use_cases.response_models.user.EditUserProfileSuccessResponseModel;
-import com.example.cupetfrontend.use_cases.response_models.user.FetchUserAccountFailResponseModel;
-import com.example.cupetfrontend.use_cases.response_models.user.FetchUserAccountSuccessResponseModel;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class EditUserProfile implements EditUserProfileInputBoundary {
+public class EditUserProfile extends DefaultFailResponseUseCase implements EditUserProfileInputBoundary {
     IUserAPIGateway userAPIGateway;
     EditUserProfileOutputBoundary outputBoundary;
 
@@ -25,8 +22,8 @@ public class EditUserProfile implements EditUserProfileInputBoundary {
     @Override
     public void editUserProfile(EditUserProfileRequestModel request) {
         APIEditUserProfileRequestModel apiRequest = new APIEditUserProfileRequestModel(
-                request.getToken(), request.getNewBiography(),
-                request.getNewInstagram(), request.getNewFacebook(), request.getNewPhoneNumber()
+                request.getToken(), request.getBiography(),
+                request.getInstagram(), request.getFacebook(), request.getPhoneNumber()
         );
 
         userAPIGateway.editUserProfile(apiRequest, new IServerResponseListener() {
@@ -61,21 +58,6 @@ public class EditUserProfile implements EditUserProfileInputBoundary {
             );
         } catch (JSONException e) {
             throw new InvalidAPIResponseException("The API gave an invalid successful edit user profile response.");
-        }
-    }
-
-    /**
-     * Convert a JSONObject response to an instance of
-     * FetchPetProfileFailResponseModel.
-     *
-     * @param jsonResponse A JSON representation of the response.
-     * @return The response as a FetchPetProfileFailResponseModel
-     */
-    private EditUserProfileFailResponseModel toFailResponseModel(JSONObject jsonResponse) {
-        try {
-            return new EditUserProfileFailResponseModel(jsonResponse.getString("message"));
-        } catch (JSONException e) {
-            throw new InvalidAPIResponseException("The API gave an invalid edit user profile response");
         }
     }
 }

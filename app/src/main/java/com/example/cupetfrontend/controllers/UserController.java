@@ -15,6 +15,8 @@ public class UserController implements IUserController {
     FetchUserAccountInputBoundary fetchUserAccount;
     EditUserAccountInputBoundary editUserAccount;
     GetPetsInputBoundary getPets;
+    SetUserProfileImageInputBoundary setUserProfileImage;
+    FetchUserProfileImageInputBoundary fetchUserProfileImage;
 
     public void setUserCreator(UserCreatorInputBoundary userCreator) {
         this.userCreator = userCreator;
@@ -36,8 +38,16 @@ public class UserController implements IUserController {
         this.editUserAccount = editUserAccount;
     }
 
+    public void setSetUserProfileImage(SetUserProfileImageInputBoundary setUserProfileImage){
+        this.setUserProfileImage = setUserProfileImage;
+    }
+
     public void setGetPets(GetPetsInputBoundary getPets) {
         this.getPets = getPets;
+    }
+
+    public void setFetchUserProfileImage(FetchUserProfileImageInputBoundary fetchUserProfileImage) {
+        this.fetchUserProfileImage = fetchUserProfileImage;
     }
 
     @Override
@@ -87,5 +97,33 @@ public class UserController implements IUserController {
         );
 
         editUserAccount.editUserAccount(request);
+    }
+
+    @Override
+    public void editUserAccount(String token, String newFirstName, String newLastName, String newEmail,
+                                String newHomeAddress, String newCity) {
+        EditUserAccountRequestModel request = new EditUserAccountRequestModel(
+                token, newFirstName, newLastName, newEmail, newHomeAddress, newCity
+        );
+
+        editUserAccount.editUserAccount(request);
+    }
+
+    @Override
+    public void setUserProfileImage(String token, String imgB64) {
+        SetUserProfileImageRequestModel request = new SetUserProfileImageRequestModel(
+                token, imgB64
+        );
+
+        setUserProfileImage.setUserProfileImage(request);
+    }
+
+    @Override
+    public void fetchUserProfileImage(String token, String userId) {
+        FetchUserProfileImageRequestModel request = new FetchUserProfileImageRequestModel(
+                token, userId
+        );
+
+        fetchUserProfileImage.fetchUserProfileImage(request);
     }
 }

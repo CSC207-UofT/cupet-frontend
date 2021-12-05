@@ -1,8 +1,6 @@
 package com.example.cupetfrontend.controllers;
 
 import com.example.cupetfrontend.controllers.abstracts.IPetController;
-import com.example.cupetfrontend.use_cases.GetPotentialMatches;
-import com.example.cupetfrontend.use_cases.RejectMatch;
 import com.example.cupetfrontend.use_cases.input_boundaries.pet.*;
 import com.example.cupetfrontend.use_cases.request_models.pet.*;
 
@@ -11,13 +9,20 @@ import com.example.cupetfrontend.use_cases.request_models.pet.*;
  * to pets.
  */
 public class PetController implements IPetController {
+    // TODO: Refactor and move all of these instance attributes and setters
+    //  to a super class which this class extends (PetControllerUseCaseHolder)
     PetCreatorInputBoundary petCreator;
     FetchPetProfileInputBoundary fetchPetProfile;
     EditPetInputBoundary editPet;
     GetPotentialMatchesInputBoundary getPotentialMatches;
     IntendToMatchInputBoundary intendToMatch;
-    RejectMatch rejectMatch;
+    RejectMatchInputBoundary rejectMatch;
     GetMatchesInputBoundary getMatches;
+    UnMatchPetInputBoundary unMatchPet;
+    SetPetProfileImageInputBoundary setPetProfileImage;
+    AddToPetImageGalleryInputBoundary addToPetImageGallery;
+    RemoveFromPetImageGalleryInputBoundary removeFromPetImageGallery;
+    FetchPetProfileImageInputBoundary fetchPetProfileImage;
 
     public void setPetCreator(PetCreatorInputBoundary petCreator) {
         this.petCreator = petCreator;
@@ -39,12 +44,32 @@ public class PetController implements IPetController {
         this.intendToMatch = intendToMatch;
     }
 
-    public void setRejectMatch(RejectMatch rejectMatch) {
+    public void setRejectMatch(RejectMatchInputBoundary rejectMatch) {
         this.rejectMatch = rejectMatch;
     }
 
     public void setGetMatches(GetMatchesInputBoundary getMatches) {
         this.getMatches = getMatches;
+    }
+
+    public void setUnMatchPet(UnMatchPetInputBoundary unMatchPet) {
+        this.unMatchPet = unMatchPet;
+    }
+
+    public void setSetPetProfileImage(SetPetProfileImageInputBoundary setPetProfileImage) {
+        this.setPetProfileImage = setPetProfileImage;
+    }
+
+    public void setAddToPetImageGallery(AddToPetImageGalleryInputBoundary addToPetImageGallery) {
+        this.addToPetImageGallery = addToPetImageGallery;
+    }
+
+    public void setRemoveFromPetImageGallery(RemoveFromPetImageGalleryInputBoundary removeFromPetImageGallery) {
+        this.removeFromPetImageGallery = removeFromPetImageGallery;
+    }
+
+    public void setFetchPetProfileImage(FetchPetProfileImageInputBoundary fetchPetProfileImage) {
+        this.fetchPetProfileImage = fetchPetProfileImage;
     }
 
     @Override
@@ -94,5 +119,48 @@ public class PetController implements IPetController {
         RejectMatchRequestModel request = new RejectMatchRequestModel(token, myPetId, otherPetId);
 
         rejectMatch.rejectMatch(request);
+    }
+
+    @Override
+    public void unMatchPet(String token, String myPetId, String otherPetId) {
+        UnMatchPetRequestModel request = new UnMatchPetRequestModel(token, myPetId, otherPetId);
+
+        unMatchPet.unMatchPet(request);
+    }
+
+    @Override
+    public void setPetProfileImage(String token, String petId, String imgB64) {
+        SetPetProfileImageRequestModel request = new SetPetProfileImageRequestModel(
+                token, petId, imgB64
+        );
+
+        setPetProfileImage.setPetProfileImage(request);
+    }
+
+    @Override
+    public void addToPetImageGallery(String token, String petId, String imgB64) {
+        AddToPetImageGalleryRequestModel request = new AddToPetImageGalleryRequestModel(
+                token, petId, imgB64
+        );
+
+        addToPetImageGallery.addToPetImageGallery(request);
+    }
+
+    @Override
+    public void removeFromPetImageGallery(String token, String petId, String assetId) {
+        RemoveFromPetImageGalleryRequestModel request = new RemoveFromPetImageGalleryRequestModel(
+                token, petId, assetId
+        );
+
+        removeFromPetImageGallery.removeFromPetImageGallery(request);
+    }
+
+    @Override
+    public void fetchPetProfileImage(String token, String petId) {
+        FetchPetProfileImageRequestModel request = new FetchPetProfileImageRequestModel(
+                token, petId
+        );
+
+        fetchPetProfileImage.fetchPetProfileImage(request);
     }
 }

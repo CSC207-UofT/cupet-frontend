@@ -53,4 +53,22 @@ public interface IUserAPIGateway {
      * @param responseListener A class with callback methods for when a response is received
      */
     void getPets(APIGetPetsRequestModel requestData, IServerResponseListener responseListener);
+
+    /**
+     * Set a user's profile picture.
+     *
+     * @param requestData The data needed to set the user's profile picture
+     * @param responseListener A class with callback methods for when a response is received
+     */
+    void setUserProfileImage(APISetUserProfileImageRequestModel requestData,
+                             IServerResponseListener responseListener);
+
+    /**
+     * Fetch a user's profile picture.
+     *
+     * @param requestData The data needed to fetch the user's profile picture
+     * @param responseListener A class with callback methods for when a response is received
+     */
+    void fetchUserProfileImage(APIFetchUserProfileImageRequestModel requestData,
+                             IServerResponseListener responseListener);
 }

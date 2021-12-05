@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_account_settings"
+            android:icon="@drawable/settings"
+            android:title="@string/nav_account_settings" />
+        <item
+            android:id="@+id/nav_my_user_profile"
+            android:icon="@drawable/profile"
+            android:title="@string/nav_my_user_profile" />
+    </group>
+</menu>

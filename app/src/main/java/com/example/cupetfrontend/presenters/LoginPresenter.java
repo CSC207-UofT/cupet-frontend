@@ -2,8 +2,8 @@ package com.example.cupetfrontend.presenters;
 
 import com.example.cupetfrontend.presenters.abstracts.ILoginPresenter;
 import com.example.cupetfrontend.presenters.view_model_abstracts.ILoginViewModel;
-import com.example.cupetfrontend.use_cases.response_models.LoginFailResponseModel;
 import com.example.cupetfrontend.use_cases.response_models.LoginSuccessResponseModel;
+import com.example.cupetfrontend.use_cases.response_models.pet.DefaultFailureResponseModel;
 
 public class LoginPresenter implements ILoginPresenter {
     private ILoginViewModel loginViewModel;
@@ -14,7 +14,7 @@ public class LoginPresenter implements ILoginPresenter {
     }
 
     @Override
-    public void onLoginFailure(LoginFailResponseModel response) {
+    public void onLoginFailure(DefaultFailureResponseModel response) {
         loginViewModel.onLoginFailure(response.getErrorMessage());
     }
 

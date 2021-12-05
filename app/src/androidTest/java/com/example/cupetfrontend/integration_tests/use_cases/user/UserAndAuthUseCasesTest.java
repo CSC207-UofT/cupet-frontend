@@ -14,12 +14,11 @@ import com.example.cupetfrontend.use_cases.output_boundaries.LoginOutputBoundary
 import com.example.cupetfrontend.use_cases.output_boundaries.user.*;
 import com.example.cupetfrontend.use_cases.request_models.LoginRequestModel;
 import com.example.cupetfrontend.use_cases.request_models.user.*;
-import com.example.cupetfrontend.use_cases.response_models.LoginFailResponseModel;
 import com.example.cupetfrontend.use_cases.response_models.LoginSuccessResponseModel;
+import com.example.cupetfrontend.use_cases.response_models.pet.DefaultFailureResponseModel;
 import com.example.cupetfrontend.use_cases.response_models.user.*;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
@@ -96,8 +95,8 @@ public class UserAndAuthUseCasesTest extends AsyncTestClass {
             }
 
             @Override
-            public void onCreateUserFailure(UserCreatorFailResponseModel response) {
-                fail("Request incorrectly failed " + response.getMessage());
+            public void onCreateUserFailure(DefaultFailureResponseModel response) {
+                fail("Request incorrectly failed " + response.getErrorMessage());
             }
         }).createUser(newUserRequest);
 
@@ -117,7 +116,7 @@ public class UserAndAuthUseCasesTest extends AsyncTestClass {
             }
 
             @Override
-            public void onLoginFailure(LoginFailResponseModel response) {
+            public void onLoginFailure(DefaultFailureResponseModel response) {
                 fail("Request incorrectly failed " + response.getErrorMessage());
             }
         }).login(request);
@@ -143,7 +142,7 @@ public class UserAndAuthUseCasesTest extends AsyncTestClass {
             }
 
             @Override
-            public void onFetchUserAccountFailure(FetchUserAccountFailResponseModel response) {
+            public void onFetchUserAccountFailure(DefaultFailureResponseModel response) {
                 fail("Request incorrectly failed " + response.getErrorMessage());
             }
         }).fetchUserAccount(request);
@@ -163,15 +162,15 @@ public class UserAndAuthUseCasesTest extends AsyncTestClass {
             public void onEditUserAccountSuccess(EditUserAccountSuccessResponseModel response) {
                 setTaskComplete();
 
-                assertEquals("android_edited_first", response.getNewFirstName());
-                assertEquals("android_edited_last", response.getNewLastName());
-                assertEquals("android_edited_email@email.com", response.getNewEmail());
-                assertEquals("new home", response.getNewCurrentAddress());
-                assertEquals("new city", response.getNewCity());
+                assertEquals("android_edited_first", response.getFirstName());
+                assertEquals("android_edited_last", response.getLastName());
+                assertEquals("android_edited_email@email.com", response.getEmail());
+                assertEquals("new home", response.getHomeAddress());
+                assertEquals("new city", response.getCity());
             }
 
             @Override
-            public void onEditUserAccountFailure(EditUserAccountFailResponseModel response) {
+            public void onEditUserAccountFailure(DefaultFailureResponseModel response) {
                 fail("Request incorrectly failed " + response.getErrorMessage());
             }
         }).editUserAccount(request);
@@ -191,15 +190,15 @@ public class UserAndAuthUseCasesTest extends AsyncTestClass {
             public void onEditUserProfileSuccess(EditUserProfileSuccessResponseModel response) {
                 setTaskComplete();
 
-                assertEquals("android test biography", response.getNewBiography());
-                assertEquals("test instagram", response.getNewInstagram());
-                assertEquals("test facebook", response.getNewFacebook());
-                assertEquals("123456789", response.getNewPhoneNumber());
+                assertEquals("android test biography", response.getBiography());
+                assertEquals("test instagram", response.getInstagram());
+                assertEquals("test facebook", response.getFacebook());
+                assertEquals("123456789", response.getPhoneNumber());
 
             }
 
             @Override
-            public void onEditUserProfileFailure(EditUserProfileFailResponseModel response) {
+            public void onEditUserProfileFailure(DefaultFailureResponseModel response) {
                 fail("Request incorrectly failed " + response.getErrorMessage());
             }
         }).editUserProfile(request);
@@ -224,7 +223,7 @@ public class UserAndAuthUseCasesTest extends AsyncTestClass {
             }
 
             @Override
-            public void onFetchUserProfileFailure(FetchUserProfileFailResponseModel response) {
+            public void onFetchUserProfileFailure(DefaultFailureResponseModel response) {
                 fail("Request incorrectly failed " + response.getErrorMessage());
             }
         }).fetchUserProfile(request);
