@@ -89,7 +89,7 @@ public class PetProfileFragment extends MainActivityFragment {
      */
     private void setUpObservePetProfileResult() {
 
-        petProfileViewModel.getPetProfileResult().observe(this, new Observer<PetProfileResult>() {
+        petProfileViewModel.getPetProfileResult().observe(getViewLifecycleOwner(), new Observer<PetProfileResult>() {
             @Override
             public void onChanged(@Nullable PetProfileResult petProfileResult) {
                 if (petProfileResult == null) {
