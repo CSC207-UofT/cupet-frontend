@@ -128,7 +128,7 @@ public class PotentialMatchesFragment extends MainActivityFragment {
      * matches request.
      */
     private void setUpObserveGetPotentialMatchesResult() {
-        viewModel.getGetPotentialMatchesResult().observe(this, new Observer<GetPotentialMatchesResult>() {
+        viewModel.getGetPotentialMatchesResult().observe(getViewLifecycleOwner(), new Observer<GetPotentialMatchesResult>() {
             @Override
             public void onChanged(GetPotentialMatchesResult getPotentialMatchesResult) {
                 if (getPotentialMatchesResult == null) {
