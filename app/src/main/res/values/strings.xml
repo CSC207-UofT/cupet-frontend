@@ -53,7 +53,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="sign_out_btn">Sign Out</string>
-  
+
     <!-- Strings used for create/edit pet page -->
     <string name="add_a_new_pet">Add a New Pet</string>
     <string name="add_pet">Add</string>
@@ -66,5 +66,6 @@
     <string name="invalid_pet_age">Invalid Pet Age</string>
     <string name="invalid_pet_breed">Invalid Pet Breed</string>
     <string name="invalid_pet_bio">Invalid Pet Biography</string>
+    <string name="potential_no_matches_text">No Potential Matches</string>
 
 </resources>

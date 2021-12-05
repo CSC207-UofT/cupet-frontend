@@ -55,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
                 "https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Jonathan_G_Meath_portrays_" +
                         "Santa_Claus.jpg/800px-Jonathan_G_Meath_portrays_Santa_Claus.jpg"
         ));
+        dependencySelector.getSessionManager().setToken("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI0IiwiZXhwIjoxNjM4NzEwNjIwLCJpYXQiOjE2Mzg2NzQ2MjB9.ucac9C58o4rBqo9tKDsUZPOMzpfd8flLLCfPtlAwu4g");
         dependencySelector.getPetSessionManager().setPetId("1");
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
@@ -80,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(binding.bottomNavView, navController);
 
         setUpSignOutListener();
+        hideEditButton();
     }
 
     // Menu icons are inflated just as they were with actionbar
