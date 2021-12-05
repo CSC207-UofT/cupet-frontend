@@ -64,13 +64,12 @@ public class PetProfileFragment extends MainActivityFragment {
         petProfileViewModel = new PetProfileViewModel(petController);
         fetchPetProfilePresenter.setPetProfileViewModel(petProfileViewModel);
 
-        ISessionManager sessionManager = dependencySelector.getSessionManager();
-        IPetSessionManager petSessionManager = dependencySelector.getPetSessionManager();
-
         // get token from session manager
+        ISessionManager sessionManager = dependencySelector.getSessionManager();
         String token = sessionManager.getToken();
 
         // get petId from pet session manager
+        IPetSessionManager petSessionManager = dependencySelector.getPetSessionManager();
         String petId = petSessionManager.getPetId();
 
         petProfileViewModel.fetchPetProfile(token, petId);
@@ -99,7 +98,10 @@ public class PetProfileFragment extends MainActivityFragment {
                 if (petProfileResult.isError()){
                     onPetProfileFailure(petProfileResult.getErrorMessage());
                 } else {
-                    onPetProfileSuccess();
+                    onPetProfileSuccess(petProfileResult.getPetName(),
+                            petProfileResult.getPetAge(),
+                            petProfileResult.getPetBreed(),
+                            petProfileResult.getPetBio());
                 }
                 // finish(); // unused
             }
@@ -117,11 +119,13 @@ public class PetProfileFragment extends MainActivityFragment {
     }
 
     /**
-     * Display a Fetch pet profile success toast message.
+     * When success fetching a pet profile, set them to corresponding TextViews.
      */
-    private void onPetProfileSuccess() {
-        Toast.makeText(getApplicationContext(), "Fetch pet profile success", Toast.LENGTH_SHORT).show();
-
+    private void onPetProfileSuccess(String petNameStr, String petAgeStr, String petBreedStr, String petBioStr) {
+        petName.setText(petNameStr);
+        petAge.setText(petAgeStr);
+        petBreed.setText(petBreedStr);
+        petBio.setText(petBioStr);
     }
 
     /**
