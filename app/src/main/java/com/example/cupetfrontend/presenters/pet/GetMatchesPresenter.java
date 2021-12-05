@@ -1,6 +1,7 @@
 package com.example.cupetfrontend.presenters.pet;
 
 import com.example.cupetfrontend.data.model.PetModel;
+import com.example.cupetfrontend.presenters.abstracts.IGetMatchesPresenter;
 import com.example.cupetfrontend.use_cases.data_models.PetData;
 import com.example.cupetfrontend.use_cases.output_boundaries.pet.FetchPetProfileImageOutputBoundary;
 import com.example.cupetfrontend.use_cases.output_boundaries.pet.GetMatchesOutputBoundary;
@@ -15,10 +16,11 @@ import com.example.cupetfrontend.use_cases.response_models.pet.PetProfileImageSu
 import java.util.ArrayList;
 import java.util.List;
 
-public class GetMatchesPresenter implements GetMatchesOutputBoundary {
+public class GetMatchesPresenter implements IGetMatchesPresenter {
     IGetMatchesViewModel getMatchesViewModel;
     private ArrayList<PetModel> dataSet = new ArrayList<>();  // for testing
 
+    @Override
     public void setGetMatchesViewModel(IGetMatchesViewModel getMatchesViewModel) {
         this.getMatchesViewModel = getMatchesViewModel;
     }

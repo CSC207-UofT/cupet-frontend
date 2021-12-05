@@ -33,28 +33,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     private static final String TAG = "RecyclerViewAdapter";
 
-//    private final ArrayList<String> mPetNames;
-//    private final ArrayList<String> mPetImages;
-//    private final ArrayList<String> mPetTypes;
-//    private final ArrayList<String> mPetBreeds;
+
     private List<PetModel> mPetModels = new ArrayList<>();
     private final Context mContext;
 
-//    public RecyclerViewAdapter(Context mContext, ArrayList<String> mPetNames, ArrayList<String> mPetImages, ArrayList<String> mPetTypes, ArrayList<String> mPetBreeds) {
-//        this.mContext = mContext;
-//        this.mPetNames = mPetNames;
-//        this.mPetImages = mPetImages;
-//        this.mPetTypes = mPetTypes;
-//        this.mPetBreeds = mPetBreeds;
-//        this.mPetModels = new ArrayList<>();
-//    }
 
     public RecyclerViewAdapter(Context mContext, List<PetModel> mPetModels) {
         this.mContext = mContext;
-//        this.mPetNames = new ArrayList<>();
-//        this.mPetImages = new ArrayList<>();
-//        this.mPetTypes = new ArrayList<>();
-//        this.mPetBreeds = new ArrayList<>();
         this.mPetModels = mPetModels;
     }
 
@@ -98,7 +83,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 .into(holder.petImage);
 
         holder.petName.setText(mPetModels.get(holder.getAdapterPosition()).getPetName());
-        holder.petType.setText(mPetModels.get(holder.getAdapterPosition()).getPetId());
+        //holder.petType.setText(mPetModels.get(holder.getAdapterPosition()).getPetId());
         holder.petBreed.setText(mPetModels.get(holder.getAdapterPosition()).getPetBreed());
         // Create OnClick listener to observe if delete button for the matched pet is clicked
         holder.deleteButton.setOnClickListener(new View.OnClickListener() {
@@ -162,7 +147,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public class ViewHolder extends RecyclerView.ViewHolder {
         CircleImageView petImage;
         TextView petName;
-        TextView petType;
+        //TextView petType;
         TextView petBreed;
         ImageButton deleteButton;
         RelativeLayout parentLayout;
@@ -171,7 +156,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             super(itemView);
             petImage = itemView.findViewById(R.id.image);
             petName = itemView.findViewById(R.id.pet_name);
-            petType = itemView.findViewById(R.id.pet_type);
+            //petType = itemView.findViewById(R.id.pet_type);
             petBreed = itemView.findViewById(R.id.pet_breed);
             deleteButton = itemView.findViewById(R.id.delete_button);
             parentLayout = itemView.findViewById(R.id.new_get_matches_layout);

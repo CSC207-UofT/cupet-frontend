@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 import com.example.cupetfrontend.data.model.PetModel;
 import com.example.cupetfrontend.use_cases.data_models.PetData;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,7 +15,7 @@ import java.util.List;
 public class GetMatchesResult {
     private final boolean isError;
     private final String errorMessage;
-    @Nullable
+    //@Nullable
     private final List<PetModel> matches;
 
     public GetMatchesResult(boolean isError) {
@@ -23,9 +24,9 @@ public class GetMatchesResult {
         matches = null;
     }
 
-    public GetMatchesResult(boolean isError, @Nullable List<PetModel> matches) {
+    public GetMatchesResult(boolean isError, List<PetModel> matches) {
         this.isError = isError;
-        errorMessage = "";
+        errorMessage = null;
         this.matches = matches;
     }
 

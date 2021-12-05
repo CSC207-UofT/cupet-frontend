@@ -20,6 +20,7 @@ import com.example.cupetfrontend.dependency_selector.DependencySelector;
 import com.example.cupetfrontend.presenters.pet.GetMatchesPresenter;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -37,6 +38,7 @@ public class GetMatchesActivity extends AppCompatActivity{
     private GetMatchesViewModel getMatchesViewModel;
     private IPetSessionManager petSessionManager;
     private ISessionManager sessionManager;
+    private List<PetModel> petModelList = new ArrayList<>();
 
     /**
      * Setup views and state on creation of the activity.
@@ -60,7 +62,6 @@ public class GetMatchesActivity extends AppCompatActivity{
         getMatchesViewModel.getMatches(sessionManager.getToken(), petSessionManager.getPetId());
 
         setUpObserveGetMatchesResult();
-
         initRecyclerView();
     }
 
@@ -68,7 +69,7 @@ public class GetMatchesActivity extends AppCompatActivity{
     // method for actually setting up our recycler view
     private void initRecyclerView(){
         Log.d(TAG, "initRecyclerView: init recyclerview");
-        adapter = new RecyclerViewAdapter(this, getMatchesViewModel.getMatchesResult().getValue().getMatches());
+        adapter = new RecyclerViewAdapter(this, petModelList);
         Log.d(TAG, "initRecyclerView: got adapter");
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -100,16 +101,18 @@ public class GetMatchesActivity extends AppCompatActivity{
 
     /**
      * Get Matches Success toast message
+     * Notify adapter for RecyclerView
      */
     private void onGetMatchesSuccess(List<PetModel> matches) {
         Log.d(TAG, "onGetMatchesSuccess: success - matches:" + matches);
         Toast.makeText(getApplicationContext(), "Get Matches Success", Toast.LENGTH_SHORT).show();
-
+        petModelList.addAll(getMatchesViewModel.getMatchesResult().getValue().getMatches());
         adapter.notifyDataSetChanged();
     }
 
     /**
      * Display a Get Matches failed toast message.
+     * Notify adapter for RecyclerView.
      * @param errorMessage The error message to display
      */
     private void onGetMatchesFailure (String errorMessage) {
