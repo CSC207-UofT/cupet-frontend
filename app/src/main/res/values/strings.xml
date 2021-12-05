@@ -69,8 +69,6 @@
     <string name="contact_info">Contact Info</string>
     <string name="pet_matches">Pet Matches</string>
     <string name="title_New_Get_Matches_Activity">new Get Matches Activity</string>
-    <string name="pet_name">Pet Name</string>
     <string name="pet_type">Pet Type</string>
-    <string name="pet_breed">Pet Breed</string>
     <string name="delete_button">Delete Match</string>
 </resources>

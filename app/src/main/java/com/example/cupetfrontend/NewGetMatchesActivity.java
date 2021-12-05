@@ -4,6 +4,7 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,11 +13,13 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import com.example.cupetfrontend.controllers.abstracts.IPetController;
+import com.example.cupetfrontend.controllers.abstracts.IPetSessionManager;
+import com.example.cupetfrontend.controllers.abstracts.ISessionManager;
 import com.example.cupetfrontend.data.model.PetModel;
 import com.example.cupetfrontend.dependency_selector.DependencySelector;
 
 import com.example.cupetfrontend.presenters.pet.GetMatchesPresenter;
-import com.example.cupetfrontend.use_cases.data_models.PetData;
+
 
 import java.util.List;
 
@@ -33,6 +36,8 @@ public class NewGetMatchesActivity extends AppCompatActivity{
     private RecyclerView recyclerView;
     private RecyclerViewAdapter adapter;
     private GetMatchesViewModel getMatchesViewModel;
+    private IPetSessionManager petSessionManager;
+    private ISessionManager sessionManager;
 
     /**
      * Setup views and state on creation of the activity.
@@ -50,21 +55,25 @@ public class NewGetMatchesActivity extends AppCompatActivity{
         GetMatchesPresenter getMatchesPresenter = dependencySelector.getPetPresenters().getGetMatchesPresenter();
         getMatchesViewModel = new GetMatchesViewModel(petController);
         getMatchesPresenter.setGetMatchesViewModel(getMatchesViewModel);
+        sessionManager = dependencySelector.getSessionManager();
+        petSessionManager = dependencySelector.getPetSessionManager();
 
-        getMatchesViewModel.init();
+        getMatchesViewModel.getMatches(sessionManager.getToken(), petSessionManager.getPetId());
+
+
+
+        //getMatchesViewModel.init(); // testing
 
         //setUpObservePetModel(); //for testing
         setUpObserveGetMatchesResult();
 
         initRecyclerView();
-
     }
 
 
     // method for actually setting up our recycler view
     private void initRecyclerView(){
         Log.d(TAG, "initRecyclerView: init recyclerview");
-        //adapter = new RecyclerViewAdapter(this, getMatchesViewModel.getPetModelData().getValue());
         adapter = new RecyclerViewAdapter(this, getMatchesViewModel.getMatchesResult().getValue().getMatches());
         Log.d(TAG, "initRecyclerView: got adapter");
         recyclerView.setAdapter(adapter);
@@ -96,16 +105,16 @@ public class NewGetMatchesActivity extends AppCompatActivity{
         });
     }
 
-    private void setUpObservePetModel(){ // for testing
-        Log.d(TAG, "setUpObservePetModel: setting up observe pet model");
-        getMatchesViewModel.getPetModelData().observe(this, new Observer<List<PetModel>>() {
-            @Override
-            public void onChanged(@Nullable List<PetModel> petModels) {
-                adapter.notifyDataSetChanged();
-            }
-        });
-
-    }
+//    private void setUpObservePetModel(){ // for testing
+//        Log.d(TAG, "setUpObservePetModel: setting up observe pet model");
+//        getMatchesViewModel.getPetModelData().observe(this, new Observer<List<PetModel>>() {
+//            @Override
+//            public void onChanged(@Nullable List<PetModel> petModels) {
+//                adapter.notifyDataSetChanged();
+//            }
+//        });
+//
+//    }
 
 
     /**

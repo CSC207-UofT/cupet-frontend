@@ -15,7 +15,7 @@ import com.example.cupetfrontend.use_cases.response_models.pet.PetProfileImageSu
 import java.util.ArrayList;
 import java.util.List;
 
-public class GetMatchesPresenter implements GetMatchesOutputBoundary, FetchPetProfileImageOutputBoundary {
+public class GetMatchesPresenter implements GetMatchesOutputBoundary {
     IGetMatchesViewModel getMatchesViewModel;
     private ArrayList<PetModel> dataSet = new ArrayList<>();  // for testing
 
@@ -37,7 +37,7 @@ public class GetMatchesPresenter implements GetMatchesOutputBoundary, FetchPetPr
         ArrayList<PetModel> mPetModels = new ArrayList<>();
 
         for (PetData pet: response.getMatches()) {
-            mPetModels.add(new PetModel(pet.getPetId(), pet.getName(), pet.getAge(), pet.getBreed()));
+            mPetModels.add(new PetModel(pet.getPetId(), pet.getName(), pet.getAge(), pet.getBreed(), pet.getProfileImgUrl()));
 
         }
         mPetModels = testPetModels(); // for testing
@@ -59,15 +59,6 @@ public class GetMatchesPresenter implements GetMatchesOutputBoundary, FetchPetPr
 
     }
 
-    @Override
-    public void onFetchPetProfileImageSuccess(PetProfileImageSuccessResponseModel response) {
-
-    }
-
-    @Override
-    public void onFetchPetProfileImageFailure(DefaultFailureResponseModel response) {
-
-    }
 
     private ArrayList<PetModel> testPetModels(){
         String id = "id";
