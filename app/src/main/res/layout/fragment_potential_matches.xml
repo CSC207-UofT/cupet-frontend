@@ -45,7 +45,6 @@
                     android:scaleType="fitCenter"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@android:drawable/ic_menu_gallery"
                     tools:src="@tools:sample/avatars" />
 
                 <ImageView
