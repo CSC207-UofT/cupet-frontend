@@ -55,8 +55,8 @@ public class MainActivity extends AppCompatActivity {
                 "https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Jonathan_G_Meath_portrays_" +
                         "Santa_Claus.jpg/800px-Jonathan_G_Meath_portrays_Santa_Claus.jpg"
         ));
-        dependencySelector.getSessionManager().setToken("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI0IiwiZXhwIjoxNjM4NzEwNjIwLCJpYXQiOjE2Mzg2NzQ2MjB9.ucac9C58o4rBqo9tKDsUZPOMzpfd8flLLCfPtlAwu4g");
-        dependencySelector.getPetSessionManager().setPetId("1");
+        dependencySelector.getSessionManager().setToken("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2IiwiZXhwIjoxNjM4NzEzMzMwLCJpYXQiOjE2Mzg2NzczMzB9.cwUIBzeQtQj7LzCOE6q44U6uEJ_-NEgZ4xJch7Jn2U4");
+        dependencySelector.getPetSessionManager().setPetId("6");
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -81,7 +81,6 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(binding.bottomNavView, navController);
 
         setUpSignOutListener();
-        hideEditButton();
     }
 
     // Menu icons are inflated just as they were with actionbar
@@ -90,6 +89,10 @@ public class MainActivity extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         appBarMenu = menu;
         getMenuInflater().inflate(R.menu.activity_main_appbar_menu, menu);
+
+        // Hide edit button as default behaviour
+        hideEditButton();
+
         return true;
     }
 
@@ -175,16 +178,20 @@ public class MainActivity extends AppCompatActivity {
      * Hide the edit action button.
      */
     public void hideEditButton () {
-        MenuItem item = appBarMenu.findItem(R.id.main_appbar_edit);
-        item.setVisible(false);
+        if (appBarMenu != null) {
+            MenuItem item = appBarMenu.findItem(R.id.main_appbar_edit);
+            item.setVisible(false);
+        }
     }
 
     /**
      * Show the edit action button.
      */
     public void showEditButton () {
-        MenuItem item = appBarMenu.findItem(R.id.main_appbar_edit);
-        item.setVisible(true);
+        if (appBarMenu != null) {
+            MenuItem item = appBarMenu.findItem(R.id.main_appbar_edit);
+            item.setVisible(true);
+        }
     }
 
     /**

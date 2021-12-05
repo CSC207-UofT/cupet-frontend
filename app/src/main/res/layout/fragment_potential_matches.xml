@@ -40,11 +40,12 @@
                 <ImageView
                     android:id="@+id/potential_profile_img"
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
+                    android:layout_height="wrap_content"
                     android:adjustViewBounds="true"
                     android:scaleType="fitCenter"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@android:drawable/ic_menu_gallery"
                     tools:src="@tools:sample/avatars" />
 
                 <ImageView
@@ -72,12 +73,22 @@
                     android:id="@+id/potential_subheading_preview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="20dp"
+                    android:layout_marginBottom="40dp"
                     android:layout_marginStart="20dp"
                     android:text="Sub heading"
                     android:textSize="24sp"
                     android:theme="@style/WhiteEditText"
                     app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <ImageView
+                    android:id="@+id/potential_dots"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    android:src="@drawable/ic_dot_dot_dot"
+                    app:layout_constraintBottom_toBottomOf="@+id/potential_profile_img"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -112,21 +123,24 @@
 
                 <TextView
                     android:id="@+id/potential_biography"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginEnd="20dp"
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="10dp"
-                    android:paddingBottom="20dp"
                     android:text="TextView"
                     android:textSize="14dp"
-
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/potential_subheading" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:paddingBottom="20dp"
+                android:paddingTop="20dp"
+                >
 
                 <ImageButton
                     android:id="@+id/swipe_left_btn"
@@ -146,8 +160,9 @@
                     android:layout_marginEnd="70dp"
                     android:background="@drawable/round_btn"
                     android:padding="20dp"
-                    android:src="@drawable/ic_match_heart"
+                    android:paddingBottom="20dp"
 
+                    android:src="@drawable/ic_match_heart"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>

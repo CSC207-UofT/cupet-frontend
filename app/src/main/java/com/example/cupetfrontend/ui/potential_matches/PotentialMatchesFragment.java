@@ -26,6 +26,9 @@ import com.example.cupetfrontend.presenters.pet.PresentedPetData;
 import com.example.cupetfrontend.ui.MainActivityFragment;
 import com.example.cupetfrontend.ui.register.RegisterResult;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * A fragment for the potential matches page
  */
@@ -53,6 +56,26 @@ public class PotentialMatchesFragment extends MainActivityFragment {
         setUpMatchBtnListener();
         setUpObserveGetPotentialMatchesResult();
 
+        hideMatchView();
+        showNoMatchesView();
+        setUpEditBtn();
+
+        // TODO: Uncomment once API is updated
+//        viewModel.getPotentialMatches(dependencySelector.getSessionManager().getToken(),
+//                dependencySelector.getPetSessionManager().getPetId());
+
+        List<PresentedPetData> dummyData = new ArrayList<>();
+        dummyData.add(new PresentedPetData("Dog", "4", "Dog Breed",
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                "https://i.insider.com/5484d9d1eab8ea3017b17e29?width=600&format=jpeg&auto=webp", "3"));
+        dummyData.add(new PresentedPetData("Cat", "3", "Cat Breed",
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/golden-retriever-royalty-free-image-506756303-1560962726.jpg?crop=0.672xw:1.00xh;0.166xw,0&resize=640:*",
+                "4"));
+
+        viewModel.onGetPotentialMatchesSuccess(dummyData);
+
+
         return root;
     }
 
@@ -65,6 +88,8 @@ public class PotentialMatchesFragment extends MainActivityFragment {
 
                 viewModel.rejectCurrentPet(
                         sessionManager.getToken(), petSessionManager.getPetId());
+
+                moveToNextMatch();
             }
         });
     }
@@ -79,6 +104,8 @@ public class PotentialMatchesFragment extends MainActivityFragment {
 
                 viewModel.intendToMatchCurrentPet(
                         sessionManager.getToken(), petSessionManager.getPetId());
+
+                moveToNextMatch();
             }
         });
     }
@@ -110,7 +137,7 @@ public class PotentialMatchesFragment extends MainActivityFragment {
                 if (getPotentialMatchesResult.isError()){
                     onGetPotentialMatchesFailure(getPotentialMatchesResult.getErrorMessage());
                 }else{
-                    onGetPotentialMatchesSuccess();
+                    moveToNextMatch();
                 }
             }
         });
@@ -151,6 +178,8 @@ public class PotentialMatchesFragment extends MainActivityFragment {
         binding.potentialHeadingPreview.setVisibility(View.GONE);
         binding.potentialGradientPreview.setVisibility(View.GONE);
         binding.potentialSubheadingPreview.setVisibility(View.GONE);
+        binding.potentialDots.setVisibility(View.GONE);
+
 
         binding.potentialExpandedTextContainer.setVisibility(View.VISIBLE);
     }
@@ -162,6 +191,7 @@ public class PotentialMatchesFragment extends MainActivityFragment {
         binding.potentialHeadingPreview.setVisibility(View.VISIBLE);
         binding.potentialGradientPreview.setVisibility(View.VISIBLE);
         binding.potentialSubheadingPreview.setVisibility(View.VISIBLE);
+        binding.potentialDots.setVisibility(View.VISIBLE);
 
         binding.potentialExpandedTextContainer.setVisibility(View.GONE);
     }
@@ -181,7 +211,8 @@ public class PotentialMatchesFragment extends MainActivityFragment {
         binding.potentialHeadingPreview.setText(heading);
         binding.potentialSubheadingPreview.setText(petData.getBreed());
 
-        Glide.with(this).load(petData.getProfileImgUrl()).into(
+
+        Glide.with(this).asBitmap().load(petData.getProfileImgUrl()).dontAnimate().into(
                 binding.potentialProfileImg);
 
         contractMatchView();
@@ -211,14 +242,6 @@ public class PotentialMatchesFragment extends MainActivityFragment {
     }
 
     /**
-     * Display the next potential match, or the no potential matches
-     * screen based on a successful get potential matches response.
-     */
-    private void onGetPotentialMatchesSuccess(){
-        moveToNextMatch();
-    }
-
-    /**
      * Display a failure message on an unsuccessful get potential
      * matches request.
      * @param errorMessage The error message
@@ -229,10 +252,9 @@ public class PotentialMatchesFragment extends MainActivityFragment {
     }
 
     /**
-     * Set up the edit button of the page:
-     *  - hide the edit button in MainActivity
+     * Hide the appbar edit button
      */
-    private void setUpEditBtn() {
+    private void setUpEditBtn () {
         getMainActivity().hideEditButton();
     }
 }
