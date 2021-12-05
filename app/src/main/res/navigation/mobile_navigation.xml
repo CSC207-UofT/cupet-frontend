@@ -22,9 +22,9 @@
         tools:layout="@layout/fragment_test" />
     <fragment
         android:id="@+id/nav_potential_matches"
-        android:name="com.example.cupetfrontend.ui.test_fragments.HomeFragment"
+        android:name="com.example.cupetfrontend.ui.potential_matches.PotentialMatchesFragment"
         android:label="@string/title_potential_matches"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_potential_matches" />
 
     <fragment
         android:id="@+id/nav_matches"

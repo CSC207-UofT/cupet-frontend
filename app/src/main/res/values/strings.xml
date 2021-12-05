@@ -67,6 +67,7 @@
     <string name="invalid_pet_age">Invalid Pet Age</string>
     <string name="invalid_pet_breed">Invalid Pet Breed</string>
     <string name="invalid_pet_bio">Invalid Pet Biography</string>
+    <string name="potential_no_matches_text">No Potential Matches</string>
 
     <string name="pet_profile_picture">Pet Profile Picture</string>
     <string name="your_pets">Your Pets</string>

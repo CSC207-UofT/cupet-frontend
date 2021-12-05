@@ -55,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
                 "https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Jonathan_G_Meath_portrays_" +
                         "Santa_Claus.jpg/800px-Jonathan_G_Meath_portrays_Santa_Claus.jpg"
         ));
+
         dependencySelector.getSessionManager().setToken("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMiIsImV4cCI6MTYzODc3MzA3OCwiaWF0IjoxNjM4NzM3MDc4fQ.5FeS7La1Khgh9EqZrrQSnXgJ56WZ7O64Zk2a63ckZkI");
         dependencySelector.getPetSessionManager().setPetId("10");
 
@@ -89,6 +90,10 @@ public class MainActivity extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         appBarMenu = menu;
         getMenuInflater().inflate(R.menu.activity_main_appbar_menu, menu);
+
+        // Hide edit button as default behaviour
+        hideEditButton();
+
         return true;
     }
 
@@ -174,16 +179,20 @@ public class MainActivity extends AppCompatActivity {
      * Hide the edit action button.
      */
     public void hideEditButton () {
-        MenuItem item = appBarMenu.findItem(R.id.main_appbar_edit);
-        item.setVisible(false);
+        if (appBarMenu != null) {
+            MenuItem item = appBarMenu.findItem(R.id.main_appbar_edit);
+            item.setVisible(false);
+        }
     }
 
     /**
      * Show the edit action button.
      */
     public void showEditButton () {
-        MenuItem item = appBarMenu.findItem(R.id.main_appbar_edit);
-        item.setVisible(true);
+        if (appBarMenu != null) {
+            MenuItem item = appBarMenu.findItem(R.id.main_appbar_edit);
+            item.setVisible(true);
+        }
     }
 
     /**
