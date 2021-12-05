@@ -156,7 +156,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             super(itemView);
             petImage = itemView.findViewById(R.id.image);
             petName = itemView.findViewById(R.id.pet_name);
-            //petType = itemView.findViewById(R.id.pet_type);
             petBreed = itemView.findViewById(R.id.pet_breed);
             deleteButton = itemView.findViewById(R.id.delete_button);
             parentLayout = itemView.findViewById(R.id.new_get_matches_layout);
