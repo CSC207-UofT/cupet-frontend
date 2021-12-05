@@ -86,7 +86,7 @@ public class PetProfileFragment extends MainActivityFragment {
         setUpEditBtn();
 
         // TODO: remove this test code later
-        petProfileViewModel.onPetProfileSuccess("https://i.insider.com/5484d9d1eab8ea3017b17e29?width=600&format=jpeg&auto=webp", "Koko", "10", "Golden Retriever", "Hellooo!");
+        petProfileViewModel.onPetProfileSuccess("", "Koko", "10", "Golden Retriever", "Hellooo!");
 
         return root;
     }
@@ -138,7 +138,11 @@ public class PetProfileFragment extends MainActivityFragment {
         petAge.setText(petAgeStr);
         petBreed.setText(petBreedStr);
         petBio.setText(petBioStr);
-        Glide.with(this).load(petImageStr).into(petImage);
+        if (petImageStr != "") {
+            Glide.with(this).load(petImageStr).into(petImage);
+        } else {
+            Glide.with(this).load("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwn2UIl7YtjhkbxoIuoI4E7yyXH1KC6GvRqg&usqp=CAU").into(petImage);
+        }
     }
 
     /**

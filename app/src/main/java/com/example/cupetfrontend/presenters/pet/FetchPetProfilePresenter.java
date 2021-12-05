@@ -18,7 +18,7 @@ public class FetchPetProfilePresenter implements IFetchPetProfilePresenter {
         petProfileViewModel.onPetProfileSuccess(
                 // TODO: uncomment the following line once fetch petImage is combined into fetch pet profile
                 // response.getImage(),
-                "https://i.insider.com/5484d9d1eab8ea3017b17e29?width=600&format=jpeg&auto=webp",
+                "",
                 response.getName(),
                 response.getAge(),
                 response.getBreed(),
