@@ -17,7 +17,7 @@ import java.util.List;
  *
  * NOTE: This class should be re-constructed each time this conversion is made.
  */
-public class GetPetDataList {
+public class  GetPetDataList {
     private List<PetData> petDataList;
     private List<String> petIds;
     private final FetchPetProfile fetchPetProfile;
