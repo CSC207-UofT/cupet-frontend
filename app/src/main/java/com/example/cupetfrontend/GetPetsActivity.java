@@ -65,6 +65,9 @@ public class GetPetsActivity extends AppCompatActivity {
         nAddPetButton = findViewById(R.id.add_pet_button);
         setUpAddPetButtonListener();
 
+        //testPetModels(); //test
+        //getPetsViewModel.onGetPetsSuccess(dataSet); //test
+
 
     }
 
@@ -133,7 +136,7 @@ public class GetPetsActivity extends AppCompatActivity {
         adapter.notifyDataSetChanged();
     }
 
-    private void testPetModels(){
+    private void testPetModels(){ // test
         String id = "id";
         String url1 = "https://upload.wikimedia.org/wikipedia/commons/1/18/Dog_Breeds.jpg";
         String name1 = "Doggo A";
@@ -176,9 +179,4 @@ public class GetPetsActivity extends AppCompatActivity {
         dataSet.add(new PetModel(id, name9, age, breed, url9));
 
     }
-
-
-
-
-
 }
