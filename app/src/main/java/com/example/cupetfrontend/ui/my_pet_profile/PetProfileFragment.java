@@ -1,6 +1,8 @@
 package com.example.cupetfrontend.ui.my_pet_profile;
 
 import android.annotation.SuppressLint;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.Observer;
 
+import com.bumptech.glide.Glide;
 import com.example.cupetfrontend.R;
 import com.example.cupetfrontend.controllers.abstracts.IPetController;
 import com.example.cupetfrontend.controllers.abstracts.IPetSessionManager;
@@ -21,6 +24,10 @@ import com.example.cupetfrontend.databinding.FragmentMyPetProfileBinding;
 import com.example.cupetfrontend.presenters.abstracts.IFetchPetProfilePresenter;
 import com.example.cupetfrontend.ui.MainActivityFragment;
 import com.example.cupetfrontend.ui.register.RegisterResult;
+
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 
 /**
@@ -78,6 +85,9 @@ public class PetProfileFragment extends MainActivityFragment {
         setUpObservePetProfileResult();
         setUpEditBtn();
 
+        // TODO: remove this test code later
+        petProfileViewModel.onPetProfileSuccess("https://i.insider.com/5484d9d1eab8ea3017b17e29?width=600&format=jpeg&auto=webp", "Koko", "10", "Golden Retriever", "Hellooo!");
+
         return root;
     }
 
@@ -98,7 +108,9 @@ public class PetProfileFragment extends MainActivityFragment {
                 if (petProfileResult.isError()){
                     onPetProfileFailure(petProfileResult.getErrorMessage());
                 } else {
-                    onPetProfileSuccess(petProfileResult.getPetName(),
+                    onPetProfileSuccess(
+                            petProfileResult.getPetImage(),
+                            petProfileResult.getPetName(),
                             petProfileResult.getPetAge(),
                             petProfileResult.getPetBreed(),
                             petProfileResult.getPetBio());
@@ -119,13 +131,14 @@ public class PetProfileFragment extends MainActivityFragment {
     }
 
     /**
-     * When success fetching a pet profile, set them to corresponding TextViews.
+     * When success fetching a pet profile, set them to corresponding ImageView & TextViews.
      */
-    private void onPetProfileSuccess(String petNameStr, String petAgeStr, String petBreedStr, String petBioStr) {
+    private void onPetProfileSuccess(String petImageStr, String petNameStr, String petAgeStr, String petBreedStr, String petBioStr) {
         petName.setText(petNameStr);
         petAge.setText(petAgeStr);
         petBreed.setText(petBreedStr);
         petBio.setText(petBioStr);
+        Glide.with(this).load(petImageStr).into(petImage);
     }
 
     /**

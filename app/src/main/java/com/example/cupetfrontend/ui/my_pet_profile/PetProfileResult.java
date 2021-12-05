@@ -6,6 +6,7 @@ package com.example.cupetfrontend.ui.my_pet_profile;
 public class PetProfileResult {
     private final boolean isError;
     private final String errorMessage;
+    private String petImage;
     private String petName;
     private String petAge;
     private String petBreed;
@@ -20,9 +21,10 @@ public class PetProfileResult {
     /**
      * Initialize a successful pet profile result
      */
-    public PetProfileResult(String petName, String petAge, String petBreed, String petBio) {
+    public PetProfileResult(String petImage, String petName, String petAge, String petBreed, String petBio) {
         this.isError = false;
         this.errorMessage = null;
+        this.petImage = petImage;
         this.petName = petName;
         this.petAge = petAge;
         this.petBreed = petBreed;
@@ -35,6 +37,10 @@ public class PetProfileResult {
 
     public String getErrorMessage() {
         return errorMessage;
+    }
+
+    public String getPetImage() {
+        return petImage;
     }
 
     public String getPetName() {
@@ -51,6 +57,10 @@ public class PetProfileResult {
 
     public String getPetBio() {
         return petBio;
+    }
+
+    public void setPetImage(String petImage) {
+        this.petImage = petImage;
     }
 
     public void setPetName(String petName) {

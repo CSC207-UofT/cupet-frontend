@@ -32,8 +32,9 @@ public class PetProfileViewModel extends ViewModel implements IPetProfileViewMod
     }
 
     @Override
-    public void onPetProfileSuccess(String petName, String petAge, String petBreed, String petBio) {
+    public void onPetProfileSuccess(String petImage, String petName, String petAge, String petBreed, String petBio) {
         PetProfileResult newFetchPetResult = new PetProfileResult(
+                petImage,
                 petName,
                 petAge,
                 petBreed,
