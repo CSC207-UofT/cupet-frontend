@@ -60,11 +60,6 @@ public class NewGetMatchesActivity extends AppCompatActivity{
 
         getMatchesViewModel.getMatches(sessionManager.getToken(), petSessionManager.getPetId());
 
-
-
-        //getMatchesViewModel.init(); // testing
-
-        //setUpObservePetModel(); //for testing
         setUpObserveGetMatchesResult();
 
         initRecyclerView();
@@ -105,18 +100,6 @@ public class NewGetMatchesActivity extends AppCompatActivity{
         });
     }
 
-//    private void setUpObservePetModel(){ // for testing
-//        Log.d(TAG, "setUpObservePetModel: setting up observe pet model");
-//        getMatchesViewModel.getPetModelData().observe(this, new Observer<List<PetModel>>() {
-//            @Override
-//            public void onChanged(@Nullable List<PetModel> petModels) {
-//                adapter.notifyDataSetChanged();
-//            }
-//        });
-//
-//    }
-
-
     /**
      * Get Matches Success toast message
      */
@@ -137,8 +120,4 @@ public class NewGetMatchesActivity extends AppCompatActivity{
         Toast.makeText(getApplicationContext(), "Get Matches failed: " + errorMessage, Toast.LENGTH_SHORT).show();
         adapter.notifyDataSetChanged();
     }
-
-
-
-
 }

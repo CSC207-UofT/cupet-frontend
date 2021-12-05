@@ -25,9 +25,6 @@ public class GetMatchesViewModel extends ViewModel implements IGetMatchesViewMod
         return getMatchesResult;
     }
 
-
-
-
     /**
      * Create a new get matches request
      * @param token The token
@@ -37,9 +34,6 @@ public class GetMatchesViewModel extends ViewModel implements IGetMatchesViewMod
         petController.getMatches(token, myPetId);
     }
 
-//    public LiveData<List<PetModel>> getPetModelData(){
-//        return mPetModelData;
-//    }
 
 
     @Override
