@@ -3,7 +3,7 @@ package com.example.cupetfrontend.presenters.user;
 import com.example.cupetfrontend.presenters.abstracts.IPrivateProfilePresenter;
 import com.example.cupetfrontend.presenters.view_model_abstracts.IPrivateUserProfileViewModel;
 import com.example.cupetfrontend.use_cases.output_boundaries.user.FetchUserProfileOutputBoundary;
-import com.example.cupetfrontend.use_cases.response_models.user.FetchUserProfileFailResponseModel;
+import com.example.cupetfrontend.use_cases.response_models.pet.DefaultFailureResponseModel;
 import com.example.cupetfrontend.use_cases.response_models.user.FetchUserProfileSuccessResponseModel;
 
 public class FetchUserProfilePresenter implements FetchUserProfileOutputBoundary {
@@ -19,7 +19,7 @@ public class FetchUserProfilePresenter implements FetchUserProfileOutputBoundary
     }
 
     @Override
-    public void onFetchUserProfileFailure(FetchUserProfileFailResponseModel response) {
+    public void onFetchUserProfileFailure(DefaultFailureResponseModel response) {
 
     }
 

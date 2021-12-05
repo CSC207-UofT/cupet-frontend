@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="login_sign_in_btn">SIGN IN</string>
+    <string name="login_prompt">SIGN IN</string>
+    <string name="login_email">Email Address</string>
+    <string name="login_password">Password</string>
+</resources>

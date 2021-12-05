@@ -67,4 +67,48 @@ public interface IPetAPIGateway {
      * @param responseListener A class with callback methods for when a response is received
      */
     void getMatches(APIGetMatchesRequestModel requestData, IServerResponseListener responseListener);
+
+    /**
+     * Un-match with a pet you've already matched with.
+     *
+     * @param requestData The data needed to get to un-match
+     * @param responseListener A class with callback methods for when a response is received
+     */
+    void unMatchPet(APIUnMatchPetRequestModel requestData, IServerResponseListener responseListener);
+
+    /**
+     * Set a pet's profile image
+     *
+     * @param requestData The data needed to set the pet's profile image
+     * @param responseListener A class with callback methods for when a response is received
+     */
+    void setPetProfileImage(APISetPetProfileImageRequestModel requestData,
+                            IServerResponseListener responseListener);
+
+    /**
+     * Add an image to a pet's image gallery
+     *
+     * @param requestData The data needed to add to the pet's image gallery
+     * @param responseListener A class with callback methods for when a response is received
+     */
+    void addToPetImageGallery(APIAddToPetImageGalleryRequestModel requestData,
+                            IServerResponseListener responseListener);
+
+    /**
+     * Remove an image from a pet's image gallery
+     *
+     * @param requestData The data needed to remove from the pet's image gallery
+     * @param responseListener A class with callback methods for when a response is received
+     */
+    void removeFromPetImageGallery(APIRemoveFromPetImageGalleryRequestModel requestData,
+                            IServerResponseListener responseListener);
+
+    /**
+     * Fetch a pet's profile image
+     *
+     * @param requestData The data needed to fetch the pet's profile image
+     * @param responseListener A class with callback methods for when a response is received
+     */
+    void fetchPetProfileImage(APIFetchPetProfileImageRequestModel requestData,
+                              IServerResponseListener responseListener);
 }

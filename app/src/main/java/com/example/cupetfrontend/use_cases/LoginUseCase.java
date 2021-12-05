@@ -6,18 +6,18 @@ import com.example.cupetfrontend.use_cases.api_abstracts.request_models.APILogin
 import com.example.cupetfrontend.use_cases.input_boundaries.LoginInputBoundary;
 import com.example.cupetfrontend.use_cases.output_boundaries.LoginOutputBoundary;
 import com.example.cupetfrontend.use_cases.request_models.LoginRequestModel;
-import com.example.cupetfrontend.use_cases.response_models.LoginFailResponseModel;
 import com.example.cupetfrontend.use_cases.response_models.LoginSuccessResponseModel;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class LoginUseCase implements LoginInputBoundary {
+public class LoginUseCase extends DefaultFailResponseUseCase implements LoginInputBoundary {
 
     IAuthAPIGateway authAPIGateway;
     LoginOutputBoundary outputBoundary;
 
-    public LoginUseCase(IAuthAPIGateway authAPIGateway) {
+    public LoginUseCase(IAuthAPIGateway authAPIGateway, LoginOutputBoundary outputBoundary) {
         this.authAPIGateway = authAPIGateway;
+        this.outputBoundary = outputBoundary;
     }
 
     @Override
@@ -27,7 +27,23 @@ public class LoginUseCase implements LoginInputBoundary {
         authAPIGateway.login(apiRequest, new IServerResponseListener() {
             @Override
             public void onRequestSuccess(JSONObject jsonResponse) {
-                outputBoundary.onLoginSuccess(toSuccessResponseModel(jsonResponse));
+                // TODO: Remove temporary code
+                //  The API currently does not support HTTP status codes, so we need this
+                //  code to prevent a runtime exception from crashing the application
+
+                try {
+                    if (jsonResponse.get("isSuccess").equals("true")){
+                        outputBoundary.onLoginSuccess(toSuccessResponseModel(jsonResponse));
+                    }else{
+                        outputBoundary.onLoginFailure(toFailResponseModel(jsonResponse));
+                    }
+                } catch (JSONException e) {
+                    throw new InvalidAPIResponseException(
+                            "The API gave an invalid login response:" + jsonResponse);
+                }
+
+                // TODO: Uncomment when API is updated.
+//                outputBoundary.onLoginSuccess(toSuccessResponseModel(jsonResponse));
             }
 
             @Override
@@ -46,22 +62,10 @@ public class LoginUseCase implements LoginInputBoundary {
      */
     private LoginSuccessResponseModel toSuccessResponseModel(JSONObject jsonResponse) {
         try {
-            return new LoginSuccessResponseModel(jsonResponse.getString("token"));
+            JSONObject dataObj = new JSONObject(jsonResponse.getString("data"));
+            return new LoginSuccessResponseModel(dataObj.getString("jwt"));
         } catch (JSONException e) {
-            throw new InvalidAPIResponseException("The API gave an invalid successful create user response.");
+            throw new InvalidAPIResponseException("The API gave an invalid successful login response:" + jsonResponse);
         }
-    }
-
-    /**
-     * Convert a JSONObject response to an instance of
-     * LoginFailResponseModel.
-     *
-     * @param jsonResponse A JSON representation of the response.
-     * @return The response as a LoginFailResponseModel
-     */
-    private LoginFailResponseModel toFailResponseModel(JSONObject jsonResponse) {
-        // TODO: The current API does not return a message; include a dummy message
-        //  replace with actual message once API is updated
-        return new LoginFailResponseModel("dummy_message");
     }
 }

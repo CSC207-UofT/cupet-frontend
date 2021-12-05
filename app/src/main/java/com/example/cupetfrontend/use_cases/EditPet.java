@@ -2,21 +2,15 @@ package com.example.cupetfrontend.use_cases;
 
 import com.example.cupetfrontend.use_cases.api_abstracts.IPetAPIGateway;
 import com.example.cupetfrontend.use_cases.api_abstracts.IServerResponseListener;
-import com.example.cupetfrontend.use_cases.api_abstracts.request_models.pet.APICreatePetRequestModel;
 import com.example.cupetfrontend.use_cases.api_abstracts.request_models.pet.APIEditPetRequestModel;
 import com.example.cupetfrontend.use_cases.input_boundaries.pet.EditPetInputBoundary;
 import com.example.cupetfrontend.use_cases.output_boundaries.pet.EditPetOutputBoundary;
-import com.example.cupetfrontend.use_cases.output_boundaries.pet.PetCreatorOutputBoundary;
 import com.example.cupetfrontend.use_cases.request_models.pet.EditPetRequestModel;
-import com.example.cupetfrontend.use_cases.request_models.pet.PetCreatorRequestModel;
-import com.example.cupetfrontend.use_cases.response_models.pet.EditPetFailResponseModel;
 import com.example.cupetfrontend.use_cases.response_models.pet.EditPetSuccessResponseModel;
-import com.example.cupetfrontend.use_cases.response_models.pet.PetCreatorFailResponseModel;
-import com.example.cupetfrontend.use_cases.response_models.pet.PetCreatorSuccessResponseModel;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class EditPet implements EditPetInputBoundary {
+public class EditPet extends DefaultFailResponseUseCase implements EditPetInputBoundary {
     IPetAPIGateway petAPIGateway;
     EditPetOutputBoundary outputBoundary;
 
@@ -28,8 +22,8 @@ public class EditPet implements EditPetInputBoundary {
     @Override
     public void editPet(EditPetRequestModel request) {
         APIEditPetRequestModel apiRequest = new APIEditPetRequestModel(
-                request.getToken(), request.getNewName(), request.getNewAge(),
-                request.getNewBreed(), request.getNewBiography()
+                request.getToken(), request.getPetId(), request.getName(), request.getAge(),
+                request.getBreed(), request.getBiography()
         );
 
         petAPIGateway.editPet(apiRequest, new IServerResponseListener() {
@@ -53,23 +47,17 @@ public class EditPet implements EditPetInputBoundary {
      * @return The response as a EditPetSuccessResponseModel
      */
     private EditPetSuccessResponseModel toSuccessResponseModel(JSONObject jsonResponse) {
-//        try {
-            return new EditPetSuccessResponseModel();
-//        } catch (JSONException e) {
-//            throw new InvalidAPIResponseException("The API gave an invalid successful create user response.");
-//        }
-    }
+        try {
+            JSONObject dataObj = new JSONObject(jsonResponse.getString("data"));
 
-    /**
-     * Convert a JSONObject response to an instance of
-     * EditPetFailResponseModel.
-     *
-     * @param jsonResponse A JSON representation of the response.
-     * @return The response as a EditPetFailResponseModel
-     */
-    private EditPetFailResponseModel toFailResponseModel(JSONObject jsonResponse) {
-        // TODO: The current API does not return a message; include a dummy message
-        //  replace with actual message once API is updated
-        return new EditPetFailResponseModel("Sample Error Message");
+            return new EditPetSuccessResponseModel(
+                    dataObj.getString("name"),
+                    dataObj.getString("age"),
+                    dataObj.getString("breed"),
+                    dataObj.getString("biography")
+            );
+        } catch (JSONException e) {
+            throw new InvalidAPIResponseException("The API gave an invalid successful edit petresponse.");
+        }
     }
 }

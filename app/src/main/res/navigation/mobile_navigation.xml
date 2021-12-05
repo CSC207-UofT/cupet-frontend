@@ -2,24 +2,34 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    android:id="@+id/mobile_navigation_bar"
+    app:startDestination="@+id/nav_potential_matches">
 
     <fragment
-        android:id="@+id/navigation_home"
-        android:name="com.example.cupetfrontend.ui.home.HomeFragment"
-        android:label="@string/title_home"
+        android:id="@+id/nav_account_settings"
+        android:name="com.example.cupetfrontend.ui.TestFragment"
+        android:label="@string/nav_account_settings"
+        tools:layout="@layout/fragment_test" />
+    <fragment
+        android:id="@+id/nav_my_user_profile"
+        android:name="com.example.cupetfrontend.ui.TestFragment"
+        android:label="@string/nav_my_user_profile"
+        tools:layout="@layout/fragment_test" />
+    <fragment
+        android:id="@+id/nav_potential_matches"
+        android:name="com.example.cupetfrontend.ui.test_fragments.HomeFragment"
+        android:label="@string/title_potential_matches"
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.example.cupetfrontend.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:id="@+id/nav_matches"
+        android:name="com.example.cupetfrontend.ui.test_fragments.HomeFragment"
+        android:label="@string/title_matches"
+        tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.example.cupetfrontend.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:id="@+id/nav_my_pet_profile"
+        android:name="com.example.cupetfrontend.ui.test_fragments.HomeFragment"
+        android:label="@string/title_my_pet_profile"
+        tools:layout="@layout/fragment_home" />
 </navigation>

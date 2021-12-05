@@ -3,6 +3,7 @@ package com.example.cupetfrontend;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+// TODO: Delete this unused class
 public class RegisterData {
     String firstName;
     String lastName;

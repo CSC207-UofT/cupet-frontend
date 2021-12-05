@@ -1,7 +1,7 @@
 package com.example.cupetfrontend.presenters.user;
 
 import com.example.cupetfrontend.use_cases.output_boundaries.user.GetPetsOutputBoundary;
-import com.example.cupetfrontend.use_cases.response_models.user.GetPetsFailResponseModel;
+import com.example.cupetfrontend.use_cases.response_models.pet.DefaultFailureResponseModel;
 import com.example.cupetfrontend.use_cases.response_models.user.GetPetsSuccessResponseModel;
 
 public class GetPetsPresenter implements GetPetsOutputBoundary {
@@ -13,7 +13,7 @@ public class GetPetsPresenter implements GetPetsOutputBoundary {
     }
 
     @Override
-    public void onGetPetsFailure(GetPetsFailResponseModel response) {
+    public void onGetPetsFailure(DefaultFailureResponseModel response) {
 
     }
 }

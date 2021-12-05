@@ -1,6 +1,6 @@
 package com.example.cupetfrontend.use_cases.output_boundaries.user;
 
-import com.example.cupetfrontend.use_cases.response_models.user.GetPetsFailResponseModel;
+import com.example.cupetfrontend.use_cases.response_models.pet.DefaultFailureResponseModel;
 import com.example.cupetfrontend.use_cases.response_models.user.GetPetsSuccessResponseModel;
 
 /**
@@ -20,5 +20,5 @@ public interface GetPetsOutputBoundary {
      *
      * @param response The response data
      */
-    void onGetPetsFailure(GetPetsFailResponseModel response);
+    void onGetPetsFailure(DefaultFailureResponseModel response);
 }

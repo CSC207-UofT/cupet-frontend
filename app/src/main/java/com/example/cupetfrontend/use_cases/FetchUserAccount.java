@@ -6,11 +6,11 @@ import com.example.cupetfrontend.use_cases.api_abstracts.request_models.user.API
 import com.example.cupetfrontend.use_cases.input_boundaries.user.FetchUserAccountInputBoundary;
 import com.example.cupetfrontend.use_cases.output_boundaries.user.FetchUserAccountOutputBoundary;
 import com.example.cupetfrontend.use_cases.request_models.user.FetchUserAccountRequestModel;
-import com.example.cupetfrontend.use_cases.response_models.user.FetchUserAccountFailResponseModel;
 import com.example.cupetfrontend.use_cases.response_models.user.FetchUserAccountSuccessResponseModel;
+import org.json.JSONException;
 import org.json.JSONObject;
 
-public class FetchUserAccount implements FetchUserAccountInputBoundary {
+public class FetchUserAccount extends DefaultFailResponseUseCase implements FetchUserAccountInputBoundary {
     IUserAPIGateway userAPIGateway;
     FetchUserAccountOutputBoundary outputBoundary;
 
@@ -46,26 +46,18 @@ public class FetchUserAccount implements FetchUserAccountInputBoundary {
      * @return The response as a FetchPetProfileSuccessResponseModel
      */
     private FetchUserAccountSuccessResponseModel toSuccessResponseModel(JSONObject jsonResponse) {
-        // TODO: Waiting on backend implementation
-//        try {
-        return new FetchUserAccountSuccessResponseModel("dummy first",
-                "dummy last", "dummy email", "dummy home address",
-                "dummy city");
-//        } catch (JSONException e) {
-//            throw new InvalidAPIResponseException("The API gave an invalid successful create user response.");
-//        }
-    }
+        try {
+            JSONObject dataObj = new JSONObject(jsonResponse.getString("data"));
 
-    /**
-     * Convert a JSONObject response to an instance of
-     * FetchPetProfileFailResponseModel.
-     *
-     * @param jsonResponse A JSON representation of the response.
-     * @return The response as a FetchPetProfileFailResponseModel
-     */
-    private FetchUserAccountFailResponseModel toFailResponseModel(JSONObject jsonResponse) {
-        // TODO: The current API does not return a message; include a dummy message
-        //  replace with actual message once API is updated
-        return new FetchUserAccountFailResponseModel("Sample Error Message");
+            return new FetchUserAccountSuccessResponseModel(
+                    dataObj.getString("firstName"),
+                    dataObj.getString("lastName"),
+                    dataObj.getString("email"),
+                    dataObj.getString("currentAddress"),
+                    dataObj.getString("currentCity")
+                    );
+        } catch (JSONException e) {
+            throw new InvalidAPIResponseException("The API gave an invalid successful fetch user response.");
+        }
     }
 }

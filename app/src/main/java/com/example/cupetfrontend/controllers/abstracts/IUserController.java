@@ -29,11 +29,14 @@ public interface IUserController {
     /**
      * Edit a user's profile
      *
-     * // TODO: add images and other contact info (other social media links)
      * @param token The login session token
      * @param newBiography The user's new biography
+     * @param newInstagram The user's new instagram handle
+     * @param newFacebook The user's new facebook handle
+     * @param newPhoneNumber The user's new phone number
      */
-    void editUserProfile(String token, String newBiography);
+    void editUserProfile(String token, String newBiography, String newInstagram,
+                         String newFacebook, String newPhoneNumber);
 
     /**
      * Fetch a user's account information
@@ -44,7 +47,6 @@ public interface IUserController {
 
     /**
      * Edit a user's account
-     * // TODO: too many parameters code smell: combine into a request object
      *
      * @param token The login session token
      * @param newFirstName The user's new first name
@@ -58,9 +60,38 @@ public interface IUserController {
                          String newEmail, String newPassword, String newHomeAddress, String newCity);
 
     /**
+     * Edit a user's account without changing their password
+     *
+     * @param token The login session token
+     * @param newFirstName The user's new first name
+     * @param newLastName The user's new last name
+     * @param newEmail The user's new email
+     * @param newHomeAddress The user's new home address
+     * @param newCity The user's new city
+     */
+    void editUserAccount(String token, String newFirstName, String newLastName,
+                         String newEmail, String newHomeAddress, String newCity);
+
+    /**
      * Return a user's list of pets
      *
      * @param token The user's session token
      */
     void getPets(String token);
+
+    /**
+     * Set a user's profile image
+     *
+     * @param token The user's session token
+     * @param imgB64 The image as a base64 string
+     */
+    void setUserProfileImage(String token, String imgB64);
+
+    /**
+     * Fetch a user's profile picture
+     *
+     * @param token The user's session token
+     * @param userId The target user's id
+     */
+    void fetchUserProfileImage(String token, String userId);
 }

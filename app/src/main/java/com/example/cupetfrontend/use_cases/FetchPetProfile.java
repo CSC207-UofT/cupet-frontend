@@ -6,12 +6,11 @@ import com.example.cupetfrontend.use_cases.api_abstracts.request_models.pet.APIF
 import com.example.cupetfrontend.use_cases.input_boundaries.pet.FetchPetProfileInputBoundary;
 import com.example.cupetfrontend.use_cases.output_boundaries.pet.FetchPetProfileOutputBoundary;
 import com.example.cupetfrontend.use_cases.request_models.pet.FetchPetProfileRequestModel;
-import com.example.cupetfrontend.use_cases.response_models.pet.FetchPetProfileFailResponseModel;
 import com.example.cupetfrontend.use_cases.response_models.pet.FetchPetProfileSuccessResponseModel;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class FetchPetProfile implements FetchPetProfileInputBoundary {
+public class FetchPetProfile extends DefaultFailResponseUseCase implements FetchPetProfileInputBoundary {
     IPetAPIGateway petAPIGateway;
     FetchPetProfileOutputBoundary outputBoundary;
 
@@ -48,27 +47,16 @@ public class FetchPetProfile implements FetchPetProfileInputBoundary {
      */
     private FetchPetProfileSuccessResponseModel toSuccessResponseModel(JSONObject jsonResponse) {
         try {
+            JSONObject dataObj = new JSONObject(jsonResponse.getString("data"));
+
             return new FetchPetProfileSuccessResponseModel(
-                    jsonResponse.getString("name"),
-                    jsonResponse.getString("age"),
-                    jsonResponse.getString("breed"),
-                    jsonResponse.getString("biography")
+                    dataObj.getString("name"),
+                    dataObj.getString("age"),
+                    dataObj.getString("breed"),
+                    dataObj.getString("biography")
             );
         } catch (JSONException e) {
-            throw new InvalidAPIResponseException("The API gave an invalid successful create user response.");
+            throw new InvalidAPIResponseException("The API gave an invalid successful fetch pet profile response.");
         }
-    }
-
-    /**
-     * Convert a JSONObject response to an instance of
-     * FetchPetProfileFailResponseModel.
-     *
-     * @param jsonResponse A JSON representation of the response.
-     * @return The response as a FetchPetProfileFailResponseModel
-     */
-    private FetchPetProfileFailResponseModel toFailResponseModel(JSONObject jsonResponse) {
-        // TODO: The current API does not return a message; include a dummy message
-        //  replace with actual message once API is updated
-        return new FetchPetProfileFailResponseModel("Sample Error Message");
     }
 }

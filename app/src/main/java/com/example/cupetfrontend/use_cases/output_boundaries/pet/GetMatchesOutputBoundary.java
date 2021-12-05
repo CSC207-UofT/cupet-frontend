@@ -1,6 +1,6 @@
 package com.example.cupetfrontend.use_cases.output_boundaries.pet;
 
-import com.example.cupetfrontend.use_cases.response_models.pet.GetMatchesFailResponseModel;
+import com.example.cupetfrontend.use_cases.response_models.pet.DefaultFailureResponseModel;
 import com.example.cupetfrontend.use_cases.response_models.pet.GetMatchesSuccessResponseModel;
 
 /**
@@ -20,5 +20,5 @@ public interface GetMatchesOutputBoundary {
      *
      * @param response The response data
      */
-    void onGetMatchesFailure(GetMatchesFailResponseModel response);
+    void onGetMatchesFailure(DefaultFailureResponseModel response);
 }

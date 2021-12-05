@@ -6,12 +6,11 @@ import com.example.cupetfrontend.use_cases.api_abstracts.request_models.user.API
 import com.example.cupetfrontend.use_cases.input_boundaries.user.UserCreatorInputBoundary;
 import com.example.cupetfrontend.use_cases.output_boundaries.user.UserCreatorOutputBoundary;
 import com.example.cupetfrontend.use_cases.request_models.user.UserCreatorRequestModel;
-import com.example.cupetfrontend.use_cases.response_models.user.UserCreatorFailResponseModel;
 import com.example.cupetfrontend.use_cases.response_models.user.UserCreatorSuccessResponseModel;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class UserCreator implements UserCreatorInputBoundary {
+public class UserCreator extends DefaultFailResponseUseCase implements UserCreatorInputBoundary {
     IUserAPIGateway userAPIGateway;
     UserCreatorOutputBoundary outputBoundary;
 
@@ -29,7 +28,23 @@ public class UserCreator implements UserCreatorInputBoundary {
         userAPIGateway.createUser(apiRequest, new IServerResponseListener() {
             @Override
             public void onRequestSuccess(JSONObject jsonResponse) {
-                outputBoundary.onCreateUserSuccess(toSuccessResponseModel(jsonResponse));
+                // TODO: Remove temporary code
+                //  The API currently does not support HTTP status codes, so we need this
+                //  code to prevent a runtime exception from crashing the application
+
+                try {
+                    if (jsonResponse.get("isSuccess").equals("true")){
+                        outputBoundary.onCreateUserSuccess(toSuccessResponseModel(jsonResponse));
+                    }else{
+                        outputBoundary.onCreateUserFailure(toFailResponseModel(jsonResponse));
+                    }
+                } catch (JSONException e) {
+                    throw new InvalidAPIResponseException(
+                            "The API gave an invalid create user response:" + jsonResponse);
+                }
+
+                // TODO: Uncomment when API is updated.
+//                outputBoundary.onCreateUserSuccess(toSuccessResponseModel(jsonResponse));
             }
 
             @Override
@@ -48,29 +63,20 @@ public class UserCreator implements UserCreatorInputBoundary {
      */
     private UserCreatorSuccessResponseModel toSuccessResponseModel(JSONObject jsonResponse) {
         try {
+
+            JSONObject dataObj = new JSONObject(jsonResponse.getString("data"));
+
             return new UserCreatorSuccessResponseModel(
-                    jsonResponse.getString("firstName"),
-                    jsonResponse.getString("lastName"),
-                    jsonResponse.getString("homeAddress"),
-                    jsonResponse.getString("email"),
-                    jsonResponse.getString("city"),
-                    jsonResponse.getString("userId")
+                    dataObj.getString("firstName"),
+                    dataObj.getString("lastName"),
+                    dataObj.getString("email"),
+                    dataObj.getString("currentAddress"),
+                    dataObj.getString("currentCity"),
+                    dataObj.getString("userId")
             );
         } catch (JSONException e) {
-            throw new InvalidAPIResponseException("The API gave an invalid successful create user response.");
+            throw new InvalidAPIResponseException(
+                    "The API gave an invalid successful create user response: " + jsonResponse);
         }
-    }
-
-    /**
-     * Convert a JSONObject response to an instance of
-     * UserCreatorFailResponseModel.
-     *
-     * @param jsonResponse A JSON representation of the response.
-     * @return The response as a UserCreatorFailResponseModel
-     */
-    private UserCreatorFailResponseModel toFailResponseModel(JSONObject jsonResponse) {
-        // TODO: The current API does not return a message; include a dummy message
-        //  replace with actual message once API is updated
-        return new UserCreatorFailResponseModel("Sample Error Message");
     }
 }

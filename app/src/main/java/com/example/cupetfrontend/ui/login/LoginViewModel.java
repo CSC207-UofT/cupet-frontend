@@ -5,19 +5,19 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import android.util.Patterns;
 
-import com.example.cupetfrontend.data.LoginRepository;
-import com.example.cupetfrontend.data.Result;
-import com.example.cupetfrontend.data.model.LoggedInUser;
+import com.example.cupetfrontend.controllers.abstracts.IAuthController;
 import com.example.cupetfrontend.R;
+import com.example.cupetfrontend.data.LoginRepository;
+import com.example.cupetfrontend.presenters.view_model_abstracts.ILoginViewModel;
 
-public class LoginViewModel extends ViewModel {
+public class LoginViewModel extends ViewModel implements ILoginViewModel {
 
-    private MutableLiveData<LoginFormState> loginFormState = new MutableLiveData<>();
-    private MutableLiveData<LoginResult> loginResult = new MutableLiveData<>();
-    private LoginRepository loginRepository;
+    private final MutableLiveData<LoginFormState> loginFormState = new MutableLiveData<>();
+    private final MutableLiveData<LoginResult> loginResult = new MutableLiveData<>();
+    private final IAuthController authController;
 
-    LoginViewModel(LoginRepository loginRepository) {
-        this.loginRepository = loginRepository;
+    LoginViewModel(IAuthController authController) {
+        this.authController = authController;
     }
 
     LiveData<LoginFormState> getLoginFormState() {
@@ -28,21 +28,13 @@ public class LoginViewModel extends ViewModel {
         return loginResult;
     }
 
-    public void login(String username, String password) {
-        // can be launched in a separate asynchronous job
-        Result<LoggedInUser> result = loginRepository.login(username, password);
-
-        if (result instanceof Result.Success) {
-            LoggedInUser data = ((Result.Success<LoggedInUser>) result).getData();
-            loginResult.setValue(new LoginResult(new LoggedInUserView(data.getDisplayName())));
-        } else {
-            loginResult.setValue(new LoginResult(R.string.login_failed));
-        }
+    public void login(String email, String password) {
+        authController.login(email, password);
     }
 
-    public void loginDataChanged(String username, String password) {
-        if (!isUserNameValid(username)) {
-            loginFormState.setValue(new LoginFormState(R.string.invalid_username, null));
+    public void loginDataChanged(String email, String password) {
+        if (!isEmailValid(email)) {
+            loginFormState.setValue(new LoginFormState(R.string.invalid_email, null));
         } else if (!isPasswordValid(password)) {
             loginFormState.setValue(new LoginFormState(null, R.string.invalid_password));
         } else {
@@ -50,20 +42,35 @@ public class LoginViewModel extends ViewModel {
         }
     }
 
-    // A placeholder username validation check
-    private boolean isUserNameValid(String username) {
-        if (username == null) {
+    private boolean isEmailValid(String email) {
+        if (email == null) {
             return false;
         }
-        if (username.contains("@")) {
-            return Patterns.EMAIL_ADDRESS.matcher(username).matches();
+        if (email.contains("@")) {
+            return Patterns.EMAIL_ADDRESS.matcher(email).matches();
         } else {
-            return !username.trim().isEmpty();
+            return !email.trim().isEmpty();
         }
     }
 
-    // A placeholder password validation check
     private boolean isPasswordValid(String password) {
         return password != null && password.trim().length() > 5;
+    }
+
+    @Override
+    public void onLoginSuccess(String token) {
+        LoginResult newLoginResult = new LoginResult(false);
+        newLoginResult.setToken(token);
+
+        // TODO: Remove after demo
+        System.out.println("Login success with token: " + token);
+        System.out.println("Login success with user id: " + token);
+
+        loginResult.setValue(newLoginResult);
+    }
+
+    @Override
+    public void onLoginFailure(String message) {
+        loginResult.setValue(new LoginResult(true, message));
     }
 }

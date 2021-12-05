@@ -9,6 +9,14 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_password">Password must be longer than 5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="welcome_to_cupet">Welcome to Cupet!</string>
     <string name="title_activity_user_pets">ScrollingActivity</string>
 
 
@@ -71,5 +79,38 @@
     <string name="invalid_confirm_password">Password\'s don\'t match</string>
     <string name="invalid_home_address">Invalid Home Address</string>
     <string name="invalid_city">Invalid City</string>
+
+    <!-- Navigation Drawer  -->
+    <string name="title_activity_navigation_drawer">NavigationDrawerActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="nav_account_settings">Account Settings</string>
+    <string name="nav_my_user_profile">User Profile</string>
+
+    <!-- MainActivity / Bottom Navigation -->
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_potential_matches">Potential Matches</string>
+    <string name="title_matches">Matches</string>
+    <string name="title_my_pet_profile">My Pet Profile</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="sign_out_btn">Sign Out</string>
+
+    <!-- Strings used for create/edit pet page -->
+    <string name="add_a_new_pet">Add a New Pet</string>
+    <string name="add_pet">Add</string>
+    <string name="edit_pet">Edit</string>
+    <string name="pet_name">Pet Name</string>
+    <string name="pet_age">Pet Age</string>
+    <string name="pet_breed">Pet Breed</string>
+    <string name="pet_bio">Pet Biography</string>
+    <string name="invalid_pet_name">Invalid Pet Name</string>
+    <string name="invalid_pet_age">Invalid Pet Age</string>
+    <string name="invalid_pet_breed">Invalid Pet Breed</string>
+    <string name="invalid_pet_bio">Invalid Pet Biography</string>
+
 
 </resources>

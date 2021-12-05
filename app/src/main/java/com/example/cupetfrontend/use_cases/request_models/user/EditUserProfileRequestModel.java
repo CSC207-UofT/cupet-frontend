@@ -1,19 +1,16 @@
 package com.example.cupetfrontend.use_cases.request_models.user;
 
-public class EditUserProfileRequestModel {
-    private final String token;
-    private final String newBiography;
+import com.example.cupetfrontend.use_cases.data_models.UserProfile;
 
-    public EditUserProfileRequestModel(String token, String newBiography) {
+public class EditUserProfileRequestModel extends UserProfile {
+    private final String token;
+
+    public EditUserProfileRequestModel(String token, String biography, String instagram, String facebook, String phoneNumber) {
+        super(biography, instagram, facebook, phoneNumber);
         this.token = token;
-        this.newBiography = newBiography;
     }
 
     public String getToken() {
         return token;
-    }
-
-    public String getNewBiography() {
-        return newBiography;
     }
 }

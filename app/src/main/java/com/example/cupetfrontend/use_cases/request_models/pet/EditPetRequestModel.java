@@ -1,37 +1,24 @@
 package com.example.cupetfrontend.use_cases.request_models.pet;
 
-public class EditPetRequestModel {
-    private final String token;
-    private final String newName;
-    private final String newAge;
-    private final String newBreed;
-    private final String newBiography;
+import com.example.cupetfrontend.use_cases.data_models.PetData;
+import com.example.cupetfrontend.use_cases.data_models.PetProfile;
 
-    public EditPetRequestModel(String token, String newName, String newAge, String newBreed, String newBiography) {
+public class EditPetRequestModel extends PetProfile {
+    private final String token;
+    private final String petId;
+
+    public EditPetRequestModel(String token, String petId, String name,
+                               String age, String breed, String biography) {
+        super(name, age, breed, biography);
         this.token = token;
-        this.newName = newName;
-        this.newAge = newAge;
-        this.newBreed = newBreed;
-        this.newBiography = newBiography;
+        this.petId = petId;
     }
 
     public String getToken() {
         return token;
     }
 
-    public String getNewName() {
-        return newName;
-    }
-
-    public String getNewAge() {
-        return newAge;
-    }
-
-    public String getNewBreed() {
-        return newBreed;
-    }
-
-    public String getNewBiography() {
-        return newBiography;
+    public String getPetId() {
+        return petId;
     }
 }

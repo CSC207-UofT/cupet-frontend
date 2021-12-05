@@ -6,13 +6,12 @@ import com.example.cupetfrontend.use_cases.api_abstracts.request_models.pet.APIR
 import com.example.cupetfrontend.use_cases.input_boundaries.pet.RejectMatchInputBoundary;
 import com.example.cupetfrontend.use_cases.output_boundaries.pet.RejectMatchOutputBoundary;
 import com.example.cupetfrontend.use_cases.request_models.pet.RejectMatchRequestModel;
-import com.example.cupetfrontend.use_cases.response_models.pet.RejectMatchFailResponseModel;
 import com.example.cupetfrontend.use_cases.response_models.pet.RejectMatchSuccessResponseModel;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class RejectMatch implements RejectMatchInputBoundary {
+public class RejectMatch extends DefaultFailResponseUseCase  implements RejectMatchInputBoundary {
     IPetAPIGateway petAPIGateway;
     RejectMatchOutputBoundary outputBoundary;
 
@@ -48,23 +47,6 @@ public class RejectMatch implements RejectMatchInputBoundary {
      * @return The response as a PetCreatorSuccessResponseModel
      */
     private RejectMatchSuccessResponseModel toSuccessResponseModel(JSONObject jsonResponse) {
-//        try {
         return new RejectMatchSuccessResponseModel();
-//        } catch (JSONException e) {
-//            throw new InvalidAPIResponseException("The API gave an invalid successful create user response.");
-//        }
-    }
-
-    /**
-     * Convert a JSONObject response to an instance of
-     * PetCreatorFailResponseModel.
-     *
-     * @param jsonResponse A JSON representation of the response.
-     * @return The response as a PetCreatorFailResponseModel
-     */
-    private RejectMatchFailResponseModel toFailResponseModel(JSONObject jsonResponse) {
-        // TODO: The current API does not return a message; include a dummy message
-        //  replace with actual message once API is updated
-        return new RejectMatchFailResponseModel("Sample Error Message");
     }
 }

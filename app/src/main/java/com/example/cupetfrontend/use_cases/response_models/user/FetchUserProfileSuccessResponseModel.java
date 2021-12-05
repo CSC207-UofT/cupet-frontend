@@ -1,14 +1,16 @@
 package com.example.cupetfrontend.use_cases.response_models.user;
 
-public class FetchUserProfileSuccessResponseModel {
+import com.example.cupetfrontend.use_cases.data_models.UserProfile;
+
+public class FetchUserProfileSuccessResponseModel extends UserProfile {
     private final String firstName;
     private final String lastName;
-    private final String biography;
 
-    public FetchUserProfileSuccessResponseModel(String firstName, String lastName, String biography) {
+    public FetchUserProfileSuccessResponseModel(String firstName, String lastName, String biography,
+                                                String instagram, String facebook, String phoneNumber) {
+        super(biography, instagram, facebook, phoneNumber);
         this.firstName = firstName;
         this.lastName = lastName;
-        this.biography = biography;
     }
 
     public String getFirstName() {
@@ -17,9 +19,5 @@ public class FetchUserProfileSuccessResponseModel {
 
     public String getLastName() {
         return lastName;
-    }
-
-    public String getBiography() {
-        return biography;
     }
 }

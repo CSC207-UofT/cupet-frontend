@@ -2,22 +2,38 @@ package com.example.cupetfrontend.dependency_selector;
 
 import android.content.Context;
 
+import com.example.cupetfrontend.controllers.PetSessionManager;
+import com.example.cupetfrontend.controllers.SessionManager;
+import com.example.cupetfrontend.controllers.abstracts.IPetSessionManager;
+import com.example.cupetfrontend.controllers.abstracts.ISessionManager;
+import com.example.cupetfrontend.drivers.api.JWTParser;
+
 /**
  * This class stores all the dependencies used in the entire
  * Android app (i.e. what specific implementations of controllers,
  * use cases, etc. are we using)
  */
 public class DependencySelector {
-    private APIDependencies apiDependencies;
-    private UserPresenterDependencies userPresenters;
-    private PetPresenterDependencies petPresenters;
+    private final APIDependencies apiDependencies;
+    private final UserPresenterDependencies userPresenters;
+    private final PetPresenterDependencies petPresenters;
+    private final AuthPresenterDependencies authPresenters;
+    private final ISessionManager sessionManager;
+    private final IPetSessionManager petSessionManager;
 
-    private ControllerDependencies controllers;
+    private final ControllerDependencies controllers;
 
     public DependencySelector(Context applicationContext) {
         apiDependencies = new APIDependencies(applicationContext);
         userPresenters = new UserPresenterDependencies();
-        controllers = new ControllerDependencies(apiDependencies, userPresenters, petPresenters);
+        authPresenters = new AuthPresenterDependencies();
+        petPresenters = new PetPresenterDependencies();
+
+        controllers = new ControllerDependencies(apiDependencies, userPresenters,
+                petPresenters, authPresenters);
+
+        sessionManager = new SessionManager(new JWTParser());
+        petSessionManager = new PetSessionManager();
     }
 
     public APIDependencies getApiDependencies() {
@@ -34,5 +50,17 @@ public class DependencySelector {
 
     public ControllerDependencies getControllers() {
         return controllers;
+    }
+
+    public AuthPresenterDependencies getAuthPresenters() {
+        return authPresenters;
+    }
+
+    public ISessionManager getSessionManager() {
+        return sessionManager;
+    }
+
+    public IPetSessionManager getPetSessionManager() {
+        return petSessionManager;
     }
 }

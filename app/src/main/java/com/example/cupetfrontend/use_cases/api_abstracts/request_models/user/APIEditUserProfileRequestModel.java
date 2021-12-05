@@ -1,19 +1,9 @@
 package com.example.cupetfrontend.use_cases.api_abstracts.request_models.user;
 
-public class APIEditUserProfileRequestModel {
-    private final String token;
-    private final String newBiography;
+import com.example.cupetfrontend.use_cases.request_models.user.EditUserProfileRequestModel;
 
-    public APIEditUserProfileRequestModel(String token, String newBiography) {
-        this.token = token;
-        this.newBiography = newBiography;
-    }
-
-    public String getToken() {
-        return token;
-    }
-
-    public String getNewBiography() {
-        return newBiography;
+public class APIEditUserProfileRequestModel extends EditUserProfileRequestModel {
+    public APIEditUserProfileRequestModel(String token, String newBiography, String newInstagram, String newFacebook, String newPhoneNumber) {
+        super(token, newBiography, newInstagram, newFacebook, newPhoneNumber);
     }
 }
