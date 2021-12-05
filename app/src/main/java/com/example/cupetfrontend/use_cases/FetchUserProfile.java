@@ -55,7 +55,11 @@ public class FetchUserProfile extends DefaultFailResponseUseCase implements Fetc
                     dataObj.getString("biography"),
                     dataObj.getString("instagram"),
                     dataObj.getString("facebook"),
-                    dataObj.getString("phoneNumber")
+                    dataObj.getString("phoneNumber"),
+                    "https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Jonathan_G_Meath_portrays_Santa_Claus.jpg/800px-Jonathan_G_Meath_portrays_Santa_Claus.jpg"
+
+                    // TODO: Replace with real profile image
+//                    dataObj.getString("profileImgUrl")
             );
         } catch (JSONException e) {
             throw new InvalidAPIResponseException("The API gave an invalid successful fetch user profile response.");
