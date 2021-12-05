@@ -41,8 +41,8 @@ public class PetProfileFragment extends MainActivityFragment {
     private void initializeViews() {
         petImage = binding.petProfileImage;
         petName = binding.petProfileName;
-        petAge = binding.petProfileName;
-        petBreed = binding.petProfileAge;
+        petAge = binding.petProfileAge;
+        petBreed = binding.petProfileBreed;
         petBio = binding.petProfileBio;
     }
 
