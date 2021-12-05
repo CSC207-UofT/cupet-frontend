@@ -10,15 +10,28 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.cupetfrontend.controllers.abstracts.IPetSessionManager;
+import com.example.cupetfrontend.controllers.abstracts.ISessionManager;
+
 import java.util.ArrayList;
 
-public class ViewPetsActivity extends AppCompatActivity {
+public class GetPetsActivity extends AppCompatActivity {
 
     private static final String TAG = "NewGetMatchesActivity";
 
     //vars
     private final ArrayList<String> mPetNames = new ArrayList<>();
     private final ArrayList<String> mPetImageUrls = new ArrayList<>();
+    private RecyclerView recyclerView;
+    private CardRecyclerViewAdapter adapter;
+    private GetPetsViewModel getPetsViewModel;
+    private IPetSessionManager petSessionManager;
+    private ISessionManager sessionManager;
+
+
+
+
+
 
     private Button nAddPetButton;
 
