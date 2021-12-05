@@ -4,15 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".GetPetsActivity"
+    tools:context=".ui.view_my_pets.ViewMyPetsFragment"
     android:layout_marginStart="5dp"
     android:paddingStart="10dp">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/card_recylcer_view"
+        android:id="@+id/card_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="500dp"
         android:layout_marginTop="16dp"
+        android:clipToPadding="false"
+        android:paddingBottom="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"

@@ -16,6 +16,11 @@ public class PetSessionManager implements IPetSessionManager {
     }
 
     @Override
+    public void setPetId(String petId) {
+        this.petId = petId;
+    }
+
+    @Override
     public CachedPetData getCachedPetData() {
         return cachedPetData;
     }

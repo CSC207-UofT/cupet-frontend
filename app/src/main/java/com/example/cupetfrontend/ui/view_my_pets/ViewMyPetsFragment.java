@@ -1,90 +1,94 @@
-package com.example.cupetfrontend;
+package com.example.cupetfrontend.ui.view_my_pets;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.example.cupetfrontend.controllers.abstracts.ISessionManager;
+import com.example.cupetfrontend.R;
 import com.example.cupetfrontend.controllers.abstracts.IUserController;
 import com.example.cupetfrontend.data.model.PetModel;
-import com.example.cupetfrontend.dependency_selector.DependencySelector;
+import com.example.cupetfrontend.databinding.FragmentViewMyPetsBinding;
 import com.example.cupetfrontend.presenters.user.GetPetsPresenter;
+import com.example.cupetfrontend.ui.MainActivityFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class GetPetsActivity extends AppCompatActivity {
+public class ViewMyPetsFragment extends MainActivityFragment {
 
     private static final String TAG = "GetPetsActivity";
 
+    private FragmentViewMyPetsBinding binding;
+
     //vars
-    private final ArrayList<String> mPetNames = new ArrayList<>();
-    private final ArrayList<String> mPetImageUrls = new ArrayList<>();
     private RecyclerView recyclerView;
     private CardRecyclerViewAdapter adapter;
-    private GetPetsViewModel getPetsViewModel;
-    private ISessionManager sessionManager;
+    private ViewMyPetsViewModel viewMyPetsViewModel;
     private List<PetModel> petModelList = new ArrayList<>();
     private ArrayList<PetModel> dataSet = new ArrayList<>(); //testing
+    private Button addPetButton;
 
-
-    private Button nAddPetButton;
+    public void initializeViews() {
+        recyclerView = binding.cardRecyclerView;
+        addPetButton = binding.addPetButton;
+    }
 
     /**
      * Setup views and state on creation of the activity.
      */
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_pets);
-        Log.d(TAG, "onCreate: started.");
+        binding = FragmentViewMyPetsBinding.inflate(inflater, container, false);
+        View root = binding.getRoot();
 
-        DependencySelector dependencySelector = ((App) getApplication()).getDependencySelector();
-        IUserController userController = dependencySelector.getControllers().getUserController();
-        recyclerView = findViewById(R.id.card_recylcer_view);
+        initializeViews();
+        initializeDependencySelector();
+        initializeViewModel();
 
-        GetPetsPresenter getPetsPresenter = dependencySelector.getUserPresenters().getGetPetsPresenter();
-        getPetsViewModel = new GetPetsViewModel(userController);
-        getPetsPresenter.setGetPetsViewModel(getPetsViewModel);
-        sessionManager = dependencySelector.getSessionManager();
-
-//        getPetsViewModel.getPets(sessionManager.getToken());
+        viewMyPetsViewModel.getPets(dependencySelector.getSessionManager().getToken());
 
         setUpObserveGetPetsResult();
         initCardRecyclerView();
-
-
-        nAddPetButton = findViewById(R.id.add_pet_button);
         setUpAddPetButtonListener();
+        setUpEditBtn();
 
-        testPetModels(); //test
-        getPetsViewModel.onGetPetsSuccess(dataSet); //test
+        return root;
+    }
 
+    private void initializeViewModel() {
+        IUserController userController = dependencySelector.getControllers().getUserController();
 
+        GetPetsPresenter getPetsPresenter = dependencySelector.getUserPresenters().getGetPetsPresenter();
+        viewMyPetsViewModel = new ViewMyPetsViewModel(userController);
+        getPetsPresenter.setGetPetsViewModel(viewMyPetsViewModel);
     }
 
 
     // method for actually setting up our recycler view
     private void initCardRecyclerView(){
         Log.d(TAG, "initRecyclerView: init recyclerview");
-        adapter = new CardRecyclerViewAdapter(this, petModelList);
+        adapter = new CardRecyclerViewAdapter(getContext(), petModelList);
         recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager((new GridLayoutManager(this, 2)));
+        recyclerView.setLayoutManager((new GridLayoutManager(getContext(), 2)));
     }
 
     private void setUpAddPetButtonListener(){
-        nAddPetButton.setOnClickListener(new View.OnClickListener() {
+        addPetButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 Toast.makeText(getApplicationContext(), "Add Pet", Toast.LENGTH_SHORT).show();
-                //TODO: Link to Add New Pet Activity
+                getMainActivity().navigate(R.id.nav_create_pet);
             }
         });
     }
@@ -95,7 +99,7 @@ public class GetPetsActivity extends AppCompatActivity {
      * Update the displayed views when the get pets result has changed.
      */
     private void setUpObserveGetPetsResult() {
-        getPetsViewModel.getPetsResult().observe(this, new Observer<GetPetsResult>() {
+        viewMyPetsViewModel.getPetsResult().observe(getViewLifecycleOwner(), new Observer<GetPetsResult>() {
             @Override
             public void onChanged(@Nullable GetPetsResult getPetsResult) {
                 Log.d(TAG, "onChanged: setUpObserveGetPetsResult");
@@ -120,7 +124,8 @@ public class GetPetsActivity extends AppCompatActivity {
     private void onGetPetsSuccess(List<PetModel> userPets) {
         Log.d(TAG, "onGetPetsSuccess: success - pets:" + userPets);
         Toast.makeText(getApplicationContext(), "Get Pets Success", Toast.LENGTH_SHORT).show();
-        petModelList.addAll(getPetsViewModel.getPetsResult().getValue().getPets());
+
+        petModelList.addAll(userPets);
         adapter.notifyDataSetChanged();
     }
 
@@ -178,5 +183,12 @@ public class GetPetsActivity extends AppCompatActivity {
 
         dataSet.add(new PetModel(id, name9, age, breed, url9));
 
+    }
+
+    /**
+     * Hide the appbar edit button by default.
+     */
+    private void setUpEditBtn() {
+        getMainActivity().hideEditButton();
     }
 }

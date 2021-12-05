@@ -14,6 +14,11 @@ public interface IPetSessionManager {
     String getPetId();
 
     /**
+     * Set the signed-in pet's id
+     */
+    void setPetId(String petId);
+
+    /**
      * Get the cached data of the pet that's signed in
      * @return The signed-in pet's cached data
      */

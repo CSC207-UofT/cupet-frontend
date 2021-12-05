@@ -12,5 +12,9 @@
             android:id="@+id/nav_my_user_profile"
             android:icon="@drawable/profile"
             android:title="@string/nav_my_user_profile" />
+        <item
+            android:id="@+id/nav_view_my_pets"
+            android:icon="@drawable/profile"
+            android:title="@string/nav_view_my_pets" />
     </group>
 </menu>

@@ -1,4 +1,4 @@
-package com.example.cupetfrontend;
+package com.example.cupetfrontend.ui.get_matches;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -13,8 +13,6 @@ import java.util.List;
 public class GetMatchesViewModel extends ViewModel implements IGetMatchesViewModel {
     MutableLiveData<GetMatchesResult> getMatchesResults = new MutableLiveData<>();
     private final IPetController petController;
-
-
 
     public GetMatchesViewModel(IPetController petController) {
         this.petController = petController;
@@ -32,8 +30,6 @@ public class GetMatchesViewModel extends ViewModel implements IGetMatchesViewMod
     public void getMatches(String token, String myPetId){
         petController.getMatches(token, myPetId);
     }
-
-
 
     @Override
     public void onGetMatchesSuccess(List<PetModel> matches) {

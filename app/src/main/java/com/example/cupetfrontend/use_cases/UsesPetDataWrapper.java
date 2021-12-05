@@ -37,7 +37,7 @@ public class UsesPetDataWrapper extends DefaultFailResponseUseCase {
             getPetDataList.getPetDataList(petIds);
 
         } catch (JSONException e) {
-            throw new InvalidAPIResponseException("The API gave an invalid successful fetch user profile response.");
+            throw new InvalidAPIResponseException("The API gave an invalid successful fetch pet data response.");
         }
     }
 

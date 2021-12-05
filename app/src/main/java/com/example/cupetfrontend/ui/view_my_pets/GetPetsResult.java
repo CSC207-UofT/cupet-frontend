@@ -1,4 +1,4 @@
-package com.example.cupetfrontend;
+package com.example.cupetfrontend.ui.view_my_pets;
 
 import androidx.annotation.Nullable;
 
@@ -12,22 +12,22 @@ import java.util.List;
  * Get Matches result : success or error message.
  */
 
-public class GetMatchesResult {
+public class GetPetsResult {
     private final boolean isError;
     private final String errorMessage;
     //@Nullable
-    private final List<PetModel> matches;
+    private final List<PetModel> userPets;
 
-    public GetMatchesResult(boolean isError) {
+    public GetPetsResult(boolean isError) {
         this.isError = isError;
-        this.errorMessage = "error getting Pet Matches";
-        matches = null;
+        this.errorMessage = "error getting user's pets";
+        userPets = null;
     }
 
-    public GetMatchesResult(boolean isError, List<PetModel> matches) {
+    public GetPetsResult(boolean isError, List<PetModel> userPets) {
         this.isError = isError;
         errorMessage = null;
-        this.matches = matches;
+        this.userPets = userPets;
     }
 
     public boolean isError() {
@@ -39,7 +39,7 @@ public class GetMatchesResult {
     }
 
     @Nullable
-    public List<PetModel> getMatches() {
-        return matches;
+    public List<PetModel> getPets() {
+        return userPets;
     }
 }
