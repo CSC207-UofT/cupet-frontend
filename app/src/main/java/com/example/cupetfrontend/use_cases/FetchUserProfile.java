@@ -55,7 +55,8 @@ public class FetchUserProfile extends DefaultFailResponseUseCase implements Fetc
                     dataObj.getString("biography"),
                     dataObj.getString("instagram"),
                     dataObj.getString("facebook"),
-                    dataObj.getString("phoneNumber")
+                    dataObj.getString("phoneNumber"),
+                    dataObj.getString("profileImgUrl")
             );
         } catch (JSONException e) {
             throw new InvalidAPIResponseException("The API gave an invalid successful fetch user profile response.");

@@ -25,6 +25,7 @@ public class EditUserProfileTest extends UseCaseTestClass {
                 assertEquals(response.getInstagram(), "dummy instagram");
                 assertEquals(response.getFacebook(), "dummy facebook");
                 assertEquals(response.getPhoneNumber(), "dummy phone number");
+                // TODO: add assertEquals for profileImgUrl once implemented in back-end
 
                 setTaskComplete();
             }

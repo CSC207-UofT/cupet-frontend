@@ -28,6 +28,7 @@ public class MockSuccessPetAPIGateway extends MockSuccessAPIGateway implements I
             put("age", "dummy age");
             put("breed", "dummy breed");
             put("biography", "dummy biography");
+            put("profileImgUrl", "dummy url");
         }}));
     }
 
