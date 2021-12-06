@@ -40,7 +40,7 @@
                 <ImageView
                     android:id="@+id/potential_profile_img"
                     android:layout_width="match_parent"
-                    android:layout_height="450dp"
+                    android:layout_height="411dp"
                     android:adjustViewBounds="true"
                     android:scaleType="fitCenter"
                     app:layout_constraintStart_toStartOf="parent"

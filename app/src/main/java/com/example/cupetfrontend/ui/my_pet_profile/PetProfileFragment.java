@@ -134,10 +134,9 @@ public class PetProfileFragment extends MainActivityFragment {
         petProfileTitle.setText(profileTitle);
         petBreed.setText(petBreedStr);
         petBio.setText(petBioStr);
+
         if (!petImageStr.equals("")) {
             Glide.with(this).load(petImageStr).into(petImage);
-        } else {
-            Glide.with(this).load("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwn2UIl7YtjhkbxoIuoI4E7yyXH1KC6GvRqg&usqp=CAU").into(petImage);
         }
     }
 
