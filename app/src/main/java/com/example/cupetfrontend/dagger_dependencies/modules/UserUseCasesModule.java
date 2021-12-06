@@ -32,7 +32,7 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 
-@Module(includes={APIGatewaysModule.class, UserPresentersModule.class})
+@Module(includes={APIGatewaysModule.class, UserOutputBoundariesModule.class})
 public class UserUseCasesModule {
     @Singleton
     @Provides

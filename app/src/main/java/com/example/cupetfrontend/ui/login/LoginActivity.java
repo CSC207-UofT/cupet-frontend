@@ -47,12 +47,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         ((App) getApplication()).getAppComponent().inject(this);
 
-//        loginViewModel = new LoginViewModelFactory().createLoginViewModel(this.getApplication());
-        DependencySelector dependencySelector = ((App) this.getApplication()).getDependencySelector();
-        dependencySelector.getAuthPresenters().getLoginPresenter().setLoginViewModel(loginViewModel);
-
         initializeViews();
-
         setUpObserveLoginFormState();
         setUpObserveLoginResult();
         setUpFormEditedListener();
@@ -105,9 +100,6 @@ public class LoginActivity extends AppCompatActivity {
                 }else{
                     onLoginSuccess(loginResult.getToken());
                 }
-
-                // Complete and destroy login activity once successful
-//                finish();
             }
         });
     }

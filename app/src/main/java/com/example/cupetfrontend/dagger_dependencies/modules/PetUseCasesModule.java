@@ -34,7 +34,7 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 
-@Module(includes={APIGatewaysModule.class, PetPresentersModule.class})
+@Module(includes={APIGatewaysModule.class, PetOutputBoundariesModule.class})
 public class PetUseCasesModule {
     @Singleton
     @Provides
