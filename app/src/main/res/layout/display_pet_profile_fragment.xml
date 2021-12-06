@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".DisplayPetProfileFragment">
+    tools:context=".ui.public_pet_profile.display_pet_profile_fragment.DisplayPetProfileFragment">
 
     <RelativeLayout
         android:layout_width="match_parent"

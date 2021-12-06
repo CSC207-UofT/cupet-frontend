@@ -1,4 +1,4 @@
-package com.example.cupetfrontend;
+package com.example.cupetfrontend.ui.public_pet_profile.display_pet_profile_fragment;
 
 import androidx.lifecycle.Observer;
 
