@@ -16,7 +16,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="48dp"
-            app:layout_constraintBottom_toTopOf="@+id/pet_petName"
+            app:layout_constraintBottom_toTopOf="@+id/create_pet_name"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
@@ -31,11 +31,11 @@
             android:text="@string/pet_name"
             android:textColor="@color/black"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/pet_petName"
-            app:layout_constraintStart_toStartOf="@+id/pet_petName" />
+            app:layout_constraintBottom_toTopOf="@+id/create_pet_name"
+            app:layout_constraintStart_toStartOf="@+id/create_pet_name" />
 
     <EditText
-            android:id="@+id/pet_petName"
+            android:id="@+id/edit_pet_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="32dp"
@@ -43,7 +43,7 @@
             android:hint="@string/pet_name"
             android:inputType="textPersonName"
             android:text="Pet Name"
-            app:layout_constraintBottom_toTopOf="@+id/pet_petAge"
+            app:layout_constraintBottom_toTopOf="@+id/edit_pet_age"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.502"
             app:layout_constraintStart_toStartOf="parent" android:layout_marginEnd="96dp"/>
@@ -55,11 +55,11 @@
             android:text="@string/pet_age"
             android:textColor="@color/black"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/pet_petAge"
-            app:layout_constraintStart_toStartOf="@+id/pet_petAge" />
+            app:layout_constraintBottom_toTopOf="@+id/edit_pet_age"
+            app:layout_constraintStart_toStartOf="@+id/edit_pet_age" />
 
     <EditText
-            android:id="@+id/pet_petAge"
+            android:id="@+id/edit_pet_age"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="32dp"
@@ -67,7 +67,7 @@
             android:hint="@string/pet_age"
             android:inputType="textPersonName"
             android:text="@string/pet_age"
-            app:layout_constraintBottom_toTopOf="@+id/pet_petBreed"
+            app:layout_constraintBottom_toTopOf="@+id/edit_pet_breed"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.502"
             app:layout_constraintStart_toStartOf="parent" android:layout_marginEnd="96dp"/>
@@ -79,18 +79,18 @@
             android:text="@string/pet_breed"
             android:textColor="@color/black"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/pet_petBreed"
-            app:layout_constraintStart_toStartOf="@+id/pet_petBreed" />
+            app:layout_constraintBottom_toTopOf="@+id/edit_pet_breed"
+            app:layout_constraintStart_toStartOf="@+id/edit_pet_breed" />
 
     <EditText
-            android:id="@+id/pet_petBreed"
+            android:id="@+id/edit_pet_breed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="32dp"
             android:ems="10"
             android:inputType="textPersonName"
             android:text="@string/pet_breed"
-            app:layout_constraintBottom_toTopOf="@+id/pet_petBio"
+            app:layout_constraintBottom_toTopOf="@+id/edit_pet_bio"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent" android:layout_marginEnd="96dp"/>
@@ -102,11 +102,11 @@
             android:text="@string/pet_bio"
             android:textColor="@color/black"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/pet_petBio"
-            app:layout_constraintStart_toStartOf="@+id/pet_petBio" />
+            app:layout_constraintBottom_toTopOf="@+id/edit_pet_bio"
+            app:layout_constraintStart_toStartOf="@+id/edit_pet_bio" />
 
     <EditText
-            android:id="@+id/pet_petBio"
+            android:id="@+id/edit_pet_bio"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"

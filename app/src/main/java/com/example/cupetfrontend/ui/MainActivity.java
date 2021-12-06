@@ -64,8 +64,8 @@ public class MainActivity extends AppCompatActivity implements Navigator {
                         "Santa_Claus.jpg/800px-Jonathan_G_Meath_portrays_Santa_Claus.jpg"
         ));
 
-        sessionManager.setToken("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMiIsImV4cCI6MTYzODc3MzA3OCwiaWF0IjoxNjM4NzM3MDc4fQ.5FeS7La1Khgh9EqZrrQSnXgJ56WZ7O64Zk2a63ckZkI");
-        petSessionManager.setPetId("10");
+        sessionManager.setToken("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMyIsImV4cCI6MTYzODgwOTk0NiwiaWF0IjoxNjM4NzczOTQ2fQ.SdSbrjHEMTxht4AWO2M8v7MdAGsz1586gENERQo6EUY");
+        petSessionManager.setPetId("12");
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());

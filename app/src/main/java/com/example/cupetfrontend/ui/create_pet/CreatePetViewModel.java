@@ -32,11 +32,12 @@ public class CreatePetViewModel extends ViewModel implements ICreatePetViewModel
 
     /**
      * Create a new create pet request
+     *
+     * @param token The user's session token
      * @param formData The pet creation data entered into the form
      */
-    public void createPet(CreatePetFormData formData){
-        // TODO: add token code
-        petController.createPet("token", formData.getPetName(), formData.getPetAge(),
+    public void createPet(String token, CreatePetFormData formData){
+        petController.createPet(token, formData.getPetName(), formData.getPetAge(),
                 formData.getPetBreed(), formData.getPetBio());
     }
 
@@ -115,8 +116,8 @@ public class CreatePetViewModel extends ViewModel implements ICreatePetViewModel
     }
 
     @Override
-    public void onCreatePetSuccess() {
-        CreatePetResult newCreatePetResult = new CreatePetResult(false);
+    public void onCreatePetSuccess(String petId) {
+        CreatePetResult newCreatePetResult = new CreatePetResult(petId);
 
         createPetResult.setValue(newCreatePetResult);
     }
