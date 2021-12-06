@@ -17,8 +17,10 @@ import android.widget.Toast;
 import com.example.cupetfrontend.App;
 import com.example.cupetfrontend.R;
 import com.example.cupetfrontend.controllers.InvalidJWTException;
+import com.example.cupetfrontend.controllers.abstracts.IAuthController;
 import com.example.cupetfrontend.controllers.abstracts.ISessionManager;
 import com.example.cupetfrontend.dependency_selector.DependencySelector;
+import com.example.cupetfrontend.presenters.abstracts.ILoginPresenter;
 import com.example.cupetfrontend.ui.MainActivity;
 import com.example.cupetfrontend.ui.register.RegisterActivity;
 
@@ -29,13 +31,19 @@ import javax.inject.Inject;
  */
 public class LoginActivity extends AppCompatActivity {
 
-    @Inject
     public LoginViewModel loginViewModel;
     private Button loginButton;
     private EditText emailField;
     private EditText passwordField;
+    @Inject
+    public ISessionManager sessionManager;
+    @Inject
+    public IAuthController authController;
+    @Inject
+    public ILoginPresenter loginPresenter;
 
     private void initializeViews(){
+        // TODO: Replace with binding
         loginButton = findViewById(R.id.login_button);
         emailField = findViewById(R.id.login_email);
         passwordField = findViewById(R.id.login_password);
@@ -45,7 +53,9 @@ public class LoginActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
         ((App) getApplication()).getAppComponent().inject(this);
+        loginViewModel = new LoginViewModel(authController, loginPresenter);
 
         initializeViews();
         setUpObserveLoginFormState();
@@ -125,9 +135,6 @@ public class LoginActivity extends AppCompatActivity {
     private void onLoginSuccess(String token) {
         Toast.makeText(getApplicationContext(), "Login Success", Toast.LENGTH_SHORT).show();
         System.out.println("Successful login with token " + token);
-
-        DependencySelector dependencySelector = ((App) this.getApplication()).getDependencySelector();
-        ISessionManager sessionManager = dependencySelector.getSessionManager();
 
         try {
             sessionManager.setToken(token);

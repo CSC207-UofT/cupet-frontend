@@ -14,8 +14,6 @@ public class ViewMyPetsViewModel extends ViewModel implements IGetPetsViewModel 
     MutableLiveData<GetPetsResult> getPetsResults = new MutableLiveData<>();
     private final IUserController userController;
 
-
-
     public ViewMyPetsViewModel(IUserController userController) {
         this.userController = userController;
     }

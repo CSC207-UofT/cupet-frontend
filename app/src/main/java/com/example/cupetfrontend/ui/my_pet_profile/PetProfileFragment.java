@@ -16,6 +16,7 @@ import androidx.annotation.Nullable;
 import androidx.lifecycle.Observer;
 
 import com.bumptech.glide.Glide;
+import com.example.cupetfrontend.App;
 import com.example.cupetfrontend.R;
 import com.example.cupetfrontend.controllers.abstracts.IPetController;
 import com.example.cupetfrontend.controllers.abstracts.IPetSessionManager;
@@ -29,6 +30,8 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import javax.inject.Inject;
+
 
 /**
  * The fragment for my pet profile page.
@@ -39,6 +42,16 @@ public class PetProfileFragment extends MainActivityFragment {
     private TextView petBreed;
     private TextView petBio;
     private PetProfileViewModel petProfileViewModel;
+
+    @Inject
+    public IPetController petController;
+    @Inject
+    public IFetchPetProfilePresenter fetchPetProfilePresenter;
+    @Inject
+    public ISessionManager sessionManager;
+    @Inject
+    public IPetSessionManager petSessionManager;
+
     private FragmentMyPetProfileBinding binding;
 
     /**
@@ -62,19 +75,12 @@ public class PetProfileFragment extends MainActivityFragment {
         binding = FragmentMyPetProfileBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        initializeDependencySelector();
+        ((App) getApplicationContext()).getAppComponent().inject(this);
 
-        IPetController petController = dependencySelector.getControllers().getPetController();
-        IFetchPetProfilePresenter fetchPetProfilePresenter = dependencySelector.getPetPresenters().getFetchPetProfilePresenter();
         petProfileViewModel = new PetProfileViewModel(petController);
         fetchPetProfilePresenter.setPetProfileViewModel(petProfileViewModel);
 
-        // get token from session manager
-        ISessionManager sessionManager = dependencySelector.getSessionManager();
         String token = sessionManager.getToken();
-
-        // get petId from pet session manager
-        IPetSessionManager petSessionManager = dependencySelector.getPetSessionManager();
         String petId = petSessionManager.getPetId();
 
         petProfileViewModel.fetchPetProfile(token, petId);
@@ -110,7 +116,6 @@ public class PetProfileFragment extends MainActivityFragment {
                             petProfileResult.getPetBreed(),
                             petProfileResult.getPetBio());
                 }
-                // finish(); // unused
             }
         });
     }

@@ -12,6 +12,4 @@ public interface IEditPetViewModel {
      * @param message The error message from the response
      */
     void onEditPetFailure(String message);
-
-    void ping(String A);
 }
