@@ -112,7 +112,6 @@ public class PublicPetProfileFragment extends MainActivityFragment {
         if (petImageStr == "") {
             petImageStr = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwn2UIl7YtjhkbxoIuoI4E7yyXH1KC6GvRqg&usqp=CAU";
         }
-        // now fetch user profile?
     }
 
     /**
