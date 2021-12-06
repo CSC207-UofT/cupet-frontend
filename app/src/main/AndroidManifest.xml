@@ -13,23 +13,26 @@
         android:theme="@style/Theme.CupetFrontEnd"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
+        <activity android:name=".EditUserProfileActivity"></activity>
+        <activity android:name=".UserAccountActivity" />
+        <activity android:name=".EditUserAccountActivity" />
         <activity
             android:name=".ui.MainActivity"
             android:exported="true"
-            android:theme="@style/Theme.CupetFrontEnd.NoActionBar"
-            android:label="@string/title_activity_main" />
+            android:label="@string/title_activity_main"
+            android:theme="@style/Theme.CupetFrontEnd.NoActionBar" />
 
-        <activity android:name=".ui.splash_screen.SplashScreenActivity"
+        <activity
+            android:name=".ui.splash_screen.SplashScreenActivity"
+            android:exported="true"
             android:label="SplashScreenActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar"
-            android:exported="true">
+            android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-      
         <activity
             android:name=".ui.login.LoginActivity"
             android:exported="true"
@@ -40,62 +43,6 @@
             android:exported="true"
             android:label="RegisterActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
-
-<!--        <activity android:name=".ui.create_pet.CreatePetFragment"-->
-<!--            android:label="Create a New Pet"-->
-<!--            android:exported="true">-->
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.CreatePetActivity"/>-->
-<!--                <category android:name="android.intent.category.LAUNCHER"/>-->
-<!--            </intent-filter>-->
-<!--        </activity>-->
-
-<!--        <activity android:name=".ui.edit_pet.EditPetFragment"-->
-<!--            android:label="EditPetActivity"-->
-<!--            android:exported="true">-->
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.EditPetActivity"/>-->
-<!--                <category android:name="android.intent.category.LAUNCHER"/>-->
-<!--            </intent-filter>-->
-<!--        </activity>-->
-
-<!--        <activity android:name=".ui.my_pet_profile.PetProfileFragment"-->
-<!--            android:label="PetProfileActivity"-->
-<!--            android:exported="true">-->
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.PetProfileActivity"/>-->
-<!--                <category android:name="android.intent.category.LAUNCHER"/>-->
-<!--            </intent-filter>-->
-<!--        </activity>-->
-
-<!--        <activity android:name=".ui.my_pet_profile.PetProfileFragment"-->
-<!--            android:label="PetProfileActivity"-->
-<!--            android:exported="true">-->
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.PetProfileActivity"/>-->
-<!--                <category android:name="android.intent.category.LAUNCHER"/>-->
-<!--            </intent-filter>-->
-<!--        </activity>-->
-
-<!--        <activity android:name=".ui.get_matches.GetMatchesFragment"-->
-<!--            android:exported="true"-->
-<!--            android:label="">-->
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN"/>-->
-
-<!--                <category android:name="android.intent.category.LAUNCHER"/>-->
-<!--            </intent-filter>-->
-<!--        </activity>-->
-<!--        <activity android:name=".ui.view_my_pets.ViewMyPetsFragment"-->
-<!--            android:exported="true"-->
-<!--            android:label="">-->
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN"/>-->
-
-<!--                <category android:name="android.intent.category.LAUNCHER"/>-->
-<!--            </intent-filter>-->
-<!--        </activity>-->
-
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />
