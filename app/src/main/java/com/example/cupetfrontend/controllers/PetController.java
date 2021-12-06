@@ -20,9 +20,6 @@ public class PetController implements IPetController {
     GetMatchesInputBoundary getMatches;
     UnMatchPetInputBoundary unMatchPet;
     SetPetProfileImageInputBoundary setPetProfileImage;
-    AddToPetImageGalleryInputBoundary addToPetImageGallery;
-    RemoveFromPetImageGalleryInputBoundary removeFromPetImageGallery;
-    FetchPetProfileImageInputBoundary fetchPetProfileImage;
 
     public void setPetCreator(PetCreatorInputBoundary petCreator) {
         this.petCreator = petCreator;
@@ -58,18 +55,6 @@ public class PetController implements IPetController {
 
     public void setSetPetProfileImage(SetPetProfileImageInputBoundary setPetProfileImage) {
         this.setPetProfileImage = setPetProfileImage;
-    }
-
-    public void setAddToPetImageGallery(AddToPetImageGalleryInputBoundary addToPetImageGallery) {
-        this.addToPetImageGallery = addToPetImageGallery;
-    }
-
-    public void setRemoveFromPetImageGallery(RemoveFromPetImageGalleryInputBoundary removeFromPetImageGallery) {
-        this.removeFromPetImageGallery = removeFromPetImageGallery;
-    }
-
-    public void setFetchPetProfileImage(FetchPetProfileImageInputBoundary fetchPetProfileImage) {
-        this.fetchPetProfileImage = fetchPetProfileImage;
     }
 
     @Override
@@ -135,32 +120,5 @@ public class PetController implements IPetController {
         );
 
         setPetProfileImage.setPetProfileImage(request);
-    }
-
-    @Override
-    public void addToPetImageGallery(String token, String petId, String imgB64) {
-        AddToPetImageGalleryRequestModel request = new AddToPetImageGalleryRequestModel(
-                token, petId, imgB64
-        );
-
-        addToPetImageGallery.addToPetImageGallery(request);
-    }
-
-    @Override
-    public void removeFromPetImageGallery(String token, String petId, String assetId) {
-        RemoveFromPetImageGalleryRequestModel request = new RemoveFromPetImageGalleryRequestModel(
-                token, petId, assetId
-        );
-
-        removeFromPetImageGallery.removeFromPetImageGallery(request);
-    }
-
-    @Override
-    public void fetchPetProfileImage(String token, String petId) {
-        FetchPetProfileImageRequestModel request = new FetchPetProfileImageRequestModel(
-                token, petId
-        );
-
-        fetchPetProfileImage.fetchPetProfileImage(request);
     }
 }

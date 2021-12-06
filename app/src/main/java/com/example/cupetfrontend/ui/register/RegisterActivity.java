@@ -12,12 +12,14 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.lifecycle.Observer;
+
 import com.example.cupetfrontend.App;
 import com.example.cupetfrontend.R;
 import com.example.cupetfrontend.controllers.abstracts.IUserController;
-import com.example.cupetfrontend.dependency_selector.DependencySelector;
 import com.example.cupetfrontend.presenters.abstracts.ICreateUserPresenter;
 import com.example.cupetfrontend.ui.login.LoginActivity;
+
+import javax.inject.Inject;
 
 /**
  * The activity for the Register page.
@@ -32,11 +34,16 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText cityField;
     private Button registerButton;
     private RegisterViewModel registerViewModel;
+    @Inject
+    public IUserController userController;
+    @Inject
+    public ICreateUserPresenter createUserPresenter;
 
     /**
      * Initialize the views of the form into the field instance variables.
      */
     private void initializeViews() {
+        // TODO: Replace with binding
         firstNameField = findViewById(R.id.reg_firstName);
         lastNameField = findViewById(R.id.reg_lastName);
         emailField = findViewById(R.id.reg_email);
@@ -67,11 +74,8 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        DependencySelector dependencySelector = ((App) getApplication()).getDependencySelector();
+        ((App) getApplicationContext()).getAppComponent().inject(this);
 
-        IUserController userController = dependencySelector.getControllers().getUserController();
-
-        ICreateUserPresenter createUserPresenter = dependencySelector.getUserPresenters().getCreateUserPresenter();
         registerViewModel = new RegisterViewModel(userController);
         createUserPresenter.setRegisterViewModel(registerViewModel);
 

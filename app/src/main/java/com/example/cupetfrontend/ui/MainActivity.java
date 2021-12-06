@@ -18,7 +18,6 @@ import com.example.cupetfrontend.controllers.SessionManager;
 import com.example.cupetfrontend.controllers.abstracts.IPetSessionManager;
 import com.example.cupetfrontend.controllers.abstracts.ISessionManager;
 import com.example.cupetfrontend.controllers.cached_data_models.CachedUserData;
-import com.example.cupetfrontend.dependency_selector.DependencySelector;
 import com.example.cupetfrontend.ui.login.LoginActivity;
 import com.example.cupetfrontend.ui.splash_screen.SplashScreenActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -32,32 +31,41 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.example.cupetfrontend.databinding.ActivityMainBinding;
 
+import javax.inject.Inject;
+
 /**
  * This is the main activity of the application which is presented to
  * the user once they have signed in and chosen a pet to sign in as.
  */
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements Navigator {
 
+    private Object navPayloadContext;
     private ActivityMainBinding binding;
     private AppBarConfiguration appBarConfig;
     private int editBtnNavTarget;
     private Menu appBarMenu;
 
+    @Inject
+    public ISessionManager sessionManager;
+    @Inject
+    public IPetSessionManager petSessionManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        ((App) getApplicationContext()).getAppComponent().inject(this);
+
         // Temporarily create some user dummy data
         //  TODO: Offload to the log in step
-        DependencySelector dependencySelector = ((App) this.getApplication()).getDependencySelector();
-        dependencySelector.getSessionManager().setCachedUserData(new CachedUserData(
+        sessionManager.setCachedUserData(new CachedUserData(
                 "dummy first", "dummy last", "dummy email",
                 "https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Jonathan_G_Meath_portrays_" +
                         "Santa_Claus.jpg/800px-Jonathan_G_Meath_portrays_Santa_Claus.jpg"
         ));
 
-        dependencySelector.getSessionManager().setToken("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMiIsImV4cCI6MTYzODc3MzA3OCwiaWF0IjoxNjM4NzM3MDc4fQ.5FeS7La1Khgh9EqZrrQSnXgJ56WZ7O64Zk2a63ckZkI");
-        dependencySelector.getPetSessionManager().setPetId("10");
+        sessionManager.setToken("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMyIsImV4cCI6MTYzODg0NzQ1MSwiaWF0IjoxNjM4ODExNDUxfQ.oK14JQB5Z-NbzkAEtq0e77V8gc6CMfmiehiMz8tykc4");
+        petSessionManager.setPetId("12");
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -114,8 +122,7 @@ public class MainActivity extends AppCompatActivity {
         TextView fullNameView = findViewById(R.id.drawer_full_name);
         TextView emailView = findViewById(R.id.drawer_email);
 
-        DependencySelector dependencySelector = ((App) this.getApplication()).getDependencySelector();
-        CachedUserData cachedUserData = dependencySelector.getSessionManager().getCachedUserData();
+        CachedUserData cachedUserData = sessionManager.getCachedUserData();
         String fullName = cachedUserData.getFirstName() + " " + cachedUserData.getLastName();
 
         fullNameView.setText(fullName);
@@ -126,9 +133,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void setUpSignOutListener() {
         Button signOutBtn = binding.signOutBtn;
-        DependencySelector dependencySelector = ((App) this.getApplication()).getDependencySelector();
-        ISessionManager sessionManager = dependencySelector.getSessionManager();
-        IPetSessionManager petSessionManager = dependencySelector.getPetSessionManager();
 
         signOutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -195,14 +199,23 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    /**
-     * Navigate to a page defined in mobile_navigation.xml.
-     */
-    public void navigate (int navTarget) {
+    @Override
+    public void navigate(int navTarget) {
         NavController navController = Navigation.findNavController(
                 this, R.id.main_nav_fragment);
 
         navController.navigate(navTarget);
+    }
+
+    @Override
+    public void navigate(int navTarget, Object payloadContext) {
+        this.navPayloadContext = payloadContext;
+        navigate(navTarget);
+    }
+
+    @Override
+    public Object getPayloadContext() {
+        return navPayloadContext;
     }
 
     /**

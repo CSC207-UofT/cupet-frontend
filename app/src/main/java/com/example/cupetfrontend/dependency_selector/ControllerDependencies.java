@@ -3,11 +3,32 @@ package com.example.cupetfrontend.dependency_selector;
 import com.example.cupetfrontend.controllers.AuthController;
 import com.example.cupetfrontend.controllers.PetController;
 import com.example.cupetfrontend.controllers.UserController;
+import com.example.cupetfrontend.controllers.abstracts.IPetController;
 import com.example.cupetfrontend.controllers.abstracts.IUserController;
 import com.example.cupetfrontend.use_cases.*;
 import com.example.cupetfrontend.use_cases.api_abstracts.IAuthAPIGateway;
 import com.example.cupetfrontend.use_cases.api_abstracts.IPetAPIGateway;
 import com.example.cupetfrontend.use_cases.api_abstracts.IUserAPIGateway;
+import com.example.cupetfrontend.use_cases.pet.AddToPetImageGallery;
+import com.example.cupetfrontend.use_cases.pet.EditPet;
+import com.example.cupetfrontend.use_cases.pet.FetchPetProfile;
+import com.example.cupetfrontend.use_cases.pet.FetchPetProfileImage;
+import com.example.cupetfrontend.use_cases.pet.GetMatches;
+import com.example.cupetfrontend.use_cases.pet.GetPotentialMatches;
+import com.example.cupetfrontend.use_cases.pet.IntendToMatch;
+import com.example.cupetfrontend.use_cases.pet.PetCreator;
+import com.example.cupetfrontend.use_cases.pet.RejectMatch;
+import com.example.cupetfrontend.use_cases.pet.RemoveFromPetImageGallery;
+import com.example.cupetfrontend.use_cases.pet.SetPetProfileImage;
+import com.example.cupetfrontend.use_cases.pet.UnMatchPet;
+import com.example.cupetfrontend.use_cases.user.EditUserAccount;
+import com.example.cupetfrontend.use_cases.user.EditUserProfile;
+import com.example.cupetfrontend.use_cases.user.FetchUserAccount;
+import com.example.cupetfrontend.use_cases.user.FetchUserProfile;
+import com.example.cupetfrontend.use_cases.user.FetchUserProfileImage;
+import com.example.cupetfrontend.use_cases.user.GetPets;
+import com.example.cupetfrontend.use_cases.user.SetUserProfileImage;
+import com.example.cupetfrontend.use_cases.user.UserCreator;
 
 public class ControllerDependencies {
     private UserController userController;
@@ -42,9 +63,6 @@ public class ControllerDependencies {
         userController.setSetUserProfileImage(new SetUserProfileImage(
                 userAPIGateway, presenters.getSetUserProfileImagePresenter()
         ));
-        userController.setFetchUserProfileImage(new FetchUserProfileImage(
-                userAPIGateway, presenters.getFetchUserProfileImagePresenter()
-        ));
     }
 
     private void setPetController(IPetAPIGateway petAPIGateway, PetPresenterDependencies petPresenters){
@@ -68,12 +86,6 @@ public class ControllerDependencies {
                 petPresenters.getUnMatchPresenter()));
         petController.setSetPetProfileImage(new SetPetProfileImage(petAPIGateway,
                 petPresenters.getSetPetProfileImagePresenter()));
-        petController.setAddToPetImageGallery(new AddToPetImageGallery(petAPIGateway,
-                petPresenters.getAddToPetImageGalleryPresenter()));
-        petController.setRemoveFromPetImageGallery(new RemoveFromPetImageGallery(petAPIGateway,
-                petPresenters.getRemoveFromPetImageGalleryPresenter()));
-        petController.setFetchPetProfileImage(new FetchPetProfileImage(
-                petAPIGateway, petPresenters.getFetchPetProfileImagePresenter()));
     }
 
     private void setAuthController(IAuthAPIGateway authAPIGateway,

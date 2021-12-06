@@ -16,7 +16,6 @@ public class UserController implements IUserController {
     EditUserAccountInputBoundary editUserAccount;
     GetPetsInputBoundary getPets;
     SetUserProfileImageInputBoundary setUserProfileImage;
-    FetchUserProfileImageInputBoundary fetchUserProfileImage;
 
     public void setUserCreator(UserCreatorInputBoundary userCreator) {
         this.userCreator = userCreator;
@@ -44,10 +43,6 @@ public class UserController implements IUserController {
 
     public void setGetPets(GetPetsInputBoundary getPets) {
         this.getPets = getPets;
-    }
-
-    public void setFetchUserProfileImage(FetchUserProfileImageInputBoundary fetchUserProfileImage) {
-        this.fetchUserProfileImage = fetchUserProfileImage;
     }
 
     @Override
@@ -116,14 +111,5 @@ public class UserController implements IUserController {
         );
 
         setUserProfileImage.setUserProfileImage(request);
-    }
-
-    @Override
-    public void fetchUserProfileImage(String token, String userId) {
-        FetchUserProfileImageRequestModel request = new FetchUserProfileImageRequestModel(
-                token, userId
-        );
-
-        fetchUserProfileImage.fetchUserProfileImage(request);
     }
 }

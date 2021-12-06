@@ -14,16 +14,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.cupetfrontend.App;
 import com.example.cupetfrontend.controllers.abstracts.IPetController;
+import com.example.cupetfrontend.controllers.abstracts.IPetSessionManager;
+import com.example.cupetfrontend.controllers.abstracts.ISessionManager;
 import com.example.cupetfrontend.data.model.PetModel;
 import com.example.cupetfrontend.databinding.FragmentGetMatchesBinding;
 
+import com.example.cupetfrontend.presenters.abstracts.IGetMatchesPresenter;
 import com.example.cupetfrontend.presenters.pet.GetMatchesPresenter;
 import com.example.cupetfrontend.ui.MainActivityFragment;
+import com.example.cupetfrontend.ui.get_matches.recycler.RecyclerViewAdapter;
 
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.inject.Inject;
 
 /**
  * The activity for the Get Matches page.
@@ -36,7 +43,16 @@ public class GetMatchesFragment extends MainActivityFragment {
     private RecyclerView recyclerView;
     private RecyclerViewAdapter adapter;
     private GetMatchesViewModel getMatchesViewModel;
-    private final List<PetModel> petModelList = new ArrayList<>();
+    private List<PetModel> petModelList;
+
+    @Inject
+    public ISessionManager sessionManager;
+    @Inject
+    public IPetSessionManager petSessionManager;
+    @Inject
+    public IPetController petController;
+    @Inject
+    public IGetMatchesPresenter getMatchesPresenter;
 
     private void initializeViews() {
         recyclerView = binding.recyclerView;
@@ -52,14 +68,17 @@ public class GetMatchesFragment extends MainActivityFragment {
         binding = FragmentGetMatchesBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        Log.d(TAG, "onCreate: started.");
-        initializeDependencySelector();
-        initializeViews();
+        petModelList = new ArrayList<>();
 
+        Log.d(TAG, "onCreate: started.");
+
+        ((App) getApplicationContext()).getAppComponent().inject(this);
+
+        initializeViews();
         initViewModel();
 
-        getMatchesViewModel.getMatches(dependencySelector.getSessionManager().getToken(),
-                dependencySelector.getPetSessionManager().getPetId());
+        getMatchesViewModel.getMatches(sessionManager.getToken(),
+                petSessionManager.getPetId());
 
         setUpObserveGetMatchesResult();
         initRecyclerView();
@@ -70,8 +89,6 @@ public class GetMatchesFragment extends MainActivityFragment {
     }
 
     private void initViewModel() {
-        IPetController petController = dependencySelector.getControllers().getPetController();
-        GetMatchesPresenter getMatchesPresenter = dependencySelector.getPetPresenters().getGetMatchesPresenter();
         getMatchesViewModel = new GetMatchesViewModel(petController);
         getMatchesPresenter.setGetMatchesViewModel(getMatchesViewModel);
     }
