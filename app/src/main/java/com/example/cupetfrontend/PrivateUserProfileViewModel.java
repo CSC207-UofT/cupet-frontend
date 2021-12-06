@@ -29,19 +29,18 @@ public class PrivateUserProfileViewModel extends ViewModel implements IPrivateUs
     }
 
     @Override
-    public void onPrivateProfileSuccess(String firstname, String lastname, String biography) {
-        privateUserProfileResult.setValue(new PrivateUserProfileResult(firstname, lastname, biography));
-        this.firstName = Objects.requireNonNull(privateUserProfileResult.getValue()).getFirstName();
-        this.lastName = Objects.requireNonNull(privateUserProfileResult.getValue()).getLastName();
+    public void onPrivateProfileSuccess(String firstname, String lastname, String biography, String image_url) {
+        privateUserProfileResult.setValue(new PrivateUserProfileResult(biography));
         this.biography = Objects.requireNonNull(privateUserProfileResult.getValue()).getBiography();
 
 
     }
 
     @Override
-    public void onPrivateProfileFailure() {
-
+    public void onPrivateProfileFailure(String message) {
+        PrivateUserProfileResult newPrivateUserProfileResult = new PrivateUserProfileResult(true, message);
     }
+
     public String getFirstName(){
         return this.firstName;
     }

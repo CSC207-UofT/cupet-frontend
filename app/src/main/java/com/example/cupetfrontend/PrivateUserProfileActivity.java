@@ -1,29 +1,37 @@
 package com.example.cupetfrontend;
 
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.lifecycle.Observer;
+import com.bumptech.glide.Glide;
 import com.example.cupetfrontend.controllers.abstracts.IUserController;
 import com.example.cupetfrontend.dependency_selector.DependencySelector;
 import com.example.cupetfrontend.presenters.abstracts.IPrivateProfilePresenter;
 import com.example.cupetfrontend.presenters.user.FetchUserProfilePresenter;
 
 public class PrivateUserProfileActivity extends AppCompatActivity {
-    private String firstName;
-    private String lastName;
-    private String biography;
-    private int age;
     private PrivateUserProfileViewModel privateUserProfileViewModel;
-
+    TextView biography_view;
+    ImageView profile_picture;
+    TextView instagram_view;
+    TextView phoneNumber_view;
+    TextView facebook_view;
 
     private void setFieldError(EditText field, Integer errorState){
         if (errorState != null){
             field.setError(getString(errorState));
         }
     };
-
+    private void initializeViews(){
+        biography_view = findViewById(R.id.UserProfileBiography);
+        profile_picture = findViewById(R.id.UserProfilePicture);
+        instagram_view = findViewById(R.id.UserInstagramLink_textview);
+        phoneNumber_view = findViewById(R.id.UserPhoneNumberLink_textview);
+        facebook_view = findViewById(R.id.UserFaceBookLink_textview);
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,9 +43,9 @@ public class PrivateUserProfileActivity extends AppCompatActivity {
 
         FetchUserProfilePresenter fetchUserProfilePresenter = dependencySelector.getUserPresenters().getFetchUserProfilePresenter();
         privateUserProfileViewModel = new PrivateUserProfileViewModel(userController);
-        fetchUserProfilePresenter.setPrivateUserProfileViewModel(privateUserProfileViewModel);
-
+        fetchUserProfilePresenter.setPrivateProfileViewModel(privateUserProfileViewModel);
         privateUserProfileViewModel.getProfileInformation();
+        initializeViews();
         privateUserProfileViewModel.getPrivateUserProfileResult().observe(this, new Observer<PrivateUserProfileResult>() {
             @Override
             public void onChanged(PrivateUserProfileResult privateUserProfileResult) {
@@ -49,19 +57,22 @@ public class PrivateUserProfileActivity extends AppCompatActivity {
                     onPrivateProfileFailure(privateUserProfileResult.getErrorMessage());
                 }
                 else{
-                    onPrivateProfileSuccess(privateUserProfileResult.getFirstName(), privateUserProfileResult.getLastName(), privateUserProfileResult.getBiography());
+                    onPrivateProfileSuccess(privateUserProfileResult.getBiography(),
+                            privateUserProfileResult.getInstagram(), privateUserProfileResult.getFacebook(),
+                            privateUserProfileResult.getPhoneNumber(), privateUserProfileResult.getImage_url());
                 }
             }
         });
 
     }
 
-    private void onPrivateProfileSuccess(String firstName, String lastName, String biography){
-        TextView Biography_view = findViewById(R.id.UserProfileBiography);
-        Biography_view.setText(biography);
-        TextView name_view = findViewById(R.id.name_textview);
-        String name = firstName + "" + lastName;
-        Biography_view.setText(name);
+    private void onPrivateProfileSuccess(String biography, String instagram, String facebook, String phoneNumber, String image_url){
+        biography_view.setText(biography);
+        instagram_view.setText(instagram);
+        facebook_view.setText(facebook);
+        phoneNumber_view.setText(phoneNumber);
+        Glide.with(this).load(image_url).into(profile_picture);
+
 
     }
 

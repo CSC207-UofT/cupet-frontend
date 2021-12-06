@@ -35,6 +35,7 @@ public class EditUserAccountActivity extends AppCompatActivity {
         passwordField = findViewById(R.id.AccountUserPassword_Input);
         cityField = findViewById(R.id.editAccountUserCity_Input);
         saveChangesButton = findViewById(R.id.Confirm_EditUserAccount_button);
+        
     }
 
 

@@ -5,9 +5,11 @@ import java.util.List;
 
 public class PrivateUserProfileResult {
     private boolean isError;
+    private String instagram;
+    private String facebook;
+    private String phoneNumber;
+    private String image_url;
     private String errorMessage;
-    private String firstName;
-    private String lastName;
     private String biography;
 
 
@@ -17,10 +19,14 @@ public class PrivateUserProfileResult {
         errorMessage = "";
     }
 
-    public PrivateUserProfileResult(String firstname, String lastname, String biography){
-        this.firstName = firstname;
-        this.lastName = lastname;
+    public PrivateUserProfileResult(String biography){
+
         this.biography = biography;
+    }
+
+    public PrivateUserProfileResult(boolean isError, String message) {
+        this.isError = isError;
+        this.errorMessage = message;
     }
 
     public boolean isError() {
@@ -33,14 +39,18 @@ public class PrivateUserProfileResult {
         return errorMessage;
     }
 
-    public String getFirstName(){
-        return this.firstName;
-    }
-
-    public String getLastName(){
-        return this.lastName;
-    }
-
     public String getBiography(){
         return this.biography;}
+
+    public String getInstagram(){
+        return this.instagram;}
+
+    public String getFacebook(){
+        return this.facebook;}
+
+    public String getPhoneNumber(){
+        return this.phoneNumber;}
+
+    public String getImage_url(){
+        return this.image_url;}
 }
