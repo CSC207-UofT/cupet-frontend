@@ -36,8 +36,9 @@ import com.example.cupetfrontend.databinding.ActivityMainBinding;
  * This is the main activity of the application which is presented to
  * the user once they have signed in and chosen a pet to sign in as.
  */
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements Navigator {
 
+    private Object navPayloadContext;
     private ActivityMainBinding binding;
     private AppBarConfiguration appBarConfig;
     private int editBtnNavTarget;
@@ -195,14 +196,23 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    /**
-     * Navigate to a page defined in mobile_navigation.xml.
-     */
-    public void navigate (int navTarget) {
+    @Override
+    public void navigate(int navTarget) {
         NavController navController = Navigation.findNavController(
                 this, R.id.main_nav_fragment);
 
         navController.navigate(navTarget);
+    }
+
+    @Override
+    public void navigate(int navTarget, Object payloadContext) {
+        this.navPayloadContext = payloadContext;
+        navigate(navTarget);
+    }
+
+    @Override
+    public Object getPayloadContext() {
+        return navPayloadContext;
     }
 
     /**

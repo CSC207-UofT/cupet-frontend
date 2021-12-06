@@ -20,6 +20,7 @@ import com.example.cupetfrontend.databinding.FragmentGetMatchesBinding;
 
 import com.example.cupetfrontend.presenters.pet.GetMatchesPresenter;
 import com.example.cupetfrontend.ui.MainActivityFragment;
+import com.example.cupetfrontend.ui.get_matches.recycler.RecyclerViewAdapter;
 
 
 import java.util.ArrayList;

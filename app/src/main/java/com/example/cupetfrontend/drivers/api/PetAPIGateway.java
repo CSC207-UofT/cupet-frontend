@@ -119,7 +119,7 @@ public class PetAPIGateway extends APIGateway implements IPetAPIGateway {
             put("pet2Id", requestData.getOtherPetId());
         }});
 
-        String url = PetRoutesStore.toAbsoluteRoute(PetRoutesStore.UN_SWIPE_PETS);
+        String url = PetRoutesStore.toAbsoluteRoute(PetRoutesStore.UN_MATCH_PETS);
 
         requestManager.makePostRequest(url, requestBody,
                 createAuthHeaders(requestData.getToken()), responseListener);

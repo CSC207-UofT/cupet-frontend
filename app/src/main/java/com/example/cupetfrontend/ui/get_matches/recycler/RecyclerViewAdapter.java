@@ -1,4 +1,4 @@
-package com.example.cupetfrontend.ui.get_matches;
+package com.example.cupetfrontend.ui.get_matches.recycler;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -17,10 +17,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.cupetfrontend.App;
 import com.example.cupetfrontend.R;
 import com.example.cupetfrontend.data.model.PetModel;
+import com.example.cupetfrontend.dependency_selector.DependencySelector;
 
-import java.util.ArrayList;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -33,15 +36,30 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>{
 
     private static final String TAG = "RecyclerViewAdapter";
+    private final List<PetModel> mPetModels;
+    private final Context context;
+    private GetMatchesRecyclerViewModel viewModel;
 
-
-    private List<PetModel> mPetModels = new ArrayList<>();
-    private final Context mContext;
-
-
-    public RecyclerViewAdapter(Context mContext, List<PetModel> mPetModels) {
-        this.mContext = mContext;
+    public RecyclerViewAdapter(Context context, List<PetModel> mPetModels) {
+        this.context = context;
         this.mPetModels = mPetModels;
+
+        initializeViewModel();
+    }
+
+    private DependencySelector getDependencySelector() {
+        return ((App) context.getApplicationContext()).
+                getDependencySelector();
+    }
+
+    private void initializeViewModel() {
+        DependencySelector dependencySelector = getDependencySelector();
+
+        viewModel = new GetMatchesRecyclerViewModel(dependencySelector.getControllers()
+                .getPetController());
+
+        dependencySelector.getPetPresenters().getUnMatchPresenter()
+                .setUnMatchViewModel(viewModel);
     }
 
     /**
@@ -56,9 +74,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // This method is responsible for inflating the view
         // Basically recycles the view holders - puts them in position they should be put into
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_listitem, parent, false);
-        ViewHolder holder = new ViewHolder(view);
-        return holder;
+        View view = LayoutInflater.from(parent.getContext()).inflate(
+                R.layout.layout_listitem, parent, false);
+        return new ViewHolder(view);
     }
 
     /**
@@ -75,37 +93,66 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         RequestOptions defaultOptions = new RequestOptions()
                 .error(R.drawable.ic_launcher_background);
 
-        Glide.with(mContext)
+        loadDataIntoViews(holder);
+        setUpDeleteButtonClicked(holder);
+        setUpClickedEntry(holder);
+    }
+
+    private void loadDataIntoViews(@NotNull ViewHolder holder) {
+        Glide.with(context)
                 // tells Glide we it as bitmap
                 .asBitmap()
                 // where we would reference img URLs - resource where img is coming from
-                .load(mPetModels.get(holder.getAdapterPosition()).getPetImageUrl())
+                .load(getPetModelFor(holder).getPetImageUrl())
                 // loading image into image view - so reference view holder -> image widget
                 .into(holder.petImage);
 
-        holder.petName.setText(mPetModels.get(holder.getAdapterPosition()).getPetName());
-        holder.petBreed.setText(mPetModels.get(holder.getAdapterPosition()).getPetBreed());
-        // Create OnClick listener to observe if delete button for the matched pet is clicked
+        holder.petName.setText(getPetModelFor(holder).getPetName());
+        holder.petBreed.setText(getPetModelFor(holder).getPetBreed());
+    }
+
+    private void setUpClickedEntry(@NotNull ViewHolder holder) {
+        holder.parentLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "onClick: clicked on:" + getPetModelFor(holder)
+                        .getPetName());
+
+                Toast.makeText(context, mPetModels.get(holder.getAdapterPosition()).getPetName(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void setUpDeleteButtonClicked(@NotNull ViewHolder holder) {
         holder.deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "onClick: clicked on: delete" + mPetModels.get(holder.getAdapterPosition()).getPetName());
 
-                Toast.makeText(mContext, "delete pet", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "delete pet", Toast.LENGTH_SHORT).show();
 
-                // Create Alert Dialog to prompt user to confirm action to delete the matched pet
-                AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
                 builder.setTitle(R.string.delete_button);
                 builder.setMessage("Are you sure you want to delete this pet?");
-                builder.setIcon(R.drawable.ic_launcher_foreground); //change icon
+                builder.setIcon(R.drawable.ic_launcher_foreground);
+
                 builder.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Log.d(TAG, "onClick: confirm delete");
-                        // TODO: Delete from the list
+
+                        DependencySelector dependencySelector = getDependencySelector();
+                        String otherPetId = getPetModelFor(holder).getPetId();
+                        String token = dependencySelector.getSessionManager().getToken();
+                        String myPetId = dependencySelector.getPetSessionManager().getPetId();
+
+                        viewModel.unMatch(token, myPetId, otherPetId);
+                        removeAt(holder.getAdapterPosition());
+
                         dialog.dismiss();
                     }
                 });
+
                 builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -113,23 +160,20 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                         dialog.dismiss();
                     }
                 });
+
                 AlertDialog alert = builder.create();
                 alert.show();
             }
         });
-        // set on click listener for each view in the RecyclerView.
-        holder.parentLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d(TAG, "onClick: clicked on:" + mPetModels.get(holder.getAdapterPosition()).getPetName());
-
-                Toast.makeText(mContext, mPetModels.get(holder.getAdapterPosition()).getPetName(), Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 
-
-    // tells adapter how many list items are in the list
+    /**
+     * Return the instance of PetModel corresponding
+     * to a holder
+     */
+    private PetModel getPetModelFor(ViewHolder holder) {
+        return mPetModels.get(holder.getAdapterPosition());
+    }
 
     /**
      * Return the number of items in the list which corresponds to the number of views to be
@@ -153,6 +197,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+
             petImage = itemView.findViewById(R.id.image);
             petName = itemView.findViewById(R.id.pet_name);
             petBreed = itemView.findViewById(R.id.pet_breed);
@@ -161,4 +206,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         }
     }
 
+    /**
+     * Remove an item in the recycler view at position.
+     *
+     * @param position The position of the item to remove
+     */
+    public void removeAt(int position) {
+        mPetModels.remove(position);
+        notifyItemRemoved(position);
+        notifyItemRangeChanged(position, mPetModels.size());
+    }
 }
