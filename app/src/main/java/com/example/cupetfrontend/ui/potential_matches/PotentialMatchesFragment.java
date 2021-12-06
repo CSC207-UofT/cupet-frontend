@@ -212,8 +212,7 @@ public class PotentialMatchesFragment extends MainActivityFragment {
         binding.potentialHeadingPreview.setText(heading);
         binding.potentialSubheadingPreview.setText(petData.getBreed());
 
-
-        Glide.with(this).asBitmap().load(petData.getProfileImgUrl()).dontAnimate().into(
+        Glide.with(this).load(petData.getProfileImgUrl()).into(
                 binding.potentialProfileImg);
 
         contractMatchView();

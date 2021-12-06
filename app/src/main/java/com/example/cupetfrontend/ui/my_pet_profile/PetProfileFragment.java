@@ -35,8 +35,7 @@ import java.net.URL;
  */
 public class PetProfileFragment extends MainActivityFragment {
     private ImageView petImage;
-    private TextView petName;
-    private TextView petAge;
+    private TextView petProfileTitle;
     private TextView petBreed;
     private TextView petBio;
     private PetProfileViewModel petProfileViewModel;
@@ -47,8 +46,7 @@ public class PetProfileFragment extends MainActivityFragment {
      */
     private void initializeViews() {
         petImage = binding.petProfileImage;
-        petName = binding.petProfileName;
-        petAge = binding.petProfileAge;
+        petProfileTitle = binding.petProfileTitle;
         petBreed = binding.petProfileBreed;
         petBio = binding.petProfileBio;
     }
@@ -131,11 +129,12 @@ public class PetProfileFragment extends MainActivityFragment {
      * When success fetching a pet profile, set them to corresponding ImageView & TextViews.
      */
     private void onPetProfileSuccess(String petImageStr, String petNameStr, String petAgeStr, String petBreedStr, String petBioStr) {
-        petName.setText(petNameStr);
-        petAge.setText(petAgeStr);
+        String profileTitle = petNameStr + ", " + petAgeStr;
+
+        petProfileTitle.setText(profileTitle);
         petBreed.setText(petBreedStr);
         petBio.setText(petBioStr);
-        if (petImageStr != "") {
+        if (!petImageStr.equals("")) {
             Glide.with(this).load(petImageStr).into(petImage);
         } else {
             Glide.with(this).load("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwn2UIl7YtjhkbxoIuoI4E7yyXH1KC6GvRqg&usqp=CAU").into(petImage);

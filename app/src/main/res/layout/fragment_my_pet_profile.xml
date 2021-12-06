@@ -17,10 +17,9 @@
 
             <ImageView
                 android:id="@+id/pet_profile_image"
-                android:layout_width="410dp"
-                android:layout_height="347dp"
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
                 android:layout_gravity="center"
-                android:layout_marginTop="60dp"
                 tools:srcCompat="@tools:sample/avatars" />
 
             <LinearLayout
@@ -28,24 +27,15 @@
                 android:layout_height="match_parent">
 
                 <TextView
-                    android:id="@+id/pet_profile_name"
+                    android:id="@+id/pet_profile_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="24dp"
                     android:fontFamily="@font/quicksand"
                     android:text="@string/pet_name"
-                    android:textSize="24sp" />
+                    android:textSize="36sp" />
 
-                <TextView
-                    android:id="@+id/pet_profile_age"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginTop="24dp"
-                    android:fontFamily="@font/quicksand"
-                    android:text="@string/pet_age"
-                    android:textSize="24sp" />
             </LinearLayout>
 
             <TextView
@@ -53,17 +43,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="24dp"
-                android:layout_marginTop="12dp"
                 android:fontFamily="@font/quicksand"
                 android:text="@string/pet_breed"
-                android:textSize="20sp" />
+                android:textSize="24sp" />
 
             <TextView
                 android:id="@+id/pet_profile_bio"
                 android:layout_width="362dp"
-                android:layout_height="188dp"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="16dp"
+                android:paddingBottom="30dp"
                 android:fontFamily="@font/quicksand"
                 android:text="@string/pet_bio" />
 
