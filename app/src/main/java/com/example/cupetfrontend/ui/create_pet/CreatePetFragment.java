@@ -20,12 +20,12 @@ import androidx.lifecycle.Observer;
 import com.example.cupetfrontend.App;
 import com.example.cupetfrontend.R;
 import com.example.cupetfrontend.controllers.abstracts.IPetController;
+import com.example.cupetfrontend.controllers.abstracts.ISessionManager;
 import com.example.cupetfrontend.databinding.FragmentCreatePetBinding;
-import com.example.cupetfrontend.databinding.FragmentEditPetBinding;
-import com.example.cupetfrontend.dependency_selector.DependencySelector;
 import com.example.cupetfrontend.presenters.abstracts.ICreatePetPresenter;
 import com.example.cupetfrontend.ui.MainActivityFragment;
-import com.example.cupetfrontend.ui.my_pet_profile.PetProfileFragment;
+
+import javax.inject.Inject;
 
 /**
  * The fragment for the Create Pet page.
@@ -40,6 +40,13 @@ public class CreatePetFragment extends MainActivityFragment {
     private ImageButton editPetImageButton;
     private CreatePetViewModel createPetViewModel;
     private FragmentCreatePetBinding binding;
+
+    @Inject
+    public IPetController petController;
+    @Inject
+    public ISessionManager sessionManager;
+    @Inject
+    public ICreatePetPresenter createPetPresenter;
 
     /**
      * Initialize the views of the form into the field instance variables.
@@ -73,10 +80,7 @@ public class CreatePetFragment extends MainActivityFragment {
         binding = FragmentCreatePetBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        initializeDependencySelector();
-        IPetController petController = dependencySelector.getControllers().getPetController();
-
-        ICreatePetPresenter createPetPresenter = dependencySelector.getPetPresenters().getCreatePetPresenter();
+        ((App) getApplicationContext()).getAppComponent().inject(this);
         createPetViewModel = new CreatePetViewModel(petController);
         createPetPresenter.setCreatePetViewModel(createPetViewModel);
 

@@ -1,6 +1,5 @@
 package com.example.cupetfrontend.ui.edit_pet;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -12,19 +11,17 @@ import android.widget.EditText;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
+
 import com.example.cupetfrontend.App;
 import com.example.cupetfrontend.R;
 import com.example.cupetfrontend.controllers.abstracts.IPetController;
+import com.example.cupetfrontend.controllers.abstracts.ISessionManager;
 import com.example.cupetfrontend.databinding.FragmentEditPetBinding;
-import com.example.cupetfrontend.databinding.FragmentMyPetProfileBinding;
-import com.example.cupetfrontend.dependency_selector.DependencySelector;
 import com.example.cupetfrontend.presenters.abstracts.IEditPetPresenter;
-import com.example.cupetfrontend.presenters.abstracts.IFetchPetProfilePresenter;
 import com.example.cupetfrontend.ui.MainActivityFragment;
-import com.example.cupetfrontend.ui.login.LoginActivity;
-import com.example.cupetfrontend.ui.my_pet_profile.PetProfileViewModel;
+
+import javax.inject.Inject;
 
 /**
  * The fragment for the Edit Pet page.
@@ -37,6 +34,13 @@ public class EditPetFragment extends MainActivityFragment {
     private Button editPetButton;
     private EditPetViewModel editPetViewModel;
     private FragmentEditPetBinding binding;
+
+    @Inject
+    public ISessionManager sessionManager;
+    @Inject
+    public IEditPetPresenter editPetPresenter;
+    @Inject
+    public IPetController petController;
 
     /**
      * Initialize the views of the form into the field instance variables.
@@ -68,11 +72,8 @@ public class EditPetFragment extends MainActivityFragment {
         binding = FragmentEditPetBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        initializeDependencySelector();
+        ((App) getApplicationContext()).getAppComponent().inject(this);
 
-        IPetController petController = dependencySelector.getControllers().getPetController();
-
-        IEditPetPresenter editPetPresenter = dependencySelector.getPetPresenters().getEditPetPresenter();
         editPetViewModel = new EditPetViewModel(petController);
         editPetPresenter.setEditPetViewModel(editPetViewModel);
 

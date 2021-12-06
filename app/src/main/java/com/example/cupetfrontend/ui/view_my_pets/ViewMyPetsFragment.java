@@ -14,20 +14,25 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.cupetfrontend.App;
 import com.example.cupetfrontend.R;
+import com.example.cupetfrontend.controllers.abstracts.IPetController;
+import com.example.cupetfrontend.controllers.abstracts.ISessionManager;
 import com.example.cupetfrontend.controllers.abstracts.IUserController;
 import com.example.cupetfrontend.data.model.PetModel;
 import com.example.cupetfrontend.databinding.FragmentViewMyPetsBinding;
+import com.example.cupetfrontend.presenters.abstracts.IGetPetsPresenter;
 import com.example.cupetfrontend.presenters.user.GetPetsPresenter;
 import com.example.cupetfrontend.ui.MainActivityFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 public class ViewMyPetsFragment extends MainActivityFragment {
 
     private static final String TAG = "GetPetsActivity";
-
     private FragmentViewMyPetsBinding binding;
 
     private RecyclerView recyclerView;
@@ -35,6 +40,13 @@ public class ViewMyPetsFragment extends MainActivityFragment {
     private ViewMyPetsViewModel viewMyPetsViewModel;
     private List<PetModel> petModelList;
     private Button addPetButton;
+
+    @Inject
+    public IUserController userController;
+    @Inject
+    public IGetPetsPresenter getPetsPresenter;
+    @Inject
+    public ISessionManager sessionManager;
 
     public void initializeViews() {
         recyclerView = binding.cardRecyclerView;
@@ -51,13 +63,14 @@ public class ViewMyPetsFragment extends MainActivityFragment {
         binding = FragmentViewMyPetsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
+        ((App) getApplicationContext()).getAppComponent().inject(this);
+
         petModelList = new ArrayList<>();
 
         initializeViews();
-        initializeDependencySelector();
         initializeViewModel();
 
-        viewMyPetsViewModel.getPets(dependencySelector.getSessionManager().getToken());
+        viewMyPetsViewModel.getPets(sessionManager.getToken());
 
         setUpObserveGetPetsResult();
         initCardRecyclerView();
@@ -68,15 +81,10 @@ public class ViewMyPetsFragment extends MainActivityFragment {
     }
 
     private void initializeViewModel() {
-        IUserController userController = dependencySelector.getControllers().getUserController();
-
-        GetPetsPresenter getPetsPresenter = dependencySelector.getUserPresenters().getGetPetsPresenter();
         viewMyPetsViewModel = new ViewMyPetsViewModel(userController);
         getPetsPresenter.setGetPetsViewModel(viewMyPetsViewModel);
     }
 
-
-    // method for actually setting up our recycler view
     private void initCardRecyclerView(){
         Log.d(TAG, "initRecyclerView: init recyclerview");
         adapter = new CardRecyclerViewAdapter(getContext(), petModelList);

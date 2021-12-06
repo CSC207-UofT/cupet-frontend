@@ -1,5 +1,7 @@
-package com.example.cupetfrontend.use_cases;
+package com.example.cupetfrontend.use_cases.user;
 
+import com.example.cupetfrontend.use_cases.DefaultFailResponseUseCase;
+import com.example.cupetfrontend.use_cases.InvalidAPIResponseException;
 import com.example.cupetfrontend.use_cases.api_abstracts.IServerResponseListener;
 import com.example.cupetfrontend.use_cases.api_abstracts.IUserAPIGateway;
 import com.example.cupetfrontend.use_cases.api_abstracts.request_models.user.APIEditUserProfileRequestModel;

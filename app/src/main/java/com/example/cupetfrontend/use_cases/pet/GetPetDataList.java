@@ -1,4 +1,4 @@
-package com.example.cupetfrontend.use_cases;
+package com.example.cupetfrontend.use_cases.pet;
 
 import com.example.cupetfrontend.use_cases.api_abstracts.IPetAPIGateway;
 import com.example.cupetfrontend.use_cases.output_boundaries.pet.FetchPetProfileOutputBoundary;

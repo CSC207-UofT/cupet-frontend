@@ -3,7 +3,6 @@ package com.example.cupetfrontend.dependency_selector;
 import com.example.cupetfrontend.presenters.abstracts.ICreateUserPresenter;
 import com.example.cupetfrontend.presenters.user.GetPetsPresenter;
 import com.example.cupetfrontend.presenters.user.*;
-import com.example.cupetfrontend.use_cases.SetUserProfileImage;
 
 public class UserPresenterDependencies {
     // TODO: replace all with abstract presenter types

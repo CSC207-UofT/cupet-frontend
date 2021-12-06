@@ -7,17 +7,19 @@ import android.util.Patterns;
 
 import com.example.cupetfrontend.controllers.abstracts.IAuthController;
 import com.example.cupetfrontend.R;
-import com.example.cupetfrontend.data.LoginRepository;
+import com.example.cupetfrontend.presenters.abstracts.ILoginPresenter;
 import com.example.cupetfrontend.presenters.view_model_abstracts.ILoginViewModel;
 
 public class LoginViewModel extends ViewModel implements ILoginViewModel {
 
     private final MutableLiveData<LoginFormState> loginFormState = new MutableLiveData<>();
     private final MutableLiveData<LoginResult> loginResult = new MutableLiveData<>();
-    private final IAuthController authController;
 
-    LoginViewModel(IAuthController authController) {
+    public IAuthController authController;
+
+    public LoginViewModel(IAuthController authController, ILoginPresenter loginPresenter) {
         this.authController = authController;
+        loginPresenter.setLoginViewModel(this);
     }
 
     LiveData<LoginFormState> getLoginFormState() {
@@ -61,10 +63,6 @@ public class LoginViewModel extends ViewModel implements ILoginViewModel {
     public void onLoginSuccess(String token) {
         LoginResult newLoginResult = new LoginResult(false);
         newLoginResult.setToken(token);
-
-        // TODO: Remove after demo
-        System.out.println("Login success with token: " + token);
-        System.out.println("Login success with user id: " + token);
 
         loginResult.setValue(newLoginResult);
     }

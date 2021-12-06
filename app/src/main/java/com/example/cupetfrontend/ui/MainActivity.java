@@ -18,7 +18,6 @@ import com.example.cupetfrontend.controllers.SessionManager;
 import com.example.cupetfrontend.controllers.abstracts.IPetSessionManager;
 import com.example.cupetfrontend.controllers.abstracts.ISessionManager;
 import com.example.cupetfrontend.controllers.cached_data_models.CachedUserData;
-import com.example.cupetfrontend.dependency_selector.DependencySelector;
 import com.example.cupetfrontend.ui.login.LoginActivity;
 import com.example.cupetfrontend.ui.splash_screen.SplashScreenActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -32,6 +31,8 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.example.cupetfrontend.databinding.ActivityMainBinding;
 
+import javax.inject.Inject;
+
 /**
  * This is the main activity of the application which is presented to
  * the user once they have signed in and chosen a pet to sign in as.
@@ -44,21 +45,27 @@ public class MainActivity extends AppCompatActivity implements Navigator {
     private int editBtnNavTarget;
     private Menu appBarMenu;
 
+    @Inject
+    public ISessionManager sessionManager;
+    @Inject
+    public IPetSessionManager petSessionManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        ((App) getApplicationContext()).getAppComponent().inject(this);
+
         // Temporarily create some user dummy data
         //  TODO: Offload to the log in step
-        DependencySelector dependencySelector = ((App) this.getApplication()).getDependencySelector();
-        dependencySelector.getSessionManager().setCachedUserData(new CachedUserData(
+        sessionManager.setCachedUserData(new CachedUserData(
                 "dummy first", "dummy last", "dummy email",
                 "https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Jonathan_G_Meath_portrays_" +
                         "Santa_Claus.jpg/800px-Jonathan_G_Meath_portrays_Santa_Claus.jpg"
         ));
 
-        dependencySelector.getSessionManager().setToken("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMiIsImV4cCI6MTYzODc3MzA3OCwiaWF0IjoxNjM4NzM3MDc4fQ.5FeS7La1Khgh9EqZrrQSnXgJ56WZ7O64Zk2a63ckZkI");
-        dependencySelector.getPetSessionManager().setPetId("10");
+        sessionManager.setToken("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMiIsImV4cCI6MTYzODc3MzA3OCwiaWF0IjoxNjM4NzM3MDc4fQ.5FeS7La1Khgh9EqZrrQSnXgJ56WZ7O64Zk2a63ckZkI");
+        petSessionManager.setPetId("10");
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -115,8 +122,7 @@ public class MainActivity extends AppCompatActivity implements Navigator {
         TextView fullNameView = findViewById(R.id.drawer_full_name);
         TextView emailView = findViewById(R.id.drawer_email);
 
-        DependencySelector dependencySelector = ((App) this.getApplication()).getDependencySelector();
-        CachedUserData cachedUserData = dependencySelector.getSessionManager().getCachedUserData();
+        CachedUserData cachedUserData = sessionManager.getCachedUserData();
         String fullName = cachedUserData.getFirstName() + " " + cachedUserData.getLastName();
 
         fullNameView.setText(fullName);
@@ -127,9 +133,6 @@ public class MainActivity extends AppCompatActivity implements Navigator {
 
     private void setUpSignOutListener() {
         Button signOutBtn = binding.signOutBtn;
-        DependencySelector dependencySelector = ((App) this.getApplication()).getDependencySelector();
-        ISessionManager sessionManager = dependencySelector.getSessionManager();
-        IPetSessionManager petSessionManager = dependencySelector.getPetSessionManager();
 
         signOutBtn.setOnClickListener(new View.OnClickListener() {
             @Override

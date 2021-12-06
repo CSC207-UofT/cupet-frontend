@@ -2,8 +2,6 @@ package com.example.cupetfrontend.ui.potential_matches;
 
 import android.os.Bundle;
 
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 
 import android.view.LayoutInflater;
@@ -12,12 +10,16 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.cupetfrontend.App;
 import com.example.cupetfrontend.controllers.abstracts.IPetController;
 import com.example.cupetfrontend.controllers.abstracts.IPetSessionManager;
 import com.example.cupetfrontend.controllers.abstracts.ISessionManager;
 import com.example.cupetfrontend.databinding.FragmentPotentialMatchesBinding;
+import com.example.cupetfrontend.presenters.abstracts.IGetPotentialMatchesPresenter;
 import com.example.cupetfrontend.presenters.pet.PresentedPetData;
 import com.example.cupetfrontend.ui.MainActivityFragment;
+
+import javax.inject.Inject;
 
 
 /**
@@ -26,21 +28,27 @@ import com.example.cupetfrontend.ui.MainActivityFragment;
 public class PotentialMatchesFragment extends MainActivityFragment {
     PotentialMatchesViewModel viewModel;
     FragmentPotentialMatchesBinding binding;
+    @Inject
+    public IPetController petController;
+    @Inject
+    public IGetPotentialMatchesPresenter potentialMatchesPresenter;
+    @Inject
+    public ISessionManager sessionManager;
+    @Inject
+    public IPetSessionManager petSessionManager;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        ((App) getApplicationContext()).getAppComponent().inject(this);
+
         binding = FragmentPotentialMatchesBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        initializeDependencySelector();
-        IPetController petController = dependencySelector.getControllers().getPetController();
         viewModel = new PotentialMatchesViewModel(petController);
-
-        dependencySelector.getPetPresenters().getGetPotentialMatchesPresenter().
-                setPotentialMatchesViewModel(viewModel);
+        potentialMatchesPresenter.setPotentialMatchesViewModel(viewModel);
 
         setUpExpandListeners();
         setUpRejectBtnListener();
@@ -51,8 +59,8 @@ public class PotentialMatchesFragment extends MainActivityFragment {
         showNoMatchesView();
         setUpEditBtn();
 
-        viewModel.getPotentialMatches(dependencySelector.getSessionManager().getToken(),
-                dependencySelector.getPetSessionManager().getPetId());
+        viewModel.getPotentialMatches(sessionManager.getToken(),
+                petSessionManager.getPetId());
 
         return root;
     }
@@ -61,9 +69,6 @@ public class PotentialMatchesFragment extends MainActivityFragment {
         binding.swipeLeftBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ISessionManager sessionManager = dependencySelector.getSessionManager();
-                IPetSessionManager petSessionManager = dependencySelector.getPetSessionManager();
-
                 viewModel.rejectCurrentPet(
                         sessionManager.getToken(), petSessionManager.getPetId());
 
@@ -77,9 +82,6 @@ public class PotentialMatchesFragment extends MainActivityFragment {
 
             @Override
             public void onClick(View v) {
-                ISessionManager sessionManager = dependencySelector.getSessionManager();
-                IPetSessionManager petSessionManager = dependencySelector.getPetSessionManager();
-
                 viewModel.intendToMatchCurrentPet(
                         sessionManager.getToken(), petSessionManager.getPetId());
 

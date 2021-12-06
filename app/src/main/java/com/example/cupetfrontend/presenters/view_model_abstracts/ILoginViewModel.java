@@ -14,4 +14,5 @@ public interface ILoginViewModel {
      * @param message The error message from the response
      */
     void onLoginFailure(String message);
+
 }
