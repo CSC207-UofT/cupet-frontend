@@ -19,6 +19,10 @@ import com.example.cupetfrontend.controllers.abstracts.IPetController;
 import com.example.cupetfrontend.controllers.abstracts.ISessionManager;
 import com.example.cupetfrontend.databinding.FragmentEditPetBinding;
 import com.example.cupetfrontend.presenters.abstracts.IEditPetPresenter;
+import com.example.cupetfrontend.presenters.data_models.PetProfileData;
+import com.example.cupetfrontend.presenters.view_model_abstracts.IEditPetViewModel;
+import com.example.cupetfrontend.presenters.view_model_abstracts.IUploadImageViewModel;
+import com.example.cupetfrontend.presenters.view_model_abstracts.nav_context_models.UploadImageContext;
 import com.example.cupetfrontend.ui.MainActivityFragment;
 
 import javax.inject.Inject;
@@ -32,9 +36,12 @@ public class EditPetFragment extends MainActivityFragment {
     private EditText petBreedField;
     private EditText petBioField;
     private Button editPetButton;
-    private EditPetViewModel editPetViewModel;
     private FragmentEditPetBinding binding;
 
+    @Inject
+    public IEditPetViewModel editPetViewModel;
+    @Inject
+    public IUploadImageViewModel uploadImageViewModel;
     @Inject
     public ISessionManager sessionManager;
     @Inject
@@ -73,8 +80,6 @@ public class EditPetFragment extends MainActivityFragment {
         View root = binding.getRoot();
 
         ((App) getApplicationContext()).getAppComponent().inject(this);
-
-        editPetViewModel = new EditPetViewModel(petController);
         editPetPresenter.setEditPetViewModel(editPetViewModel);
 
         initializeViews();
@@ -82,6 +87,10 @@ public class EditPetFragment extends MainActivityFragment {
         setUpObserveEditPetResult();
         setUpFormEditedListener();
         setUpEditPetButtonClickedListener();
+
+        if (editPetViewModel.getContext() != null){
+            prefillData(editPetViewModel.getContext().getPetProfileData());
+        }
 
         return root;
     }
@@ -124,6 +133,11 @@ public class EditPetFragment extends MainActivityFragment {
             public void onClick(View view) {
                 EditPetFormData formData = getEditPetFormData();
                 editPetViewModel.editPet(formData);
+
+                if (uploadImageViewModel.getImgB64() != null){
+                    editPetViewModel.setPetProfileImage(
+                            uploadImageViewModel.getImgB64());
+                }
             }
         });
     }
@@ -194,7 +208,7 @@ public class EditPetFragment extends MainActivityFragment {
      * Display a Pet Edition Success toast message and move to the pet profile page.
      */
     private void onEditPetSuccess() {
-        Toast.makeText(getApplicationContext(), "Pet Edition Success", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "Pet Edit Success", Toast.LENGTH_SHORT).show();
 
         getMainActivity().navigate(R.id.nav_my_pet_profile);
     }
@@ -204,7 +218,16 @@ public class EditPetFragment extends MainActivityFragment {
      * @param errorMessage The error message to display
      */
     private void onEditPetFailure (String errorMessage) {
-        System.out.println("Pet Edition failed");
-        Toast.makeText(getApplicationContext(), "Pet Edition failed: " + errorMessage, Toast.LENGTH_SHORT).show();
+        System.out.println("Pet Edit failed");
+        Toast.makeText(getApplicationContext(), "Pet Edit failed: " + errorMessage, Toast.LENGTH_SHORT).show();
+    }
+
+    private void prefillData(PetProfileData petProfileData) {
+        petNameField.setText(petProfileData.getName());
+        petAgeField.setText(petProfileData.getAge());
+        petBioField.setText(petProfileData.getBiography());
+        petBreedField.setText(petProfileData.getBreed());
+
+        // TODO: Fill in the pet profile image
     }
 }

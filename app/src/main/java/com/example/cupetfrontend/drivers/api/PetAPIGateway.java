@@ -128,6 +128,7 @@ public class PetAPIGateway extends APIGateway implements IPetAPIGateway {
     @Override
     public void setPetProfileImage(APISetPetProfileImageRequestModel requestData, IServerResponseListener responseListener) {
         JSONObject requestBody = new JSONObject(new HashMap<String, String>(){{
+            put("petId", requestData.getPetId());
             put("base64Encoded", requestData.getImgB64());
         }});
 

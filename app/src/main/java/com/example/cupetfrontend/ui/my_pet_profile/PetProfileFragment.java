@@ -23,6 +23,9 @@ import com.example.cupetfrontend.controllers.abstracts.IPetSessionManager;
 import com.example.cupetfrontend.controllers.abstracts.ISessionManager;
 import com.example.cupetfrontend.databinding.FragmentMyPetProfileBinding;
 import com.example.cupetfrontend.presenters.abstracts.IFetchPetProfilePresenter;
+import com.example.cupetfrontend.presenters.data_models.PetProfileData;
+import com.example.cupetfrontend.presenters.view_model_abstracts.IEditPetViewModel;
+import com.example.cupetfrontend.presenters.view_model_abstracts.nav_context_models.EditPetContext;
 import com.example.cupetfrontend.ui.MainActivityFragment;
 import com.example.cupetfrontend.ui.register.RegisterResult;
 
@@ -51,6 +54,8 @@ public class PetProfileFragment extends MainActivityFragment {
     public ISessionManager sessionManager;
     @Inject
     public IPetSessionManager petSessionManager;
+    @Inject
+    public IEditPetViewModel editPetViewModel;
 
     private FragmentMyPetProfileBinding binding;
 
@@ -143,6 +148,14 @@ public class PetProfileFragment extends MainActivityFragment {
         if (!petImageStr.equals("")) {
             Glide.with(this).load(petImageStr).into(petImage);
         }
+
+        editPetViewModel.setContext(new EditPetContext(new PetProfileData(
+                petNameStr,
+                petAgeStr,
+                petBreedStr,
+                petBioStr,
+                petImageStr
+        )));
     }
 
     /**
