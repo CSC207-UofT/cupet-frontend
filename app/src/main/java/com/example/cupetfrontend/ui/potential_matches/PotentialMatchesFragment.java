@@ -9,25 +9,16 @@ import androidx.lifecycle.Observer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.example.cupetfrontend.R;
 import com.example.cupetfrontend.controllers.abstracts.IPetController;
 import com.example.cupetfrontend.controllers.abstracts.IPetSessionManager;
 import com.example.cupetfrontend.controllers.abstracts.ISessionManager;
-import com.example.cupetfrontend.databinding.FragmentMyPetProfileBinding;
 import com.example.cupetfrontend.databinding.FragmentPotentialMatchesBinding;
-import com.example.cupetfrontend.dependency_selector.DependencySelector;
 import com.example.cupetfrontend.presenters.pet.PresentedPetData;
 import com.example.cupetfrontend.ui.MainActivityFragment;
-import com.example.cupetfrontend.ui.register.RegisterResult;
 
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * A fragment for the potential matches page
@@ -60,22 +51,8 @@ public class PotentialMatchesFragment extends MainActivityFragment {
         showNoMatchesView();
         setUpEditBtn();
 
-        // TODO: Uncomment once API is updated
         viewModel.getPotentialMatches(dependencySelector.getSessionManager().getToken(),
                 dependencySelector.getPetSessionManager().getPetId());
-
-//        List<PresentedPetData> dummyData = new ArrayList<>();
-//        dummyData.add(new PresentedPetData("Dog", "4", "Dog Breed",
-//                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-//                "https://i.insider.com/5484d9d1eab8ea3017b17e29?width=600&format=jpeg&auto=webp", "3"));
-//        dummyData.add(new PresentedPetData("Cat", "3", "Cat Breed",
-//                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-//                "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/golden-retriever-royalty-free-image-506756303-1560962726.jpg?crop=0.672xw:1.00xh;0.166xw,0&resize=640:*",
-//                "4"));
-//
-//        viewModel.onGetPotentialMatchesSuccess(dummyData);
-
-
 
         return root;
     }
@@ -212,8 +189,10 @@ public class PotentialMatchesFragment extends MainActivityFragment {
         binding.potentialHeadingPreview.setText(heading);
         binding.potentialSubheadingPreview.setText(petData.getBreed());
 
-        Glide.with(this).load(petData.getProfileImgUrl()).into(
-                binding.potentialProfileImg);
+        if (!petData.getProfileImgUrl().equals("")){
+            Glide.with(this).load(petData.getProfileImgUrl()).into(
+                    binding.potentialProfileImg);
+        }
 
         contractMatchView();
         showMatchView();

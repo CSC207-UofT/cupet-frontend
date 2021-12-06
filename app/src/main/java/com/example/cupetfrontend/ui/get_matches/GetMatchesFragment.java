@@ -37,7 +37,7 @@ public class GetMatchesFragment extends MainActivityFragment {
     private RecyclerView recyclerView;
     private RecyclerViewAdapter adapter;
     private GetMatchesViewModel getMatchesViewModel;
-    private final List<PetModel> petModelList = new ArrayList<>();
+    private List<PetModel> petModelList ;
 
     private void initializeViews() {
         recyclerView = binding.recyclerView;
@@ -52,6 +52,8 @@ public class GetMatchesFragment extends MainActivityFragment {
         super.onCreate(savedInstanceState);
         binding = FragmentGetMatchesBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+
+        petModelList = new ArrayList<>();
 
         Log.d(TAG, "onCreate: started.");
         initializeDependencySelector();
