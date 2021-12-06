@@ -2,11 +2,14 @@ package com.example.cupetfrontend.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.cupetfrontend.App;
 import com.example.cupetfrontend.R;
@@ -37,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
     private AppBarConfiguration appBarConfig;
+    private int editBtnNavTarget;
+    private Menu appBarMenu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,8 +52,12 @@ public class MainActivity extends AppCompatActivity {
         DependencySelector dependencySelector = ((App) this.getApplication()).getDependencySelector();
         dependencySelector.getSessionManager().setCachedUserData(new CachedUserData(
                 "dummy first", "dummy last", "dummy email",
-                "https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Jonathan_G_Meath_portrays_Santa_Claus.jpg/800px-Jonathan_G_Meath_portrays_Santa_Claus.jpg"
+                "https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Jonathan_G_Meath_portrays_" +
+                        "Santa_Claus.jpg/800px-Jonathan_G_Meath_portrays_Santa_Claus.jpg"
         ));
+
+        dependencySelector.getSessionManager().setToken("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMiIsImV4cCI6MTYzODc3MzA3OCwiaWF0IjoxNjM4NzM3MDc4fQ.5FeS7La1Khgh9EqZrrQSnXgJ56WZ7O64Zk2a63ckZkI");
+        dependencySelector.getPetSessionManager().setPetId("10");
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -75,6 +84,19 @@ public class MainActivity extends AppCompatActivity {
         setUpSignOutListener();
     }
 
+    // Menu icons are inflated just as they were with actionbar
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        appBarMenu = menu;
+        getMenuInflater().inflate(R.menu.activity_main_appbar_menu, menu);
+
+        // Hide edit button as default behaviour
+        hideEditButton();
+
+        return true;
+    }
+
     @Override
     public boolean onSupportNavigateUp() {
         NavController navController = Navigation.findNavController(this,
@@ -87,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Attach the user's data to the drawer
      */
-    private void attachUserDataToDrawer(){
+    public void attachUserDataToDrawer(){
         ImageView imgView = findViewById(R.id.drawer_profile_img);
         TextView fullNameView = findViewById(R.id.drawer_full_name);
         TextView emailView = findViewById(R.id.drawer_email);
@@ -121,10 +143,24 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.main_appbar_edit) {
+            if (editBtnNavTarget != 0) {
+                navigate(editBtnNavTarget);
+            }
+
+        }else{
+            onSupportNavigateUp();
+        }
+
+        return true;
+    }
+
     /**
      * Hide the navigation drawer and bottom nav bar
      */
-    private void hideNavigation() {
+    public void hideNavigation() {
         binding.bottomNavView.setVisibility(View.GONE);
         binding.drawerNavView.setVisibility(View.GONE);
         binding.mainDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
@@ -133,9 +169,48 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Show the navigation drawer and bottom nav bar
      */
-    private void showNavigation() {
+    public void showNavigation() {
         binding.bottomNavView.setVisibility(View.VISIBLE);
         binding.drawerNavView.setVisibility(View.VISIBLE);
         binding.mainDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+    }
+
+    /**
+     * Hide the edit action button.
+     */
+    public void hideEditButton () {
+        if (appBarMenu != null) {
+            MenuItem item = appBarMenu.findItem(R.id.main_appbar_edit);
+            item.setVisible(false);
+        }
+    }
+
+    /**
+     * Show the edit action button.
+     */
+    public void showEditButton () {
+        if (appBarMenu != null) {
+            MenuItem item = appBarMenu.findItem(R.id.main_appbar_edit);
+            item.setVisible(true);
+        }
+    }
+
+    /**
+     * Navigate to a page defined in mobile_navigation.xml.
+     */
+    public void navigate (int navTarget) {
+        NavController navController = Navigation.findNavController(
+                this, R.id.main_nav_fragment);
+
+        navController.navigate(navTarget);
+    }
+
+    /**
+     * Set the navigation target fragment when the edit button is clicked.
+     *
+     * Ex. setEditBtnNavTarget(R.id.nav_account_settings);
+     */
+    public void setEditBtnNavTarget(int navTarget) {
+        editBtnNavTarget = navTarget;
     }
 }

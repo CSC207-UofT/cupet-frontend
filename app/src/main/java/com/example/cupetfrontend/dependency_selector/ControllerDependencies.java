@@ -59,6 +59,8 @@ public class ControllerDependencies {
                 petPresenters.getFetchPetProfilePresenter()));
         petController.setGetMatches(new GetMatches(petAPIGateway,
                 petPresenters.getGetMatchesPresenter()));
+        petController.setGetPotentialMatches(new GetPotentialMatches(petAPIGateway,
+                petPresenters.getGetPotentialMatchesPresenter()));
         petController.setIntendToMatch(new IntendToMatch(petAPIGateway,
                 petPresenters.getIntendToMatchPresenter()));
         petController.setRejectMatch(new RejectMatch(petAPIGateway,

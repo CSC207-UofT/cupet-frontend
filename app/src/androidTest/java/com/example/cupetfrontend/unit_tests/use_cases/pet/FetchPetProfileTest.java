@@ -24,6 +24,7 @@ public class FetchPetProfileTest extends UseCaseTestClass {
                 assertEquals(response.getAge(), "dummy age");
                 assertEquals(response.getBreed(), "dummy breed");
                 assertEquals(response.getBiography(), "dummy biography");
+                assertEquals(response.getProfileImgUrl(), "dummy url");
 
                 setTaskComplete();
             }

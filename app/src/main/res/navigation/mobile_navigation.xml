@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation_bar"
+    app:startDestination="@+id/nav_potential_matches">
+
+    <fragment
+            android:id="@+id/nav_account_settings"
+            android:name="com.example.cupetfrontend.ui.TestFragment"
+            android:label="@string/nav_account_settings"
+            tools:layout="@layout/fragment_test"/>
+    <fragment
+        android:id="@+id/nav_view_my_pets"
+        android:name="com.example.cupetfrontend.ui.view_my_pets.ViewMyPetsFragment"
+        android:label="@string/nav_view_my_pets"
+        tools:layout="@layout/fragment_view_my_pets" />
+    <fragment
+        android:id="@+id/nav_my_user_profile"
+        android:name="com.example.cupetfrontend.ui.TestFragment"
+        android:label="@string/nav_my_user_profile"
+        tools:layout="@layout/fragment_test" />
+    <fragment
+        android:id="@+id/nav_potential_matches"
+        android:name="com.example.cupetfrontend.ui.potential_matches.PotentialMatchesFragment"
+        android:label="@string/title_potential_matches"
+        tools:layout="@layout/fragment_potential_matches" />
+
+    <fragment
+        android:id="@+id/nav_matches"
+        android:name="com.example.cupetfrontend.ui.get_matches.GetMatchesFragment"
+        android:label="@string/title_matches" />
+
+    <fragment
+            android:id="@+id/nav_my_pet_profile"
+            android:name="com.example.cupetfrontend.ui.my_pet_profile.PetProfileFragment"
+            android:label="@string/title_my_pet_profile"
+    />
+    <fragment
+            android:id="@+id/nav_edit_pet"
+            android:name="com.example.cupetfrontend.ui.edit_pet.EditPetFragment"
+            android:label="@string/title_my_pet_profile"
+            tools:layout="@layout/fragment_edit_pet"/>
+    <fragment
+            android:id="@+id/nav_create_pet"
+            android:name="com.example.cupetfrontend.ui.create_pet.CreatePetFragment"
+            android:label="@string/title_my_pet_profile"
+            tools:layout="@layout/fragment_create_pet"/>
+</navigation>

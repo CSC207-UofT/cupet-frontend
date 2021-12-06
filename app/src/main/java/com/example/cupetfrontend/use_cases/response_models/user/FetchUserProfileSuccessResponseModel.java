@@ -5,12 +5,15 @@ import com.example.cupetfrontend.use_cases.data_models.UserProfile;
 public class FetchUserProfileSuccessResponseModel extends UserProfile {
     private final String firstName;
     private final String lastName;
+    private final String profileImgUrl;
 
     public FetchUserProfileSuccessResponseModel(String firstName, String lastName, String biography,
-                                                String instagram, String facebook, String phoneNumber) {
+                                                String instagram, String facebook, String phoneNumber,
+                                                String profileImgUrl) {
         super(biography, instagram, facebook, phoneNumber);
         this.firstName = firstName;
         this.lastName = lastName;
+        this.profileImgUrl = profileImgUrl;
     }
 
     public String getFirstName() {
@@ -19,5 +22,9 @@ public class FetchUserProfileSuccessResponseModel extends UserProfile {
 
     public String getLastName() {
         return lastName;
+    }
+
+    public String getProfileImgUrl() {
+        return profileImgUrl;
     }
 }

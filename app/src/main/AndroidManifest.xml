@@ -3,8 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.cupetfrontend">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-
     <application
         android:name=".App"
         android:allowBackup="true"
@@ -23,6 +21,7 @@
             android:exported="true"
             android:label="@string/title_activity_main"
             android:theme="@style/Theme.CupetFrontEnd.NoActionBar" />
+
         <activity
             android:name=".ui.splash_screen.SplashScreenActivity"
             android:exported="true"
@@ -44,36 +43,9 @@
             android:exported="true"
             android:label="RegisterActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
-        <activity
-            android:name=".ui.create_pet.CreatePetActivity"
-            android:exported="true"
-            android:label="Create a New Pet">
-            <intent-filter>
-                <action android:name="android.intent.action.CreatePetActivity" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".ui.edit_pet.EditPetActivity"
-            android:exported="true"
-            android:label="EditPetActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.EditPetActivity" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".ui.pet_profile.PetProfileActivity"
-            android:exported="true"
-            android:label="PetProfileActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.PetProfileActivity" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
     </application>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
 
 </manifest>
