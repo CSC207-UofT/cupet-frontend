@@ -13,15 +13,7 @@
         android:theme="@style/Theme.CupetFrontEnd"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".ui.edit_user_profile.EditUserProfileFragment"
-            android:exported="true"
-
-            ></activity>
         <activity android:name=".ui.user_account.UserAccountActivity"
-            android:exported="true"
-
-            />
-        <activity android:name=".ui.edit_account.EditUserAccountFragment"
             android:exported="true"
 
             />
@@ -53,8 +45,5 @@
             android:label="RegisterActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
     </application>
-
     <uses-permission android:name="android.permission.INTERNET" />
-
-
 </manifest>
