@@ -6,126 +6,134 @@
     android:layout_height="match_parent"
     tools:context=".ui.edit_user_profile.EditUserProfileFragment">
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="305dp"
-        android:layout_height="311dp"
-        android:scaleType="centerCrop"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.033"
-        tools:srcCompat="@tools:sample/avatars" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Biography"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.15"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
 
-    <EditText
-        android:id="@+id/edit_user_profile_biography"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:ems="10"
-        android:hint="A description of yourself!"
-        android:inputType="textPersonName"
-        android:text=""
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.237"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/edit_user_upload_image"
+                android:name="com.example.cupetfrontend.ui.upload_image_fragment.UploadImageFragment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="60dp"
+                />
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="216dp"
-        android:text="Instagram"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.135"
-        app:layout_constraintStart_toStartOf="parent" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="40dp">
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="156dp"
-        android:text="Phone Number"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.148"
-        app:layout_constraintStart_toStartOf="parent" />
+                <EditText
+                    android:id="@+id/edit_user_profile_biography"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="A description of yourself!"
+                    android:inputType="textPersonName"
+                    android:text=""
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/edit_user_profile_biography_title" />
 
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="92dp"
-        android:text="Facebook"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.135"
-        app:layout_constraintStart_toStartOf="parent" />
+                <EditText
+                    android:id="@+id/edit_user_profile_instagram"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="Drop your instagram!"
+                    android:inputType="textPersonName"
+                    android:text=""
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/edit_user_profile_instagram_title"
+                    tools:layout_editor_absoluteX="172dp"
+                    tools:layout_editor_absoluteY="170dp" />
 
-    <Button
-        android:id="@+id/Confirm_EditUserProfile_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Confirm Changes"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.467"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.976" />
+                <EditText
+                    android:id="@+id/edit_user_profile_phone_num"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="Drop your phone number!"
+                    android:inputType="textPersonName"
+                    android:text=""
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/edit_user_phone_num_title"
+                    tools:layout_editor_absoluteX="171dp"
+                    tools:layout_editor_absoluteY="230dp" />
 
-    <EditText
-        android:id="@+id/edit_user_profile_instagram"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="480dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text=""
-        android:hint="Drop your instagram!"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.674"
-        app:layout_constraintStart_toEndOf="@+id/textView2"
-        app:layout_constraintTop_toTopOf="parent" />
+                <EditText
+                    android:id="@+id/edit_user_profile_facebook"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="Drop your facebook!"
+                    android:inputType="textPersonName"
+                    android:text=""
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/edit_user_profile_facebook_title"
+                    tools:layout_editor_absoluteX="172dp"
+                    tools:layout_editor_absoluteY="294dp" />
 
-    <EditText
-        android:id="@+id/edit_user_profile_phone_num"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="540dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text=""
-        android:hint="Drop your phone number!"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView3"
-        app:layout_constraintTop_toTopOf="parent" />
+                <TextView
+                    android:id="@+id/edit_user_phone_num_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="Phone Number"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/edit_user_profile_biography"
+                    tools:layout_editor_absoluteX="47dp"
+                    tools:layout_editor_absoluteY="556dp" />
 
-    <EditText
-        android:id="@+id/edit_user_profile_facebook"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="604dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text=""
-        android:hint="Drop your facebook!"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.681"
-        app:layout_constraintStart_toEndOf="@+id/textView4"
-        app:layout_constraintTop_toTopOf="parent" />
+                <TextView
+                    android:id="@+id/edit_user_profile_instagram_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="Instagram"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/edit_user_profile_phone_num"
+                    tools:layout_editor_absoluteX="67dp"
+                    tools:layout_editor_absoluteY="516dp" />
+
+                <TextView
+                    android:id="@+id/edit_user_profile_facebook_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="Facebook"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/edit_user_profile_instagram"
+                    tools:layout_editor_absoluteX="47dp"
+                    tools:layout_editor_absoluteY="620dp"
+
+                    />
+
+                <TextView
+                    android:id="@+id/edit_user_profile_biography_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Biography"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:layout_editor_absoluteX="36dp"
+                    tools:layout_editor_absoluteY="356dp" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <Button
+                android:id="@+id/Confirm_EditUserProfile_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Confirm Changes"
+                android:layout_gravity="center"
+                android:layout_marginBottom="40dp"
+                />
+        </LinearLayout>
+    </ScrollView>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

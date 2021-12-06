@@ -1,44 +1,48 @@
 package com.example.cupetfrontend.ui.edit_user_profile;
 
 public class EditUserProfileData {
-
     private String biography;
+    private String phoneNumber;
     private String facebook;
     private String instagram;
-    private String phoneNumber;
 
-    public String getBiography(){
+    public EditUserProfileData(String biography, String phoneNumber,
+                               String facebook, String instagram) {
+        this.phoneNumber = phoneNumber;
+        this.biography = biography;
+        this.facebook = facebook;
+        this.instagram = instagram;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public String getBiography() {
         return biography;
     }
-    public String getFacebook(){
-        return this.facebook;
-    }
-    public String getInstagram(){
-        return this.instagram;
+
+    public String getFacebook() {
+        return facebook;
     }
 
-    public String getPhoneNumber(){
-        return this.phoneNumber;
+    public String getInstagram() {
+        return instagram;
     }
 
-    public boolean setBiography(String biography){
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public void setBiography(String biography) {
         this.biography = biography;
-        return true;
     }
 
-    public boolean setPhoneNumber(String phoneNumber){
-        this.biography = phoneNumber;
-        return true;
-    }
-
-    public boolean setFacebook(String facebook){
+    public void setFacebook(String facebook) {
         this.facebook = facebook;
-        return true;
     }
 
-    public boolean setInstagram(String instagram){
+    public void setInstagram(String instagram) {
         this.instagram = instagram;
-        return true;
     }
-
 }

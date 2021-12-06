@@ -15,6 +15,8 @@ import com.example.cupetfrontend.controllers.abstracts.IUserController;
 import com.example.cupetfrontend.databinding.FragmentUserProfileBinding;
 import com.example.cupetfrontend.presenters.abstracts.IFetchUserProfilePresenter;
 import com.example.cupetfrontend.presenters.data_models.UserProfileData;
+import com.example.cupetfrontend.presenters.view_model_abstracts.IEditUserProfileViewModel;
+import com.example.cupetfrontend.presenters.view_model_abstracts.nav_context_models.EditUserProfileContext;
 import com.example.cupetfrontend.ui.MainActivityFragment;
 import com.example.cupetfrontend.presenters.view_model_abstracts.IContactInfoViewModel;
 
@@ -32,6 +34,8 @@ public class UserProfileFragment extends MainActivityFragment {
     public ISessionManager sessionManager;
     @Inject
     public IContactInfoViewModel contactInfoViewModel;
+    @Inject
+    public IEditUserProfileViewModel editUserProfileViewModel;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -83,6 +87,10 @@ public class UserProfileFragment extends MainActivityFragment {
 
         binding.userProfileHeader.setText(headerText);
         binding.userProfileBiography.setText(userProfileData.getBiography());
+
+        editUserProfileViewModel.setContext(new EditUserProfileContext(
+                userProfileData
+        ));
     }
 
     private void onFetchUserProfileFailure(String errorMessage){

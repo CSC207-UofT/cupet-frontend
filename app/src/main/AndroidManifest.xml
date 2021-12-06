@@ -45,5 +45,7 @@
             android:label="RegisterActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
     </application>
+
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 </manifest>

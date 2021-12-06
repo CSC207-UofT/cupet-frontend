@@ -1,8 +1,10 @@
 package com.example.cupetfrontend.dagger_dependencies.modules;
 
 import com.example.cupetfrontend.presenters.abstracts.ICreateUserPresenter;
+import com.example.cupetfrontend.presenters.abstracts.IEditUserProfilePresenter;
 import com.example.cupetfrontend.presenters.abstracts.IFetchUserProfilePresenter;
 import com.example.cupetfrontend.presenters.abstracts.IGetPetsPresenter;
+import com.example.cupetfrontend.presenters.abstracts.ISetUserProfileImagePresenter;
 import com.example.cupetfrontend.presenters.user.CreateUserPresenter;
 import com.example.cupetfrontend.presenters.user.EditUserAccountPresenter;
 import com.example.cupetfrontend.presenters.user.EditUserProfilePresenter;
@@ -11,10 +13,7 @@ import com.example.cupetfrontend.presenters.user.FetchUserProfilePresenter;
 import com.example.cupetfrontend.presenters.user.GetPetsPresenter;
 import com.example.cupetfrontend.presenters.user.SetUserProfileImagePresenter;
 import com.example.cupetfrontend.use_cases.output_boundaries.user.EditUserAccountOutputBoundary;
-import com.example.cupetfrontend.use_cases.output_boundaries.user.EditUserProfileOutputBoundary;
 import com.example.cupetfrontend.use_cases.output_boundaries.user.FetchUserAccountOutputBoundary;
-import com.example.cupetfrontend.use_cases.output_boundaries.user.FetchUserProfileOutputBoundary;
-import com.example.cupetfrontend.use_cases.output_boundaries.user.SetUserProfileImageOutputBoundary;
 
 import javax.inject.Singleton;
 
@@ -37,7 +36,7 @@ public class UserPresentersModule {
 
     @Singleton
     @Provides
-    public EditUserProfileOutputBoundary provideEditUserProfilePresenter () {
+    public IEditUserProfilePresenter provideEditUserProfilePresenter () {
         return new EditUserProfilePresenter();
     }
 
@@ -62,7 +61,7 @@ public class UserPresentersModule {
 
     @Singleton
     @Provides
-    public SetUserProfileImageOutputBoundary provideSetUserProfileImagePresenter () {
+    public ISetUserProfileImagePresenter provideSetUserProfileImagePresenter () {
         return new SetUserProfileImagePresenter();
     }
 }

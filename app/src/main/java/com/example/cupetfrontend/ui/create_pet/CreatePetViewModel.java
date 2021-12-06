@@ -35,7 +35,6 @@ public class CreatePetViewModel extends ViewModel implements ICreatePetViewModel
      * @param formData The pet creation data entered into the form
      */
     public void createPet(CreatePetFormData formData){
-        // TODO: add token code
         petController.createPet("token", formData.getPetName(), formData.getPetAge(),
                 formData.getPetBreed(), formData.getPetBio());
     }

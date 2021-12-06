@@ -15,6 +15,7 @@ import com.example.cupetfrontend.ui.login.LoginActivity;
 import com.example.cupetfrontend.ui.my_pet_profile.PetProfileFragment;
 import com.example.cupetfrontend.ui.potential_matches.PotentialMatchesFragment;
 import com.example.cupetfrontend.ui.register.RegisterActivity;
+import com.example.cupetfrontend.ui.upload_image_fragment.UploadImageFragment;
 import com.example.cupetfrontend.ui.user_profile.UserProfileFragment;
 import com.example.cupetfrontend.ui.view_my_pets.ViewMyPetsFragment;
 
@@ -42,4 +43,5 @@ public interface AppComponent {
     void inject(UserProfileFragment userProfileFragment);
     void inject(EditUserAccountFragment editUserAccountFragment);
     void inject(ContactInfoFragment contactInfoFragment);
+    void inject(UploadImageFragment uploadImageFragment);
 }

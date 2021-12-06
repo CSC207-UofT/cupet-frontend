@@ -1,11 +1,11 @@
 package com.example.cupetfrontend.ui.edit_user_profile;
 
+import android.content.Intent;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import android.os.Bundle;
@@ -13,38 +13,42 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.Observer;
 
-import com.example.cupetfrontend.App;
-import com.example.cupetfrontend.R;
+import com.example.cupetfrontend.controllers.abstracts.ISessionManager;
 import com.example.cupetfrontend.controllers.abstracts.IUserController;
-import com.example.cupetfrontend.databinding.FragmentCreatePetBinding;
-import com.example.cupetfrontend.databinding.FragmentEditUserAccountBinding;
 import com.example.cupetfrontend.databinding.FragmentEditUserProfileBinding;
-import com.example.cupetfrontend.dependency_selector.DependencySelector;
 import com.example.cupetfrontend.presenters.abstracts.IEditUserProfilePresenter;
+import com.example.cupetfrontend.presenters.abstracts.ISetUserProfileImagePresenter;
+import com.example.cupetfrontend.presenters.data_models.UserProfileData;
+import com.example.cupetfrontend.presenters.view_model_abstracts.IEditUserProfileViewModel;
+import com.example.cupetfrontend.presenters.view_model_abstracts.IUploadImageViewModel;
 import com.example.cupetfrontend.ui.MainActivityFragment;
 
+import javax.inject.Inject;
+
 public class EditUserProfileFragment extends MainActivityFragment {
-    private EditUserProfileViewModel editUserProfileViewModel;
+    @Inject
+    public IEditUserProfileViewModel viewModel;
+    @Inject
+    public IUploadImageViewModel uploadImageViewModel;
+    @Inject
+    public ISessionManager sessionManager;
     private FragmentEditUserProfileBinding binding;
 
-    private EditText biographyField;
-    private EditText facebookField;
-    private EditText instagramField;
-    private EditText phoneNumberField;
-    private Button confirmChangesButton;
+    @Inject
+    public IEditUserProfilePresenter editUserProfilePresenter;
+    @Inject
+    public ISetUserProfileImagePresenter setUserProfileImagePresenter;
 
-    private void setFieldError(EditText field, Integer errorState){
-        if (errorState != null){
+    /**
+     * If errorState is non-null, display the error state on the field.
+     *
+     * @param field The field to display the error state in
+     * @param errorState The error state represented by an integer
+     */
+    private void setFieldError(EditText field, Integer errorState) {
+        if (errorState != null) {
             field.setError(getString(errorState));
         }
-    };
-
-    private void initializeView(){
-        biographyField = binding.editUserProfileBiography;
-        facebookField = binding.editUserProfileFacebook;
-        instagramField = binding.editUserProfileInstagram;
-        phoneNumberField = binding.editUserProfilePhoneNum;
-        confirmChangesButton = binding.ConfirmEditUserProfileButton;
     }
 
     @Override
@@ -54,18 +58,18 @@ public class EditUserProfileFragment extends MainActivityFragment {
         binding = FragmentEditUserProfileBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        initializeDependencySelector();
-        IUserController userController = dependencySelector.getControllers().getUserController();
+        getApplicationContext().getAppComponent().inject(this);
+        editUserProfilePresenter.setEditUserProfileViewModel(viewModel);
+        setUserProfileImagePresenter.setViewModel(viewModel);
 
-        IEditUserProfilePresenter editUserProfilePresenter = dependencySelector.getUserPresenters().getEditUserProfilePresenter();
-        editUserProfileViewModel = new EditUserProfileViewModel(userController);
-        editUserProfilePresenter.setEditUserProfileViewModel(editUserProfileViewModel);
-
-        initializeView();
         setUpFormEditedListener();
         setUpConfirmButtonClickedListener();
         setUpObserveUserProfileResult();
         setUpObserveEditUserProfileFormState();
+
+        if (viewModel.getContext() != null){
+            preFillExistingData(viewModel.getContext().getPreFilledData());
+        }
 
         return root;
     }
@@ -85,37 +89,42 @@ public class EditUserProfileFragment extends MainActivityFragment {
             @Override
             public void afterTextChanged(Editable s) {
                 EditUserProfileData editUserProfileData = getEditUserProfileData();
-                editUserProfileViewModel.updateFormState(editUserProfileData);
+                viewModel.updateFormState(editUserProfileData);
             }
         };
-        biographyField.addTextChangedListener(listener);
-        instagramField.addTextChangedListener(listener);
-        facebookField.addTextChangedListener(listener);
-        phoneNumberField.addTextChangedListener(listener);
+        binding.editUserProfileBiography.addTextChangedListener(listener);
+        binding.editUserProfileInstagram.addTextChangedListener(listener);
+        binding.editUserProfileFacebook.addTextChangedListener(listener);
+        binding.editUserProfilePhoneNum.addTextChangedListener(listener);
     }
 
     private EditUserProfileData getEditUserProfileData(){
-        EditUserProfileData formData = new EditUserProfileData();
-        formData.setBiography(biographyField.getText().toString());
-        formData.setFacebook(facebookField.getText().toString());
-        formData.setInstagram(instagramField.getText().toString());
-        formData.setPhoneNumber(phoneNumberField.getText().toString());
-
-        return formData;
+        return new EditUserProfileData(
+                binding.editUserProfileBiography.getText().toString(),
+                binding.editUserProfilePhoneNum.getText().toString(),
+                binding.editUserProfileFacebook.getText().toString(),
+                binding.editUserProfileInstagram.getText().toString()
+        );
     }
 
     private void setUpConfirmButtonClickedListener(){
-        confirmChangesButton.setOnClickListener(new View.OnClickListener() {
+        binding.ConfirmEditUserProfileButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 EditUserProfileData formData = getEditUserProfileData();
-                editUserProfileViewModel.editUserProfile(formData, "TOKEN");
+
+                viewModel.editUserProfile(formData, sessionManager.getToken());
+
+                if (uploadImageViewModel.getImgB64() != null){
+                    viewModel.setUserProfileImage(sessionManager.getToken(),
+                            uploadImageViewModel.getImgB64());
+                }
             }
         });
     }
 
     private void setUpObserveUserProfileResult(){
-        editUserProfileViewModel.getEditUserProfileResult().observe(this, new Observer<EditUserProfileResult>() {
+        viewModel.getEditUserProfileResult().observe(getViewLifecycleOwner(), new Observer<EditUserProfileResult>() {
             @Override
             public void onChanged(EditUserProfileResult editUserProfileResult) {
                 if (editUserProfileResult == null)
@@ -136,22 +145,33 @@ public class EditUserProfileFragment extends MainActivityFragment {
     }
 
     private void onEditUserProfileFailure(String errorMessage){
-        System.out.println("Edit failed");
         Toast.makeText(getApplicationContext(), "Edit Failed:" + errorMessage, Toast.LENGTH_SHORT).show();
     }
 
     private void setUpObserveEditUserProfileFormState(){
-        editUserProfileViewModel.getEditUserProfileState().observe(getViewLifecycleOwner(), new Observer<EditUserProfileState>() {
+        viewModel.getEditUserProfileState().observe(getViewLifecycleOwner(), new Observer<EditUserProfileState>() {
             @Override
             public void onChanged(EditUserProfileState editUserProfileState) {
                 if (editUserProfileState == null){
-
+                    return;
                 }
-                setFieldError(biographyField, editUserProfileState.getBiographyError());
-                setFieldError(instagramField, editUserProfileState.getInstagramError());
-                setFieldError(facebookField, editUserProfileState.getFacebookError());
-                setFieldError(phoneNumberField, editUserProfileState.getPhoneNumberError());
+
+                setFieldError(binding.editUserProfileBiography,
+                        editUserProfileState.getBiographyError());
+                setFieldError(binding.editUserProfileInstagram,
+                        editUserProfileState.getInstagramError());
+                setFieldError(binding.editUserProfileFacebook,
+                        editUserProfileState.getFacebookError());
+                setFieldError(binding.editUserProfilePhoneNum,
+                        editUserProfileState.getPhoneNumberError());
             }
         });
+    }
+
+    private void preFillExistingData(UserProfileData userProfileData) {
+        binding.editUserProfileBiography.setText(userProfileData.getBiography());
+        binding.editUserProfilePhoneNum.setText(userProfileData.getPhoneNumber());
+        binding.editUserProfileFacebook.setText(userProfileData.getFacebook());
+        binding.editUserProfileInstagram.setText(userProfileData.getInstagram());
     }
 }
