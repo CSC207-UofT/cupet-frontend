@@ -1,4 +1,4 @@
-package com.example.cupetfrontend.ui.public_pet_profile.contact_info_fragment;
+package com.example.cupetfrontend.ui.contact_info_fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -6,14 +6,22 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
+import com.example.cupetfrontend.R;
 import com.example.cupetfrontend.databinding.FragmentPublicContactinfoBinding;
+import com.example.cupetfrontend.presenters.view_model_abstracts.IContactInfoViewModel;
+import com.example.cupetfrontend.presenters.view_model_abstracts.data_models.ContactInfoData;
+import com.example.cupetfrontend.ui.MainActivityFragment;
+
+import javax.inject.Inject;
+
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 
-public class ContactInfoFragment extends Fragment {
+public class ContactInfoFragment extends MainActivityFragment {
     private FragmentPublicContactinfoBinding binding;
-    private ContactInfoViewModel contactInfoViewModel;
+
+    @Inject
+    public IContactInfoViewModel contactInfoViewModel;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -21,7 +29,8 @@ public class ContactInfoFragment extends Fragment {
         super.onCreate(savedInstanceState);
         binding = FragmentPublicContactinfoBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-        initializeViewModel();
+
+        getApplicationContext().getAppComponent().inject(this);
 
         hideAllInfo();
         initializeContactInfoObserver();
@@ -61,6 +70,16 @@ public class ContactInfoFragment extends Fragment {
         binding.pubContactinfoInstagramLayout.setVisibility(View.VISIBLE);
     }
 
+    private void showOwnerSpecificInfo(){
+        binding.pubContactinfoProfileImg.setVisibility(View.VISIBLE);
+        binding.pubContactinfoTitle.setText(R.string.public_contactinfo_title);
+    }
+
+    private void hideOwnerSpecificInfo() {
+        binding.pubContactinfoProfileImg.setVisibility(View.GONE);
+        binding.pubContactinfoTitle.setText(R.string.contactinfo_title_non_pet);
+    }
+
 
     private void loadContactInfo (ContactInfoData contactInfoData) {
         hideAllInfo();
@@ -68,11 +87,17 @@ public class ContactInfoFragment extends Fragment {
         binding.pubContactinfoEmail.setText(contactInfoData.getEmail());
         showEmailInfo();
 
+        if (contactInfoViewModel.getContext() != null &&
+                contactInfoViewModel.getContext().isFromPetProfile()){
+            showOwnerSpecificInfo();
+        }else{
+            hideOwnerSpecificInfo();
+        }
+
         if (!contactInfoData.getPhoneNumber().equals("")){
             String phoneNumber = contactInfoData.getPhoneNumber();
 
             binding.pubContactinfoPhone.setText(phoneNumber);
-        }else{
             showPhoneInfo();
         }
 
@@ -80,7 +105,6 @@ public class ContactInfoFragment extends Fragment {
             String phoneNumber = contactInfoData.getFacebook();
 
             binding.pubContactinfoFacebook.setText(phoneNumber);
-        }else{
             showFacebookInfo();
         }
 
@@ -88,15 +112,14 @@ public class ContactInfoFragment extends Fragment {
             String phoneNumber = contactInfoData.getInstagram();
 
             binding.pubContactinfoInstagram.setText(phoneNumber);
-        }else{
             showInstagramInfo();
         }
 
-        Glide.with(this).load(
-                contactInfoData.getProfileImgUrl()).into(binding.pubContactinfoProfileImg);
-    }
+        String profileImgUrl = contactInfoData.getProfileImgUrl();
 
-    private void initializeViewModel() {
-        contactInfoViewModel = new ContactInfoViewModel();
+        if (profileImgUrl != null && !profileImgUrl.equals("")) {
+            Glide.with(this).load(
+                    profileImgUrl).into(binding.pubContactinfoProfileImg);
+        }
     }
 }

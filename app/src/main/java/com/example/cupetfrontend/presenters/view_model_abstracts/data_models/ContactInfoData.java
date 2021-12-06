@@ -1,4 +1,4 @@
-package com.example.cupetfrontend.ui.public_pet_profile.contact_info_fragment;
+package com.example.cupetfrontend.presenters.view_model_abstracts.data_models;
 
 public class ContactInfoData {
     private final String email;

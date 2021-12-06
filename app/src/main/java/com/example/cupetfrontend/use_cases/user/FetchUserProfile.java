@@ -54,6 +54,7 @@ public class FetchUserProfile extends DefaultFailResponseUseCase implements Fetc
             return new FetchUserProfileSuccessResponseModel(
                     dataObj.getString("firstName"),
                     dataObj.getString("lastName"),
+                    dataObj.getString("email"),
                     dataObj.getString("biography"),
                     dataObj.getString("instagram"),
                     dataObj.getString("facebook"),

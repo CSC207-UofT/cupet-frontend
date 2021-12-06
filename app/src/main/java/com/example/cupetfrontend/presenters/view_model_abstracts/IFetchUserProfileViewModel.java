@@ -1,7 +1,9 @@
 package com.example.cupetfrontend.presenters.view_model_abstracts;
 
+import com.example.cupetfrontend.presenters.data_models.UserProfileData;
+
 public interface IFetchUserProfileViewModel {
-    void onFetchUserProfileSuccess(String email, String phoneNumber, String facebook, String Instagram, String biography, String image);
+    void onFetchUserProfileSuccess(UserProfileData userProfileData);
 
     void onFetchUserProfileFailure(String message);
 }

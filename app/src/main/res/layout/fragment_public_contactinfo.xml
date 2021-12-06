@@ -24,12 +24,11 @@
 
         <ImageView
             android:id="@+id/pub_contactinfo_email_ic"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_email"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:layout_editor_absoluteY="33dp" />
+            app:srcCompat="@drawable/ic_email" />
 
         <TextView
             android:id="@+id/pub_contactinfo_email"
@@ -58,7 +57,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_email" />
+            app:srcCompat="@drawable/ic_phone" />
 
         <TextView
             android:id="@+id/pub_contactinfo_phone"
@@ -84,9 +83,8 @@
             android:id="@+id/pub_contactinfo_facebook_ic"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_email"
             app:layout_constraintTop_toTopOf="parent"
-            tools:layout_editor_absoluteY="25dp" />
+            app:srcCompat="@drawable/ic_facebook" />
 
         <TextView
             android:id="@+id/pub_contactinfo_facebook"
@@ -115,7 +113,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_email" />
+            app:srcCompat="@drawable/ic_instagram" />
 
         <TextView
             android:id="@+id/pub_contactinfo_instagram"
@@ -134,5 +132,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
+        app:srcCompat="@drawable/default_profile_img"
+        tools:srcCompat="@drawable/default_profile_img" />
 </androidx.constraintlayout.widget.ConstraintLayout>

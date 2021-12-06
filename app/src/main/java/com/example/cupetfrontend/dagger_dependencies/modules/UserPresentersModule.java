@@ -1,6 +1,7 @@
 package com.example.cupetfrontend.dagger_dependencies.modules;
 
 import com.example.cupetfrontend.presenters.abstracts.ICreateUserPresenter;
+import com.example.cupetfrontend.presenters.abstracts.IFetchUserProfilePresenter;
 import com.example.cupetfrontend.presenters.abstracts.IGetPetsPresenter;
 import com.example.cupetfrontend.presenters.user.CreateUserPresenter;
 import com.example.cupetfrontend.presenters.user.EditUserAccountPresenter;
@@ -48,7 +49,7 @@ public class UserPresentersModule {
 
     @Singleton
     @Provides
-    public FetchUserProfileOutputBoundary provideFetchUserProfile () {
+    public IFetchUserProfilePresenter provideFetchUserProfile () {
         return new FetchUserProfilePresenter();
     }
 

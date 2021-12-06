@@ -3,41 +3,35 @@ package com.example.cupetfrontend.ui.user_profile;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.Observer;
 import com.bumptech.glide.Glide;
-import com.example.cupetfrontend.App;
 import com.example.cupetfrontend.R;
+import com.example.cupetfrontend.controllers.abstracts.ISessionManager;
 import com.example.cupetfrontend.controllers.abstracts.IUserController;
-import com.example.cupetfrontend.databinding.FragmentCreatePetBinding;
 import com.example.cupetfrontend.databinding.FragmentUserProfileBinding;
-import com.example.cupetfrontend.dependency_selector.DependencySelector;
-import com.example.cupetfrontend.presenters.user.FetchUserProfilePresenter;
+import com.example.cupetfrontend.presenters.abstracts.IFetchUserProfilePresenter;
+import com.example.cupetfrontend.presenters.data_models.UserProfileData;
 import com.example.cupetfrontend.ui.MainActivityFragment;
+import com.example.cupetfrontend.presenters.view_model_abstracts.IContactInfoViewModel;
+
+import javax.inject.Inject;
 
 public class UserProfileFragment extends MainActivityFragment {
-    private PrivateUserProfileViewModel privateUserProfileViewModel;
+    private UserProfileViewModel viewModel;
     private FragmentUserProfileBinding binding;
 
-    TextView biography_view;
-    ImageView profile_picture;
-    TextView instagram_view;
-    TextView phoneNumber_view;
-    TextView facebook_view;
-
-
-    private void initializeViews(){
-        biography_view = binding.UserProfileBiography;
-        profile_picture = binding.UserProfilePicture;
-        instagram_view = binding.UserInstagramLinkTextview;
-        phoneNumber_view = binding.UserPhoneNumberLinkTextview;
-        facebook_view = binding.UserFaceBookLinkTextview;
-    }
+    @Inject
+    public IUserController userController;
+    @Inject
+    public IFetchUserProfilePresenter fetchUserProfilePresenter;
+    @Inject
+    public ISessionManager sessionManager;
+    @Inject
+    public IContactInfoViewModel contactInfoViewModel;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -46,30 +40,24 @@ public class UserProfileFragment extends MainActivityFragment {
         binding = FragmentUserProfileBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        initializeDependencySelector();
+        getApplicationContext().getAppComponent().inject(this);
 
-        IUserController userController = dependencySelector.getControllers().getUserController();
+        viewModel = new UserProfileViewModel(userController);
+        fetchUserProfilePresenter.setViewModel(viewModel);
 
-        FetchUserProfilePresenter fetchUserProfilePresenter = dependencySelector.getUserPresenters().getFetchUserProfilePresenter();
-        privateUserProfileViewModel = new PrivateUserProfileViewModel(userController);
-        fetchUserProfilePresenter.setPrivateProfileViewModel(privateUserProfileViewModel);
-//        privateUserProfileViewModel.getProfileInformation();
-        initializeViews();
+        viewModel.fetchUserProfile(sessionManager.getToken(), sessionManager.getUserId());
 
-        privateUserProfileViewModel.getPrivateUserProfileResult().observe(getViewLifecycleOwner(), new Observer<PrivateUserProfileResult>() {
+        viewModel.getFetchUserProfileResult().observe(getViewLifecycleOwner(), new Observer<FetchUserProfileResult>() {
             @Override
-            public void onChanged(PrivateUserProfileResult privateUserProfileResult) {
-                if (privateUserProfileResult == null){
+            public void onChanged(FetchUserProfileResult fetchUserProfileResult) {
+                if (fetchUserProfileResult == null){
                     return;
                 }
 
-                if (privateUserProfileResult.isError()){
-                    onPrivateProfileFailure(privateUserProfileResult.getErrorMessage());
-                }
-                else{
-                    onPrivateProfileSuccess(privateUserProfileResult.getBiography(),
-                            privateUserProfileResult.getInstagram(), privateUserProfileResult.getFacebook(),
-                            privateUserProfileResult.getPhoneNumber(), privateUserProfileResult.getImage_url());
+                if (fetchUserProfileResult.isError()){
+                    onFetchUserProfileFailure(fetchUserProfileResult.getErrorMessage());
+                } else {
+                    onFetchUserProfileSuccess(fetchUserProfileResult.getUserProfileData());
                 }
             }
         });
@@ -80,15 +68,25 @@ public class UserProfileFragment extends MainActivityFragment {
         return root;
     }
 
-    private void onPrivateProfileSuccess(String biography, String instagram, String facebook, String phoneNumber, String image_url){
-        biography_view.setText(biography);
-        instagram_view.setText(instagram);
-        facebook_view.setText(facebook);
-        phoneNumber_view.setText(phoneNumber);
-        Glide.with(this).load(image_url).into(profile_picture);
+    private void onFetchUserProfileSuccess(UserProfileData userProfileData){
+        contactInfoViewModel.setContactInfoData(userProfileData.getEmail(),
+                userProfileData.getPhoneNumber(), userProfileData.getFacebook(),
+                userProfileData.getInstagram(), null);
+
+        if (!userProfileData.getProfileImgUrl().equals("")){
+            Glide.with(this).load(userProfileData.getProfileImgUrl())
+                    .into(binding.userProfileImage);
+        }
+
+        String headerText = userProfileData.getFirstName() + " " +
+                userProfileData.getLastName();
+
+        binding.userProfileHeader.setText(headerText);
+        binding.userProfileBiography.setText(userProfileData.getBiography());
     }
 
-    private void onPrivateProfileFailure(String errorMessage){
-        System.out.println("Profile Error");
+    private void onFetchUserProfileFailure(String errorMessage){
+        Toast.makeText(getApplicationContext(), "Request failed: " +
+                errorMessage, Toast.LENGTH_SHORT).show();
     }
 }

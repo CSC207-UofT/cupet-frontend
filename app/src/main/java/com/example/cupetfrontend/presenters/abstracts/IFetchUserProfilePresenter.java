@@ -4,5 +4,5 @@ import com.example.cupetfrontend.presenters.view_model_abstracts.IFetchUserProfi
 import com.example.cupetfrontend.use_cases.output_boundaries.user.FetchUserProfileOutputBoundary;
 
 public interface IFetchUserProfilePresenter extends FetchUserProfileOutputBoundary {
-    void setFetchUserProfileViewModel(IFetchUserProfileViewModel fetchUserProfileViewModel);
+    void setViewModel(IFetchUserProfileViewModel fetchUserProfileViewModel);
 }
