@@ -74,4 +74,5 @@
     <string name="delete_button">delete</string>
     <string name="nav_view_my_pets">My Pets</string>
     <string name="public_contactinfo_title">Owner Contact Info</string>
+    <string name="pet_name_age">Pet Name, Age</string>
 </resources>
