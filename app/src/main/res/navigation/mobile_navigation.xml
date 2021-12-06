@@ -6,10 +6,10 @@
     app:startDestination="@+id/nav_potential_matches">
 
     <fragment
-            android:id="@+id/nav_account_settings"
-            android:name="com.example.cupetfrontend.ui.TestFragment"
-            android:label="@string/nav_account_settings"
-            tools:layout="@layout/fragment_test"/>
+        android:id="@+id/nav_account_settings"
+        android:name="com.example.cupetfrontend.ui.edit_account.EditUserAccountFragment"
+        android:label="@string/nav_account_settings"
+        tools:layout="@layout/fragment_edit_user_account" />
     <fragment
         android:id="@+id/nav_view_my_pets"
         android:name="com.example.cupetfrontend.ui.view_my_pets.ViewMyPetsFragment"
