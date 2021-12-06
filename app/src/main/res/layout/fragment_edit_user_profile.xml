@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.edit_user_profile.EditUserProfileActivity">
+    tools:context=".ui.edit_user_profile.EditUserProfileFragment">
 
     <ImageView
         android:id="@+id/imageView2"
@@ -30,7 +30,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/edit_user_profile_biography"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
@@ -89,7 +89,7 @@
         app:layout_constraintVertical_bias="0.976" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName2"
+        android:id="@+id/edit_user_profile_instagram"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="480dp"
@@ -103,7 +103,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName3"
+        android:id="@+id/edit_user_profile_phone_num"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="540dp"
@@ -116,7 +116,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName4"
+        android:id="@+id/edit_user_profile_facebook"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="604dp"

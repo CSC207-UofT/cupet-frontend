@@ -74,7 +74,8 @@ public class UserProfileFragment extends MainActivityFragment {
             }
         });
 
-//        getMainActivity().setEditBtnNavTarget(R.id.);
+        getMainActivity().showEditButton();
+        getMainActivity().setEditBtnNavTarget(R.id.nav_edit_user_profile);
 
         return root;
     }

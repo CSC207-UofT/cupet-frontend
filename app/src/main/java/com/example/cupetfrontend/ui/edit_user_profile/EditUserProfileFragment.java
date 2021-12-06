@@ -2,22 +2,31 @@ package com.example.cupetfrontend.ui.edit_user_profile;
 
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 import androidx.lifecycle.Observer;
 
 import com.example.cupetfrontend.App;
 import com.example.cupetfrontend.R;
 import com.example.cupetfrontend.controllers.abstracts.IUserController;
+import com.example.cupetfrontend.databinding.FragmentCreatePetBinding;
+import com.example.cupetfrontend.databinding.FragmentEditUserAccountBinding;
+import com.example.cupetfrontend.databinding.FragmentEditUserProfileBinding;
 import com.example.cupetfrontend.dependency_selector.DependencySelector;
 import com.example.cupetfrontend.presenters.abstracts.IEditUserProfilePresenter;
+import com.example.cupetfrontend.ui.MainActivityFragment;
 
-public class EditUserProfileActivity extends AppCompatActivity {
+public class EditUserProfileFragment extends MainActivityFragment {
     private EditUserProfileViewModel editUserProfileViewModel;
+    private FragmentEditUserProfileBinding binding;
+
     private EditText biographyField;
     private EditText facebookField;
     private EditText instagramField;
@@ -31,20 +40,21 @@ public class EditUserProfileActivity extends AppCompatActivity {
     };
 
     private void initializeView(){
-        biographyField = findViewById(R.id.editTextTextPersonName);
-        facebookField = findViewById(R.id.editTextTextPersonName4);
-        instagramField = findViewById(R.id.editTextTextPersonName2);
-        phoneNumberField = findViewById(R.id.editTextTextPersonName3);
-        confirmChangesButton = findViewById(R.id.Confirm_EditUserAccount_button);
+        biographyField = binding.editUserProfileBiography;
+        facebookField = binding.editUserProfileFacebook;
+        instagramField = binding.editUserProfileInstagram;
+        phoneNumberField = binding.editUserProfilePhoneNum;
+        confirmChangesButton = binding.ConfirmEditUserProfileButton;
     }
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-//        binding = ActivityEditUserProfileBinding.inflate(getLayoutInflater());
-//        View root = binding.getRoot();
-        setContentView(R.layout.activity_edit_user_profile);
 
-        DependencySelector dependencySelector = ((App) getApplication()).getDependencySelector();
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             ViewGroup container, Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        binding = FragmentEditUserProfileBinding.inflate(inflater, container, false);
+        View root = binding.getRoot();
+
+        initializeDependencySelector();
         IUserController userController = dependencySelector.getControllers().getUserController();
 
         IEditUserProfilePresenter editUserProfilePresenter = dependencySelector.getUserPresenters().getEditUserProfilePresenter();
@@ -56,6 +66,8 @@ public class EditUserProfileActivity extends AppCompatActivity {
         setUpConfirmButtonClickedListener();
         setUpObserveUserProfileResult();
         setUpObserveEditUserProfileFormState();
+
+        return root;
     }
 
     private void setUpFormEditedListener(){
@@ -80,7 +92,6 @@ public class EditUserProfileActivity extends AppCompatActivity {
         instagramField.addTextChangedListener(listener);
         facebookField.addTextChangedListener(listener);
         phoneNumberField.addTextChangedListener(listener);
-        confirmChangesButton = findViewById(R.id.Confirm_EditUserAccount_button);
     }
 
     private EditUserProfileData getEditUserProfileData(){
@@ -116,7 +127,6 @@ public class EditUserProfileActivity extends AppCompatActivity {
                 else{
                     onEditUserProfileSuccess();
                 }
-                finish();
             }
         });
     }
@@ -131,7 +141,7 @@ public class EditUserProfileActivity extends AppCompatActivity {
     }
 
     private void setUpObserveEditUserProfileFormState(){
-        editUserProfileViewModel.getEditUserProfileState().observe(this, new Observer<EditUserProfileState>() {
+        editUserProfileViewModel.getEditUserProfileState().observe(getViewLifecycleOwner(), new Observer<EditUserProfileState>() {
             @Override
             public void onChanged(EditUserProfileState editUserProfileState) {
                 if (editUserProfileState == null){

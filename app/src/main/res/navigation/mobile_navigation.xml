@@ -21,6 +21,11 @@
         android:label="@string/nav_my_user_profile"
         tools:layout="@layout/fragment_user_profile" />
     <fragment
+        android:id="@+id/nav_edit_user_profile"
+        android:name="com.example.cupetfrontend.ui.edit_user_profile.EditUserProfileFragment"
+        android:label="@string/nav_my_user_profile"
+        tools:layout="@layout/fragment_edit_user_profile" />
+    <fragment
         android:id="@+id/nav_potential_matches"
         android:name="com.example.cupetfrontend.ui.potential_matches.PotentialMatchesFragment"
         android:label="@string/title_potential_matches"
