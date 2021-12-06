@@ -166,7 +166,7 @@ public class CreatePetFragment extends MainActivityFragment {
      * Update the displayed views when the pet creation result has changed.
      */
     private void setUpObserveCreatePetResult() {
-        createPetViewModel.getCreatePetResult().observe(this, new Observer<CreatePetResult>() {
+        createPetViewModel.getCreatePetResult().observe(getViewLifecycleOwner(), new Observer<CreatePetResult>() {
             @Override
             public void onChanged(@Nullable CreatePetResult createPetResult) {
                 if (createPetResult == null) {
@@ -189,7 +189,7 @@ public class CreatePetFragment extends MainActivityFragment {
      * Update the fields accordingly to whether or not they have errors.
      */
     private void setUpObserveCreatePetFormState() {
-        createPetViewModel.getCreatePetFormState().observe(this, new Observer<CreatePetFormState>() {
+        createPetViewModel.getCreatePetFormState().observe(getViewLifecycleOwner(), new Observer<CreatePetFormState>() {
             @Override
             public void onChanged(@Nullable CreatePetFormState createPetFormState) {
                 if (createPetFormState == null) {

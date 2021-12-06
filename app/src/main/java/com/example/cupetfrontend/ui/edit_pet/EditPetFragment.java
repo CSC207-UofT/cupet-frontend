@@ -149,7 +149,7 @@ public class EditPetFragment extends MainActivityFragment {
      * Update the displayed views when the pet edition result has changed.
      */
     private void setUpObserveEditPetResult() {
-        editPetViewModel.getEditPetResult().observe(this, new Observer<EditPetResult>() {
+        editPetViewModel.getEditPetResult().observe(getViewLifecycleOwner(), new Observer<EditPetResult>() {
             @Override
             public void onChanged(@Nullable EditPetResult editPetResult) {
                 if (editPetResult == null) {
@@ -172,7 +172,7 @@ public class EditPetFragment extends MainActivityFragment {
      * Update the fields accordingly to whether or not they have errors.
      */
     private void setUpObserveEditPetFormState() {
-        editPetViewModel.getEditPetFormState().observe(this, new Observer<EditPetFormState>() {
+        editPetViewModel.getEditPetFormState().observe(getViewLifecycleOwner(), new Observer<EditPetFormState>() {
             @Override
             public void onChanged(@Nullable EditPetFormState editPetFormState) {
                 if (editPetFormState == null) {
