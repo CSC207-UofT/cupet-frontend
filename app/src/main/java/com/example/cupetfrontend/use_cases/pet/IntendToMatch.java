@@ -1,5 +1,6 @@
-package com.example.cupetfrontend.use_cases;
+package com.example.cupetfrontend.use_cases.pet;
 
+import com.example.cupetfrontend.use_cases.DefaultFailResponseUseCase;
 import com.example.cupetfrontend.use_cases.api_abstracts.IPetAPIGateway;
 import com.example.cupetfrontend.use_cases.api_abstracts.IServerResponseListener;
 import com.example.cupetfrontend.use_cases.api_abstracts.request_models.pet.APIIntendToMatchRequestModel;
@@ -9,7 +10,7 @@ import com.example.cupetfrontend.use_cases.request_models.pet.IntendToMatchReque
 import com.example.cupetfrontend.use_cases.response_models.pet.IntendToMatchSuccessResponseModel;
 import org.json.JSONObject;
 
-public class IntendToMatch extends DefaultFailResponseUseCase  implements IntendToMatchInputBoundary {
+public class IntendToMatch extends DefaultFailResponseUseCase implements IntendToMatchInputBoundary {
     IPetAPIGateway petAPIGateway;
     IntendToMatchOutputBoundary outputBoundary;
 

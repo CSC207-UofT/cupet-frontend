@@ -1,4 +1,4 @@
-package com.example.cupetfrontend.use_cases;
+package com.example.cupetfrontend.use_cases.user;
 
 import com.example.cupetfrontend.use_cases.api_abstracts.IPetAPIGateway;
 import com.example.cupetfrontend.use_cases.api_abstracts.IServerResponseListener;
@@ -7,6 +7,7 @@ import com.example.cupetfrontend.use_cases.api_abstracts.request_models.user.API
 import com.example.cupetfrontend.use_cases.input_boundaries.user.GetPetsInputBoundary;
 import com.example.cupetfrontend.use_cases.output_boundaries.pet.GetPetDataListOutputBoundary;
 import com.example.cupetfrontend.use_cases.output_boundaries.user.GetPetsOutputBoundary;
+import com.example.cupetfrontend.use_cases.pet.UsesPetDataWrapper;
 import com.example.cupetfrontend.use_cases.request_models.user.GetPetsRequestModel;
 import com.example.cupetfrontend.use_cases.data_models.PetData;
 import com.example.cupetfrontend.use_cases.response_models.user.GetPetsSuccessResponseModel;

@@ -10,13 +10,17 @@ import com.example.cupetfrontend.R;
 import com.example.cupetfrontend.data.LoginRepository;
 import com.example.cupetfrontend.presenters.view_model_abstracts.ILoginViewModel;
 
+import javax.inject.Inject;
+
 public class LoginViewModel extends ViewModel implements ILoginViewModel {
 
     private final MutableLiveData<LoginFormState> loginFormState = new MutableLiveData<>();
     private final MutableLiveData<LoginResult> loginResult = new MutableLiveData<>();
-    private final IAuthController authController;
 
-    LoginViewModel(IAuthController authController) {
+    public IAuthController authController;
+
+    @Inject
+    public LoginViewModel(IAuthController authController) {
         this.authController = authController;
     }
 

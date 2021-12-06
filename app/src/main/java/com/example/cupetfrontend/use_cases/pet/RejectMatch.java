@@ -1,5 +1,6 @@
-package com.example.cupetfrontend.use_cases;
+package com.example.cupetfrontend.use_cases.pet;
 
+import com.example.cupetfrontend.use_cases.DefaultFailResponseUseCase;
 import com.example.cupetfrontend.use_cases.api_abstracts.IPetAPIGateway;
 import com.example.cupetfrontend.use_cases.api_abstracts.IServerResponseListener;
 import com.example.cupetfrontend.use_cases.api_abstracts.request_models.pet.APIRejectMatchRequestModel;
@@ -9,9 +10,7 @@ import com.example.cupetfrontend.use_cases.request_models.pet.RejectMatchRequest
 import com.example.cupetfrontend.use_cases.response_models.pet.RejectMatchSuccessResponseModel;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-
-public class RejectMatch extends DefaultFailResponseUseCase  implements RejectMatchInputBoundary {
+public class RejectMatch extends DefaultFailResponseUseCase implements RejectMatchInputBoundary {
     IPetAPIGateway petAPIGateway;
     RejectMatchOutputBoundary outputBoundary;
 

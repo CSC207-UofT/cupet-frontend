@@ -9,7 +9,7 @@ import com.example.cupetfrontend.drivers.api.AuthAPIGateway;
 import com.example.cupetfrontend.drivers.api.HTTPRequestManager;
 import com.example.cupetfrontend.drivers.api.UserAPIGateway;
 import com.example.cupetfrontend.use_cases.LoginUseCase;
-import com.example.cupetfrontend.use_cases.UserCreator;
+import com.example.cupetfrontend.use_cases.user.UserCreator;
 import com.example.cupetfrontend.use_cases.api_abstracts.IAuthAPIGateway;
 import com.example.cupetfrontend.use_cases.api_abstracts.IServerRequestManager;
 import com.example.cupetfrontend.use_cases.api_abstracts.IUserAPIGateway;

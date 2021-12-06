@@ -22,12 +22,15 @@ import com.example.cupetfrontend.dependency_selector.DependencySelector;
 import com.example.cupetfrontend.ui.MainActivity;
 import com.example.cupetfrontend.ui.register.RegisterActivity;
 
+import javax.inject.Inject;
+
 /**
  * The activity for the login page.
  */
 public class LoginActivity extends AppCompatActivity {
 
-    private LoginViewModel loginViewModel;
+    @Inject
+    public LoginViewModel loginViewModel;
     private Button loginButton;
     private EditText emailField;
     private EditText passwordField;
@@ -42,8 +45,9 @@ public class LoginActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        ((App) getApplication()).getAppComponent().inject(this);
 
-        loginViewModel = new LoginViewModelFactory().createLoginViewModel(this.getApplication());
+//        loginViewModel = new LoginViewModelFactory().createLoginViewModel(this.getApplication());
         DependencySelector dependencySelector = ((App) this.getApplication()).getDependencySelector();
         dependencySelector.getAuthPresenters().getLoginPresenter().setLoginViewModel(loginViewModel);
 

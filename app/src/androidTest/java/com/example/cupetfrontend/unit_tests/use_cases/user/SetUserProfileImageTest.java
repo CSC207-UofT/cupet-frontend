@@ -1,7 +1,7 @@
 package com.example.cupetfrontend.unit_tests.use_cases.user;
 
 import com.example.cupetfrontend.unit_tests.use_cases.UseCaseTestClass;
-import com.example.cupetfrontend.use_cases.SetUserProfileImage;
+import com.example.cupetfrontend.use_cases.user.SetUserProfileImage;
 import com.example.cupetfrontend.use_cases.output_boundaries.user.SetUserProfileImageOutputBoundary;
 import com.example.cupetfrontend.use_cases.request_models.user.SetUserProfileImageRequestModel;
 import com.example.cupetfrontend.use_cases.response_models.pet.DefaultFailureResponseModel;

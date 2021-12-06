@@ -1,7 +1,10 @@
-package com.example.cupetfrontend.use_cases;
+package com.example.cupetfrontend.use_cases.pet;
 
+import com.example.cupetfrontend.use_cases.DefaultFailResponseUseCase;
+import com.example.cupetfrontend.use_cases.InvalidAPIResponseException;
 import com.example.cupetfrontend.use_cases.api_abstracts.IPetAPIGateway;
 import com.example.cupetfrontend.use_cases.output_boundaries.pet.GetPetDataListOutputBoundary;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -16,7 +19,7 @@ import java.util.List;
 public class UsesPetDataWrapper extends DefaultFailResponseUseCase {
     private final IPetAPIGateway petAPIGateway;
 
-    UsesPetDataWrapper(IPetAPIGateway petAPIGateway) {
+    public UsesPetDataWrapper(IPetAPIGateway petAPIGateway) {
         this.petAPIGateway = petAPIGateway;
     }
 
@@ -28,7 +31,7 @@ public class UsesPetDataWrapper extends DefaultFailResponseUseCase {
      * @param jsonResponse A JSON representation of the response.
      * @param getPetDataListeners Listeners for the success/fail of the conversion
      */
-    void getPetDataList(String token, JSONObject jsonResponse,
+    public void getPetDataList(String token, JSONObject jsonResponse,
                                 GetPetDataListOutputBoundary getPetDataListeners) {
         try {
             List<String> petIds = getPetIds(jsonResponse);

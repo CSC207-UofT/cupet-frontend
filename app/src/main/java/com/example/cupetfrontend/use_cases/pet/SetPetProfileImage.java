@@ -1,15 +1,13 @@
-package com.example.cupetfrontend.use_cases;
+package com.example.cupetfrontend.use_cases.pet;
 
+import com.example.cupetfrontend.use_cases.DefaultFailResponseUseCase;
+import com.example.cupetfrontend.use_cases.InvalidAPIResponseException;
 import com.example.cupetfrontend.use_cases.api_abstracts.IPetAPIGateway;
 import com.example.cupetfrontend.use_cases.api_abstracts.IServerResponseListener;
-import com.example.cupetfrontend.use_cases.api_abstracts.request_models.pet.APIAddToPetImageGalleryRequestModel;
 import com.example.cupetfrontend.use_cases.api_abstracts.request_models.pet.APISetPetProfileImageRequestModel;
 import com.example.cupetfrontend.use_cases.input_boundaries.pet.SetPetProfileImageInputBoundary;
-import com.example.cupetfrontend.use_cases.output_boundaries.pet.AddToPetImageGalleryOutputBoundary;
 import com.example.cupetfrontend.use_cases.output_boundaries.pet.SetPetProfileImageOutputBoundary;
-import com.example.cupetfrontend.use_cases.request_models.pet.AddToPetImageGalleryRequestModel;
 import com.example.cupetfrontend.use_cases.request_models.pet.SetPetProfileImageRequestModel;
-import com.example.cupetfrontend.use_cases.response_models.pet.AddToPetImageGallerySuccessResponseModel;
 import com.example.cupetfrontend.use_cases.response_models.pet.SetPetProfileImageSuccessResponseModel;
 
 import org.json.JSONException;
