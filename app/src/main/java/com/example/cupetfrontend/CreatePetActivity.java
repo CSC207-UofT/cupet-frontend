@@ -10,9 +10,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.lifecycle.Observer;
 import com.example.cupetfrontend.controllers.abstracts.IPetController;
+import com.example.cupetfrontend.controllers.abstracts.ISessionManager;
 import com.example.cupetfrontend.dependency_selector.DependencySelector;
 import com.example.cupetfrontend.presenters.abstracts.ICreatePetPresenter;
 import com.example.cupetfrontend.presenters.abstracts.ICreateUserPresenter;
+import com.example.cupetfrontend.presenters.view_model_abstracts.ICreatePetViewModel;
 import com.example.cupetfrontend.ui.login.LoginActivity;
 import com.example.cupetfrontend.ui.register.*;
 
@@ -23,6 +25,7 @@ public class CreatePetActivity extends AppCompatActivity implements AdapterView.
     private int age;
     private String breed;
     private CreatePetViewModel createPetViewModel;
+    private ISessionManager sessionManager;
 
     EditText nameInput;
     EditText ageInput;
@@ -46,9 +49,13 @@ public class CreatePetActivity extends AppCompatActivity implements AdapterView.
         createPetViewModel = new CreatePetViewModel(petController);
         createPetPresenter.setCreatePetViewModel(createPetViewModel);
 
+        sessionManager = dependencySelector.getSessionManager();
+        createPetViewModel.createPetProfile(getCreatePetData(), sessionManager.getToken());
+
         nameInput = (EditText) findViewById(R.id.Create_Pet_Name_Input);
         ageInput = (EditText) findViewById(R.id.Create_Pet_Age_Input);
         biographyInput = (EditText) findViewById(R.id.Create_Pet_Biography_Input);
+
 
 
         Spinner breed_spinner = (Spinner) findViewById(R.id.Create_Pet_Breed_Spinner_Input);
@@ -161,7 +168,7 @@ public class CreatePetActivity extends AppCompatActivity implements AdapterView.
         confirm_button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 CreatePetProfileData createPetProfileData = getCreatePetData();
-                createPetViewModel.createPetProfile(createPetProfileData);
+                createPetViewModel.createPetProfile(createPetProfileData, sessionManager.getToken());
             }
         });
     }

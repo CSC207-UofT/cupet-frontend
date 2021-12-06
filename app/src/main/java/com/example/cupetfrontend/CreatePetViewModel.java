@@ -1,18 +1,20 @@
 package com.example.cupetfrontend;
 
+import android.media.session.MediaSession;
 import android.util.Patterns;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import com.example.cupetfrontend.controllers.abstracts.IPetController;
 import com.example.cupetfrontend.controllers.abstracts.IUserController;
+import com.example.cupetfrontend.presenters.view_model_abstracts.ICreatePetViewModel;
 import com.example.cupetfrontend.presenters.view_model_abstracts.ICreaterPetViewModel;
 import com.example.cupetfrontend.presenters.view_model_abstracts.IRegisterViewModel;
 import com.example.cupetfrontend.ui.register.RegisterFormData;
 import com.example.cupetfrontend.ui.register.RegisterFormState;
 import com.example.cupetfrontend.ui.register.RegisterResult;
 
-public class CreatePetViewModel extends ViewModel implements ICreaterPetViewModel {
+public class CreatePetViewModel extends ViewModel implements ICreatePetViewModel {
 
     private final MutableLiveData<CreatePetState> createPetState= new MutableLiveData<>();
     private final MutableLiveData<CreatePetResult> createPetResult = new MutableLiveData<>();
@@ -36,8 +38,8 @@ public class CreatePetViewModel extends ViewModel implements ICreaterPetViewMode
      * @param formData The pet data entered into the form
      *                 NEED TOKEN FOR PET
      */
-    public void createPetProfile(CreatePetProfileData formData){
-        petController.createPet("123", formData.getName(), String.valueOf(formData.getAge()), formData.getBiography(), formData.getBreed());
+    public void createPetProfile(CreatePetProfileData formData, String token){
+        petController.createPet(token, formData.getName(), String.valueOf(formData.getAge()), formData.getBiography(), formData.getBreed());
     }
 
     /**

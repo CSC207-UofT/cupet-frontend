@@ -3,6 +3,7 @@ package com.example.cupetfrontend;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
+import com.example.cupetfrontend.controllers.SessionManager;
 import com.example.cupetfrontend.controllers.abstracts.IUserController;
 import com.example.cupetfrontend.presenters.user.FetchUserProfilePresenter;
 import com.example.cupetfrontend.presenters.view_model_abstracts.IPrivateUserProfileViewModel;
@@ -15,12 +16,15 @@ public class PrivateUserProfileViewModel extends ViewModel implements IPrivateUs
     private String firstName;
     private String lastName;
     private String biography;
+    private SessionManager sessionManager;
+
 
     public PrivateUserProfileViewModel(IUserController userController){
         this.userController = userController;
     }
 
     public void getProfileInformation(){
+
         userController.fetchUserProfile("testing", "1111");
     }
 
