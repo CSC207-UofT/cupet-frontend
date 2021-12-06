@@ -7,8 +7,6 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.preference.PreferenceFragmentCompat;
-import androidx.preference.SeekBarPreference;
 import org.w3c.dom.Text;
 import android.widget.Toast;
 

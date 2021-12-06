@@ -39,7 +39,7 @@ public class CreatePetPresenter implements ICreatePetPresenter {
      * @param response The response from the use case's layer
      */
     @Override
-    public void onCreatePetFailure(PetCreatorFailResponseModel response) {
+    public void onCreatePetFailure(DefaultFailureResponseModel response) {
 
     }
 }

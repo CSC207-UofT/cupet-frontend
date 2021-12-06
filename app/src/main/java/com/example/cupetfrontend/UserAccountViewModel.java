@@ -30,7 +30,7 @@ public class UserAccountViewModel extends ViewModel implements IUserAccountViewM
 
     @Override
     public void onUserAccountSuccess(String firstName, String lastName, String address, String city, String password){
-        userAccountResult.setValue(new UserAccountResult(firstName, lastName, address, city, password));
+        userAccountResult.setValue(new UserAccountResult(firstName, lastName, address, city, password, "tempImg"));
         this.firstName = Objects.requireNonNull(userAccountResult.getValue()).getFirstName();
         this.lastName = Objects.requireNonNull(userAccountResult.getValue()).getLastName();
         this.address = Objects.requireNonNull(userAccountResult.getValue().getAddress());
