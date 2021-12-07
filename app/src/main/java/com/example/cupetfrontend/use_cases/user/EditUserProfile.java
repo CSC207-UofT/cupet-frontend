@@ -41,6 +41,7 @@ public class EditUserProfile extends DefaultFailResponseUseCase implements EditU
         });
     }
 
+
     /**
      * Convert a JSONObject response to an instance of
      * FetchPetProfileSuccessResponseModel.

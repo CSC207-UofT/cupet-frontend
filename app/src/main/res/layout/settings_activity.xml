@@ -1,0 +1,74 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:id="@+id/settings"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/Contact_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Contact" />
+
+            <Switch
+                android:id="@+id/Invisibility_switch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Appear invisible to others"
+                android:textOff="Other can see me and match with me."
+                android:textOn="I am hidden on the feeds of others. I am unable to view potential matches." />
+
+            <Switch
+                android:id="@+id/Contact_switch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Display Contact Information"
+                android:textOff="Contact information is shown to everyone."
+                android:textOn="Contact information is only shown to successful matches." />
+
+            <TextView
+                android:id="@+id/Location_textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Location" />
+
+            <Switch
+                android:id="@+id/Location_On_Off_switch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Allow the app to know my location"
+                android:textOff="Location is turned off."
+                android:textOn="Location is turned on." />
+
+            <TextView
+                android:id="@+id/Maximum_match_distance_textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Maximum match distance(km)" />
+
+            <SeekBar
+                android:id="@+id/Distance_seekBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/Distance_textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="0" />
+
+
+        </LinearLayout>
+    </FrameLayout>
+
+
+</LinearLayout>

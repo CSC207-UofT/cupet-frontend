@@ -13,24 +13,27 @@
         android:theme="@style/Theme.CupetFrontEnd"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
+        <activity android:name=".ui.user_account.UserAccountActivity"
+            android:exported="true"
+
+            />
         <activity
             android:name=".ui.MainActivity"
             android:exported="true"
             android:theme="@style/Theme.CupetFrontEnd.NoActionBar"
             android:windowSoftInputMode="adjustPan"
-        android:label="@string/title_activity_main" />
-
-        <activity android:name=".ui.splash_screen.SplashScreenActivity"
+            android:label="@string/title_activity_main" />
+        <activity
+            android:name=".ui.splash_screen.SplashScreenActivity"
+            android:exported="true"
             android:label="SplashScreenActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar"
-            android:exported="true">
+            android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-      
         <activity
             android:name=".ui.login.LoginActivity"
             android:exported="true"
@@ -44,6 +47,5 @@
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />
-
-
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 </manifest>

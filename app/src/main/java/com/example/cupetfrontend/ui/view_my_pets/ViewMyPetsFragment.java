@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.example.cupetfrontend.App;
 import com.example.cupetfrontend.R;
 import com.example.cupetfrontend.controllers.abstracts.IPetController;
+import com.example.cupetfrontend.controllers.abstracts.IPetSessionManager;
 import com.example.cupetfrontend.controllers.abstracts.ISessionManager;
 import com.example.cupetfrontend.controllers.abstracts.IUserController;
 import com.example.cupetfrontend.data.model.PetModel;
@@ -47,6 +48,8 @@ public class ViewMyPetsFragment extends MainActivityFragment {
     public IGetPetsPresenter getPetsPresenter;
     @Inject
     public ISessionManager sessionManager;
+    @Inject
+    public IPetSessionManager petSessionManager;
 
     public void initializeViews() {
         recyclerView = binding.cardRecyclerView;
@@ -87,7 +90,8 @@ public class ViewMyPetsFragment extends MainActivityFragment {
 
     private void initCardRecyclerView(){
         Log.d(TAG, "initRecyclerView: init recyclerview");
-        adapter = new CardRecyclerViewAdapter(getContext(), petModelList);
+        adapter = new CardRecyclerViewAdapter(getContext(), petModelList,
+                getMainActivity(), petSessionManager);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager((new GridLayoutManager(getContext(), 2)));
     }

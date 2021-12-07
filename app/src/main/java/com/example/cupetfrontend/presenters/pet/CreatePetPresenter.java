@@ -40,6 +40,6 @@ public class CreatePetPresenter implements ICreatePetPresenter {
      */
     @Override
     public void onCreatePetFailure(DefaultFailureResponseModel response) {
-        createPetViewModel.onCreatePetFailure(response.getErrorMessage());
+
     }
 }

@@ -6,10 +6,10 @@
     app:startDestination="@+id/nav_potential_matches">
 
     <fragment
-            android:id="@+id/nav_account_settings"
-            android:name="com.example.cupetfrontend.ui.TestFragment"
-            android:label="@string/nav_account_settings"
-            tools:layout="@layout/fragment_test"/>
+        android:id="@+id/nav_account_settings"
+        android:name="com.example.cupetfrontend.ui.edit_account.EditUserAccountFragment"
+        android:label="@string/nav_account_settings"
+        tools:layout="@layout/fragment_edit_user_account" />
     <fragment
         android:id="@+id/nav_view_my_pets"
         android:name="com.example.cupetfrontend.ui.view_my_pets.ViewMyPetsFragment"
@@ -17,9 +17,14 @@
         tools:layout="@layout/fragment_view_my_pets" />
     <fragment
         android:id="@+id/nav_my_user_profile"
-        android:name="com.example.cupetfrontend.ui.TestFragment"
+        android:name="com.example.cupetfrontend.ui.user_profile.UserProfileFragment"
         android:label="@string/nav_my_user_profile"
-        tools:layout="@layout/fragment_test" />
+        tools:layout="@layout/fragment_user_profile" />
+    <fragment
+        android:id="@+id/nav_edit_user_profile"
+        android:name="com.example.cupetfrontend.ui.edit_user_profile.EditUserProfileFragment"
+        android:label="@string/nav_my_user_profile"
+        tools:layout="@layout/fragment_edit_user_profile" />
     <fragment
         android:id="@+id/nav_potential_matches"
         android:name="com.example.cupetfrontend.ui.potential_matches.PotentialMatchesFragment"
@@ -29,12 +34,15 @@
     <fragment
         android:id="@+id/nav_matches"
         android:name="com.example.cupetfrontend.ui.get_matches.GetMatchesFragment"
-        android:label="@string/title_matches" />
+        android:label="@string/title_matches"
+        tools:layout="@layout/fragment_get_matches"
+        />
 
     <fragment
             android:id="@+id/nav_my_pet_profile"
             android:name="com.example.cupetfrontend.ui.my_pet_profile.PetProfileFragment"
             android:label="@string/title_my_pet_profile"
+            tools:layout="@layout/fragment_my_pet_profile"
     />
     <fragment
             android:id="@+id/nav_edit_pet"

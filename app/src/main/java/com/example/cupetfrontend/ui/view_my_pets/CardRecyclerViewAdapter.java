@@ -15,7 +15,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.cupetfrontend.R;
+import com.example.cupetfrontend.controllers.abstracts.IPetSessionManager;
 import com.example.cupetfrontend.data.model.PetModel;
+import com.example.cupetfrontend.ui.Navigator;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -26,12 +28,17 @@ public class CardRecyclerViewAdapter extends RecyclerView.Adapter<CardRecyclerVi
 
     private static final String TAG = "RecyclerViewAdapter";
 
-    private List<PetModel> mPetModels;
+    private final List<PetModel> mPetModels;
     private final Context mContext;
+    private final Navigator navigator;
+    private final IPetSessionManager petSessionManager;
 
-    public CardRecyclerViewAdapter(Context mContext, List<PetModel> mPetModels) {
+    public CardRecyclerViewAdapter(Context mContext, List<PetModel> mPetModels,
+                                   Navigator navigator, IPetSessionManager petSessionManager) {
         this.mContext = mContext;
         this.mPetModels = mPetModels;
+        this.navigator = navigator;
+        this.petSessionManager = petSessionManager;
     }
 
     @NonNull
@@ -70,9 +77,13 @@ public class CardRecyclerViewAdapter extends RecyclerView.Adapter<CardRecyclerVi
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "onClick: clicked on:" + getPetModelFrom(holder));
-                Toast.makeText(mContext, getPetModelFrom(holder).getPetName(), Toast.LENGTH_SHORT).show();
+                PetModel model = getPetModelFrom(holder);
 
-                //TODO: Send to appropriate page for selected pet
+                String toastMessage = "Switched to " + model.getPetName();
+                Toast.makeText(mContext, toastMessage, Toast.LENGTH_SHORT).show();
+
+                petSessionManager.setPetId(model.getPetId());
+                navigator.navigate(R.id.nav_my_pet_profile);
             }
         });
     }

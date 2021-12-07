@@ -101,13 +101,17 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
     private void loadDataIntoViews(@NotNull ViewHolder holder) {
-        Glide.with(context)
-                // tells Glide we it as bitmap
-                .asBitmap()
-                // where we would reference img URLs - resource where img is coming from
-                .load(getPetModelFor(holder).getPetImageUrl())
-                // loading image into image view - so reference view holder -> image widget
-                .into(holder.petImage);
+        String petImgUrl = getPetModelFor(holder).getPetImageUrl();
+
+        if (!petImgUrl.equals("")){
+            Glide.with(context)
+                    // tells Glide we it as bitmap
+                    .asBitmap()
+                    // where we would reference img URLs - resource where img is coming from
+                    .load(petImgUrl)
+                    // loading image into image view - so reference view holder -> image widget
+                    .into(holder.petImage);
+        }
 
         holder.petName.setText(getPetModelFor(holder).getPetName());
         holder.petBreed.setText(getPetModelFor(holder).getPetBreed());

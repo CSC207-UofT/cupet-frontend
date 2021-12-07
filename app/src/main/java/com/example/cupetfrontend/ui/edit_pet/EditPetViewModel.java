@@ -5,7 +5,12 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import com.example.cupetfrontend.R;
 import com.example.cupetfrontend.controllers.abstracts.IPetController;
+import com.example.cupetfrontend.controllers.abstracts.IPetSessionManager;
+import com.example.cupetfrontend.controllers.abstracts.ISessionManager;
 import com.example.cupetfrontend.presenters.view_model_abstracts.IEditPetViewModel;
+import com.example.cupetfrontend.presenters.view_model_abstracts.nav_context_models.EditPetContext;
+
+import javax.inject.Inject;
 
 /**
  * A ViewModel class for the Edit Pet page.
@@ -14,35 +19,47 @@ import com.example.cupetfrontend.presenters.view_model_abstracts.IEditPetViewMod
 public class EditPetViewModel extends ViewModel implements IEditPetViewModel {
     private final MutableLiveData<EditPetFormState> editPetFormState = new MutableLiveData<>();
     private final MutableLiveData<EditPetResult> editPetResult = new MutableLiveData<>();
-    private final IPetController petController;
 
-    public EditPetViewModel(IPetController petController) {
+    private final IPetController petController;
+    public ISessionManager sessionManager;
+    public IPetSessionManager petSessionManager;
+
+    private EditPetContext context;
+
+    @Inject
+    public EditPetViewModel(IPetController petController, ISessionManager sessionManager,
+                            IPetSessionManager petSessionManager) {
         this.petController = petController;
+        this.sessionManager = sessionManager;
+        this.petSessionManager = petSessionManager;
     }
 
-    LiveData<EditPetFormState> getEditPetFormState() {
+    @Override
+    public LiveData<EditPetFormState> getEditPetFormState() {
         return editPetFormState;
     }
 
-    LiveData<EditPetResult> getEditPetResult() {
+    @Override
+    public LiveData<EditPetResult> getEditPetResult() {
         return editPetResult;
     }
 
-    /**
-     * Create a new edit pet request
-     * @param formData The registration data entered into the form
-     */
+    @Override
     public void editPet(EditPetFormData formData){
-        // TODO: add token code
-        // TODO: add petId code
-        petController.editPet("token", "petId", formData.getPetName(), formData.getPetAge(),
+        petController.editPet(sessionManager.getToken(), petSessionManager.getPetId(), formData.getPetName(), formData.getPetAge(),
                 formData.getPetBreed(), formData.getPetBio());
+    }
+
+    @Override
+    public void setPetProfileImage(String b64) {
+        petController.setPetProfileImage(sessionManager.getToken(), petSessionManager.getPetId(), b64);
     }
 
     /**
      * Update the state of the edit pet form.
      * @param formData The data entered into the form.
      */
+    @Override
     public void updateFormState(EditPetFormData formData) {
         EditPetFormState newFormState = new EditPetFormState();
 
@@ -121,5 +138,15 @@ public class EditPetViewModel extends ViewModel implements IEditPetViewModel {
         EditPetResult newEditPetResult = new EditPetResult(true, message);
 
         editPetResult.setValue(newEditPetResult);
+    }
+
+    @Override
+    public EditPetContext getContext() {
+        return context;
+    }
+
+    @Override
+    public void setContext(EditPetContext context) {
+        this.context = context;
     }
 }
