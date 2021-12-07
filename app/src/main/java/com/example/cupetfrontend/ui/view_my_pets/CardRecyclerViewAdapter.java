@@ -30,16 +30,17 @@ public class CardRecyclerViewAdapter extends RecyclerView.Adapter<CardRecyclerVi
 
     private final List<PetModel> mPetModels;
     private final Context mContext;
-    private final Navigator navigator;
     private final IPetSessionManager petSessionManager;
+    private final Navigator navigator;
 
     public CardRecyclerViewAdapter(Context mContext, List<PetModel> mPetModels,
-                                   Navigator navigator, IPetSessionManager petSessionManager) {
-        this.mContext = mContext;
+                                   IPetSessionManager petSessionManager, Navigator navigator) {
         this.mPetModels = mPetModels;
-        this.navigator = navigator;
+        this.mContext = mContext;
         this.petSessionManager = petSessionManager;
+        this.navigator = navigator;
     }
+
 
     @NonNull
     @Override
@@ -47,8 +48,7 @@ public class CardRecyclerViewAdapter extends RecyclerView.Adapter<CardRecyclerVi
         // This method is responsible for inflating the view
         // Basically recycles the view holders - puts them in position they should be put into
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_carditem, parent, false);
-        ViewHolder holder = new ViewHolder(view);
-        return holder;
+        return new ViewHolder(view);
     }
 
     @Override
@@ -77,12 +77,13 @@ public class CardRecyclerViewAdapter extends RecyclerView.Adapter<CardRecyclerVi
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "onClick: clicked on:" + getPetModelFrom(holder));
-                PetModel model = getPetModelFrom(holder);
+                PetModel petModel = getPetModelFrom(holder);
 
-                String toastMessage = "Switched to " + model.getPetName();
+                String toastMessage = "Switched to " + petModel.getPetName();
+
                 Toast.makeText(mContext, toastMessage, Toast.LENGTH_SHORT).show();
+                petSessionManager.setPetId(petModel.getPetId());
 
-                petSessionManager.setPetId(model.getPetId());
                 navigator.navigate(R.id.nav_my_pet_profile);
             }
         });

@@ -91,8 +91,9 @@ public class ViewMyPetsFragment extends MainActivityFragment {
     private void initCardRecyclerView(){
         Log.d(TAG, "initRecyclerView: init recyclerview");
         adapter = new CardRecyclerViewAdapter(getContext(), petModelList,
-                getMainActivity(), petSessionManager);
-        recyclerView.setAdapter(adapter);
+                petSessionManager, getMainActivity());
+
+      recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager((new GridLayoutManager(getContext(), 2)));
     }
 
