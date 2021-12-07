@@ -60,12 +60,11 @@ public class MainActivity extends AppCompatActivity implements Navigator {
         //  TODO: Offload to the log in step
         sessionManager.setCachedUserData(new CachedUserData(
                 "dummy first", "dummy last", "dummy email",
-                "https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Jonathan_G_Meath_portrays_" +
-                        "Santa_Claus.jpg/800px-Jonathan_G_Meath_portrays_Santa_Claus.jpg"
+                "http://res.cloudinary.com/dzcilqec7/image/upload/v1638824880/gifu6kjzdv58lidrarwx.png"
         ));
 
-        sessionManager.setToken("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMyIsImV4cCI6MTYzODg0NzQ1MSwiaWF0IjoxNjM4ODExNDUxfQ.oK14JQB5Z-NbzkAEtq0e77V8gc6CMfmiehiMz8tykc4");
-        petSessionManager.setPetId("12");
+        sessionManager.setToken("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxOCIsImV4cCI6MTYzODk1NTEzNiwiaWF0IjoxNjM4OTE5MTM2fQ.wy2BlAsa09vU-QoRLU46tA9rH8X690wXZi_5_7EoWwg");
+        petSessionManager.setPetId("16");
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -128,7 +127,9 @@ public class MainActivity extends AppCompatActivity implements Navigator {
         fullNameView.setText(fullName);
         emailView.setText(cachedUserData.getEmail());
 
-        Glide.with(this).load(cachedUserData.getProfileImgUrl()).into(imgView);
+        if (!cachedUserData.getProfileImgUrl().equals("")){
+            Glide.with(this).load(cachedUserData.getProfileImgUrl()).into(imgView);
+        }
     }
 
     private void setUpSignOutListener() {

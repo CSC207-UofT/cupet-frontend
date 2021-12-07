@@ -92,6 +92,8 @@ public class EditPetFragment extends MainActivityFragment {
             prefillData(editPetViewModel.getContext().getPetProfileData());
         }
 
+        getMainActivity().hideEditButton();
+
         return root;
     }
 

@@ -15,7 +15,7 @@ import java.io.IOException;
 /**
  * A class responsible for getting raw image data from android uris.
  */
-public class ImgDataGetter {
+public class ImgLoader {
     public static Bitmap bitMapFromUri(ContentResolver contentResolver, Uri uri) throws IOException {
         ParcelFileDescriptor parcelFileDescriptor = contentResolver.openFileDescriptor(uri, "r");
         FileDescriptor fileDescriptor = parcelFileDescriptor.getFileDescriptor();
@@ -25,17 +25,21 @@ public class ImgDataGetter {
         return image;
     }
 
+    /**
+     * Attach a PNG B64 prefix to a b64 image raw-data string.
+     */
+    private static String attachB64ImagePrefix(String b64){
+        return "data:image/png;base64," + b64;
+    }
+
     public static String b64FromBitmap(Bitmap bitmap){
         // Convert bitmap to byte array
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
         byte[] byteArray = byteArrayOutputStream.toByteArray();
 
-        System.out.println(Base64.encodeToString(byteArray, Base64.NO_WRAP));
+        String b64 = Base64.encodeToString(byteArray, Base64.NO_WRAP);
 
-        String b64 =  Base64.encodeToString(byteArray, Base64.NO_WRAP);
-        b64 = b64.replace("\n", "");
-
-        return b64;
+        return attachB64ImagePrefix(b64);
     }
 }

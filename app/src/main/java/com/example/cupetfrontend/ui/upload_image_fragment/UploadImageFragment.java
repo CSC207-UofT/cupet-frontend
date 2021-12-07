@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.cupetfrontend.databinding.FragmentUploadImageBinding;
@@ -54,10 +53,10 @@ public class UploadImageFragment extends MainActivityFragment {
 
                             Uri uri = result.getData().getData();
                             try {
-                                Bitmap bitmap = ImgDataGetter.bitMapFromUri(
+                                Bitmap bitmap = ImgLoader.bitMapFromUri(
                                         getApplicationContext().getContentResolver(), uri);
 
-                                String b64 = ImgDataGetter.b64FromBitmap(bitmap);
+                                String b64 = ImgLoader.b64FromBitmap(bitmap);
 
                                 viewModel.setImgB64(b64);
                                 Glide.with(getMainActivity()).
