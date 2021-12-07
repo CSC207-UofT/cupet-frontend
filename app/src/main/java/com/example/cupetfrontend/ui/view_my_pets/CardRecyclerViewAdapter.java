@@ -15,7 +15,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.cupetfrontend.R;
+import com.example.cupetfrontend.controllers.abstracts.IPetSessionManager;
 import com.example.cupetfrontend.data.model.PetModel;
+import com.example.cupetfrontend.ui.Navigator;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -28,11 +30,17 @@ public class CardRecyclerViewAdapter extends RecyclerView.Adapter<CardRecyclerVi
 
     private List<PetModel> mPetModels;
     private final Context mContext;
+    private final IPetSessionManager petSessionManager;
+    private final Navigator navigator;
 
-    public CardRecyclerViewAdapter(Context mContext, List<PetModel> mPetModels) {
-        this.mContext = mContext;
+    public CardRecyclerViewAdapter(Context mContext, List<PetModel> mPetModels,
+                                   IPetSessionManager petSessionManager, Navigator navigator) {
         this.mPetModels = mPetModels;
+        this.mContext = mContext;
+        this.petSessionManager = petSessionManager;
+        this.navigator = navigator;
     }
+
 
     @NonNull
     @Override
@@ -40,8 +48,7 @@ public class CardRecyclerViewAdapter extends RecyclerView.Adapter<CardRecyclerVi
         // This method is responsible for inflating the view
         // Basically recycles the view holders - puts them in position they should be put into
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_carditem, parent, false);
-        ViewHolder holder = new ViewHolder(view);
-        return holder;
+        return new ViewHolder(view);
     }
 
     @Override
@@ -70,9 +77,14 @@ public class CardRecyclerViewAdapter extends RecyclerView.Adapter<CardRecyclerVi
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "onClick: clicked on:" + getPetModelFrom(holder));
-                Toast.makeText(mContext, getPetModelFrom(holder).getPetName(), Toast.LENGTH_SHORT).show();
+                PetModel petModel = getPetModelFrom(holder);
 
-                //TODO: Send to appropriate page for selected pet
+                String toastMessage = "Switched to " + petModel.getPetName();
+
+                Toast.makeText(mContext, toastMessage, Toast.LENGTH_SHORT).show();
+                petSessionManager.setPetId(petModel.getPetId());
+
+                navigator.navigate(R.id.nav_my_pet_profile);
             }
         });
     }
