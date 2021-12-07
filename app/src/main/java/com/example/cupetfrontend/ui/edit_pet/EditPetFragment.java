@@ -53,10 +53,10 @@ public class EditPetFragment extends MainActivityFragment {
      * Initialize the views of the form into the field instance variables.
      */
     private void initializeViews() {
-        petNameField = binding.editPetName;
-        petAgeField = binding.editPetAge;
-        petBreedField = binding.editPetBreed;
-        petBioField = binding.editPetBio;
+        petNameField = binding.petPetName;
+        petAgeField = binding.petPetAge;
+        petBreedField = binding.petPetBreed;
+        petBioField = binding.petPetBio;
         editPetButton = binding.confirmEditPetButton;
     }
 
