@@ -1,73 +1,63 @@
 package com.example.cupetfrontend.ui.edit_pet;
 
-import androidx.annotation.Nullable;
+import com.example.cupetfrontend.ui.form_validators.FormFieldState;
 
 /**
  * A class that stores all the error states for the edit pet form.
  * (i.e. which fields are in an error state)
  */
 public class EditPetFormState {
-    @Nullable
-    private Integer petNameError;
-    @Nullable
-    private Integer petAgeError;
-    @Nullable
-    private Integer petBreedError;
-    @Nullable
-    private Integer petBioError;
-
-    private boolean isDataValid;
+    private FormFieldState nameState;
+    private FormFieldState ageState;
+    private FormFieldState breedState;
+    private FormFieldState biographyState;
 
     public EditPetFormState() {
-        this.petNameError = null;
-        this.petAgeError = null;
-        this.petBreedError = null;
-        this.petBioError = null;
-        this.isDataValid = false;
+        nameState = new FormFieldState();
+        ageState = new FormFieldState();
+        breedState = new FormFieldState();
+        biographyState = new FormFieldState();
     }
 
-    @Nullable
-    public Integer getPetNameError() {
-        return petNameError;
+    public FormFieldState getNameState() {
+        return nameState;
     }
 
-    @Nullable
-    public Integer getPetAgeError() {
-        return petAgeError;
+    public FormFieldState getAgeState() {
+        return ageState;
     }
 
-    @Nullable
-    public Integer getPetBreedError() {
-        return petBreedError;
+    public FormFieldState getBreedState() {
+        return breedState;
     }
 
-    @Nullable
-    public Integer getPetBioError() {
-        return petBioError;
+    public FormFieldState getBiographyState() {
+        return biographyState;
     }
 
-    public void setPetNameError(@Nullable Integer petNameError) {
-        this.petNameError = petNameError;
+    public void setNameState(FormFieldState nameState) {
+        this.nameState = nameState;
     }
 
-    public void setPetAgeError(@Nullable Integer petAgeError) {
-        this.petAgeError = petAgeError;
+    public void setAgeState(FormFieldState ageState) {
+        this.ageState = ageState;
     }
 
-    public void setPetBreedError(@Nullable Integer petBreedError) {
-        this.petBreedError = petBreedError;
+    public void setBreedState(FormFieldState breedState) {
+        this.breedState = breedState;
     }
 
-    public void setPetBioError(@Nullable Integer petBioError) {
-        this.petBioError = petBioError;
-    }
-
-    public void setDataValid(boolean dataValid) {
-        isDataValid = dataValid;
+    public void setBiographyState(FormFieldState biographyState) {
+        this.biographyState = biographyState;
     }
 
     public boolean isDataValid() {
-        return isDataValid;
+        boolean isError = this.nameState.isError() ||
+                this.ageState.isError() ||
+                this.breedState.isError() ||
+                this.biographyState.isError();
+
+        return !isError;
     }
 
 }

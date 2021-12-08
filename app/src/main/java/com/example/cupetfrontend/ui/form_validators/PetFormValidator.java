@@ -62,7 +62,7 @@ public class PetFormValidator {
      *
      * @return Error text if applicable, otherwise return null
      */
-    public String validateBiography(String petName) {
+    public static String validateBiography(String biography) {
         return null;
     }
 }

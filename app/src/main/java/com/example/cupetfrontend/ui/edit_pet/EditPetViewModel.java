@@ -9,6 +9,9 @@ import com.example.cupetfrontend.controllers.abstracts.IPetSessionManager;
 import com.example.cupetfrontend.controllers.abstracts.ISessionManager;
 import com.example.cupetfrontend.presenters.view_model_abstracts.IEditPetViewModel;
 import com.example.cupetfrontend.presenters.view_model_abstracts.nav_context_models.EditPetContext;
+import com.example.cupetfrontend.ui.form_validators.FormFieldState;
+import com.example.cupetfrontend.ui.form_validators.PetFormValidator;
+import com.example.cupetfrontend.ui.form_validators.UserFormValidator;
 
 import javax.inject.Inject;
 
@@ -62,20 +65,56 @@ public class EditPetViewModel extends ViewModel implements IEditPetViewModel {
     @Override
     public void updateFormState(EditPetFormData formData) {
         EditPetFormState newFormState = new EditPetFormState();
+        EditPetFormState oldFormState = editPetFormState.getValue();
 
-        if (!isPetNameValid(formData.getPetName())) {
-            newFormState.setPetNameError(R.string.invalid_pet_name);
-        } else if (!isPetAgeValid(formData.getPetAge())) {
-            newFormState.setPetAgeError(R.string.invalid_pet_age);
-        } else if (!isPetBreedValid(formData.getPetBreed())) {
-            newFormState.setPetBreedError(R.string.invalid_pet_breed);
-        } else if (!isPetBioValid(formData.getPetBio())) {
-            newFormState.setPetBioError(R.string.invalid_pet_bio);
-        } else {
-            newFormState.setDataValid(true);
+        if (oldFormState == null){
+            editPetFormState.setValue(newFormState);
+            return;
         }
 
+        validateForm(formData, newFormState, oldFormState);
+        checkFormStateInteracted(formData,  newFormState);
+
         editPetFormState.setValue(newFormState);
+    }
+
+    private void validateForm(EditPetFormData formData, EditPetFormState newFormState,
+                              EditPetFormState oldFormState) {
+        newFormState.setNameState(
+                new FormFieldState(
+                        oldFormState.getNameState(),
+                        PetFormValidator.validatePetName(formData.getPetName())
+                ));
+        newFormState.setAgeState(
+                new FormFieldState(
+                        oldFormState.getAgeState(),
+                        PetFormValidator.validateAge(formData.getPetAge())
+                ));
+        newFormState.setBreedState(
+                new FormFieldState(
+                        oldFormState.getBreedState(),
+                        PetFormValidator.validateBreed(formData.getPetBreed())
+                ));
+        newFormState.setBiographyState(
+                new FormFieldState(
+                        oldFormState.getBiographyState(),
+                        PetFormValidator.validateBiography(formData.getPetBio())
+                ));
+    }
+
+    private void checkFormStateInteracted (EditPetFormData formData, EditPetFormState state) {
+        if (formData.getPetName() != null && !formData.getPetName().equals("")){
+            state.getNameState().onFieldInteracted();
+        }
+        if (formData.getPetAge() != null && !formData.getPetAge().equals("")){
+            state.getAgeState().onFieldInteracted();
+        }
+        if (formData.getPetBreed() != null && !formData.getPetBreed().equals("")){
+            state.getBreedState().onFieldInteracted();
+        }
+        if (formData.getPetBio() != null && !formData.getPetBio().equals("")){
+            state.getBiographyState().onFieldInteracted();
+        }
     }
 
     /**
