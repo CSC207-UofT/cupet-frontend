@@ -21,6 +21,8 @@ import com.example.cupetfrontend.presenters.abstracts.ISetUserProfileImagePresen
 import com.example.cupetfrontend.presenters.data_models.UserProfileData;
 import com.example.cupetfrontend.presenters.view_model_abstracts.IEditUserProfileViewModel;
 import com.example.cupetfrontend.presenters.view_model_abstracts.IUploadImageViewModel;
+import com.example.cupetfrontend.presenters.view_model_abstracts.nav_context_models.DataTypeOrigin;
+import com.example.cupetfrontend.presenters.view_model_abstracts.nav_context_models.UploadImageContext;
 import com.example.cupetfrontend.ui.MainActivityFragment;
 
 import javax.inject.Inject;
@@ -173,5 +175,10 @@ public class EditUserProfileFragment extends MainActivityFragment {
         binding.editUserProfilePhoneNum.setText(userProfileData.getPhoneNumber());
         binding.editUserProfileFacebook.setText(userProfileData.getFacebook());
         binding.editUserProfileInstagram.setText(userProfileData.getInstagram());
+
+        uploadImageViewModel.setContext(new UploadImageContext(
+                DataTypeOrigin.USER,
+                userProfileData.getProfileImgUrl()
+        ));
     }
 }

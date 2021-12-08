@@ -22,6 +22,7 @@ import com.example.cupetfrontend.presenters.abstracts.IEditPetPresenter;
 import com.example.cupetfrontend.presenters.data_models.PetProfileData;
 import com.example.cupetfrontend.presenters.view_model_abstracts.IEditPetViewModel;
 import com.example.cupetfrontend.presenters.view_model_abstracts.IUploadImageViewModel;
+import com.example.cupetfrontend.presenters.view_model_abstracts.nav_context_models.DataTypeOrigin;
 import com.example.cupetfrontend.presenters.view_model_abstracts.nav_context_models.UploadImageContext;
 import com.example.cupetfrontend.ui.MainActivityFragment;
 
@@ -230,6 +231,9 @@ public class EditPetFragment extends MainActivityFragment {
         petBioField.setText(petProfileData.getBiography());
         petBreedField.setText(petProfileData.getBreed());
 
-        // TODO: Fill in the pet profile image
+        uploadImageViewModel.setContext(new UploadImageContext(
+                DataTypeOrigin.PET,
+                petProfileData.getImgUrl()
+        ));
     }
 }
