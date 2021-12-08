@@ -14,11 +14,11 @@ public class UserFormValidator {
      */
     public static String validateFirstName(String firstName) {
         if (firstName == null){
-            return "The last name must be more than 2 characters long.";
+            return "The first name must be more than 2 characters long.";
         } else if (firstName.length() > 2){
             return null;
         }else{
-            return "The last name must be more than 2 characters long.";
+            return "The first name must be more than 2 characters long.";
         }
     }
 
