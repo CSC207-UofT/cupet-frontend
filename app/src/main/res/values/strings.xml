@@ -119,4 +119,5 @@
     <string name="pet_name_age">Pet Name, Age</string>
     <string name="contactinfo_title_non_pet">Contact Info</string>
     <string name="user_profile_header">Name, Age</string>
+    <string name="visit_owner_s_profile">Visit Owner\'s Profile</string>
 </resources>
