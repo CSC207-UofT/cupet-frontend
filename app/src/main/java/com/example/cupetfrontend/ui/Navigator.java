@@ -14,12 +14,4 @@ public interface Navigator {
      * @param navTarget The id of the page to navigate to
      */
     void navigate(int navTarget);
-
-    /**
-     * Navigate to navTarget
-     *
-     * @param navTarget The id of the page to navigate to
-     * @param payloadContext The context/data needed to navigate to the new page.
-     */
-    void navigate(int navTarget, Object payloadContext);
 }
