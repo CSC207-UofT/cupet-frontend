@@ -125,8 +125,4 @@ public class MatchedPetProfileFragment extends MainActivityFragment {
         Toast.makeText(getApplicationContext(), "Request failed" + errorMessage,
                 Toast.LENGTH_SHORT).show();
     }
-
-
-
-
 }
