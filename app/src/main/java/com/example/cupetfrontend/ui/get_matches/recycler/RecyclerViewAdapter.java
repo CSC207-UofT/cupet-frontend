@@ -142,12 +142,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             public void onClick(View v) {
                 Log.d(TAG, "onClick: clicked on: delete" + mPetModels.get(holder.getAdapterPosition()).getPetName());
 
-                Toast.makeText(context, "delete pet", Toast.LENGTH_SHORT).show();
-
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
                 builder.setTitle(R.string.delete_button);
                 builder.setMessage("Are you sure you want to delete this pet?");
-                builder.setIcon(R.drawable.ic_launcher_foreground);
+                builder.setIcon(R.drawable.delete_button);
 
                 builder.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
                     @Override

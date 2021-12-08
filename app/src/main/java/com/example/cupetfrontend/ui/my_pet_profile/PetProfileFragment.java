@@ -163,7 +163,6 @@ public class PetProfileFragment extends MainActivityFragment {
      * @param errorMessage The error message to display
      */
     private void onPetProfileFailure(String errorMessage) {
-        System.out.println("Fetch pet profile failed");
-        Toast.makeText(getApplicationContext(), "Fetch pet profile failed: " + errorMessage, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "Fetching Pet Profile Failed: " + errorMessage, Toast.LENGTH_SHORT).show();
     }
 }

@@ -138,14 +138,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void onLoginSuccess(String token) {
         Toast.makeText(getApplicationContext(), "Login Success", Toast.LENGTH_SHORT).show();
-        System.out.println("Successful login with token " + token);
-
-        try {
-            sessionManager.setToken(token);
-            System.out.println("Successful login with user " + sessionManager.getUserId());
-        } catch (InvalidJWTException e) {
-            e.printStackTrace();
-        }
+        sessionManager.setToken(token);
 
         Intent moveToMainActivity = new Intent(LoginActivity.this, MainActivity.class);
         viewMyPetsViewModel.setContext(new ViewMyPetsContext(true));
@@ -153,7 +146,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void onLoginFailure(String errorMessage) {
-        System.out.println("Login failed");
-        Toast.makeText(getApplicationContext(), "Login failed: " + errorMessage, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "Login Failed: " + errorMessage, Toast.LENGTH_SHORT).show();
     }
 }

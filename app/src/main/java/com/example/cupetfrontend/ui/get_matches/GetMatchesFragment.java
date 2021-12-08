@@ -141,7 +141,6 @@ public class GetMatchesFragment extends MainActivityFragment {
      */
     private void onGetMatchesSuccess(List<PetModel> matches) {
         Log.d(TAG, "onGetMatchesSuccess: success - matches:" + matches);
-        Toast.makeText(getApplicationContext(), "Get Matches Success", Toast.LENGTH_SHORT).show();
 
         if (matches.size() == 0){
             binding.noMatchesView.setVisibility(View.VISIBLE);
@@ -160,8 +159,7 @@ public class GetMatchesFragment extends MainActivityFragment {
      */
     private void onGetMatchesFailure (String errorMessage) {
         Log.e(TAG, "onGetMatchesFailure: Get Matches Failure");
-        System.out.println("Get Matches failed");
-        Toast.makeText(getApplicationContext(), "Get Matches failed: " + errorMessage, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "Get Matches Failed: " + errorMessage, Toast.LENGTH_SHORT).show();
         adapter.notifyDataSetChanged();
     }
 

@@ -216,8 +216,7 @@ public class RegisterActivity extends AppCompatActivity {
      * @param errorMessage The error message to display
      */
     private void onRegisterFailure (String errorMessage) {
-        System.out.println("Registration failed");
-        Toast.makeText(getApplicationContext(), "Registration failed: " + errorMessage, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "Registration Failed: " + errorMessage, Toast.LENGTH_SHORT).show();
     }
 
 }

@@ -119,7 +119,6 @@ public class ViewMyPetsFragment extends MainActivityFragment {
     private void setUpAddPetButtonListener(){
         addPetButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "Add Pet", Toast.LENGTH_SHORT).show();
                 getMainActivity().navigate(R.id.nav_create_pet);
             }
         });
@@ -155,8 +154,6 @@ public class ViewMyPetsFragment extends MainActivityFragment {
      */
     private void onGetPetsSuccess(List<PetModel> userPets) {
         Log.d(TAG, "onGetPetsSuccess: success - pets:" + userPets);
-        Toast.makeText(getApplicationContext(), "Get Pets Success", Toast.LENGTH_SHORT).show();
-
         petModelList.clear();
         petModelList.addAll(userPets);
         adapter.notifyDataSetChanged();
@@ -169,8 +166,7 @@ public class ViewMyPetsFragment extends MainActivityFragment {
      */
     private void onGetPetsFailure (String errorMessage) {
         Log.e(TAG, "onGetPetsFailure: Get pets Failure");
-        System.out.println("GetPets failed");
-        Toast.makeText(getApplicationContext(), "Get pets failed: " + errorMessage, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "Get Pets Failed: " + errorMessage, Toast.LENGTH_SHORT).show();
         adapter.notifyDataSetChanged();
     }
 

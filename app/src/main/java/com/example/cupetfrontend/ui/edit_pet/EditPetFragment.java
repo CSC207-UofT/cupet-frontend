@@ -221,8 +221,7 @@ public class EditPetFragment extends MainActivityFragment {
      * @param errorMessage The error message to display
      */
     private void onEditPetFailure (String errorMessage) {
-        System.out.println("Pet Edit failed");
-        Toast.makeText(getApplicationContext(), "Pet Edit failed: " + errorMessage, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "Pet Edit Failed: " + errorMessage, Toast.LENGTH_SHORT).show();
     }
 
     private void prefillData(PetProfileData petProfileData) {
