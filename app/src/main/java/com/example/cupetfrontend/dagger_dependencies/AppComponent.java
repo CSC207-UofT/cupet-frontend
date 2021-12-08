@@ -16,12 +16,13 @@ import com.example.cupetfrontend.ui.my_pet_profile.PetProfileFragment;
 import com.example.cupetfrontend.ui.potential_matches.PotentialMatchesFragment;
 import com.example.cupetfrontend.ui.register.RegisterActivity;
 import com.example.cupetfrontend.ui.upload_image_fragment.UploadImageFragment;
+import com.example.cupetfrontend.ui.user_account.UserAccountFragment;
 import com.example.cupetfrontend.ui.user_profile.UserProfileFragment;
 import com.example.cupetfrontend.ui.view_my_pets.ViewMyPetsFragment;
+import com.google.android.datatransport.runtime.dagger.Component;
 
 import javax.inject.Singleton;
 
-import dagger.Component;
 
 /**
  * The main Dagger component for the application.
@@ -44,4 +45,6 @@ public interface AppComponent {
     void inject(EditUserAccountFragment editUserAccountFragment);
     void inject(ContactInfoFragment contactInfoFragment);
     void inject(UploadImageFragment uploadImageFragment);
+    void inject(UserAccountFragment userAccountFragment);
+
 }

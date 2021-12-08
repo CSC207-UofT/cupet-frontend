@@ -1,34 +1,40 @@
 package com.example.cupetfrontend.ui.user_account;
 
 import android.content.Intent;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+
+import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import com.bumptech.glide.Glide;
 import com.example.cupetfrontend.App;
 import com.example.cupetfrontend.R;
 import com.example.cupetfrontend.controllers.abstracts.ISessionManager;
 import com.example.cupetfrontend.controllers.abstracts.IUserController;
+import com.example.cupetfrontend.databinding.FragmentUserAccountBinding;
 import com.example.cupetfrontend.dependency_selector.DependencySelector;
 import com.example.cupetfrontend.presenters.abstracts.IFetchUserAccountPresenter;
 import com.example.cupetfrontend.presenters.user.FetchUserAccountPresenter;
+import com.example.cupetfrontend.ui.MainActivityFragment;
 import com.example.cupetfrontend.ui.edit_account.EditUserAccountFragment;
 
 import javax.inject.Inject;
 
-public class UserAccountActivity extends AppCompatActivity {
+public class UserAccountFragment extends MainActivityFragment {
     private UserAccountViewModel userAccountViewModel;
-    TextView username_view;
-    TextView address_view;
-    TextView city_view;
-    TextView password_view;
-    ImageView profile_picture;
-    Button editUserAccount_button;
+    private TextView username_view;
+    private TextView address_view;
+    private TextView city_view;
+    private TextView password_view;
+    private ImageView profile_picture;
+    private Button editUserAccount_button;
+    private FragmentUserAccountBinding binding;
 
     @Inject
     public IUserController userController;
@@ -37,57 +43,52 @@ public class UserAccountActivity extends AppCompatActivity {
     @Inject
     public IFetchUserAccountPresenter fetchUserAccountPresenter;
 
-    private void setFieldError(EditText field, Integer errorState){
-        if (errorState != null){
-            field.setError(getString(errorState));
-        }
-    };
+
 
     public void initializeViews(){
-        address_view = findViewById(R.id.UserAccountAddress_textView);
-
-        city_view = findViewById(R.id.UserAccountCity_textView);
-        password_view = findViewById(R.id.UserAccountPassword_textview);
-
-        profile_picture = findViewById(R.id.imageView);
-        username_view = findViewById(R.id.UserAccountName_textView);
-        editUserAccount_button = findViewById(R.id.EditUserAccount_button);
+        address_view = binding.UserAccountAddressTextView;
+        city_view = binding.UserAccountCityTextView;
+        password_view = binding.UserAccountPasswordTextview;
+        profile_picture = binding.imageView;
+        username_view = binding.UserAccountNameTextView;
+        editUserAccount_button = binding.EditUserAccountButton;
 
     }
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_account);
+        binding = FragmentUserAccountBinding.inflate(inflater, container, false);
+        View root = binding.getRoot();
 
-        DependencySelector dependencySelector = ((App) getApplication()).getDependencySelector();
-        IUserController userController = dependencySelector.getControllers().getUserController();
+        ((App) getApplicationContext()).getAppComponent().inject(this);
 
         String userToken = sessionManager.getToken();
 
-        FetchUserAccountPresenter fetchUserAccountPresenter = dependencySelector.getUserPresenters().getFetchUserAccountPresenter();
+        fetchUserAccountPresenter = dependencySelector.getUserPresenters().getFetchUserAccountPresenter();
+
         userAccountViewModel = new UserAccountViewModel(userController);
         fetchUserAccountPresenter.setUserAccountViewModel(userAccountViewModel);
 
 
         userAccountViewModel.getUserInformation(userToken);
+
         initializeViews();
         setUpObserveUserProfileResult();
-        editUserAccount_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openEditUserAccountActivity();
-            }
-        });
+        setUpEditBtn();
 
+        return root;
 
     }
 
-    public void openEditUserAccountActivity(){
-        Intent intent = new Intent(this, EditUserAccountFragment.class);
+
+    private void  setUpEditBtn(){
+
+        getMainActivity().showEditButton();
+        getMainActivity().setEditBtnNavTarget(R.id.nav_account_settings);
     }
 
     public void setUpObserveUserProfileResult(){
-        userAccountViewModel.getUserAccountResult().observe(this, new Observer<UserAccountResult>() {
+        userAccountViewModel.getUserAccountResult().observe(getViewLifecycleOwner(), new Observer<UserAccountResult>() {
             @Override
             public void onChanged(UserAccountResult userAccountResult) {
                 if (userAccountResult == null){

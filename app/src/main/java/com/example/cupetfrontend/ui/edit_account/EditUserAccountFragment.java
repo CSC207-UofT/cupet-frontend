@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.Observer;
 
 import com.example.cupetfrontend.App;
+import com.example.cupetfrontend.R;
 import com.example.cupetfrontend.controllers.abstracts.ISessionManager;
 import com.example.cupetfrontend.controllers.abstracts.IUserController;
 import com.example.cupetfrontend.databinding.FragmentEditUserAccountBinding;
@@ -191,7 +192,7 @@ public class EditUserAccountFragment extends MainActivityFragment {
 
     private void onEditUserAccountSuccess(){
         Toast.makeText(getApplicationContext(), "Edit Success", Toast.LENGTH_SHORT).show();
-       //Todo: getMainActivity().navigate();
+        getMainActivity().navigate(R.id.nav_account_settings);
 
 
     }
