@@ -56,7 +56,7 @@ public class MatchedPetProfileFragment extends MainActivityFragment {
     /**
      * Set up pet profile for pet selected from Get Matches Fragment
      *
-     * @param petModel  the selected matched pet
+     * @param petModel the selected matched pet
      */
     private void setUpPetProfile(PetModel petModel) {
         String petHeading = petModel.getPetName() + ", " + petModel.getPetAge();
@@ -68,8 +68,8 @@ public class MatchedPetProfileFragment extends MainActivityFragment {
     /**
      * Sets up the user contact information fragment for the owner of the selected matched pet
      */
-    private void setUpVisitOwnerProfileButtonClickedListener(){
-        binding.visitOwnerProfileButton.setOnClickListener(new View.OnClickListener(){
+    private void setUpVisitOwnerProfileButtonClickedListener() {
+        binding.visitOwnerProfileButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //TODO: Navigate to User's public profile
@@ -80,7 +80,7 @@ public class MatchedPetProfileFragment extends MainActivityFragment {
     /**
      * Set up this fragment as an observer that observes the result of obtaining the user profile
      * data for the selected pet's owner.
-     *
+     * <p>
      * Update the displayed views when the pet profile result has changed.
      */
     private void setUpObserveGetUserContactInfoResult() {
@@ -107,7 +107,7 @@ public class MatchedPetProfileFragment extends MainActivityFragment {
         Toast.makeText(getApplicationContext(), "Fetch User Contact Info Success", Toast.LENGTH_SHORT).show();
 
         String imgUrl = null;
-        if (!userProfileData.getProfileImgUrl().equals("")){
+        if (!userProfileData.getProfileImgUrl().equals("")) {
             imgUrl = userProfileData.getProfileImgUrl();
         }
         contactInfoViewModel.setContactInfoData(userProfileData.getEmail(),
