@@ -118,4 +118,5 @@
     <string name="public_contactinfo_title">Owner Contact Info</string>
     <string name="contactinfo_title_non_pet">Contact Info</string>
     <string name="user_profile_header">Name, Age</string>
+    <string name="no_matches_view_text">No Matches</string>
 </resources>

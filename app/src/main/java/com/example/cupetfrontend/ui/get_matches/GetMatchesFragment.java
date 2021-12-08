@@ -143,9 +143,14 @@ public class GetMatchesFragment extends MainActivityFragment {
         Log.d(TAG, "onGetMatchesSuccess: success - matches:" + matches);
         Toast.makeText(getApplicationContext(), "Get Matches Success", Toast.LENGTH_SHORT).show();
 
-        petModelList.clear();
-        petModelList.addAll(matches);
-        adapter.notifyDataSetChanged();
+        if (matches.size() == 0){
+            binding.noMatchesView.setVisibility(View.VISIBLE);
+        }else{
+            binding.noMatchesView.setVisibility(View.GONE);
+            petModelList.clear();
+            petModelList.addAll(matches);
+            adapter.notifyDataSetChanged();
+        }
     }
 
     /**
