@@ -2,21 +2,17 @@ package com.example.cupetfrontend.presenters.view_model_abstracts;
 
 import androidx.lifecycle.LiveData;
 
-import com.example.cupetfrontend.data.model.PetModel;
 import com.example.cupetfrontend.presenters.data_models.UserProfileData;
 import com.example.cupetfrontend.presenters.view_model_abstracts.nav_context_models.MatchedPetProfileContext;
-import com.example.cupetfrontend.ui.matched_pet_profile.MatchedPetProfileResult;
+import com.example.cupetfrontend.ui.matched_pet_profile.MatchedPetProfileOwnerContactInfoResult;
+import com.example.cupetfrontend.ui.user_profile.FetchUserProfileResult;
 
 public interface IMatchedPetProfileViewModel {
-    LiveData<MatchedPetProfileResult> getMatchedPetProfileResult();
+    LiveData<MatchedPetProfileOwnerContactInfoResult> getUserContactInfoResult();
 
-    void onMatchedPetProfileSuccess(PetModel petModel);
+    void onFetchOwnerContactInfoSuccess(UserProfileData userProfileData);
 
-    void onMatchedPetProfileFailure(String message);
-
-    void onFetchUserProfileSuccess(UserProfileData userProfileData);
-
-    void onFetchUserProfileFailure(String message);
+    void onFetchOwnerContactInfoFailure(String message);
 
 
     void setContext(MatchedPetProfileContext context);
