@@ -99,4 +99,52 @@ public class UserFormValidator {
             return "City must be three characters or more";
         }
     }
+
+    /**
+     * Validate a user's biography
+     *
+     * @return Error text if applicable, otherwise return null
+     */
+    public static String validateBiography(String biography) {
+        return null;
+    }
+
+    /**
+     * Validate a user's phone number
+     *
+     * @return Error text if applicable, otherwise return null
+     */
+    public static String validatePhoneNumber(String phoneNumber) {
+        if (phoneNumber == null || phoneNumber.equals("")){
+            return null;
+        } else if (phoneNumber.matches("^\\s*(?:\\+?(\\d{1,3}))?[-. (]*(\\d{3})[-. )]*(\\d{3})[-. ]*(\\d{4})(?: *x(\\d+))?\\s*$")){
+            return null;
+        }else{
+            return "Invalid phone number";
+        }
+    }
+
+    /**
+     * Validate a user's facebook handle
+     *
+     * @return Error text if applicable, otherwise return null
+     */
+    public static String validateFacebook(String phoneNumber) {
+        return null;
+    }
+
+    /**
+     * Validate a user's instagram handle
+     *
+     * @return Error text if applicable, otherwise return null
+     */
+    public static String validateInstagram(String phoneNumber) {
+        if (phoneNumber == null || phoneNumber.equals("")){
+            return null;
+        } else if (phoneNumber.matches("^@.*$")){
+            return null;
+        }else{
+            return "Instagram handles must start with @";
+        }
+    }
 }
