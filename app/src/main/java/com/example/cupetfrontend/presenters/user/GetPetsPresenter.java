@@ -2,19 +2,18 @@ package com.example.cupetfrontend.presenters.user;
 
 import com.example.cupetfrontend.data.model.PetModel;
 import com.example.cupetfrontend.presenters.abstracts.IGetPetsPresenter;
-import com.example.cupetfrontend.presenters.view_model_abstracts.IGetPetsViewModel;
+import com.example.cupetfrontend.presenters.view_model_abstracts.IViewMyPetsViewModel;
 import com.example.cupetfrontend.use_cases.data_models.PetData;
-import com.example.cupetfrontend.use_cases.output_boundaries.user.GetPetsOutputBoundary;
 import com.example.cupetfrontend.use_cases.response_models.pet.DefaultFailureResponseModel;
 import com.example.cupetfrontend.use_cases.response_models.user.GetPetsSuccessResponseModel;
 
 import java.util.ArrayList;
 
 public class GetPetsPresenter implements IGetPetsPresenter {
-    IGetPetsViewModel getPetsViewModel;
+    IViewMyPetsViewModel getPetsViewModel;
 
     @Override
-    public void setGetPetsViewModel(IGetPetsViewModel getPetsViewModel) {
+    public void setGetPetsViewModel(IViewMyPetsViewModel getPetsViewModel) {
         this.getPetsViewModel = getPetsViewModel;
 
     }

@@ -17,6 +17,11 @@ import com.bumptech.glide.Glide;
 import com.example.cupetfrontend.R;
 import com.example.cupetfrontend.controllers.abstracts.IPetSessionManager;
 import com.example.cupetfrontend.data.model.PetModel;
+import com.example.cupetfrontend.presenters.view_model_abstracts.IContactInfoViewModel;
+import com.example.cupetfrontend.presenters.view_model_abstracts.ICreatePetViewModel;
+import com.example.cupetfrontend.presenters.view_model_abstracts.IViewMyPetsViewModel;
+import com.example.cupetfrontend.presenters.view_model_abstracts.nav_context_models.CreatePetContext;
+import com.example.cupetfrontend.presenters.view_model_abstracts.nav_context_models.ViewMyPetsContext;
 import com.example.cupetfrontend.ui.Navigator;
 
 import org.jetbrains.annotations.NotNull;
@@ -32,15 +37,21 @@ public class CardRecyclerViewAdapter extends RecyclerView.Adapter<CardRecyclerVi
     private final Context mContext;
     private final IPetSessionManager petSessionManager;
     private final Navigator navigator;
+    private final ICreatePetViewModel createPetViewModel;
+    private final IViewMyPetsViewModel viewMyPetsViewModel;
 
-    public CardRecyclerViewAdapter(Context mContext, List<PetModel> mPetModels,
-                                   IPetSessionManager petSessionManager, Navigator navigator) {
-        this.mPetModels = mPetModels;
+    public CardRecyclerViewAdapter(Context mContext, IPetSessionManager petSessionManager, Navigator navigator,
+                                   ICreatePetViewModel createPetViewModel, IViewMyPetsViewModel viewMyPetsViewModel) {
         this.mContext = mContext;
         this.petSessionManager = petSessionManager;
         this.navigator = navigator;
+        this.createPetViewModel = createPetViewModel;
+        this.viewMyPetsViewModel = viewMyPetsViewModel;
     }
 
+    public void setPetModels(List<PetModel> mPetModels) {
+        this.mPetModels = mPetModels;
+    }
 
     @NonNull
     @Override
@@ -83,6 +94,12 @@ public class CardRecyclerViewAdapter extends RecyclerView.Adapter<CardRecyclerVi
 
                 Toast.makeText(mContext, toastMessage, Toast.LENGTH_SHORT).show();
                 petSessionManager.setPetId(petModel.getPetId());
+
+                createPetViewModel.setContext(
+                        new CreatePetContext(false));
+                viewMyPetsViewModel.setContext(
+                        new ViewMyPetsContext(false));
+                navigator.showNavigation();
 
                 navigator.navigate(R.id.nav_my_pet_profile);
             }

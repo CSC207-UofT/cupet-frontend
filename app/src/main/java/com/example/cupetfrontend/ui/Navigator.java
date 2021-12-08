@@ -5,6 +5,10 @@ package com.example.cupetfrontend.ui;
  * to different pages.
  */
 public interface Navigator {
+    void hideNavigation();
+
+    void showNavigation();
+
     /**
      * Navigate to navTarget
      * @param navTarget The id of the page to navigate to
@@ -18,12 +22,4 @@ public interface Navigator {
      * @param payloadContext The context/data needed to navigate to the new page.
      */
     void navigate(int navTarget, Object payloadContext);
-
-    /**
-     * Return the payload context for navigation
-     * to the page the user is currently on.
-     *
-     * @return The payload context.
-     */
-    Object getPayloadContext();
 }

@@ -63,9 +63,6 @@ public class MainActivity extends AppCompatActivity implements Navigator {
                 "http://res.cloudinary.com/dzcilqec7/image/upload/v1638824880/gifu6kjzdv58lidrarwx.png"
         ));
 
-        sessionManager.setToken("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxOCIsImV4cCI6MTYzODk1NTEzNiwiaWF0IjoxNjM4OTE5MTM2fQ.wy2BlAsa09vU-QoRLU46tA9rH8X690wXZi_5_7EoWwg");
-        petSessionManager.setPetId("16");
-
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
@@ -165,19 +162,21 @@ public class MainActivity extends AppCompatActivity implements Navigator {
     /**
      * Hide the navigation drawer and bottom nav bar
      */
+    @Override
     public void hideNavigation() {
         binding.bottomNavView.setVisibility(View.GONE);
         binding.drawerNavView.setVisibility(View.GONE);
-        binding.mainDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+        binding.mainAppbar.setVisibility(View.GONE);
     }
 
     /**
      * Show the navigation drawer and bottom nav bar
      */
+    @Override
     public void showNavigation() {
         binding.bottomNavView.setVisibility(View.VISIBLE);
         binding.drawerNavView.setVisibility(View.VISIBLE);
-        binding.mainDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+        binding.mainAppbar.setVisibility(View.VISIBLE);
     }
 
     /**
@@ -214,10 +213,6 @@ public class MainActivity extends AppCompatActivity implements Navigator {
         navigate(navTarget);
     }
 
-    @Override
-    public Object getPayloadContext() {
-        return navPayloadContext;
-    }
 
     /**
      * Set the navigation target fragment when the edit button is clicked.

@@ -22,6 +22,7 @@ import com.example.cupetfrontend.data.model.PetModel;
 import com.example.cupetfrontend.databinding.FragmentGetMatchesBinding;
 
 import com.example.cupetfrontend.presenters.abstracts.IGetMatchesPresenter;
+import com.example.cupetfrontend.presenters.abstracts.IUnMatchPresenter;
 import com.example.cupetfrontend.presenters.pet.GetMatchesPresenter;
 import com.example.cupetfrontend.ui.MainActivityFragment;
 import com.example.cupetfrontend.ui.get_matches.recycler.RecyclerViewAdapter;
@@ -53,6 +54,8 @@ public class GetMatchesFragment extends MainActivityFragment {
     public IPetController petController;
     @Inject
     public IGetMatchesPresenter getMatchesPresenter;
+    @Inject
+    public IUnMatchPresenter unMatchPresenter;
 
     private void initializeViews() {
         recyclerView = binding.recyclerView;
@@ -97,7 +100,11 @@ public class GetMatchesFragment extends MainActivityFragment {
     // method for actually setting up our recycler view
     private void initRecyclerView(){
         Log.d(TAG, "initRecyclerView: init recyclerview");
-        adapter = new RecyclerViewAdapter(getContext(), petModelList);
+
+        adapter = new RecyclerViewAdapter(getContext(), petSessionManager,
+                sessionManager, unMatchPresenter, petController);
+        adapter.setPetModels(petModelList);
+
         Log.d(TAG, "initRecyclerView: got adapter");
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -136,6 +143,7 @@ public class GetMatchesFragment extends MainActivityFragment {
         Log.d(TAG, "onGetMatchesSuccess: success - matches:" + matches);
         Toast.makeText(getApplicationContext(), "Get Matches Success", Toast.LENGTH_SHORT).show();
 
+        petModelList.clear();
         petModelList.addAll(matches);
         adapter.notifyDataSetChanged();
     }

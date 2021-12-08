@@ -19,8 +19,12 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.cupetfrontend.App;
 import com.example.cupetfrontend.R;
+import com.example.cupetfrontend.controllers.abstracts.IPetController;
+import com.example.cupetfrontend.controllers.abstracts.IPetSessionManager;
+import com.example.cupetfrontend.controllers.abstracts.ISessionManager;
 import com.example.cupetfrontend.data.model.PetModel;
 import com.example.cupetfrontend.dependency_selector.DependencySelector;
+import com.example.cupetfrontend.presenters.abstracts.IUnMatchPresenter;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -36,30 +40,35 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>{
 
     private static final String TAG = "RecyclerViewAdapter";
-    private final List<PetModel> mPetModels;
+    private List<PetModel> mPetModels;
     private final Context context;
     private GetMatchesRecyclerViewModel viewModel;
+    private final IPetSessionManager petSessionManager;
+    private final ISessionManager sessionManager;
+    private final IUnMatchPresenter unMatchPresenter;
+    private final IPetController petController;
 
-    public RecyclerViewAdapter(Context context, List<PetModel> mPetModels) {
+    public RecyclerViewAdapter(Context context,
+                               IPetSessionManager petSessionManager,
+                               ISessionManager sessionManager,
+                               IUnMatchPresenter unMatchPresenter,
+                               IPetController petController) {
         this.context = context;
-        this.mPetModels = mPetModels;
+        this.petSessionManager = petSessionManager;
+        this.sessionManager = sessionManager;
+        this.unMatchPresenter = unMatchPresenter;
+        this.petController = petController;
 
         initializeViewModel();
     }
 
-    private DependencySelector getDependencySelector() {
-        return ((App) context.getApplicationContext()).
-                getDependencySelector();
+    public void setPetModels(List<PetModel> mPetModels) {
+        this.mPetModels = mPetModels;
     }
 
     private void initializeViewModel() {
-        DependencySelector dependencySelector = getDependencySelector();
-
-        viewModel = new GetMatchesRecyclerViewModel(dependencySelector.getControllers()
-                .getPetController());
-
-        dependencySelector.getPetPresenters().getUnMatchPresenter()
-                .setUnMatchViewModel(viewModel);
+        viewModel = new GetMatchesRecyclerViewModel(petController);
+        unMatchPresenter.setUnMatchViewModel(viewModel);
     }
 
     /**
@@ -145,10 +154,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                     public void onClick(DialogInterface dialog, int which) {
                         Log.d(TAG, "onClick: confirm delete");
 
-                        DependencySelector dependencySelector = getDependencySelector();
                         String otherPetId = getPetModelFor(holder).getPetId();
-                        String token = dependencySelector.getSessionManager().getToken();
-                        String myPetId = dependencySelector.getPetSessionManager().getPetId();
+                        String token = sessionManager.getToken();
+                        String myPetId = petSessionManager.getPetId();
 
                         viewModel.unMatch(token, myPetId, otherPetId);
                         removeAt(holder.getAdapterPosition());

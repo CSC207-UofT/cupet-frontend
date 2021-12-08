@@ -4,31 +4,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.view_my_pets.ViewMyPetsFragment"
     android:layout_marginStart="5dp"
-    android:paddingStart="10dp">
+    android:paddingStart="10dp"
+    tools:context=".ui.view_my_pets.ViewMyPetsFragment">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/card_recycler_view"
-        android:layout_width="match_parent"
-        android:layout_height="500dp"
-        android:layout_marginTop="16dp"
-        android:clipToPadding="false"
-        android:paddingBottom="40dp"
+    <Button
+        android:id="@+id/add_pet_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="9dp"
+        android:layout_marginStart="217dp"
+        android:layout_marginTop="7dp"
+        android:text="@string/add_pet"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_user_profile_biography_title">
-
-    </androidx.recyclerview.widget.RecyclerView>
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/edit_user_profile_biography_title"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/edit_user_profile_biography_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="345dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="345dp"
         android:fontFamily="@font/quicksand1"
         android:text="@string/your_pets"
         android:textSize="24sp"
@@ -37,17 +36,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/add_pet_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="217dp"
-        android:layout_marginTop="7dp"
-        android:layout_marginEnd="9dp"
-        android:text="@string/add_pet"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/edit_user_profile_biography_title"
-        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/card_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="60dp"
+        android:clipToPadding="false"
+        android:paddingBottom="40dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_user_profile_biography_title">
+
+    </androidx.recyclerview.widget.RecyclerView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
