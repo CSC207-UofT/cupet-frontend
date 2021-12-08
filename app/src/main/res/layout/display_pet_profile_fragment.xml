@@ -1,70 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+
+
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    tools:context=".ui.public_pet_profile.display_pet_profile_fragment.DisplayPetProfileFragment">
+    android:layout_height="match_parent"
+    tools:context=".ui.matched_pet_profile.MatchedPetProfileFragment">
 
-    <RelativeLayout
+    <ScrollView
+        android:id="@+id/scrollView3"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:id="@+id/profile_image"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="275dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:contentDescription="@string/pet_profile_picture"
-            android:foregroundGravity="top"
-            android:scaleType="centerCrop"
-            tools:src="@tools:sample/avatars" />
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/pet_heading"
-            android:layout_width="208dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/profile_image"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="7dp"
-            android:layout_marginTop="9dp"
-            android:layout_marginEnd="196dp"
-            android:fontFamily="@font/quicksand"
-            android:text="@string/pet_name_age"
-            android:textSize="24sp" />
+            <ImageView
+                android:id="@+id/profile_image"
+                android:layout_width="match_parent"
+                android:layout_height="275dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="0dp"
+                android:contentDescription="@string/pet_profile_picture"
+                android:foregroundGravity="top"
+                android:scaleType="centerCrop"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@tools:sample/avatars" />
 
-        <TextView
-            android:id="@+id/pet_bio"
-            android:layout_width="389dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/breed"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="12dp"
-            android:layout_marginEnd="10dp"
-            android:fontFamily="@font/quicksand"
-            android:text="@string/pet_bio" />
+            <TextView
+                android:id="@+id/pet_heading"
+                android:layout_width="208dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/profile_image"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="1dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginEnd="-1dp"
+                android:fontFamily="@font/quicksand"
+                android:text="@string/pet_name_age"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toStartOf="@+id/profile_image"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/profile_image" />
 
-        <TextView
-            android:id="@+id/breed"
-            android:layout_width="75dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/pet_heading"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginEnd="326dp"
-            android:fontFamily="@font/quicksand"
-            android:text="@string/pet_breed" />
+            <TextView
+                android:id="@+id/breed"
+                android:layout_width="75dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/pet_heading"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="7dp"
+                android:layout_marginEnd="0dp"
+                android:fontFamily="@font/quicksand"
+                android:text="@string/pet_breed"
+                app:layout_constraintEnd_toStartOf="@+id/profile_image"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/pet_heading" />
 
-    </RelativeLayout>
+            <TextView
+                android:id="@+id/pet_bio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/breed"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="7dp"
+                android:layout_marginTop="14dp"
+                android:layout_marginEnd="22dp"
+                android:fontFamily="@font/quicksand"
+                android:text="@string/pet_bio" />
+
+        </RelativeLayout>
+    </ScrollView>
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmentContainerView"
+        android:name="com.example.cupetfrontend.ui.contact_info_fragment.ContactInfoFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView3"
+        app:layout_constraintVertical_bias="0.264"
+        tools:layout="@layout/fragment_public_contactinfo" />
 
 
-
-
-</FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
