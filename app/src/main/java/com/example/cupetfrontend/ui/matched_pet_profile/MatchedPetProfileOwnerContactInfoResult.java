@@ -8,7 +8,7 @@ public class MatchedPetProfileOwnerContactInfoResult {
     private final String errorMessage;
     private UserProfileData ownerContactInfoData;
 
-    public MatchedPetProfileOwnerContactInfoResult(boolean isError, String errorMessage){
+    public MatchedPetProfileOwnerContactInfoResult(boolean isError, String errorMessage) {
         this.isError = isError;
         this.errorMessage = errorMessage;
     }
@@ -16,7 +16,7 @@ public class MatchedPetProfileOwnerContactInfoResult {
     /**
      * Initialize a successful matched pet profile owner contact info result
      */
-    public MatchedPetProfileOwnerContactInfoResult(UserProfileData ownerContactInfoData){
+    public MatchedPetProfileOwnerContactInfoResult(UserProfileData ownerContactInfoData) {
         this.isError = false;
         this.errorMessage = null;
         this.ownerContactInfoData = ownerContactInfoData;

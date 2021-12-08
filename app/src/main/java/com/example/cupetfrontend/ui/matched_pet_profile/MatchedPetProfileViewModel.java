@@ -18,7 +18,7 @@ public class MatchedPetProfileViewModel extends ViewModel implements IMatchedPet
     private MatchedPetProfileContext context;
 
     @Inject
-    public MatchedPetProfileViewModel(IUserController userController){
+    public MatchedPetProfileViewModel(IUserController userController) {
         this.userController = userController;
     }
 
