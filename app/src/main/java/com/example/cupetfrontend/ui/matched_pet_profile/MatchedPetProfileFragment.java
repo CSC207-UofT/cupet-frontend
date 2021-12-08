@@ -54,6 +54,11 @@ public class MatchedPetProfileFragment extends MainActivityFragment {
         return root;
     }
 
+    /**
+     * Set up pet profile for pet selected from Get Matches Fragment
+     *
+     * @param petModel  the selected matched pet
+     */
     private void setUpPetProfile(PetModel petModel) {
         String petHeading = petModel.getPetName() + ", " + petModel.getPetAge();
         binding.petHeading.setText(petHeading);
@@ -61,7 +66,9 @@ public class MatchedPetProfileFragment extends MainActivityFragment {
         binding.petBio.setText(petModel.getPetImageUrl());
     }
 
-
+    /**
+     * Sets up the user contact information fragment for the owner of the selected matched pet
+     */
     private void setUpVisitOwnerProfileButtonClickedListener(){
         binding.visitOwnerProfileButton.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -71,6 +78,12 @@ public class MatchedPetProfileFragment extends MainActivityFragment {
         });
     }
 
+    /**
+     * Set up this fragment as an observer that observes the result of obtaining the user profile
+     * data for the selected pet's owner.
+     *
+     * Update the displayed views when the pet profile result has changed.
+     */
     private void setUpObserveGetUserContactInfoResult() {
         viewModel.getUserContactInfoResult().observe(getViewLifecycleOwner(), new Observer<MatchedPetProfileOwnerContactInfoResult>() {
             @Override
@@ -87,7 +100,13 @@ public class MatchedPetProfileFragment extends MainActivityFragment {
         });
     }
 
+    /**
+     * Display a Fetch User Contact Info Success toast message and set up Contact Info Fragment
+     * for user.
+     */
     private void onFetchUserContactInfoSuccess(UserProfileData userProfileData) {
+        Toast.makeText(getApplicationContext(), "Fetch User Contact Info Success", Toast.LENGTH_SHORT).show();
+
         String imgUrl = null;
         if (!userProfileData.getProfileImgUrl().equals("")){
             imgUrl = userProfileData.getProfileImgUrl();
@@ -97,6 +116,11 @@ public class MatchedPetProfileFragment extends MainActivityFragment {
                 userProfileData.getInstagram(), imgUrl);
     }
 
+    /**
+     * Display a FetchUserProfile failed toast message.
+     *
+     * @param errorMessage The error message to display
+     */
     private void onFetchUserContactInfoFailure(String errorMessage) {
         Toast.makeText(getApplicationContext(), "Request failed" + errorMessage,
                 Toast.LENGTH_SHORT).show();
