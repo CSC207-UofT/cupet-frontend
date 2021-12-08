@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Toast;
 import android.os.Bundle;
+import com.example.cupetfrontend.R;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.Observer;
@@ -144,10 +145,13 @@ public class EditUserProfileFragment extends MainActivityFragment {
 
     private void onEditUserProfileSuccess(){
         Toast.makeText(getApplicationContext(), "Edit Success", Toast.LENGTH_SHORT).show();
+        getMainActivity().navigate(R.id.nav_my_user_profile);
     }
+
 
     private void onEditUserProfileFailure(String errorMessage){
         Toast.makeText(getApplicationContext(), "Edit Failed:" + errorMessage, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "User Profile Edit Failed: " + errorMessage, Toast.LENGTH_SHORT).show();
     }
 
     private void setUpObserveEditUserProfileFormState(){

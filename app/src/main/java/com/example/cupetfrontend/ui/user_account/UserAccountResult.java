@@ -7,24 +7,24 @@ public class UserAccountResult {
     private String lastName;
     private String address;
     private String city;
-    private String password;
+    //private String password;
     private String image_url;
 
 
 
 
 
-    public UserAccountResult(boolean isError){
+    public UserAccountResult(boolean isError, String errorMessage){
         this.isError = isError;
-        errorMessage = "";
+        this.errorMessage = errorMessage;
     }
 
-    public UserAccountResult(String firstname, String lastname, String address, String city, String password, String image_url){
+    public UserAccountResult(String firstname, String lastname, String address, String city, String image_url){
         this.firstName = firstname;
         this.lastName = lastname;
         this.address = address;
         this.address = city;
-        this.password = password;
+        //this.password = password;
         this.image_url = image_url;
     }
 
@@ -54,9 +54,9 @@ public class UserAccountResult {
         return this.city;
     }
 
-    public String getPassword(){
-        return this.password;
-    }
+    //public String getPassword(){
+        //return this.password;
+    //}
 
     public String getImage_url(){ return this.image_url;}
 

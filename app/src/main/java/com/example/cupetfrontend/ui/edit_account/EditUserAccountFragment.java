@@ -13,9 +13,12 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.Observer;
 
+import com.example.cupetfrontend.App;
+import com.example.cupetfrontend.R;
 import com.example.cupetfrontend.controllers.abstracts.ISessionManager;
 import com.example.cupetfrontend.controllers.abstracts.IUserController;
 import com.example.cupetfrontend.databinding.FragmentEditUserAccountBinding;
+import com.example.cupetfrontend.presenters.abstracts.IEditUserAccountPresenter;
 import com.example.cupetfrontend.presenters.user.EditUserAccountPresenter;
 import com.example.cupetfrontend.ui.MainActivityFragment;
 
@@ -29,15 +32,17 @@ public class EditUserAccountFragment extends MainActivityFragment {
     public ISessionManager sessionManager;
     @Inject
     public IUserController userController;
+    @Inject
+    public IEditUserAccountPresenter editUserAccountPresenter;
 
     private EditText firstNameField;
     private EditText lastNameField;
     private EditText emailField;
     private EditText addressField;
     private EditText passwordField;
-    private EditText passwordConfirmField;
     private EditText cityField;
     private Button saveChangesButton;
+    private String userToken;
 
     private void initializeViews(){
         firstNameField = binding.editAccountUserFirstNameInputTextview;
@@ -69,14 +74,15 @@ public class EditUserAccountFragment extends MainActivityFragment {
         super.onCreate(savedInstanceState);
         binding = FragmentEditUserAccountBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+        ((App) getApplicationContext()).getAppComponent().inject(this);
+
 
         initializeDependencySelector();
 
-        EditUserAccountPresenter editUserAccountPresenter = dependencySelector.
-                getUserPresenters().getEditUserAccountPresenter();
 
         editUserAccountViewModel = new EditUserAccountViewModel(userController);
         editUserAccountPresenter.setEditUserAccountViewModel(editUserAccountViewModel);
+        userToken = sessionManager.getToken();
 
         initializeViews();
         setUpObserveEditUserAccountFormState();
@@ -128,7 +134,7 @@ public class EditUserAccountFragment extends MainActivityFragment {
         saveChangesButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view){
                 EditUserAccountData formData = getEditUserAccountData();
-                editUserAccountViewModel.editUserAccount(formData, "TOKEN CODE NEEDED");
+                editUserAccountViewModel.editUserAccount(formData, userToken);
             }
         });
     }
@@ -186,6 +192,7 @@ public class EditUserAccountFragment extends MainActivityFragment {
 
     private void onEditUserAccountSuccess(){
         Toast.makeText(getApplicationContext(), "Edit Success", Toast.LENGTH_SHORT).show();
+        getMainActivity().navigate(R.id.nav_account_settings);
     }
 
     private void onEditUserAccountFailure(String errorMessage){

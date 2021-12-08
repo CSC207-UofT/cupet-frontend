@@ -19,7 +19,7 @@ public class PetProfileViewModel extends ViewModel implements IPetProfileViewMod
     }
 
     LiveData<PetProfileResult> getPetProfileResult() {
-        return petProfileResult;
+        return this.petProfileResult;
     }
 
     /**
