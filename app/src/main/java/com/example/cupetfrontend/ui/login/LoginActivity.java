@@ -47,7 +47,6 @@ public class LoginActivity extends AppCompatActivity {
     public IViewMyPetsViewModel viewMyPetsViewModel;
 
     private void initializeViews(){
-        // TODO: Replace with binding
         loginButton = findViewById(R.id.login_button);
         emailField = findViewById(R.id.login_email);
         passwordField = findViewById(R.id.login_password);
