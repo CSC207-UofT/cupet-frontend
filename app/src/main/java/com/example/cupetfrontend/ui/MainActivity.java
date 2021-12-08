@@ -17,7 +17,11 @@ import com.example.cupetfrontend.controllers.PetSessionManager;
 import com.example.cupetfrontend.controllers.SessionManager;
 import com.example.cupetfrontend.controllers.abstracts.IPetSessionManager;
 import com.example.cupetfrontend.controllers.abstracts.ISessionManager;
+import com.example.cupetfrontend.controllers.abstracts.IUserController;
 import com.example.cupetfrontend.controllers.cached_data_models.CachedUserData;
+import com.example.cupetfrontend.presenters.abstracts.IFetchUserProfilePresenter;
+import com.example.cupetfrontend.presenters.data_models.UserProfileData;
+import com.example.cupetfrontend.presenters.view_model_abstracts.IFetchUserProfileViewModel;
 import com.example.cupetfrontend.ui.login.LoginActivity;
 import com.example.cupetfrontend.ui.splash_screen.SplashScreenActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -39,7 +43,6 @@ import javax.inject.Inject;
  */
 public class MainActivity extends AppCompatActivity implements Navigator {
 
-    private Object navPayloadContext;
     private ActivityMainBinding binding;
     private AppBarConfiguration appBarConfig;
     private int editBtnNavTarget;
@@ -49,23 +52,16 @@ public class MainActivity extends AppCompatActivity implements Navigator {
     public ISessionManager sessionManager;
     @Inject
     public IPetSessionManager petSessionManager;
+    @Inject
+    public IUserController userController;
+    @Inject
+    public IFetchUserProfilePresenter fetchUserProfilePresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         ((App) getApplicationContext()).getAppComponent().inject(this);
-
-        // Temporarily create some user dummy data
-        //  TODO: Offload to the log in step
-        sessionManager.setCachedUserData(new CachedUserData(
-                "dummy first", "dummy last", "dummy email",
-                "https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Jonathan_G_Meath_portrays_" +
-                        "Santa_Claus.jpg/800px-Jonathan_G_Meath_portrays_Santa_Claus.jpg"
-        ));
-
-        sessionManager.setToken("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMyIsImV4cCI6MTYzODg0NzQ1MSwiaWF0IjoxNjM4ODExNDUxfQ.oK14JQB5Z-NbzkAEtq0e77V8gc6CMfmiehiMz8tykc4");
-        petSessionManager.setPetId("12");
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -89,7 +85,31 @@ public class MainActivity extends AppCompatActivity implements Navigator {
         NavigationUI.setupWithNavController(binding.drawerNavView, navController);
         NavigationUI.setupWithNavController(binding.bottomNavView, navController);
 
+        fetchUserProfile();
+
         setUpSignOutListener();
+    }
+
+    private void fetchUserProfile() {
+        fetchUserProfilePresenter.setViewModel(new IFetchUserProfileViewModel() {
+            @Override
+            public void onFetchUserProfileSuccess(UserProfileData userProfileData) {
+                sessionManager.setCachedUserData(new CachedUserData(
+                        userProfileData.getFirstName(),
+                        userProfileData.getLastName(),
+                        userProfileData.getEmail(),
+                        userProfileData.getProfileImgUrl()));
+            }
+
+            @Override
+            public void onFetchUserProfileFailure(String message) {
+                Toast.makeText(getApplicationContext(),
+                        "Fetch user profile failed " + message, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        userController.fetchUserProfile(
+                sessionManager.getToken(), petSessionManager.getPetId());
     }
 
     // Menu icons are inflated just as they were with actionbar
@@ -128,7 +148,9 @@ public class MainActivity extends AppCompatActivity implements Navigator {
         fullNameView.setText(fullName);
         emailView.setText(cachedUserData.getEmail());
 
-        Glide.with(this).load(cachedUserData.getProfileImgUrl()).into(imgView);
+        if (!cachedUserData.getProfileImgUrl().equals("")){
+            Glide.with(this).load(cachedUserData.getProfileImgUrl()).into(imgView);
+        }
     }
 
     private void setUpSignOutListener() {
@@ -164,19 +186,21 @@ public class MainActivity extends AppCompatActivity implements Navigator {
     /**
      * Hide the navigation drawer and bottom nav bar
      */
+    @Override
     public void hideNavigation() {
         binding.bottomNavView.setVisibility(View.GONE);
         binding.drawerNavView.setVisibility(View.GONE);
-        binding.mainDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+        binding.mainAppbar.setVisibility(View.GONE);
     }
 
     /**
      * Show the navigation drawer and bottom nav bar
      */
+    @Override
     public void showNavigation() {
         binding.bottomNavView.setVisibility(View.VISIBLE);
         binding.drawerNavView.setVisibility(View.VISIBLE);
-        binding.mainDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+        binding.mainAppbar.setVisibility(View.VISIBLE);
     }
 
     /**
@@ -207,16 +231,6 @@ public class MainActivity extends AppCompatActivity implements Navigator {
         navController.navigate(navTarget);
     }
 
-    @Override
-    public void navigate(int navTarget, Object payloadContext) {
-        this.navPayloadContext = payloadContext;
-        navigate(navTarget);
-    }
-
-    @Override
-    public Object getPayloadContext() {
-        return navPayloadContext;
-    }
 
     /**
      * Set the navigation target fragment when the edit button is clicked.

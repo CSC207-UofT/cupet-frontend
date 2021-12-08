@@ -15,7 +15,10 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.Observer;
+import androidx.lifecycle.OnLifecycleEvent;
 
 import com.example.cupetfrontend.App;
 import com.example.cupetfrontend.R;
@@ -23,6 +26,7 @@ import com.example.cupetfrontend.controllers.abstracts.IPetController;
 import com.example.cupetfrontend.controllers.abstracts.ISessionManager;
 import com.example.cupetfrontend.databinding.FragmentCreatePetBinding;
 import com.example.cupetfrontend.presenters.abstracts.ICreatePetPresenter;
+import com.example.cupetfrontend.presenters.view_model_abstracts.ICreatePetViewModel;
 import com.example.cupetfrontend.ui.MainActivityFragment;
 
 import javax.inject.Inject;
@@ -38,9 +42,10 @@ public class CreatePetFragment extends MainActivityFragment {
     private ImageView petImage;
     private Button createPetButton;
     private ImageButton editPetImageButton;
-    private CreatePetViewModel createPetViewModel;
     private FragmentCreatePetBinding binding;
 
+    @Inject
+    public ICreatePetViewModel createPetViewModel;
     @Inject
     public IPetController petController;
     @Inject
@@ -81,7 +86,6 @@ public class CreatePetFragment extends MainActivityFragment {
         View root = binding.getRoot();
 
         ((App) getApplicationContext()).getAppComponent().inject(this);
-        createPetViewModel = new CreatePetViewModel(petController);
         createPetPresenter.setCreatePetViewModel(createPetViewModel);
 
         initializeViews();
@@ -90,8 +94,23 @@ public class CreatePetFragment extends MainActivityFragment {
         setUpFormEditedListener();
         setUpCreatePetButtonClickedListener();
         setUpEditPetImageButtonClickedListener();
+        attachToActivityCreate();
 
         return root;
+    }
+
+    private void attachToActivityCreate() {
+        getMainActivity().getLifecycle().addObserver(new LifecycleObserver() {
+            @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
+            public void onCreate() {
+                if (createPetViewModel.getContext() != null &&
+                        createPetViewModel.getContext().isFromLoginPage()){
+                    getMainActivity().hideNavigation();
+                }
+
+                getMainActivity().getLifecycle().removeObserver(this);
+            }
+        });
     }
 
     /**

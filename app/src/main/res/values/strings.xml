@@ -112,10 +112,11 @@
     <string name="potential_no_matches_text">No Potential Matches</string>
 
     <string name="pet_profile_picture">Pet Profile Picture</string>
-    <string name="your_pets">Your Pets</string>
+    <string name="your_pets">Select a pet</string>
     <string name="delete_button">delete</string>
     <string name="nav_view_my_pets">My Pets</string>
     <string name="public_contactinfo_title">Owner Contact Info</string>
     <string name="contactinfo_title_non_pet">Contact Info</string>
     <string name="user_profile_header">Name, Age</string>
+    <string name="no_matches_view_text">No Matches</string>
 </resources>

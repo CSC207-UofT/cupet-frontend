@@ -193,13 +193,10 @@ public class EditUserAccountFragment extends MainActivityFragment {
     private void onEditUserAccountSuccess(){
         Toast.makeText(getApplicationContext(), "Edit Success", Toast.LENGTH_SHORT).show();
         getMainActivity().navigate(R.id.nav_account_settings);
-
-
     }
 
     private void onEditUserAccountFailure(String errorMessage){
-        System.out.println("Edit failed");
-        Toast.makeText(getApplicationContext(), "Edit failed:" + errorMessage, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "Edit Failed:" + errorMessage, Toast.LENGTH_SHORT).show();
     }
 
 }

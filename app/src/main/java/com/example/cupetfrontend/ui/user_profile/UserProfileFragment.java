@@ -94,7 +94,7 @@ public class UserProfileFragment extends MainActivityFragment {
     }
 
     private void onFetchUserProfileFailure(String errorMessage){
-        Toast.makeText(getApplicationContext(), "Request failed: " +
+        Toast.makeText(getApplicationContext(), "Fetch User Profile Failed: " +
                 errorMessage, Toast.LENGTH_SHORT).show();
     }
 }
