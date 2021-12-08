@@ -107,7 +107,7 @@ public class RegisterViewModel extends ViewModel implements IRegisterViewModel {
         newFormState.setPasswordState(
                 new FormFieldState(
                         oldFormState.getPasswordState(),
-                        UserFormValidator.validatePassword(formData.getLastName())
+                        UserFormValidator.validatePassword(formData.getPassword())
                 ));
         newFormState.setConfirmPasswordState(
                 new FormFieldState(

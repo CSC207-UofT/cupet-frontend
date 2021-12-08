@@ -129,7 +129,7 @@ public class UserFormValidator {
      *
      * @return Error text if applicable, otherwise return null
      */
-    public static String validateFacebook(String phoneNumber) {
+    public static String validateFacebook(String facebook) {
         return null;
     }
 
@@ -138,10 +138,10 @@ public class UserFormValidator {
      *
      * @return Error text if applicable, otherwise return null
      */
-    public static String validateInstagram(String phoneNumber) {
-        if (phoneNumber == null || phoneNumber.equals("")){
+    public static String validateInstagram(String instagram) {
+        if (instagram == null || instagram.equals("")){
             return null;
-        } else if (phoneNumber.matches("^@.*$")){
+        } else if (instagram.matches("^@.*$")){
             return null;
         }else{
             return "Instagram handles must start with @";
