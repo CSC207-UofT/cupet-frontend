@@ -9,6 +9,9 @@ import com.example.cupetfrontend.controllers.abstracts.IAuthController;
 import com.example.cupetfrontend.R;
 import com.example.cupetfrontend.presenters.abstracts.ILoginPresenter;
 import com.example.cupetfrontend.presenters.view_model_abstracts.ILoginViewModel;
+import com.example.cupetfrontend.ui.form_validators.FormFieldState;
+import com.example.cupetfrontend.ui.form_validators.UserFormValidator;
+import com.example.cupetfrontend.ui.register.RegisterFormState;
 
 public class LoginViewModel extends ViewModel implements ILoginViewModel {
 
@@ -35,28 +38,41 @@ public class LoginViewModel extends ViewModel implements ILoginViewModel {
     }
 
     public void loginDataChanged(String email, String password) {
-        if (!isEmailValid(email)) {
-            loginFormState.setValue(new LoginFormState(R.string.invalid_email, null));
-        } else if (!isPasswordValid(password)) {
-            loginFormState.setValue(new LoginFormState(null, R.string.invalid_password));
-        } else {
-            loginFormState.setValue(new LoginFormState(true));
+        LoginFormState newFormState = new LoginFormState();
+        LoginFormState oldFormState = loginFormState.getValue();
+
+        if (oldFormState == null){
+            loginFormState.setValue(newFormState);
+            return;
         }
+
+        validateForm(email, password, newFormState, oldFormState);
+        checkFormStateInteracted(email, password, newFormState);
+
+        loginFormState.setValue(newFormState);
     }
 
-    private boolean isEmailValid(String email) {
-        if (email == null) {
-            return false;
-        }
-        if (email.contains("@")) {
-            return Patterns.EMAIL_ADDRESS.matcher(email).matches();
-        } else {
-            return !email.trim().isEmpty();
-        }
+    private void validateForm(String email, String password,
+                              LoginFormState newFormState, LoginFormState oldFormState) {
+        newFormState.setEmailState(
+                new FormFieldState(
+                        oldFormState.getEmailState(),
+                        UserFormValidator.validateEmail(email)
+                ));
+        newFormState.setPasswordState(
+                new FormFieldState(
+                        oldFormState.getPasswordState(),
+                        UserFormValidator.validatePassword(password)
+                ));
     }
 
-    private boolean isPasswordValid(String password) {
-        return password != null && password.trim().length() > 5;
+    private void checkFormStateInteracted (String email, String password, LoginFormState state) {
+        if (email != null && !email.equals("")){
+            state.getEmailState().onFieldInteracted();
+        }
+        if (password != null && !password.equals("")){
+            state.getPasswordState().onFieldInteracted();
+        }
     }
 
     @Override

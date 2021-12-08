@@ -42,10 +42,10 @@ public class RegisterViewModel extends ViewModel implements IRegisterViewModel {
     }
 
     /**
-     * Helper method for checking when a form's fields update and
-     * updating the form state appropriately.
+     * Helper method for checking when a form's fields has
+     * been interacted with.
      */
-    private void checkFormStateUpdated(RegisterFormState state, RegisterFormData formData) {
+    private void checkFormStateInteracted(RegisterFormState state, RegisterFormData formData) {
         if (formData.getFirstName() != null && !formData.getFirstName().equals("")){
             state.getFirstNameState().onFieldInteracted();
         }
@@ -83,7 +83,7 @@ public class RegisterViewModel extends ViewModel implements IRegisterViewModel {
         }
 
         validateForm(formData, newFormState, oldFormState);
-        checkFormStateUpdated(newFormState, formData);
+        checkFormStateInteracted(newFormState, formData);
 
         registerFormState.setValue(newFormState);
     }
