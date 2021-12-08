@@ -21,10 +21,14 @@ import com.example.cupetfrontend.App;
 import com.example.cupetfrontend.R;
 import com.example.cupetfrontend.data.model.PetModel;
 import com.example.cupetfrontend.dependency_selector.DependencySelector;
+import com.example.cupetfrontend.presenters.view_model_abstracts.IMatchedPetProfileViewModel;
+import com.example.cupetfrontend.presenters.view_model_abstracts.nav_context_models.MatchedPetProfileContext;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
+
+import javax.inject.Inject;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -39,6 +43,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private final List<PetModel> mPetModels;
     private final Context context;
     private GetMatchesRecyclerViewModel viewModel;
+
+    @Inject
+    public IMatchedPetProfileViewModel matchedPetProfileViewModel;
 
     public RecyclerViewAdapter(Context context, List<PetModel> mPetModels) {
         this.context = context;
@@ -119,6 +126,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                         .getPetName());
 
                 Toast.makeText(context, mPetModels.get(holder.getAdapterPosition()).getPetName(), Toast.LENGTH_SHORT).show();
+                matchedPetProfileViewModel.setContext(new MatchedPetProfileContext(getPetModelFor(holder)));
             }
         });
     }
