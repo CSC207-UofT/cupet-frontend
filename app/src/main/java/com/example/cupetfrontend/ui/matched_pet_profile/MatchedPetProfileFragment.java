@@ -50,7 +50,6 @@ public class MatchedPetProfileFragment extends MainActivityFragment {
             setUpVisitOwnerProfileButtonClickedListener();
             setUpObserveGetUserContactInfoResult();
         }
-
         return root;
     }
 
