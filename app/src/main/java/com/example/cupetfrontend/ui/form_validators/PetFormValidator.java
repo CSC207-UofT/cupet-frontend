@@ -19,11 +19,11 @@ public class PetFormValidator {
      */
     public static String validatePetName(String petName) {
         if (petName == null){
-            return "The last name must be more than 2 characters long.";
+            return "The pet's name must be more than 2 characters long.";
         } else if (petName.length() > 2){
             return null;
         }else{
-            return "The last name must be more than 2 characters long.";
+            return "The pet's name must be more than 2 characters long.";
         }
     }
 
