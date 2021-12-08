@@ -45,6 +45,8 @@ public class MatchedPetProfileFragment extends MainActivityFragment {
         getApplicationContext().getAppComponent().inject(this);
         matchedPetProfilePresenter.setMatchedPetProfileViewModel(viewModel);
 
+        //viewModel.fetchUserProfile(sessionManager, viewModel.getContext.getSelectedMatchedPet().getUserId()); //TODO: Get owner's User Id from PetModel of selected pet
+
         if (viewModel.getContext() != null) {
             setUpPetProfile(viewModel.getContext().getSelectedMatchedPet());
             setUpVisitOwnerProfileButtonClickedListener();
