@@ -42,7 +42,7 @@ public class MatchedPetProfileFragment extends MainActivityFragment {
         binding = FragmentMatchedPetProfileBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        //getApplicationContext().getAppComponent().inject(this);
+        getApplicationContext().getAppComponent().inject(this);
         matchedPetProfilePresenter.setMatchedPetProfileViewModel(viewModel);
 
         if (viewModel.getContext() != null) {
@@ -80,8 +80,9 @@ public class MatchedPetProfileFragment extends MainActivityFragment {
     /**
      * Set up this fragment as an observer that observes the result of obtaining the user profile
      * data for the selected pet's owner.
-     * <p>
-     * Update the displayed views when the pet profile result has changed.
+     *
+     * Update the displayed views when the MatchedPetProfileOwnerContactInfoResult
+     * result has changed.
      */
     private void setUpObserveGetUserContactInfoResult() {
         viewModel.getUserContactInfoResult().observe(getViewLifecycleOwner(), new Observer<MatchedPetProfileOwnerContactInfoResult>() {
