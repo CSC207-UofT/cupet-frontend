@@ -83,6 +83,7 @@ public class EditPetFragment extends MainActivityFragment {
 
         ((App) getApplicationContext()).getAppComponent().inject(this);
         editPetPresenter.setEditPetViewModel(editPetViewModel);
+        editPetViewModel.clearState();
 
         initializeViews();
         setUpObserveEditPetFormState();

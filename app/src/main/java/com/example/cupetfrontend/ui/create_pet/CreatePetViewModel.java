@@ -153,4 +153,10 @@ public class CreatePetViewModel extends ViewModel implements ICreatePetViewModel
     public void setContext(CreatePetContext context) {
         this.context = context;
     }
+
+    @Override
+    public void clearState() {
+        createPetFormState.setValue(null);
+        createPetResult.setValue(null);
+    }
 }

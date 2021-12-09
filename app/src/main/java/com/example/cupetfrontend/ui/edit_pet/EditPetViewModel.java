@@ -194,4 +194,10 @@ public class EditPetViewModel extends ViewModel implements IEditPetViewModel {
     public void setContext(EditPetContext context) {
         this.context = context;
     }
+
+    @Override
+    public void clearState() {
+        editPetFormState.setValue(null);
+        editPetResult.setValue(null);
+    }
 }

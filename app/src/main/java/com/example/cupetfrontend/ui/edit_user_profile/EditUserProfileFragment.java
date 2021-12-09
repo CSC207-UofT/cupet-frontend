@@ -65,6 +65,7 @@ public class EditUserProfileFragment extends MainActivityFragment {
         getApplicationContext().getAppComponent().inject(this);
         editUserProfilePresenter.setEditUserProfileViewModel(viewModel);
         setUserProfileImagePresenter.setViewModel(viewModel);
+        viewModel.clearState();
 
         setUpFormEditedListener();
         setUpConfirmButtonClickedListener();

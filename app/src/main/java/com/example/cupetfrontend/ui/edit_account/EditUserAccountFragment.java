@@ -55,6 +55,7 @@ public class EditUserAccountFragment extends MainActivityFragment {
         ((App) getApplicationContext()).getAppComponent().inject(this);
 
         editUserAccountPresenter.setEditUserAccountViewModel(editUserAccountViewModel);
+        editUserAccountViewModel.clearState();
 
         setUpObserveEditUserAccountFormState();
         setUpObserveUserAccountResult();

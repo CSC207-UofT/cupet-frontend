@@ -86,6 +86,7 @@ public class CreatePetFragment extends MainActivityFragment {
 
         ((App) getApplicationContext()).getAppComponent().inject(this);
         createPetPresenter.setCreatePetViewModel(createPetViewModel);
+        createPetViewModel.clearState();
 
         initializeViews();
         setUpObserveCreatePetFormState();

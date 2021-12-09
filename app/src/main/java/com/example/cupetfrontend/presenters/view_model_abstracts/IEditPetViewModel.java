@@ -34,4 +34,6 @@ public interface IEditPetViewModel {
     EditPetContext getContext();
 
     void setContext(EditPetContext context);
+
+    void clearState();
 }

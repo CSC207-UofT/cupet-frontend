@@ -26,6 +26,8 @@ public interface IEditUserProfileViewModel {
 
     void onSetUserProfileImageFailure(String message);
 
+    void clearState();
+
     void setContext(EditUserProfileContext context);
 
     EditUserProfileContext getContext();

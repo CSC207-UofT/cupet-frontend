@@ -31,4 +31,6 @@ public interface IEditUserAccountViewModel {
     EditUserAccountContext getContext();
 
     void setContext(EditUserAccountContext context);
+
+    void clearState();
 }

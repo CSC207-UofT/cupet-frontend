@@ -155,4 +155,10 @@ public class EditUserAccountViewModel extends ViewModel implements IEditUserAcco
     public void setContext(EditUserAccountContext context) {
         this.context = context;
     }
+
+    @Override
+    public void clearState() {
+        formState.setValue(null);
+        editUserAccountResult.setValue(null);
+    }
 }

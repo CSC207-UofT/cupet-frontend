@@ -31,4 +31,6 @@ public interface ICreatePetViewModel {
     CreatePetContext getContext();
 
     void setContext(CreatePetContext context);
+
+    void clearState();
 }

@@ -142,4 +142,10 @@ public class EditUserProfileViewModel extends ViewModel implements IEditUserProf
         EditUserProfileResult newEditUserProfileResult = new EditUserProfileResult(true, message);
         editUserProfileResult.setValue(newEditUserProfileResult);
     }
+
+    @Override
+    public void clearState() {
+        editUserProfileState.setValue(null);
+        editUserProfileResult.setValue(null);
+    }
 }
