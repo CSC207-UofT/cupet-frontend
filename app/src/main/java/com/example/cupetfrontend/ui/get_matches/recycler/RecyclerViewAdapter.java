@@ -24,11 +24,15 @@ import com.example.cupetfrontend.controllers.abstracts.IPetSessionManager;
 import com.example.cupetfrontend.controllers.abstracts.ISessionManager;
 import com.example.cupetfrontend.data.model.PetModel;
 import com.example.cupetfrontend.dependency_selector.DependencySelector;
+import com.example.cupetfrontend.presenters.view_model_abstracts.IMatchedPetProfileViewModel;
+import com.example.cupetfrontend.presenters.view_model_abstracts.nav_context_models.MatchedPetProfileContext;
 import com.example.cupetfrontend.presenters.abstracts.IUnMatchPresenter;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
+
+import javax.inject.Inject;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -43,6 +47,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private List<PetModel> mPetModels;
     private final Context context;
     private GetMatchesRecyclerViewModel viewModel;
+
+    @Inject
+    public IMatchedPetProfileViewModel matchedPetProfileViewModel;
+
     private final IPetSessionManager petSessionManager;
     private final ISessionManager sessionManager;
     private final IUnMatchPresenter unMatchPresenter;
@@ -132,6 +140,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                         .getPetName());
 
                 Toast.makeText(context, mPetModels.get(holder.getAdapterPosition()).getPetName(), Toast.LENGTH_SHORT).show();
+                matchedPetProfileViewModel.setContext(new MatchedPetProfileContext(getPetModelFor(holder)));
             }
         });
     }

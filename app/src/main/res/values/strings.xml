@@ -116,8 +116,10 @@
     <string name="delete_button">delete</string>
     <string name="nav_view_my_pets">My Pets</string>
     <string name="public_contactinfo_title">Owner Contact Info</string>
+    <string name="pet_name_age">Pet Name, Age</string>
     <string name="contactinfo_title_non_pet">Contact Info</string>
     <string name="user_profile_header">Name, Age</string>
+    <string name="visit_owner_s_profile">Visit Owner\'s Profile</string>
     <string name="no_matches_view_text">No Matches</string>
     <string name="nav_user_account_title">Edit My Acccount</string>
     <string name="user_account_location_title">Location Data</string>
