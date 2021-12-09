@@ -115,6 +115,7 @@
     <string name="your_pets">Select a pet</string>
     <string name="delete_button">delete</string>
     <string name="nav_view_my_pets">My Pets</string>
+    <string name="create_pet_name">Add a New Pet</string>
     <string name="public_contactinfo_title">Owner Contact Info</string>
     <string name="pet_name_age">Pet Name, Age</string>
     <string name="contactinfo_title_non_pet">Contact Info</string>

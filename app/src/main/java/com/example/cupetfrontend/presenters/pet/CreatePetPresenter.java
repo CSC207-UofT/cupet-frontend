@@ -26,7 +26,7 @@ public class CreatePetPresenter implements ICreatePetPresenter {
      */
     @Override
     public void onCreatePetSuccess(PetCreatorSuccessResponseModel response) {
-        createPetViewModel.onCreatePetSuccess();
+        createPetViewModel.onCreatePetSuccess(response.getPetId());
     }
 
     /**

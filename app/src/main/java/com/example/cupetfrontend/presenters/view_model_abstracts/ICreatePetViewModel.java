@@ -12,14 +12,14 @@ public interface ICreatePetViewModel {
 
     LiveData<CreatePetResult> getCreatePetResult();
 
-    void createPet(CreatePetFormData formData);
+    void createPet(String token, CreatePetFormData formData);
 
     void updateFormState(CreatePetFormData formData);
 
     /**
      * This method is called when the create pet request was successful.
      */
-    void onCreatePetSuccess();
+    void onCreatePetSuccess(String petId);
 
     /**
      * This method is called when the create pet request failed.

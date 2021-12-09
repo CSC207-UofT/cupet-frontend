@@ -24,23 +24,19 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/pet_image"
+            <TextView
+                android:id="@+id/create_pet_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="@string/create_pet_name"
+                android:textSize="36sp"
                 android:layout_gravity="center"
-                android:layout_marginTop="80dp"
-                tools:srcCompat="@tools:sample/avatars" />
-
-            <ImageButton
-                android:id="@+id/edit_pet_image_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                app:srcCompat="@android:drawable/ic_menu_edit" />
+                android:fontFamily="@font/quicksand"
+                android:layout_marginTop="60dp"
+                />
 
             <EditText
-                android:id="@+id/pet_petName"
+                android:id="@+id/create_pet_name"
                 android:layout_width="331dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -48,52 +44,44 @@
                 android:ems="10"
                 android:hint="@string/pet_name"
                 android:inputType="textPersonName"
-                android:textColor="@color/tinder_pink"
-                android:textColorHighlight="@color/tinder_pink_dark"
-                android:textColorHint="@color/tinder_pink_dark"
-                android:textColorLink="@color/tinder_pink_gray" />
+                android:fontFamily="@font/quicksand"
+                />
 
             <EditText
-                android:id="@+id/pet_petAge"
+                android:id="@+id/create_pet_age"
                 android:layout_width="331dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="24dp"
                 android:ems="10"
                 android:hint="@string/pet_age"
-                android:inputType="textPersonName"
-                android:textColor="@color/tinder_pink"
-                android:textColorHighlight="@color/tinder_pink_dark"
-                android:textColorHint="@color/tinder_pink_dark"
-                android:textColorLink="@color/tinder_pink_gray" />
+                android:inputType="text"
+                android:fontFamily="@font/quicksand"
+                />
 
             <EditText
-                android:id="@+id/pet_petBreed"
+                android:id="@+id/create_pet_breed"
                 android:layout_width="331dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="24dp"
                 android:ems="10"
                 android:hint="@string/pet_breed"
-                android:inputType="textPersonName"
-                android:textColor="@color/tinder_pink"
-                android:textColorHighlight="@color/tinder_pink_dark"
-                android:textColorHint="@color/tinder_pink_dark"
-                android:textColorLink="@color/tinder_pink_gray" />
+                android:inputType="text"
+                android:fontFamily="@font/quicksand"
+                />
 
             <EditText
-                android:id="@+id/pet_petBio"
+                android:id="@+id/create_pet_bio"
                 android:layout_width="330dp"
                 android:layout_height="49dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="24dp"
                 android:ems="10"
                 android:hint="@string/pet_bio"
-                android:inputType="textPersonName"
-                android:textColor="@color/tinder_pink"
-                android:textColorHighlight="@color/tinder_pink_dark"
-                android:textColorHint="@color/tinder_pink_dark"
-                android:textColorLink="@color/tinder_pink_gray" />
+                android:inputType="text"
+                android:fontFamily="@font/quicksand"
+                />
 
             <Button
                 android:id="@+id/confirm_add_pet_button"
@@ -104,7 +92,9 @@
                 android:background="@color/tinder_pink"
                 android:text="@string/add_pet"
                 android:textColor="#FFFFFF"
-                app:backgroundTint="@color/tinder_pink_dark" />
+                app:backgroundTint="@color/tinder_pink"
+                android:fontFamily="@font/quicksand"
+                />
 
         </LinearLayout>
     </ScrollView>

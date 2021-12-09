@@ -17,7 +17,6 @@ import com.bumptech.glide.Glide;
 import com.example.cupetfrontend.R;
 import com.example.cupetfrontend.controllers.abstracts.IPetSessionManager;
 import com.example.cupetfrontend.data.model.PetModel;
-import com.example.cupetfrontend.presenters.view_model_abstracts.IContactInfoViewModel;
 import com.example.cupetfrontend.presenters.view_model_abstracts.ICreatePetViewModel;
 import com.example.cupetfrontend.presenters.view_model_abstracts.IViewMyPetsViewModel;
 import com.example.cupetfrontend.presenters.view_model_abstracts.nav_context_models.CreatePetContext;
@@ -35,8 +34,8 @@ public class CardRecyclerViewAdapter extends RecyclerView.Adapter<CardRecyclerVi
 
     private List<PetModel> mPetModels;
     private final Context mContext;
-    private final IPetSessionManager petSessionManager;
     private final Navigator navigator;
+    private final IPetSessionManager petSessionManager;
     private final ICreatePetViewModel createPetViewModel;
     private final IViewMyPetsViewModel viewMyPetsViewModel;
 

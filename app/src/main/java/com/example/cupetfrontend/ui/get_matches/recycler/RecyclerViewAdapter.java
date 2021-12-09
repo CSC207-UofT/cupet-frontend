@@ -20,6 +20,8 @@ import com.bumptech.glide.request.RequestOptions;
 import com.example.cupetfrontend.App;
 import com.example.cupetfrontend.R;
 import com.example.cupetfrontend.controllers.abstracts.IPetController;
+import com.example.cupetfrontend.data.model.PetModel;
+import com.example.cupetfrontend.presenters.abstracts.IUnMatchPresenter;
 import com.example.cupetfrontend.controllers.abstracts.IPetSessionManager;
 import com.example.cupetfrontend.controllers.abstracts.ISessionManager;
 import com.example.cupetfrontend.data.model.PetModel;
@@ -49,7 +51,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private Context context;
     private GetMatchesRecyclerViewModel viewModel;
     private final IMatchedPetProfileViewModel matchedPetProfileViewModel;
-
     private final IPetSessionManager petSessionManager;
     private final ISessionManager sessionManager;
     private final IUnMatchPresenter unMatchPresenter;
