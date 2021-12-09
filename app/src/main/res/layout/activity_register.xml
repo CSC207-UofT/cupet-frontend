@@ -69,29 +69,27 @@
             android:inputType="textPassword" />
 
         <EditText
-            android:id="@+id/reg_homeAddress"
-            style="@style/WhiteEditText"
-            android:layout_width="331dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="15dp"
-            android:layout_gravity="center"
-            android:autofillHints="@string/home_address"
-            android:ems="10"
-            android:hint="@string/home_address"
-            android:inputType="textPostalAddress"
-        />
-
-        <EditText
             android:id="@+id/reg_password_confirm"
             style="@style/WhiteEditText"
             android:layout_width="331dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="15dp"
             android:layout_gravity="center"
+            android:layout_marginBottom="15dp"
             android:ems="10"
             android:hint="@string/confirm_password"
-            android:inputType="textPassword"
-        />
+            android:inputType="textPassword" />
+
+        <EditText
+            android:id="@+id/reg_homeAddress"
+            style="@style/WhiteEditText"
+            android:layout_width="331dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="15dp"
+            android:autofillHints="@string/home_address"
+            android:ems="10"
+            android:hint="@string/home_address"
+            android:inputType="textPostalAddress" />
 
         <EditText
             android:id="@+id/reg_city"
