@@ -2,7 +2,6 @@ package com.example.cupetfrontend.unit_tests.use_cases.mocks;
 
 import com.example.cupetfrontend.use_cases.api_abstracts.IPetAPIGateway;
 import com.example.cupetfrontend.use_cases.api_abstracts.IServerResponseListener;
-import com.example.cupetfrontend.use_cases.api_abstracts.request_models.pet.APIAddToPetImageGalleryRequestModel;
 import com.example.cupetfrontend.use_cases.api_abstracts.request_models.pet.APICreatePetRequestModel;
 import com.example.cupetfrontend.use_cases.api_abstracts.request_models.pet.APIEditPetRequestModel;
 import com.example.cupetfrontend.use_cases.api_abstracts.request_models.pet.APIFetchPetProfileImageRequestModel;
@@ -11,7 +10,6 @@ import com.example.cupetfrontend.use_cases.api_abstracts.request_models.pet.APIG
 import com.example.cupetfrontend.use_cases.api_abstracts.request_models.pet.APIGetPotentialMatchesRequestModel;
 import com.example.cupetfrontend.use_cases.api_abstracts.request_models.pet.APIIntendToMatchRequestModel;
 import com.example.cupetfrontend.use_cases.api_abstracts.request_models.pet.APIRejectMatchRequestModel;
-import com.example.cupetfrontend.use_cases.api_abstracts.request_models.pet.APIRemoveFromPetImageGalleryRequestModel;
 import com.example.cupetfrontend.use_cases.api_abstracts.request_models.pet.APISetPetProfileImageRequestModel;
 import com.example.cupetfrontend.use_cases.api_abstracts.request_models.pet.APIUnMatchPetRequestModel;
 
@@ -84,18 +82,6 @@ public class MockSuccessPetAPIGateway extends MockSuccessAPIGateway implements I
         responseListener.onRequestSuccess(createDummySuccessJSON(new HashMap<String, String>() {{
             put("url", "dummy url");
         }}));
-    }
-
-    @Override
-    public void addToPetImageGallery(APIAddToPetImageGalleryRequestModel requestData, IServerResponseListener responseListener) {
-        responseListener.onRequestSuccess(createDummySuccessJSON(new HashMap<String, String>() {{
-            put("url", "dummy url");
-        }}));
-    }
-
-    @Override
-    public void removeFromPetImageGallery(APIRemoveFromPetImageGalleryRequestModel requestData, IServerResponseListener responseListener) {
-        responseListener.onRequestSuccess(createDummySuccessJSON(new HashMap<>()));
     }
 
     @Override

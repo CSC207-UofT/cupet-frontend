@@ -140,32 +140,6 @@ public class PetAPIGateway extends APIGateway implements IPetAPIGateway {
     }
 
     @Override
-    public void addToPetImageGallery(APIAddToPetImageGalleryRequestModel requestData, IServerResponseListener responseListener) {
-        JSONObject requestBody = new JSONObject(new HashMap<String, String>() {{
-            put("petId", requestData.getPetId());
-            put("base64Encoded", requestData.getImgB64());
-        }});
-
-        String url = UserRoutesStore.toAbsoluteRoute(PetRoutesStore.ADD_TO_PET_IMAGE_GALLERY);
-
-        requestManager.makePostRequest(url, requestBody,
-                createAuthHeaders(requestData.getToken()), responseListener);
-    }
-
-    @Override
-    public void removeFromPetImageGallery(APIRemoveFromPetImageGalleryRequestModel requestData, IServerResponseListener responseListener) {
-        JSONObject requestBody = new JSONObject(new HashMap<String, String>() {{
-            put("petId", requestData.getPetId());
-            put("assetId", requestData.getAssetId());
-        }});
-
-        String url = UserRoutesStore.toAbsoluteRoute(PetRoutesStore.REMOVE_FROM_PET_IMAGE_GALLERY);
-
-        requestManager.makePostRequest(url, requestBody,
-                createAuthHeaders(requestData.getToken()), responseListener);
-    }
-
-    @Override
     public void fetchPetProfileImage(APIFetchPetProfileImageRequestModel requestData, IServerResponseListener responseListener) {
         HashMap<String, String> queryParams = new HashMap<String, String>() {{
             put("petId", requestData.getPetId());
