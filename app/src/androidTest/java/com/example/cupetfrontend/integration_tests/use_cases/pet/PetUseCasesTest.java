@@ -120,13 +120,13 @@ public class PetUseCasesTest extends NUsersTestClass {
             }
         }).createPet(request);
 
-        awaitForTask(2000);
+        awaitForTask(5000);
     }
 
     @Test
     public void test0_createPet2() {
         PetCreatorRequestModel request = new PetCreatorRequestModel(
-                tokens.get(0),
+                tokens.get(1),
                 "second pet",
                 "5",
                 "Dog Breed",
@@ -152,7 +152,7 @@ public class PetUseCasesTest extends NUsersTestClass {
             }
         }).createPet(request);
 
-        awaitForTask(2000);
+        awaitForTask(5000);
     }
 
     @Test
@@ -180,7 +180,7 @@ public class PetUseCasesTest extends NUsersTestClass {
 
         }).fetchPetProfile(request);
 
-        awaitForTask(2000);
+        awaitForTask(5000);
     }
 
     @Test
@@ -211,7 +211,7 @@ public class PetUseCasesTest extends NUsersTestClass {
             }
         }).editPet(request);
 
-        awaitForTask(2000);
+        awaitForTask(5000);
     }
 
     @Test
@@ -239,33 +239,7 @@ public class PetUseCasesTest extends NUsersTestClass {
             }
         }).getPets(request);
 
-        awaitForTask(2000);
-    }
-
-    @Ignore("Waiting for implementation on backend")
-    @Test
-    public void test_4_getPotentialMatches() {
-        GetPotentialMatchesRequestModel request = new GetPotentialMatchesRequestModel(
-                tokens.get(0),
-                petIds.get(0)
-        );
-
-        new GetPotentialMatches(petAPIGateway, new GetPotentialMatchesOutputBoundary() {
-            @Override
-            public void onGetPotentialMatchesSuccess(GetPotentialMatchesSuccessResponseModel response) {
-                // No need to test the correctness of the matching algorithm here
-                // It will be tested on the backend.
-                setTaskComplete();
-            }
-
-            @Override
-            public void onGetPotentialMatchesFailure(DefaultFailureResponseModel response) {
-                fail("Request incorrectly failed");
-
-            }
-        }).getPotentialMatches(request);
-
-        awaitForTask(2000);
+        awaitForTask(5000);
     }
 
     @Test
@@ -288,7 +262,7 @@ public class PetUseCasesTest extends NUsersTestClass {
             }
         }).intendToMatch(request);
 
-        awaitForTask(2000);
+        awaitForTask(5000);
     }
 
     @Test
@@ -307,11 +281,11 @@ public class PetUseCasesTest extends NUsersTestClass {
 
             @Override
             public void onIntendToMatchFailure(DefaultFailureResponseModel response) {
-                fail("Request incorrectly failed");
+                fail("Request incorrectly failed" + response.getErrorMessage());
             }
         }).intendToMatch(request);
 
-        awaitForTask(2000);
+        awaitForTask(5000);
     }
 
     @Test
@@ -325,16 +299,6 @@ public class PetUseCasesTest extends NUsersTestClass {
             @Override
             public void onGetMatchesSuccess(GetMatchesSuccessResponseModel response) {
                 setTaskComplete();
-                // TODO: uncomment test once matching algorithm on back-end is complete
-                //  For now, test that we are able to access the endpoint correctly
-
-                PetData petData = response.getMatches().get(0);
-//
-//                assertEquals(petIds.get(1), petData.getPetId());
-//                assertEquals("second pet", petData.getName());
-//                assertEquals("5", petData.getAge());
-//                assertEquals("Dog Breed", petData.getBreed());
-//                assertEquals("this is my dog 2", petData.getBiography());
             }
 
             @Override
@@ -346,6 +310,4 @@ public class PetUseCasesTest extends NUsersTestClass {
 
         awaitForTask(5000);
     }
-
-    // TODO: Implement test for rejecting match
 }

@@ -91,9 +91,9 @@ public class UserAndAuthUseCasesTest extends AsyncTestClass {
                 "android_first",
                 "android_last",
                 email,
-                "AndroidPassword",
-                "1234 Android St",
-                "Android City"
+                "1Password",
+                "1234 Yonge St",
+                "Toronto"
         );
     }
 
@@ -174,7 +174,7 @@ public class UserAndAuthUseCasesTest extends AsyncTestClass {
     public void test3_editAccount() {
         EditUserAccountRequestModel request = new EditUserAccountRequestModel(token,
                 "android_edited_first", "android_edited_last",
-                "android_edited_email@email.com", "1234password",
+                "android_edited_email@email.com", "1Password",
                 "new home", "new city");
 
         new EditUserAccount(userAPIGateway, new EditUserAccountOutputBoundary() {

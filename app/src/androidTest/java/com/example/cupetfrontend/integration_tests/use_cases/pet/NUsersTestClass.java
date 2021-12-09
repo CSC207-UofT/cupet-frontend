@@ -66,12 +66,12 @@ public class NUsersTestClass extends AsyncTestClass {
         String email = "android_test_" + time + "@android.test";
 
         return new UserCreatorRequestModel(
-                "android_first",
-                "android_last",
+                "android first",
+                "android last",
                 email,
-                "AndroidPassword",
-                "1234 Android St",
-                "Android City"
+                "1Password",
+                "1234 Yonge St",
+                "Toronto"
         );
     }
 
