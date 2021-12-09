@@ -23,7 +23,6 @@ import com.example.cupetfrontend.R;
 import com.example.cupetfrontend.controllers.InvalidJWTException;
 import com.example.cupetfrontend.controllers.abstracts.IAuthController;
 import com.example.cupetfrontend.controllers.abstracts.ISessionManager;
-import com.example.cupetfrontend.dependency_selector.DependencySelector;
 import com.example.cupetfrontend.presenters.abstracts.ILoginPresenter;
 import com.example.cupetfrontend.presenters.view_model_abstracts.IViewMyPetsViewModel;
 import com.example.cupetfrontend.presenters.view_model_abstracts.nav_context_models.ViewMyPetsContext;
