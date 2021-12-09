@@ -9,10 +9,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.recyclerview.widget.RecyclerView;
-
 import com.bumptech.glide.Glide;
 import com.example.cupetfrontend.R;
 import com.example.cupetfrontend.controllers.abstracts.IPetSessionManager;
@@ -25,8 +21,11 @@ import com.example.cupetfrontend.ui.Navigator;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class CardRecyclerViewAdapter extends RecyclerView.Adapter<CardRecyclerViewAdapter.ViewHolder>{
 
@@ -112,8 +111,6 @@ public class CardRecyclerViewAdapter extends RecyclerView.Adapter<CardRecyclerVi
         return mPetModels.get(holder.getAdapterPosition());
     }
 
-
-    // tells adapter how many list items are in the list
     /**
      * Return the number of items in the list which corresponds to the number of views to be
      * displayed in the RecyclerView

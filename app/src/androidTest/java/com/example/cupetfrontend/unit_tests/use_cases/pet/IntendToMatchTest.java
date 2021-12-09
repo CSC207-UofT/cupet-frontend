@@ -1,11 +1,12 @@
 package com.example.cupetfrontend.unit_tests.use_cases.pet;
 
 import com.example.cupetfrontend.unit_tests.use_cases.UseCaseTestClass;
-import com.example.cupetfrontend.use_cases.pet.IntendToMatch;
 import com.example.cupetfrontend.use_cases.output_boundaries.pet.IntendToMatchOutputBoundary;
+import com.example.cupetfrontend.use_cases.pet.IntendToMatch;
 import com.example.cupetfrontend.use_cases.request_models.pet.IntendToMatchRequestModel;
 import com.example.cupetfrontend.use_cases.response_models.pet.DefaultFailureResponseModel;
 import com.example.cupetfrontend.use_cases.response_models.pet.IntendToMatchSuccessResponseModel;
+
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

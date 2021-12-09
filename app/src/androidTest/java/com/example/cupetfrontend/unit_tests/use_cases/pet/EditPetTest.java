@@ -1,11 +1,12 @@
 package com.example.cupetfrontend.unit_tests.use_cases.pet;
 
 import com.example.cupetfrontend.unit_tests.use_cases.UseCaseTestClass;
-import com.example.cupetfrontend.use_cases.pet.EditPet;
 import com.example.cupetfrontend.use_cases.output_boundaries.pet.EditPetOutputBoundary;
+import com.example.cupetfrontend.use_cases.pet.EditPet;
 import com.example.cupetfrontend.use_cases.request_models.pet.EditPetRequestModel;
 import com.example.cupetfrontend.use_cases.response_models.pet.DefaultFailureResponseModel;
 import com.example.cupetfrontend.use_cases.response_models.pet.EditPetSuccessResponseModel;
+
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

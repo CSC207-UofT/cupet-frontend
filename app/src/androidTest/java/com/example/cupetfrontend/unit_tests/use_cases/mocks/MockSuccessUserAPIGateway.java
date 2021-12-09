@@ -2,7 +2,14 @@ package com.example.cupetfrontend.unit_tests.use_cases.mocks;
 
 import com.example.cupetfrontend.use_cases.api_abstracts.IServerResponseListener;
 import com.example.cupetfrontend.use_cases.api_abstracts.IUserAPIGateway;
-import com.example.cupetfrontend.use_cases.api_abstracts.request_models.user.*;
+import com.example.cupetfrontend.use_cases.api_abstracts.request_models.user.APICreateUserRequestModel;
+import com.example.cupetfrontend.use_cases.api_abstracts.request_models.user.APIEditUserAccountRequestModel;
+import com.example.cupetfrontend.use_cases.api_abstracts.request_models.user.APIEditUserProfileRequestModel;
+import com.example.cupetfrontend.use_cases.api_abstracts.request_models.user.APIFetchUserAccountRequestModel;
+import com.example.cupetfrontend.use_cases.api_abstracts.request_models.user.APIFetchUserProfileImageRequestModel;
+import com.example.cupetfrontend.use_cases.api_abstracts.request_models.user.APIFetchUserProfileRequestModel;
+import com.example.cupetfrontend.use_cases.api_abstracts.request_models.user.APIGetPetsRequestModel;
+import com.example.cupetfrontend.use_cases.api_abstracts.request_models.user.APISetUserProfileImageRequestModel;
 
 import java.util.HashMap;
 

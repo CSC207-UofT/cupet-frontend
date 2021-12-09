@@ -1,22 +1,34 @@
 package com.example.cupetfrontend.integration_tests.use_cases.user;
 
 import android.content.Context;
-import androidx.test.platform.app.InstrumentationRegistry;
+
 import com.example.cupetfrontend.AsyncTestClass;
 import com.example.cupetfrontend.drivers.api.AuthAPIGateway;
 import com.example.cupetfrontend.drivers.api.HTTPRequestManager;
 import com.example.cupetfrontend.drivers.api.UserAPIGateway;
-import com.example.cupetfrontend.use_cases.*;
+import com.example.cupetfrontend.use_cases.LoginUseCase;
 import com.example.cupetfrontend.use_cases.api_abstracts.IAuthAPIGateway;
 import com.example.cupetfrontend.use_cases.api_abstracts.IServerRequestManager;
 import com.example.cupetfrontend.use_cases.api_abstracts.IUserAPIGateway;
 import com.example.cupetfrontend.use_cases.output_boundaries.LoginOutputBoundary;
-import com.example.cupetfrontend.use_cases.output_boundaries.user.*;
+import com.example.cupetfrontend.use_cases.output_boundaries.user.EditUserAccountOutputBoundary;
+import com.example.cupetfrontend.use_cases.output_boundaries.user.EditUserProfileOutputBoundary;
+import com.example.cupetfrontend.use_cases.output_boundaries.user.FetchUserAccountOutputBoundary;
+import com.example.cupetfrontend.use_cases.output_boundaries.user.FetchUserProfileOutputBoundary;
+import com.example.cupetfrontend.use_cases.output_boundaries.user.UserCreatorOutputBoundary;
 import com.example.cupetfrontend.use_cases.request_models.LoginRequestModel;
-import com.example.cupetfrontend.use_cases.request_models.user.*;
+import com.example.cupetfrontend.use_cases.request_models.user.EditUserAccountRequestModel;
+import com.example.cupetfrontend.use_cases.request_models.user.EditUserProfileRequestModel;
+import com.example.cupetfrontend.use_cases.request_models.user.FetchUserAccountRequestModel;
+import com.example.cupetfrontend.use_cases.request_models.user.FetchUserProfileRequestModel;
+import com.example.cupetfrontend.use_cases.request_models.user.UserCreatorRequestModel;
 import com.example.cupetfrontend.use_cases.response_models.LoginSuccessResponseModel;
 import com.example.cupetfrontend.use_cases.response_models.pet.DefaultFailureResponseModel;
-import com.example.cupetfrontend.use_cases.response_models.user.*;
+import com.example.cupetfrontend.use_cases.response_models.user.EditUserAccountSuccessResponseModel;
+import com.example.cupetfrontend.use_cases.response_models.user.EditUserProfileSuccessResponseModel;
+import com.example.cupetfrontend.use_cases.response_models.user.FetchUserAccountSuccessResponseModel;
+import com.example.cupetfrontend.use_cases.response_models.user.FetchUserProfileSuccessResponseModel;
+import com.example.cupetfrontend.use_cases.response_models.user.UserCreatorSuccessResponseModel;
 import com.example.cupetfrontend.use_cases.user.EditUserAccount;
 import com.example.cupetfrontend.use_cases.user.EditUserProfile;
 import com.example.cupetfrontend.use_cases.user.FetchUserAccount;
@@ -27,6 +39,8 @@ import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
+
+import androidx.test.platform.app.InstrumentationRegistry;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
