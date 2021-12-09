@@ -1,40 +1,39 @@
 package com.example.cupetfrontend.ui.login;
 
-import androidx.annotation.Nullable;
+import com.example.cupetfrontend.ui.form_validators.FormFieldState;
 
 /**
  * Data validation state of the login form.
  */
 class LoginFormState {
-    @Nullable
-    private final Integer emailError;
-    @Nullable
-    private final Integer passwordError;
-    private final boolean isDataValid;
+    private FormFieldState emailState;
+    private FormFieldState passwordState;
 
-    LoginFormState(@Nullable Integer emailError, @Nullable Integer passwordError) {
-        this.emailError = emailError;
-        this.passwordError = passwordError;
-        this.isDataValid = false;
+    public LoginFormState() {
+        emailState = new FormFieldState();
+        passwordState = new FormFieldState();
     }
 
-    LoginFormState(boolean isDataValid) {
-        this.emailError = null;
-        this.passwordError = null;
-        this.isDataValid = isDataValid;
+    public FormFieldState getEmailState() {
+        return emailState;
     }
 
-    @Nullable
-    Integer getEmailError() {
-        return emailError;
+    public FormFieldState getPasswordState() {
+        return passwordState;
     }
 
-    @Nullable
-    Integer getPasswordError() {
-        return passwordError;
+    public void setEmailState(FormFieldState emailState) {
+        this.emailState = emailState;
     }
 
-    boolean isDataValid() {
-        return isDataValid;
+    public void setPasswordState(FormFieldState passwordState) {
+        this.passwordState = passwordState;
+    }
+
+    public boolean isDataValid() {
+        boolean isError = this.emailState.isError() ||
+                this.passwordState.isError();
+
+        return !isError;
     }
 }

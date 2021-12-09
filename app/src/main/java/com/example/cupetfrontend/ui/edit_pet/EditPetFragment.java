@@ -65,11 +65,11 @@ public class EditPetFragment extends MainActivityFragment {
      * If errorState is non-null, display the error state on the field.
      *
      * @param field The field to display the error state in
-     * @param errorState The error state represented by an integer
+     * @param errorMessage the error message to display
      */
-    private void setFieldError(EditText field, Integer errorState) {
-        if (errorState != null) {
-            field.setError(getString(errorState));
+    private void setFieldError(EditText field, String errorMessage) {
+        if (errorMessage != null) {
+            field.setError(errorMessage);
         }
     }
 
@@ -197,10 +197,10 @@ public class EditPetFragment extends MainActivityFragment {
                     return;
                 }
 
-                setFieldError(petNameField, editPetFormState.getPetNameError());
-                setFieldError(petAgeField, editPetFormState.getPetAgeError());
-                setFieldError(petBreedField, editPetFormState.getPetBreedError());
-                setFieldError(petBioField, editPetFormState.getPetBioError());
+                setFieldError(petNameField, editPetFormState.getNameState().getErrorMessage());
+                setFieldError(petAgeField, editPetFormState.getAgeState().getErrorMessage());
+                setFieldError(petBreedField, editPetFormState.getBreedState().getErrorMessage());
+                setFieldError(petBioField, editPetFormState.getBiographyState().getErrorMessage());
 
                 editPetButton.setEnabled(editPetFormState.isDataValid());
             }

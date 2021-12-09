@@ -46,11 +46,11 @@ public class EditUserProfileFragment extends MainActivityFragment {
      * If errorState is non-null, display the error state on the field.
      *
      * @param field The field to display the error state in
-     * @param errorState The error state represented by an integer
+     * @param errorMessage the error message to display
      */
-    private void setFieldError(EditText field, Integer errorState) {
-        if (errorState != null) {
-            field.setError(getString(errorState));
+    private void setFieldError(EditText field, String errorMessage) {
+        if (errorMessage != null) {
+            field.setError(errorMessage);
         }
     }
 
@@ -163,13 +163,13 @@ public class EditUserProfileFragment extends MainActivityFragment {
                 }
 
                 setFieldError(binding.editUserProfileBiography,
-                        editUserProfileState.getBiographyError());
+                        editUserProfileState.getBiographyState().getErrorMessage());
                 setFieldError(binding.editUserProfileInstagram,
-                        editUserProfileState.getInstagramError());
+                        editUserProfileState.getInstagramState().getErrorMessage());
                 setFieldError(binding.editUserProfileFacebook,
-                        editUserProfileState.getFacebookError());
+                        editUserProfileState.getFacebookState().getErrorMessage());
                 setFieldError(binding.editUserProfilePhoneNum,
-                        editUserProfileState.getPhoneNumberError());
+                        editUserProfileState.getPhoneNumberState().getErrorMessage());
             }
         });
     }

@@ -56,13 +56,13 @@ public class RegisterActivity extends AppCompatActivity {
 
     /**
      * If errorState is non-null, display the error state on the field.
-     * 
+     *
      * @param field The field to display the error state in
-     * @param errorState The error state represented by an integer
+     * @param errorMessage the error message to display
      */
-    private void setFieldError(EditText field, Integer errorState) {
-        if (errorState != null) {
-            field.setError(getString(errorState));
+    private void setFieldError(EditText field, String errorMessage) {
+        if (errorMessage != null) {
+            field.setError(errorMessage);
         }
     }
 
@@ -188,13 +188,20 @@ public class RegisterActivity extends AppCompatActivity {
                     return;
                 }
 
-                setFieldError(firstNameField, registerFormState.getFirstnameError());
-                setFieldError(lastNameField, registerFormState.getLastnameError());
-                setFieldError(emailField, registerFormState.getEmailError());
-                setFieldError(passwordField, registerFormState.getPasswordError());
-                setFieldError(passwordConfirmField, registerFormState.getConfirmPasswordError());
-                setFieldError(addressField, registerFormState.getAddressError());
-                setFieldError(cityField, registerFormState.getCityError());
+                setFieldError(firstNameField,
+                        registerFormState.getFirstNameState().getErrorMessage());
+                setFieldError(lastNameField,
+                        registerFormState.getLastNameState().getErrorMessage());
+                setFieldError(emailField,
+                        registerFormState.getEmailState().getErrorMessage());
+                setFieldError(passwordField,
+                        registerFormState.getPasswordState().getErrorMessage());
+                setFieldError(passwordConfirmField,
+                        registerFormState.getConfirmPasswordState().getErrorMessage());
+                setFieldError(addressField,
+                        registerFormState.getHomeAddressState().getErrorMessage());
+                setFieldError(cityField,
+                        registerFormState.getCityState().getErrorMessage());
 
                 registerButton.setEnabled(registerFormState.isDataValid());
             }

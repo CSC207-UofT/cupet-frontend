@@ -1,69 +1,58 @@
 package com.example.cupetfrontend.ui.edit_user_profile;
 
-import androidx.annotation.Nullable;
+import com.example.cupetfrontend.ui.form_validators.FormFieldState;
 
 public class EditUserProfileState {
-    @Nullable
-    private Integer biographyError;
-    @Nullable
-    private Integer FacebookError;
-    @Nullable
-    private Integer PhoneNumberError;
-    @Nullable
-    private Integer InstagramError;
+    private FormFieldState biographyState;
+    private FormFieldState phoneNumberState;
+    private FormFieldState facebookState;
+    private FormFieldState instagramState;
 
-
-    private boolean isDataValid;
-
-    public EditUserProfileState(){
-        this.biographyError = null;
-        this.FacebookError = null;
-        this.isDataValid = false;
-        this.PhoneNumberError = null;
-        this.InstagramError = null;
+    public EditUserProfileState() {
+        biographyState = new FormFieldState();
+        phoneNumberState = new FormFieldState();
+        facebookState = new FormFieldState();
+        instagramState = new FormFieldState();
     }
 
-    @Nullable
-    public Integer getBiographyError(){
-        return this.biographyError;
+    public FormFieldState getBiographyState() {
+        return biographyState;
     }
 
-    @Nullable
-    public Integer getFacebookError(){
-        return this.FacebookError;
+    public FormFieldState getPhoneNumberState() {
+        return phoneNumberState;
     }
 
-    @Nullable
-    public Integer getPhoneNumberError(){
-        return this.PhoneNumberError;
+    public FormFieldState getFacebookState() {
+        return facebookState;
     }
 
-    @Nullable
-    public Integer getInstagramError(){
-        return this.InstagramError;
+    public FormFieldState getInstagramState() {
+        return instagramState;
     }
 
-    public void setBiographyError(@Nullable Integer biographyError){
-        this.biographyError = biographyError;
+    public void setBiographyState(FormFieldState biographyState) {
+        this.biographyState = biographyState;
     }
 
-    public void setInstagramError(@Nullable Integer instagramError){
-        this.InstagramError = instagramError;
+    public void setPhoneNumberState(FormFieldState phoneNumberState) {
+        this.phoneNumberState = phoneNumberState;
     }
 
-    public void setFacebookError(@Nullable Integer facebookError){
-        this.FacebookError = facebookError;
+    public void setFacebookState(FormFieldState facebookState) {
+        this.facebookState = facebookState;
     }
 
-    public void setPhoneNumberError(@Nullable Integer phoneNumberError){
-        this.PhoneNumberError = phoneNumberError;
-    }
-
-    public void setDataValid(boolean dataValid) {
-        isDataValid = dataValid;
+    public void setInstagramState(FormFieldState instagramState) {
+        this.instagramState = instagramState;
     }
 
     public boolean isDataValid() {
-        return isDataValid;
+        boolean isError = this.biographyState.isError() ||
+                this.phoneNumberState.isError() ||
+                this.facebookState.isError() ||
+                this.instagramState.isError();
+
+        return !isError;
     }
 }
