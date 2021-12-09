@@ -78,7 +78,7 @@ public class UserFormValidator {
     public static String validateHomeAddress(String homeAddress) {
         if (homeAddress == null){
             return "The home address must be non-empty";
-        } else if (homeAddress.matches("^\\d [0-9A-Za-z ]$")){
+        } else if (homeAddress.matches("^\\d* [0-9A-Za-z ]*$")){
             return null;
         }else{
             return "Invalid home address";

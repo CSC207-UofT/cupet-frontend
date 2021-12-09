@@ -6,12 +6,14 @@ import com.example.cupetfrontend.controllers.abstracts.ISessionManager;
 import com.example.cupetfrontend.controllers.abstracts.IUserController;
 import com.example.cupetfrontend.presenters.view_model_abstracts.ICreatePetViewModel;
 import com.example.cupetfrontend.presenters.view_model_abstracts.IEditPetViewModel;
+import com.example.cupetfrontend.presenters.view_model_abstracts.IEditUserAccountViewModel;
 import com.example.cupetfrontend.presenters.view_model_abstracts.IEditUserProfileViewModel;
 import com.example.cupetfrontend.presenters.view_model_abstracts.IUploadImageViewModel;
 import com.example.cupetfrontend.presenters.view_model_abstracts.IViewMyPetsViewModel;
 import com.example.cupetfrontend.ui.contact_info_fragment.ContactInfoViewModel;
 import com.example.cupetfrontend.presenters.view_model_abstracts.IContactInfoViewModel;
 import com.example.cupetfrontend.ui.create_pet.CreatePetViewModel;
+import com.example.cupetfrontend.ui.edit_account.EditUserAccountViewModel;
 import com.example.cupetfrontend.ui.edit_pet.EditPetViewModel;
 import com.example.cupetfrontend.ui.edit_user_profile.EditUserProfileViewModel;
 import com.example.cupetfrontend.ui.upload_image_fragment.UploadImageViewModel;
@@ -61,5 +63,11 @@ public class ViewModelsModule {
     @Provides
     public ICreatePetViewModel provideCreatePetViewModel(IPetController petController){
         return new CreatePetViewModel(petController);
+    }
+
+    @Singleton
+    @Provides
+    public IEditUserAccountViewModel provideEditUserAccountViewModel(IUserController userController){
+        return new EditUserAccountViewModel(userController);
     }
 }

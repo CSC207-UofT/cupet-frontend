@@ -7,8 +7,13 @@
 
     <fragment
         android:id="@+id/nav_account_settings"
-        android:name="com.example.cupetfrontend.ui.edit_account.EditUserAccountFragment"
+        android:name="com.example.cupetfrontend.ui.user_account.UserAccountFragment"
         android:label="@string/nav_account_settings"
+        tools:layout="@layout/fragment_user_account" />
+    <fragment
+        android:id="@+id/nav_edit_account"
+        android:name="com.example.cupetfrontend.ui.edit_account.EditUserAccountFragment"
+        android:label="@string/nav_user_account_title"
         tools:layout="@layout/fragment_edit_user_account" />
     <fragment
         android:id="@+id/nav_view_my_pets"

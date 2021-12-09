@@ -1,16 +1,11 @@
 package com.example.cupetfrontend.ui.user_account;
 
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.os.Bundle;
+import android.widget.Toast;
 
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import com.bumptech.glide.Glide;
 import com.example.cupetfrontend.App;
@@ -18,22 +13,18 @@ import com.example.cupetfrontend.R;
 import com.example.cupetfrontend.controllers.abstracts.ISessionManager;
 import com.example.cupetfrontend.controllers.abstracts.IUserController;
 import com.example.cupetfrontend.databinding.FragmentUserAccountBinding;
-import com.example.cupetfrontend.dependency_selector.DependencySelector;
 import com.example.cupetfrontend.presenters.abstracts.IFetchUserAccountPresenter;
-import com.example.cupetfrontend.presenters.user.FetchUserAccountPresenter;
+import com.example.cupetfrontend.presenters.data_models.UserAccountData;
+import com.example.cupetfrontend.presenters.view_model_abstracts.IEditUserAccountViewModel;
+import com.example.cupetfrontend.presenters.view_model_abstracts.nav_context_models.EditUserAccountContext;
 import com.example.cupetfrontend.ui.MainActivityFragment;
-import com.example.cupetfrontend.ui.edit_account.EditUserAccountFragment;
+
+import org.jetbrains.annotations.NotNull;
 
 import javax.inject.Inject;
 
 public class UserAccountFragment extends MainActivityFragment {
     private UserAccountViewModel userAccountViewModel;
-    private TextView username_view;
-    private TextView address_view;
-    private TextView city_view;
-    private TextView password_view;
-    private ImageView profile_picture;
-    private Button editUserAccount_button;
     private FragmentUserAccountBinding binding;
 
     @Inject
@@ -42,20 +33,11 @@ public class UserAccountFragment extends MainActivityFragment {
     public ISessionManager sessionManager;
     @Inject
     public IFetchUserAccountPresenter fetchUserAccountPresenter;
+    @Inject
+    public IEditUserAccountViewModel editUserAccountViewModel;
 
-
-
-    public void initializeViews(){
-        address_view = binding.UserAccountAddressTextView;
-        city_view = binding.UserAccountCityTextView;
-        password_view = binding.UserAccountPasswordTextview;
-        profile_picture = binding.imageView;
-        username_view = binding.UserAccountNameTextView;
-        editUserAccount_button = binding.EditUserAccountButton;
-
-    }
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = FragmentUserAccountBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
@@ -64,15 +46,11 @@ public class UserAccountFragment extends MainActivityFragment {
 
         String userToken = sessionManager.getToken();
 
-        fetchUserAccountPresenter = dependencySelector.getUserPresenters().getFetchUserAccountPresenter();
-
         userAccountViewModel = new UserAccountViewModel(userController);
         fetchUserAccountPresenter.setUserAccountViewModel(userAccountViewModel);
 
+        userAccountViewModel.fetchUserAccount(userToken);
 
-        userAccountViewModel.getUserInformation(userToken);
-
-        initializeViews();
         setUpObserveUserProfileResult();
         setUpEditBtn();
 
@@ -81,10 +59,9 @@ public class UserAccountFragment extends MainActivityFragment {
     }
 
 
-    private void  setUpEditBtn(){
-
+    private void setUpEditBtn(){
         getMainActivity().showEditButton();
-        getMainActivity().setEditBtnNavTarget(R.id.nav_account_settings);
+        getMainActivity().setEditBtnNavTarget(R.id.nav_edit_account);
     }
 
     public void setUpObserveUserProfileResult(){
@@ -99,27 +76,32 @@ public class UserAccountFragment extends MainActivityFragment {
                     onUserAccountFailure(userAccountResult.getErrorMessage());
                 }
                 else{
-                    onUserAccountSuccess(userAccountResult.getFirstName(),
-                            userAccountResult.getLastName(), userAccountResult.getAddress(),
-                            userAccountResult.getCity(),
-                            userAccountResult.getImage_url());
+                    onUserAccountSuccess(userAccountResult.getAccountData());
                 }
             }
         });
     }
-    private void onUserAccountSuccess(String firstname, String lastname, String address, String city, String image_url){
+    private void onUserAccountSuccess(UserAccountData userAccountData){
+        binding.userAccountAddress.setText(userAccountData.getHomeAddress());
+        binding.userAccountCity.setText(userAccountData.getCity());
 
-        address_view.setText(address);
+        String name = userAccountData.getFirstName() + " " + userAccountData.getLastName();
+        binding.userAccountName.setText(name);
+        binding.userAccountEmail.setText(userAccountData.getEmail());
 
-        city_view.setText(city);
+        if (sessionManager.getCachedUserData() != null &&
+                !sessionManager.getCachedUserData().getProfileImgUrl().equals("null")){
+            Glide.with(this).load(sessionManager.
+                    getCachedUserData().getProfileImgUrl()).into(binding.imageView);
+        }
 
-
-        String name = firstname + " " + lastname;
-        username_view.setText(name);
-        Glide.with(this).load(image_url).into(profile_picture);
+        editUserAccountViewModel.setContext(new EditUserAccountContext(
+                userAccountData
+        ));
     }
 
     private void onUserAccountFailure(String errorMessage){
-        System.out.println("User Account Error");
+        String toastMessage = "Fetch user account failed: " + errorMessage;
+        Toast.makeText(getApplicationContext(), toastMessage, Toast.LENGTH_SHORT).show();
     }
 }

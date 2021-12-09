@@ -5,7 +5,6 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import android.os.Bundle;
@@ -16,57 +15,36 @@ import androidx.lifecycle.Observer;
 import com.example.cupetfrontend.App;
 import com.example.cupetfrontend.R;
 import com.example.cupetfrontend.controllers.abstracts.ISessionManager;
-import com.example.cupetfrontend.controllers.abstracts.IUserController;
 import com.example.cupetfrontend.databinding.FragmentEditUserAccountBinding;
 import com.example.cupetfrontend.presenters.abstracts.IEditUserAccountPresenter;
-import com.example.cupetfrontend.presenters.user.EditUserAccountPresenter;
+import com.example.cupetfrontend.presenters.data_models.UserAccountData;
+import com.example.cupetfrontend.presenters.view_model_abstracts.IEditUserAccountViewModel;
 import com.example.cupetfrontend.ui.MainActivityFragment;
 
 import javax.inject.Inject;
 
 public class EditUserAccountFragment extends MainActivityFragment {
-    private EditUserAccountViewModel editUserAccountViewModel;
+    @Inject
+    public IEditUserAccountViewModel editUserAccountViewModel;
     private FragmentEditUserAccountBinding binding;
 
     @Inject
     public ISessionManager sessionManager;
     @Inject
-    public IUserController userController;
-    @Inject
     public IEditUserAccountPresenter editUserAccountPresenter;
-
-    private EditText firstNameField;
-    private EditText lastNameField;
-    private EditText emailField;
-    private EditText addressField;
-    private EditText passwordField;
-    private EditText cityField;
-    private Button saveChangesButton;
-    private String userToken;
-
-    private void initializeViews(){
-        firstNameField = binding.editAccountUserFirstNameInputTextview;
-        lastNameField = binding.editAccountUserLastnameInputTextview;
-        emailField = binding.editAccountUserEmailInput;
-        addressField = binding.editAccountUserAddressInput;
-        passwordField = binding.AccountUserPasswordInput;
-        cityField = binding.editAccountUserCityInput;
-        saveChangesButton = binding.ConfirmEditUserAccountButton;
-    }
 
 
     /**
-     * If errorState is non-null, display the error state on the field.
+     * If error message is non-null, display the error message on the field.
      *
      * @param field The field to display the error state in
-     * @param errorState The error state represented by an integer
+     * @param errorMessage the error message to display
      */
-    private void setFieldError(EditText field, Integer errorState) {
-        if (errorState != null) {
-            field.setError(getString(errorState));
+    private void setFieldError(EditText field, String errorMessage) {
+        if (errorMessage != null) {
+            field.setError(errorMessage);
         }
     }
-
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -78,17 +56,18 @@ public class EditUserAccountFragment extends MainActivityFragment {
 
 
         initializeDependencySelector();
-
-
-        editUserAccountViewModel = new EditUserAccountViewModel(userController);
         editUserAccountPresenter.setEditUserAccountViewModel(editUserAccountViewModel);
-        userToken = sessionManager.getToken();
 
-        initializeViews();
         setUpObserveEditUserAccountFormState();
         setUpObserveUserAccountResult();
         setUpFormEditedListener();
         setUpConfirmButtonClickedListener();
+
+        getMainActivity().hideEditButton();
+
+        if (editUserAccountViewModel.getContext() != null){
+            preFillData(editUserAccountViewModel.getContext().getUserAccountData());
+        }
 
         return root;
     }
@@ -109,44 +88,41 @@ public class EditUserAccountFragment extends MainActivityFragment {
                 // Override with empty method
             }
 
-
             @Override
             public void afterTextChanged(Editable s) {
-                EditUserAccountData editUserAccountData = getEditUserAccountData();
-                editUserAccountViewModel.updateFormState(editUserAccountData);
+                EditUserAccountFormData editUserAccountFormData = getFormData();
+                editUserAccountViewModel.updateFormState(editUserAccountFormData);
             }
         };
 
-        firstNameField.addTextChangedListener(listener);
-        lastNameField.addTextChangedListener(listener);
-        emailField.addTextChangedListener(listener);
-        passwordField.addTextChangedListener(listener);
-        addressField.addTextChangedListener(listener);
-        cityField.addTextChangedListener(listener);
+        binding.editUserAccountFirstName.addTextChangedListener(listener);
+        binding.editUserAccountLastName.addTextChangedListener(listener);
+        binding.editUserAccountEmail.addTextChangedListener(listener);
+        binding.editUserAccountPassword.addTextChangedListener(listener);
+        binding.editUserAccountConfirmPassword.addTextChangedListener(listener);
+        binding.editUserAccountHomeAddress.addTextChangedListener(listener);
+        binding.editUserAccountCity.addTextChangedListener(listener);
     }
 
-    /**
-     * Return the data entered into the edit account form.
-     *
-     * @return The data entered into the edit account form.
-     */
     private void setUpConfirmButtonClickedListener(){
-        saveChangesButton.setOnClickListener(new View.OnClickListener(){
+        binding.confirmEditUserAccount.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view){
-                EditUserAccountData formData = getEditUserAccountData();
-                editUserAccountViewModel.editUserAccount(formData, userToken);
+                EditUserAccountFormData formData = getFormData();
+                editUserAccountViewModel.editUserAccount(formData, sessionManager.getToken());
             }
         });
     }
 
-    private EditUserAccountData getEditUserAccountData(){
-        EditUserAccountData formData = new EditUserAccountData();
-        formData.setfirstName(firstNameField.getText().toString());
-        formData.setlastName(lastNameField.getText().toString());
-        formData.setEmail(emailField.getText().toString());
-        formData.setPassword(passwordField.getText().toString());
-        formData.setAddress(addressField.getText().toString());
-        formData.setCity(cityField.getText().toString());
+    private EditUserAccountFormData getFormData(){
+        EditUserAccountFormData formData = new EditUserAccountFormData();
+
+        formData.setFirstname(binding.editUserAccountFirstName.getText().toString());
+        formData.setLastname(binding.editUserAccountLastName.getText().toString());
+        formData.setEmail(binding.editUserAccountEmail.getText().toString());
+        formData.setPassword(binding.editUserAccountPassword.getText().toString());
+        formData.setConfirmPassword(binding.editUserAccountConfirmPassword.getText().toString());
+        formData.setAddress(binding.editUserAccountHomeAddress.getText().toString());
+        formData.setCity(binding.editUserAccountCity.getText().toString());
 
         return formData;
     }
@@ -170,22 +146,30 @@ public class EditUserAccountFragment extends MainActivityFragment {
     }
 
     private void setUpObserveEditUserAccountFormState(){
-        editUserAccountViewModel.getEditUserAccountState().observe(getViewLifecycleOwner(), new Observer<EditUserAccountState>() {
+        editUserAccountViewModel.getFormState().observe(getViewLifecycleOwner(), new Observer<EditUserAccountFormState>() {
             @Override
-            public void onChanged(EditUserAccountState editUserAccountState) {
-                if (editUserAccountState == null){
+            public void onChanged(EditUserAccountFormState editUserAccountFormState) {
+                if (editUserAccountFormState == null){
                     return;
                 }
 
-                setFieldError(firstNameField, editUserAccountState.getFirstNameError());
-                setFieldError(lastNameField, editUserAccountState.getLastNameError());
-                setFieldError(emailField, editUserAccountState.getEmailError());
-                setFieldError(passwordField, editUserAccountState.getPasswordError());
-                setFieldError(addressField, editUserAccountState.getAddressNameError());
-                setFieldError(cityField, editUserAccountState.getCityNameError());
+                setFieldError(binding.editUserAccountFirstName,
+                        editUserAccountFormState.getFirstNameState().getErrorMessage());
+                setFieldError(binding.editUserAccountLastName,
+                        editUserAccountFormState.getLastNameState().getErrorMessage());
+                setFieldError(binding.editUserAccountEmail,
+                        editUserAccountFormState.getEmailState().getErrorMessage());
+                setFieldError(binding.editUserAccountPassword,
+                        editUserAccountFormState.getPasswordState().getErrorMessage());
+                setFieldError(binding.editUserAccountConfirmPassword,
+                        editUserAccountFormState.getConfirmPasswordState().getErrorMessage());
+                setFieldError(binding.editUserAccountHomeAddress,
+                        editUserAccountFormState.getHomeAddressState().getErrorMessage());
+                setFieldError(binding.editUserAccountCity,
+                        editUserAccountFormState.getCityState().getErrorMessage());
 
-                saveChangesButton.setEnabled(editUserAccountState.isDataValid());
-
+                binding.confirmEditUserAccount.
+                        setEnabled(editUserAccountFormState.isDataValid());
             }
         });
     }
@@ -199,4 +183,12 @@ public class EditUserAccountFragment extends MainActivityFragment {
         Toast.makeText(getApplicationContext(), "Edit Failed:" + errorMessage, Toast.LENGTH_SHORT).show();
     }
 
+    private void preFillData(UserAccountData userAccountData) {
+        binding.editUserAccountFirstName.setText(userAccountData.getFirstName());
+        binding.editUserAccountLastName.setText(userAccountData.getLastName());
+        binding.editUserAccountEmail.setText(userAccountData.getEmail());
+        binding.editUserAccountHomeAddress.setText(userAccountData.getHomeAddress());
+        binding.editUserAccountCity.setText(userAccountData.getCity());
+
+    }
 }

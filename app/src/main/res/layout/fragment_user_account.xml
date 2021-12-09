@@ -8,8 +8,8 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -17,108 +17,61 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.061"
-        tools:srcCompat="@tools:sample/avatars" />
+        app:srcCompat="@drawable/default_profile_img"
+        />
 
 
     <TextView
-        android:id="@+id/UserAccountName_textView"
+        android:id="@+id/user_account_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="56dp"
-        android:text="Name"
-        app:layout_constraintBottom_toTopOf="@+id/UserAccountAddress_textView"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.654" />
-
-    <TextView
-        android:id="@+id/UserAccountAddress_textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="140dp"
-        android:text="Address"
-        app:layout_constraintBottom_toTopOf="@+id/UserAccountEmail_textview"
-        app:layout_constraintEnd_toStartOf="@+id/UserAccountCity_textView"
-        app:layout_constraintHorizontal_bias="0.485"
-        app:layout_constraintStart_toEndOf="@+id/imageView" />
-
-
-    <TextView
-        android:id="@+id/AccountInfo_textView"
-        android:layout_width="76dp"
-        android:layout_height="33dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:text="Account Info"
-        app:layout_constraintBottom_toTopOf="@+id/UserAccountEmail_textview"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
-        app:layout_constraintVertical_bias="0.0" />
-
-
-    <TextView
-        android:id="@+id/AccountPassword_edit_textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="68dp"
-        android:layout_marginEnd="116dp"
-        android:text="Password"
-        app:layout_constraintEnd_toStartOf="@+id/UserAccountPassword_textview"
-        app:layout_constraintHorizontal_bias="0.941"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Email_textView" />
-
-    <TextView
-        android:id="@+id/Email_textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
         android:text="Email"
-        app:layout_constraintEnd_toStartOf="@+id/UserAccountEmail_textview"
-        app:layout_constraintHorizontal_bias="0.184"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/AccountInfo_textView" />
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/user_account_name" />
 
     <TextView
-        android:id="@+id/UserAccountCity_textView"
+        android:id="@+id/user_account_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="76dp"
+        android:layout_marginStart="24dp"
+        android:text="Name"
+        android:textSize="24sp"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintTop_toTopOf="@+id/imageView" />
+
+    <TextView
+        android:id="@+id/user_account_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="12dp"
+        android:text="Address"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/user_account_location_heading" />
+
+    <TextView
+        android:id="@+id/user_account_location_heading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/user_account_location_title"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <TextView
+        android:id="@+id/user_account_city"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
         android:text="City"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.151" />
-
-    <Button
-        android:id="@+id/EditUserAccount_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Edit Account"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.963" />
-
-    <TextView
-        android:id="@+id/UserAccountEmail_textview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="144dp"
-        android:layout_marginBottom="68dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/UserAccountPassword_textview"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <TextView
-        android:id="@+id/UserAccountPassword_textview"
-        android:layout_width="75dp"
-        android:layout_height="37dp"
-        android:layout_marginEnd="128dp"
-        android:layout_marginBottom="264dp"
-        android:text="*****"
-        app:layout_constraintBottom_toTopOf="@+id/EditUserAccount_button"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/user_account_address" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,4 +1,4 @@
-package com.example.cupetfrontend.presenters.view_model_abstracts.data_models;
+package com.example.cupetfrontend.presenters.data_models;
 
 public class ContactInfoData {
     private final String email;

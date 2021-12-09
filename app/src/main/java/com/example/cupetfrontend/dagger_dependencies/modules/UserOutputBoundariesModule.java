@@ -29,4 +29,8 @@ public abstract class UserOutputBoundariesModule {
     @Binds abstract EditUserAccountOutputBoundary bindEditUserAccountOutputBoundary(
             IEditUserAccountPresenter editUserAccountPresenter);
 
+    @Binds abstract FetchUserAccountOutputBoundary bindFetchUserAccountOutputBoundary(
+            IFetchUserAccountPresenter presenter
+    );
+
 }

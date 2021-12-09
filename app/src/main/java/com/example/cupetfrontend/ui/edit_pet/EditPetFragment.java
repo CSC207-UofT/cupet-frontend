@@ -62,7 +62,7 @@ public class EditPetFragment extends MainActivityFragment {
     }
 
     /**
-     * If errorState is non-null, display the error state on the field.
+     * If the errorMessage is non-null, display the errorMessage on the field.
      *
      * @param field The field to display the error state in
      * @param errorMessage the error message to display

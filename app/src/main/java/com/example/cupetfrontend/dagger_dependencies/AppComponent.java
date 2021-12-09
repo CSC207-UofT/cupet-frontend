@@ -19,9 +19,10 @@ import com.example.cupetfrontend.ui.upload_image_fragment.UploadImageFragment;
 import com.example.cupetfrontend.ui.user_account.UserAccountFragment;
 import com.example.cupetfrontend.ui.user_profile.UserProfileFragment;
 import com.example.cupetfrontend.ui.view_my_pets.ViewMyPetsFragment;
-import com.google.android.datatransport.runtime.dagger.Component;
 
 import javax.inject.Singleton;
+
+import dagger.Component;
 
 
 /**

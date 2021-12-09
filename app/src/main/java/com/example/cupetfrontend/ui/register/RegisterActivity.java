@@ -55,7 +55,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     /**
-     * If errorState is non-null, display the error state on the field.
+     * If error message is non-null, display the error message on the field.
      *
      * @param field The field to display the error state in
      * @param errorMessage the error message to display

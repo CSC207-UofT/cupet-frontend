@@ -14,11 +14,11 @@ public class EditUserAccountPresenter implements IEditUserAccountPresenter {
 
     @Override
     public void onEditUserAccountSuccess(EditUserAccountSuccessResponseModel response) {
-
+        editUserAccountViewModel.onEditUserAccountSuccess();
     }
 
     @Override
     public void onEditUserAccountFailure(DefaultFailureResponseModel response) {
-
+        editUserAccountViewModel.onEditUserAccountFailure(response.getErrorMessage());
     }
 }

@@ -9,7 +9,7 @@ import com.bumptech.glide.Glide;
 import com.example.cupetfrontend.R;
 import com.example.cupetfrontend.databinding.FragmentPublicContactinfoBinding;
 import com.example.cupetfrontend.presenters.view_model_abstracts.IContactInfoViewModel;
-import com.example.cupetfrontend.presenters.view_model_abstracts.data_models.ContactInfoData;
+import com.example.cupetfrontend.presenters.data_models.ContactInfoData;
 import com.example.cupetfrontend.ui.MainActivityFragment;
 
 import javax.inject.Inject;

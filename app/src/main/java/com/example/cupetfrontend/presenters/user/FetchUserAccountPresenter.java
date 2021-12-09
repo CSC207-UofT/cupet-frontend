@@ -1,6 +1,7 @@
 package com.example.cupetfrontend.presenters.user;
 
 import com.example.cupetfrontend.presenters.abstracts.IFetchUserAccountPresenter;
+import com.example.cupetfrontend.presenters.data_models.UserAccountData;
 import com.example.cupetfrontend.presenters.view_model_abstracts.IUserAccountViewModel;
 import com.example.cupetfrontend.ui.user_account.UserAccountViewModel;
 import com.example.cupetfrontend.use_cases.output_boundaries.user.FetchUserAccountOutputBoundary;
@@ -18,10 +19,13 @@ public class FetchUserAccountPresenter implements IFetchUserAccountPresenter {
 
     @Override
     public void onFetchUserAccountSuccess(FetchUserAccountSuccessResponseModel response) {
-        userAccountViewModel.onUserAccountSuccess(response.getFirstName(),
-        response.getLastName(),
-        response.getHomeAddress(),
-        response.getCity());
+        userAccountViewModel.onUserAccountSuccess(new UserAccountData(
+                response.getFirstName(),
+                response.getLastName(),
+                response.getEmail(),
+                response.getHomeAddress(),
+                response.getCity()
+        ));
     }
 
     @Override

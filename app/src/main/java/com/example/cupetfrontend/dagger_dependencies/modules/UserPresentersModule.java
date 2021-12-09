@@ -24,7 +24,6 @@ public class UserPresentersModule {
         return new CreateUserPresenter();
     }
 
-
     @Singleton
     @Provides
     public IEditUserProfilePresenter provideEditUserProfilePresenter () {
@@ -33,7 +32,7 @@ public class UserPresentersModule {
 
     @Singleton
     @Provides
-    public FetchUserAccountOutputBoundary provideFetchUserAccountPresenter () {
+    public IFetchUserAccountPresenter provideFetchUserAccountPresenter () {
         return new FetchUserAccountPresenter();
     }
 
