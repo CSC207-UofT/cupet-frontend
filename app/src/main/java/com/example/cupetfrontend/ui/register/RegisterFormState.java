@@ -1,5 +1,7 @@
 package com.example.cupetfrontend.ui.register;
 
+import com.example.cupetfrontend.ui.form_validators.FormFieldState;
+
 import androidx.annotation.Nullable;
 
 /**
@@ -7,101 +9,89 @@ import androidx.annotation.Nullable;
  * (i.e. which fields are in an error state)
  */
 public class RegisterFormState {
-    @Nullable
-    private Integer firstnameError;
-    @Nullable
-    private Integer lastnameError;
-    @Nullable
-    private Integer emailError;
-    @Nullable
-    private Integer passwordError;
-    @Nullable
-    private Integer confirmPasswordError;
-    @Nullable
-    private Integer addressError;
-    @Nullable
-    private Integer cityError;
-
-    private boolean isDataValid;
+    private FormFieldState firstNameState;
+    private FormFieldState lastNameState;
+    private FormFieldState emailState;
+    private FormFieldState passwordState;
+    private FormFieldState confirmPasswordState;
+    private FormFieldState homeAddressState;
+    private FormFieldState cityState;
 
     public RegisterFormState() {
-        this.firstnameError = null;
-        this.lastnameError = null;
-        this.emailError = null;
-        this.passwordError = null;
-        this.addressError = null;
-        this.isDataValid = false;
-        this.cityError = null;
+        firstNameState = new FormFieldState();
+        lastNameState = new FormFieldState();
+        emailState = new FormFieldState();
+        passwordState = new FormFieldState();
+        confirmPasswordState = new FormFieldState();
+        homeAddressState = new FormFieldState();
+        cityState = new FormFieldState();
     }
 
-    @Nullable
-    public Integer getFirstnameError() {
-        return firstnameError;
+    public FormFieldState getFirstNameState() {
+        return firstNameState;
     }
 
-    @Nullable
-    public Integer getLastnameError() {
-        return lastnameError;
+    public FormFieldState getLastNameState() {
+        return lastNameState;
     }
 
-    @Nullable
-    public Integer getEmailError() {
-        return emailError;
+    public FormFieldState getEmailState() {
+        return emailState;
     }
 
-    @Nullable
-    public Integer getPasswordError() {
-        return passwordError;
+    public FormFieldState getPasswordState() {
+        return passwordState;
     }
 
-    @Nullable
-    public Integer getAddressError() {
-        return addressError;
+    public FormFieldState getConfirmPasswordState() {
+        return confirmPasswordState;
     }
 
-    @Nullable
-    public Integer getConfirmPasswordError() {
-        return confirmPasswordError;
+    public FormFieldState getHomeAddressState() {
+        return homeAddressState;
     }
 
-    @Nullable
-    public Integer getCityError() {
-        return cityError;
+    public FormFieldState getCityState() {
+        return cityState;
     }
 
-    public void setFirstnameError(@Nullable Integer firstnameError) {
-        this.firstnameError = firstnameError;
+    public void setFirstNameState(FormFieldState firstNameState) {
+        this.firstNameState = firstNameState;
     }
 
-    public void setLastnameError(@Nullable Integer lastnameError) {
-        this.lastnameError = lastnameError;
+    public void setLastNameState(FormFieldState lastNameState) {
+        this.lastNameState = lastNameState;
     }
 
-    public void setEmailError(@Nullable Integer emailError) {
-        this.emailError = emailError;
+    public void setEmailState(FormFieldState emailState) {
+        this.emailState = emailState;
     }
 
-    public void setPasswordError(@Nullable Integer passwordError) {
-        this.passwordError = passwordError;
+    public void setPasswordState(FormFieldState passwordState) {
+        this.passwordState = passwordState;
     }
 
-    public void setConfirmPasswordError(@Nullable Integer confirmPasswordError) {
-        this.confirmPasswordError = confirmPasswordError;
+    public void setConfirmPasswordState(FormFieldState confirmPasswordState) {
+        this.confirmPasswordState = confirmPasswordState;
     }
 
-    public void setAddressError(@Nullable Integer addressError) {
-        this.addressError = addressError;
+    public void setHomeAddressState(FormFieldState homeAddressState) {
+        this.homeAddressState = homeAddressState;
     }
 
-    public void setCityError(@Nullable Integer cityError) {
-        this.cityError = cityError;
-    }
-
-    public void setDataValid(boolean dataValid) {
-        isDataValid = dataValid;
+    public void setCityState(FormFieldState cityState) {
+        this.cityState = cityState;
     }
 
     public boolean isDataValid() {
-        return isDataValid;
+        boolean isError = this.firstNameState.isError() ||
+                this.lastNameState.isError() ||
+                this.emailState.isError() ||
+                this.passwordState.isError() ||
+                this.confirmPasswordState.isError() ||
+                this.homeAddressState.isError() ||
+                this.cityState.isError();
+
+        return !isError;
     }
 }

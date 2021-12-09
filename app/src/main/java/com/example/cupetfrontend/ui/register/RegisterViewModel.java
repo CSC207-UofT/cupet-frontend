@@ -2,11 +2,11 @@ package com.example.cupetfrontend.ui.register;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
-import android.util.Patterns;
 
-import com.example.cupetfrontend.R;
 import com.example.cupetfrontend.controllers.abstracts.IUserController;
 import com.example.cupetfrontend.presenters.view_model_abstracts.IRegisterViewModel;
+import com.example.cupetfrontend.ui.form_validators.FormFieldState;
+import com.example.cupetfrontend.ui.form_validators.UserFormValidator;
 
 /**
  * A ViewModel class for the Registration page.
@@ -20,6 +20,7 @@ public class RegisterViewModel extends ViewModel implements IRegisterViewModel {
 
     public RegisterViewModel (IUserController userController) {
         this.userController = userController;
+        registerFormState.setValue(new RegisterFormState());
     }
 
     LiveData<RegisterFormState> getRegisterFormState() {
@@ -41,102 +42,89 @@ public class RegisterViewModel extends ViewModel implements IRegisterViewModel {
     }
 
     /**
+     * Helper method for checking when a form's fields has
+     * been interacted with.
+     */
+    private void checkFormStateInteracted(RegisterFormState state, RegisterFormData formData) {
+        if (formData.getFirstName() != null && !formData.getFirstName().equals("")){
+            state.getFirstNameState().onFieldInteracted();
+        }
+        if (formData.getLastName() != null && !formData.getLastName().equals("")){
+            state.getLastNameState().onFieldInteracted();
+        }
+        if (formData.getEmail() != null && !formData.getEmail().equals("")){
+            state.getEmailState().onFieldInteracted();
+        }
+        if (formData.getPassword() != null && !formData.getPassword().equals("")){
+            state.getPasswordState().onFieldInteracted();
+        }
+        if (formData.getConfirmPassword() != null && !formData.getConfirmPassword().equals("")){
+            state.getConfirmPasswordState().onFieldInteracted();
+        }
+        if (formData.getHomeAddress() != null && !formData.getHomeAddress().equals("")){
+            state.getHomeAddressState().onFieldInteracted();
+        }
+        if (formData.getCity() != null && !formData.getCity().equals("")){
+            state.getCityState().onFieldInteracted();
+        }
+    }
+
+    /**
      * Update the state of the registration form.
      * @param formData The data entered into the form.
      */
     public void updateFormState(RegisterFormData formData) {
         RegisterFormState newFormState = new RegisterFormState();
+        RegisterFormState oldFormState = registerFormState.getValue();
 
-        if (!isFirstNameValid(formData.getFirstName())) {
-            newFormState.setFirstnameError(R.string.invalid_first_name);
-        } else if (!isLastNameValid(formData.getLastName())) {
-            newFormState.setLastnameError(R.string.invalid_last_name);
-        } else if (!isEmailValid(formData.getEmail())) {
-            newFormState.setEmailError(R.string.invalid_email);
-        } else if (!isPasswordValid(formData.getPassword())) {
-            newFormState.setPasswordError(R.string.invalid_password);
-        } else if (!doesConfirmPasswordMatch(formData.getPassword(), formData.getConfirmPassword())) {
-            newFormState.setConfirmPasswordError(R.string.invalid_confirm_password);
-        } else if (!isHomeAddressValid(formData.getHomeAddress())) {
-            newFormState.setAddressError(R.string.invalid_home_address);
-        } else if (!isCityValid(formData.getCity())){
-            newFormState.setCityError(R.string.invalid_city);
-        }else {
-            newFormState.setDataValid(true);
+        if (oldFormState == null){
+            registerFormState.setValue(newFormState);
+            return;
         }
+
+        validateForm(formData, newFormState, oldFormState);
+        checkFormStateInteracted(newFormState, formData);
 
         registerFormState.setValue(newFormState);
     }
 
-    /**
-     * Return whether firstName is valid.
-     * @param firstName The user's first name
-     * @return whether firstName is valid
-     */
-    private boolean isFirstNameValid(String firstName){
-        return firstName != null && firstName.trim().length() > 2;
-    }
-
-    /**
-     * Return whether lastName is valid.
-     * @param lName The user's last name
-     * @return whether lastName is valid
-     */
-    private boolean isLastNameValid(String lName){
-        return lName != null && lName.trim().length() > 2;
-    }
-
-    /**
-     * Return whether email is valid
-     * @param email The user's email
-     * @return whether email is valid
-     */
-    private boolean isEmailValid(String email) {
-        if (email == null) {
-            return false;
-        }
-        if (email.contains("@")) {
-            return Patterns.EMAIL_ADDRESS.matcher(email).matches();
-        } else {
-            return !email.trim().isEmpty();
-        }
-    }
-
-    /**
-     * Return whether password is valid
-     * @param password The user's password
-     * @return whether password is valid
-     */
-    private boolean isPasswordValid(String password) {
-        return password != null && password.length() > 5;
-    }
-
-    /**
-     * Return whether password matches confirmPassword
-     * @param password The user's password
-     * @param confirmPassword The confirmPassword field value
-     * @return whether the two passwords match
-     */
-    private boolean doesConfirmPasswordMatch(String password, String confirmPassword) {
-        return password.equals(confirmPassword);
-    }
-
-    /**
-     * Return whether homeAddress is valid
-     * @param homeAddress The user's home address
-     * @return whether homeAddress is valid
-     */
-    private boolean isHomeAddressValid(String homeAddress) {
-        return homeAddress != null && homeAddress.trim().length() > 5;
-    }
-
-    /**
-     * Return whether city is valid
-     * @param city The user's city
-     * @return whether city is valid
-     */
-    private boolean isCityValid(String city) {
-        return city != null && city.trim().length() > 2;
+    private void validateForm(RegisterFormData formData, RegisterFormState newFormState, RegisterFormState oldFormState) {
+        newFormState.setFirstNameState(
+                new FormFieldState(
+                        oldFormState.getFirstNameState(),
+                        UserFormValidator.validateFirstName(formData.getFirstName())
+                ));
+        newFormState.setLastNameState(
+                new FormFieldState(
+                        oldFormState.getLastNameState(),
+                        UserFormValidator.validateLastName(formData.getLastName())
+                ));
+        newFormState.setEmailState(
+                new FormFieldState(
+                        oldFormState.getEmailState(),
+                        UserFormValidator.validateEmail(formData.getEmail())
+                ));
+        newFormState.setPasswordState(
+                new FormFieldState(
+                        oldFormState.getPasswordState(),
+                        UserFormValidator.validatePassword(formData.getPassword())
+                ));
+        newFormState.setConfirmPasswordState(
+                new FormFieldState(
+                        oldFormState.getConfirmPasswordState(),
+                        (formData.getConfirmPassword().equals(formData.getPassword())
+                                ? null : "Passwords must match")
+                ));
+        newFormState.setHomeAddressState(
+                new FormFieldState(
+                        oldFormState.getHomeAddressState(),
+                        UserFormValidator.validateHomeAddress(formData.getHomeAddress())
+                ));
+        newFormState.setCityState(
+                new FormFieldState(
+                        oldFormState.getCityState(),
+                        UserFormValidator.validateCity(formData.getCity())
+                ));
     }
 
     @Override

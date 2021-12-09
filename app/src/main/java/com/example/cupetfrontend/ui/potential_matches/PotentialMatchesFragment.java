@@ -56,7 +56,7 @@ public class PotentialMatchesFragment extends MainActivityFragment {
         setUpObserveGetPotentialMatchesResult();
 
         hideMatchView();
-        showNoMatchesView();
+        hideNoMatchesView();
         setUpEditBtn();
 
         viewModel.getPotentialMatches(sessionManager.getToken(),
@@ -116,7 +116,9 @@ public class PotentialMatchesFragment extends MainActivityFragment {
 
                 if (getPotentialMatchesResult.isError()){
                     onGetPotentialMatchesFailure(getPotentialMatchesResult.getErrorMessage());
-                }else{
+                }else if(getPotentialMatchesResult.getPotentialMatches().size() == 0){
+                    showNoMatchesView();
+                } else{
                     moveToNextMatch();
                 }
             }

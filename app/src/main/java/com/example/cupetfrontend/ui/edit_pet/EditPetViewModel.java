@@ -5,7 +5,15 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import com.example.cupetfrontend.R;
 import com.example.cupetfrontend.controllers.abstracts.IPetController;
+import com.example.cupetfrontend.controllers.abstracts.IPetSessionManager;
+import com.example.cupetfrontend.controllers.abstracts.ISessionManager;
 import com.example.cupetfrontend.presenters.view_model_abstracts.IEditPetViewModel;
+import com.example.cupetfrontend.presenters.view_model_abstracts.nav_context_models.EditPetContext;
+import com.example.cupetfrontend.ui.form_validators.FormFieldState;
+import com.example.cupetfrontend.ui.form_validators.PetFormValidator;
+import com.example.cupetfrontend.ui.form_validators.UserFormValidator;
+
+import javax.inject.Inject;
 
 /**
  * A ViewModel class for the Edit Pet page.
@@ -14,51 +22,99 @@ import com.example.cupetfrontend.presenters.view_model_abstracts.IEditPetViewMod
 public class EditPetViewModel extends ViewModel implements IEditPetViewModel {
     private final MutableLiveData<EditPetFormState> editPetFormState = new MutableLiveData<>();
     private final MutableLiveData<EditPetResult> editPetResult = new MutableLiveData<>();
-    private final IPetController petController;
 
-    public EditPetViewModel(IPetController petController) {
+    private final IPetController petController;
+    public ISessionManager sessionManager;
+    public IPetSessionManager petSessionManager;
+
+    private EditPetContext context;
+
+    @Inject
+    public EditPetViewModel(IPetController petController, ISessionManager sessionManager,
+                            IPetSessionManager petSessionManager) {
         this.petController = petController;
+        this.sessionManager = sessionManager;
+        this.petSessionManager = petSessionManager;
     }
 
-    LiveData<EditPetFormState> getEditPetFormState() {
+    @Override
+    public LiveData<EditPetFormState> getEditPetFormState() {
         return editPetFormState;
     }
 
-    LiveData<EditPetResult> getEditPetResult() {
+    @Override
+    public LiveData<EditPetResult> getEditPetResult() {
         return editPetResult;
     }
 
-    /**
-     * Create a new edit pet request
-     * @param formData The registration data entered into the form
-     */
+    @Override
     public void editPet(EditPetFormData formData){
-        // TODO: add token code
-        // TODO: add petId code
-        petController.editPet("token", "petId", formData.getPetName(), formData.getPetAge(),
+        petController.editPet(sessionManager.getToken(), petSessionManager.getPetId(), formData.getPetName(), formData.getPetAge(),
                 formData.getPetBreed(), formData.getPetBio());
+    }
+
+    @Override
+    public void setPetProfileImage(String b64) {
+        petController.setPetProfileImage(sessionManager.getToken(), petSessionManager.getPetId(), b64);
     }
 
     /**
      * Update the state of the edit pet form.
      * @param formData The data entered into the form.
      */
+    @Override
     public void updateFormState(EditPetFormData formData) {
         EditPetFormState newFormState = new EditPetFormState();
+        EditPetFormState oldFormState = editPetFormState.getValue();
 
-        if (!isPetNameValid(formData.getPetName())) {
-            newFormState.setPetNameError(R.string.invalid_pet_name);
-        } else if (!isPetAgeValid(formData.getPetAge())) {
-            newFormState.setPetAgeError(R.string.invalid_pet_age);
-        } else if (!isPetBreedValid(formData.getPetBreed())) {
-            newFormState.setPetBreedError(R.string.invalid_pet_breed);
-        } else if (!isPetBioValid(formData.getPetBio())) {
-            newFormState.setPetBioError(R.string.invalid_pet_bio);
-        } else {
-            newFormState.setDataValid(true);
+        if (oldFormState == null){
+            editPetFormState.setValue(newFormState);
+            return;
         }
 
+        validateForm(formData, newFormState, oldFormState);
+        checkFormStateInteracted(formData,  newFormState);
+
         editPetFormState.setValue(newFormState);
+    }
+
+    private void validateForm(EditPetFormData formData, EditPetFormState newFormState,
+                              EditPetFormState oldFormState) {
+        newFormState.setNameState(
+                new FormFieldState(
+                        oldFormState.getNameState(),
+                        PetFormValidator.validatePetName(formData.getPetName())
+                ));
+        newFormState.setAgeState(
+                new FormFieldState(
+                        oldFormState.getAgeState(),
+                        PetFormValidator.validateAge(formData.getPetAge())
+                ));
+        newFormState.setBreedState(
+                new FormFieldState(
+                        oldFormState.getBreedState(),
+                        PetFormValidator.validateBreed(formData.getPetBreed())
+                ));
+        newFormState.setBiographyState(
+                new FormFieldState(
+                        oldFormState.getBiographyState(),
+                        PetFormValidator.validateBiography(formData.getPetBio())
+                ));
+    }
+
+    private void checkFormStateInteracted (EditPetFormData formData, EditPetFormState state) {
+        if (formData.getPetName() != null && !formData.getPetName().equals("")){
+            state.getNameState().onFieldInteracted();
+        }
+        if (formData.getPetAge() != null && !formData.getPetAge().equals("")){
+            state.getAgeState().onFieldInteracted();
+        }
+        if (formData.getPetBreed() != null && !formData.getPetBreed().equals("")){
+            state.getBreedState().onFieldInteracted();
+        }
+        if (formData.getPetBio() != null && !formData.getPetBio().equals("")){
+            state.getBiographyState().onFieldInteracted();
+        }
     }
 
     /**
@@ -121,5 +177,15 @@ public class EditPetViewModel extends ViewModel implements IEditPetViewModel {
         EditPetResult newEditPetResult = new EditPetResult(true, message);
 
         editPetResult.setValue(newEditPetResult);
+    }
+
+    @Override
+    public EditPetContext getContext() {
+        return context;
+    }
+
+    @Override
+    public void setContext(EditPetContext context) {
+        this.context = context;
     }
 }

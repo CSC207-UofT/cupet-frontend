@@ -9,7 +9,7 @@
         android:id="@+id/image"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:src="@mipmap/ic_launcher" />
+        android:src="@drawable/default_pet_profile_img" />
 
     <TextView
         android:id="@+id/pet_name"

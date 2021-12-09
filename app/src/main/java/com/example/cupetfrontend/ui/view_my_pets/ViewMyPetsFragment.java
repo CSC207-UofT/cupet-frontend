@@ -2,7 +2,10 @@ package com.example.cupetfrontend.ui.view_my_pets;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.Observer;
+import androidx.lifecycle.OnLifecycleEvent;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,12 +20,15 @@ import android.widget.Toast;
 import com.example.cupetfrontend.App;
 import com.example.cupetfrontend.R;
 import com.example.cupetfrontend.controllers.abstracts.IPetController;
+import com.example.cupetfrontend.controllers.abstracts.IPetSessionManager;
 import com.example.cupetfrontend.controllers.abstracts.ISessionManager;
 import com.example.cupetfrontend.controllers.abstracts.IUserController;
 import com.example.cupetfrontend.data.model.PetModel;
 import com.example.cupetfrontend.databinding.FragmentViewMyPetsBinding;
 import com.example.cupetfrontend.presenters.abstracts.IGetPetsPresenter;
 import com.example.cupetfrontend.presenters.user.GetPetsPresenter;
+import com.example.cupetfrontend.presenters.view_model_abstracts.ICreatePetViewModel;
+import com.example.cupetfrontend.presenters.view_model_abstracts.IViewMyPetsViewModel;
 import com.example.cupetfrontend.ui.MainActivityFragment;
 
 import java.util.ArrayList;
@@ -37,7 +43,6 @@ public class ViewMyPetsFragment extends MainActivityFragment {
 
     private RecyclerView recyclerView;
     private CardRecyclerViewAdapter adapter;
-    private ViewMyPetsViewModel viewMyPetsViewModel;
     private List<PetModel> petModelList;
     private Button addPetButton;
 
@@ -47,6 +52,12 @@ public class ViewMyPetsFragment extends MainActivityFragment {
     public IGetPetsPresenter getPetsPresenter;
     @Inject
     public ISessionManager sessionManager;
+    @Inject
+    public IPetSessionManager petSessionManager;
+    @Inject
+    public ICreatePetViewModel createPetViewModel;
+    @Inject
+    public IViewMyPetsViewModel viewMyPetsViewModel;
 
     public void initializeViews() {
         recyclerView = binding.cardRecyclerView;
@@ -66,28 +77,41 @@ public class ViewMyPetsFragment extends MainActivityFragment {
         ((App) getApplicationContext()).getAppComponent().inject(this);
 
         petModelList = new ArrayList<>();
-
         initializeViews();
-        initializeViewModel();
 
+        getPetsPresenter.setGetPetsViewModel(viewMyPetsViewModel);
         viewMyPetsViewModel.getPets(sessionManager.getToken());
 
         setUpObserveGetPetsResult();
         initCardRecyclerView();
         setUpAddPetButtonListener();
         setUpEditBtn();
+        attachToActivityCreate();
 
         return root;
     }
 
-    private void initializeViewModel() {
-        viewMyPetsViewModel = new ViewMyPetsViewModel(userController);
-        getPetsPresenter.setGetPetsViewModel(viewMyPetsViewModel);
+    private void attachToActivityCreate() {
+        getMainActivity().getLifecycle().addObserver(new LifecycleObserver() {
+            @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
+            public void onCreate() {
+                if (viewMyPetsViewModel.getContext() != null &&
+                        viewMyPetsViewModel.getContext().isFromLoginPage()){
+                    getMainActivity().hideNavigation();
+                }
+
+                getMainActivity().getLifecycle().removeObserver(this);
+            }
+        });
     }
 
     private void initCardRecyclerView(){
         Log.d(TAG, "initRecyclerView: init recyclerview");
-        adapter = new CardRecyclerViewAdapter(getContext(), petModelList);
+
+        adapter = new CardRecyclerViewAdapter(getContext(), petSessionManager,
+                getMainActivity(),createPetViewModel, viewMyPetsViewModel);
+        adapter.setPetModels(petModelList);
+
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager((new GridLayoutManager(getContext(), 2)));
     }
@@ -95,7 +119,6 @@ public class ViewMyPetsFragment extends MainActivityFragment {
     private void setUpAddPetButtonListener(){
         addPetButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "Add Pet", Toast.LENGTH_SHORT).show();
                 getMainActivity().navigate(R.id.nav_create_pet);
             }
         });
@@ -131,8 +154,7 @@ public class ViewMyPetsFragment extends MainActivityFragment {
      */
     private void onGetPetsSuccess(List<PetModel> userPets) {
         Log.d(TAG, "onGetPetsSuccess: success - pets:" + userPets);
-        Toast.makeText(getApplicationContext(), "Get Pets Success", Toast.LENGTH_SHORT).show();
-
+        petModelList.clear();
         petModelList.addAll(userPets);
         adapter.notifyDataSetChanged();
     }
@@ -144,8 +166,7 @@ public class ViewMyPetsFragment extends MainActivityFragment {
      */
     private void onGetPetsFailure (String errorMessage) {
         Log.e(TAG, "onGetPetsFailure: Get pets Failure");
-        System.out.println("GetPets failed");
-        Toast.makeText(getApplicationContext(), "Get pets failed: " + errorMessage, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "Get Pets Failed: " + errorMessage, Toast.LENGTH_SHORT).show();
         adapter.notifyDataSetChanged();
     }
 
