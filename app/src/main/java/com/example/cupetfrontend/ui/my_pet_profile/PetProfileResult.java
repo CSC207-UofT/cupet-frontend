@@ -12,7 +12,6 @@ public class PetProfileResult {
     private String petBreed;
     private String petBio;
 
-
     public PetProfileResult(boolean isError, String errorMessage) {
         this.isError = isError;
         this.errorMessage = errorMessage;

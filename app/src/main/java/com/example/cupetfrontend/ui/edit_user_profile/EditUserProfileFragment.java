@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Toast;
 import android.os.Bundle;
+import com.example.cupetfrontend.R;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.Observer;
@@ -21,6 +22,8 @@ import com.example.cupetfrontend.presenters.abstracts.ISetUserProfileImagePresen
 import com.example.cupetfrontend.presenters.data_models.UserProfileData;
 import com.example.cupetfrontend.presenters.view_model_abstracts.IEditUserProfileViewModel;
 import com.example.cupetfrontend.presenters.view_model_abstracts.IUploadImageViewModel;
+import com.example.cupetfrontend.presenters.view_model_abstracts.nav_context_models.DataTypeOrigin;
+import com.example.cupetfrontend.presenters.view_model_abstracts.nav_context_models.UploadImageContext;
 import com.example.cupetfrontend.ui.MainActivityFragment;
 
 import javax.inject.Inject;
@@ -43,11 +46,11 @@ public class EditUserProfileFragment extends MainActivityFragment {
      * If errorState is non-null, display the error state on the field.
      *
      * @param field The field to display the error state in
-     * @param errorState The error state represented by an integer
+     * @param errorMessage the error message to display
      */
-    private void setFieldError(EditText field, Integer errorState) {
-        if (errorState != null) {
-            field.setError(getString(errorState));
+    private void setFieldError(EditText field, String errorMessage) {
+        if (errorMessage != null) {
+            field.setError(errorMessage);
         }
     }
 
@@ -142,10 +145,13 @@ public class EditUserProfileFragment extends MainActivityFragment {
 
     private void onEditUserProfileSuccess(){
         Toast.makeText(getApplicationContext(), "Edit Success", Toast.LENGTH_SHORT).show();
+        getMainActivity().navigate(R.id.nav_my_user_profile);
     }
+
 
     private void onEditUserProfileFailure(String errorMessage){
         Toast.makeText(getApplicationContext(), "Edit Failed:" + errorMessage, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "User Profile Edit Failed: " + errorMessage, Toast.LENGTH_SHORT).show();
     }
 
     private void setUpObserveEditUserProfileFormState(){
@@ -157,13 +163,13 @@ public class EditUserProfileFragment extends MainActivityFragment {
                 }
 
                 setFieldError(binding.editUserProfileBiography,
-                        editUserProfileState.getBiographyError());
+                        editUserProfileState.getBiographyState().getErrorMessage());
                 setFieldError(binding.editUserProfileInstagram,
-                        editUserProfileState.getInstagramError());
+                        editUserProfileState.getInstagramState().getErrorMessage());
                 setFieldError(binding.editUserProfileFacebook,
-                        editUserProfileState.getFacebookError());
+                        editUserProfileState.getFacebookState().getErrorMessage());
                 setFieldError(binding.editUserProfilePhoneNum,
-                        editUserProfileState.getPhoneNumberError());
+                        editUserProfileState.getPhoneNumberState().getErrorMessage());
             }
         });
     }
@@ -173,5 +179,10 @@ public class EditUserProfileFragment extends MainActivityFragment {
         binding.editUserProfilePhoneNum.setText(userProfileData.getPhoneNumber());
         binding.editUserProfileFacebook.setText(userProfileData.getFacebook());
         binding.editUserProfileInstagram.setText(userProfileData.getInstagram());
+
+        uploadImageViewModel.setContext(new UploadImageContext(
+                DataTypeOrigin.USER,
+                userProfileData.getProfileImgUrl()
+        ));
     }
 }

@@ -19,7 +19,7 @@ public class PetProfileViewModel extends ViewModel implements IPetProfileViewMod
     }
 
     LiveData<PetProfileResult> getPetProfileResult() {
-        return petProfileResult;
+        return this.petProfileResult;
     }
 
     /**
@@ -32,7 +32,7 @@ public class PetProfileViewModel extends ViewModel implements IPetProfileViewMod
     }
 
     @Override
-    public void onPetProfileSuccess(String petImage, String petName, String petAge, String petBreed, String petBio) {
+    public void onPetProfileSuccess(String petImage, String petName, String petAge, String petBreed, String petBio, String userId) {
         PetProfileResult newFetchPetResult = new PetProfileResult(
                 petImage,
                 petName,

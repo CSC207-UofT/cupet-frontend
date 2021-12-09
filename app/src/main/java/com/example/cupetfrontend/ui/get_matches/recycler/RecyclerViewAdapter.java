@@ -21,12 +21,21 @@ import com.example.cupetfrontend.App;
 import com.example.cupetfrontend.R;
 import com.example.cupetfrontend.controllers.abstracts.IPetController;
 import com.example.cupetfrontend.data.model.PetModel;
-import com.example.cupetfrontend.dependency_selector.DependencySelector;
 import com.example.cupetfrontend.presenters.abstracts.IUnMatchPresenter;
+import com.example.cupetfrontend.controllers.abstracts.IPetSessionManager;
+import com.example.cupetfrontend.controllers.abstracts.ISessionManager;
+import com.example.cupetfrontend.data.model.PetModel;
+import com.example.cupetfrontend.dependency_selector.DependencySelector;
+import com.example.cupetfrontend.presenters.view_model_abstracts.IMatchedPetProfileViewModel;
+import com.example.cupetfrontend.presenters.view_model_abstracts.nav_context_models.MatchedPetProfileContext;
+import com.example.cupetfrontend.presenters.abstracts.IUnMatchPresenter;
+import com.example.cupetfrontend.ui.Navigator;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
+
+import javax.inject.Inject;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -38,29 +47,45 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>{
 
     private static final String TAG = "RecyclerViewAdapter";
-    private final List<PetModel> mPetModels;
-    private final Context context;
+    private List<PetModel> mPetModels;
+    private Context context;
     private GetMatchesRecyclerViewModel viewModel;
-    private IPetController petController;
-    private IUnMatchPresenter unMatchPresenter;
-    private String token;
-    private String petId;
+    private final IMatchedPetProfileViewModel matchedPetProfileViewModel;
+    private final IPetSessionManager petSessionManager;
+    private final ISessionManager sessionManager;
+    private final IUnMatchPresenter unMatchPresenter;
+    private final IPetController petController;
+    private Navigator navigator;
 
-    public RecyclerViewAdapter(List<PetModel> mPetModels, Context context, IPetController petController,
-                               IUnMatchPresenter unMatchPresenter, String token, String petId) {
-        this.mPetModels = mPetModels;
-        this.context = context;
-        this.petController = petController;
+    @Inject
+    public RecyclerViewAdapter(IMatchedPetProfileViewModel matchedPetProfileViewModel,
+                                IPetSessionManager petSessionManager,
+                               ISessionManager sessionManager,
+                               IUnMatchPresenter unMatchPresenter,
+                               IPetController petController) {
+        this.matchedPetProfileViewModel = matchedPetProfileViewModel;
+        this.petSessionManager = petSessionManager;
+        this.sessionManager = sessionManager;
         this.unMatchPresenter = unMatchPresenter;
-        this.token = token;
-        this.petId = petId;
+        this.petController = petController;
 
         initializeViewModel();
     }
 
+    public void setContext(Context context) {
+        this.context = context;
+    }
+
+    public void setPetModels(List<PetModel> mPetModels) {
+        this.mPetModels = mPetModels;
+    }
+
+    public void setNavigator(Navigator navigator){
+        this.navigator = navigator;
+    }
+
     private void initializeViewModel() {
         viewModel = new GetMatchesRecyclerViewModel(petController);
-
         unMatchPresenter.setUnMatchViewModel(viewModel);
     }
 
@@ -124,7 +149,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 Log.d(TAG, "onClick: clicked on:" + getPetModelFor(holder)
                         .getPetName());
 
-                Toast.makeText(context, mPetModels.get(holder.getAdapterPosition()).getPetName(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, mPetModels.get(
+                        holder.getAdapterPosition()).getPetName(), Toast.LENGTH_SHORT).show();
+
+                matchedPetProfileViewModel.setContext(
+                        new MatchedPetProfileContext(getPetModelFor(holder)));
+
+                navigator.navigate(R.id.nav_matched_pet_profile);
             }
         });
     }
@@ -135,12 +166,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             public void onClick(View v) {
                 Log.d(TAG, "onClick: clicked on: delete" + mPetModels.get(holder.getAdapterPosition()).getPetName());
 
-                Toast.makeText(context, "delete pet", Toast.LENGTH_SHORT).show();
-
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
                 builder.setTitle(R.string.delete_button);
                 builder.setMessage("Are you sure you want to delete this pet?");
-                builder.setIcon(R.drawable.ic_launcher_foreground);
+                builder.setIcon(R.drawable.delete_button);
 
                 builder.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
                     @Override
@@ -148,8 +177,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                         Log.d(TAG, "onClick: confirm delete");
 
                         String otherPetId = getPetModelFor(holder).getPetId();
+                        String token = sessionManager.getToken();
+                        String myPetId = petSessionManager.getPetId();
 
-                        viewModel.unMatch(token, petId, otherPetId);
+                        viewModel.unMatch(token, myPetId, otherPetId);
                         removeAt(holder.getAdapterPosition());
 
                         dialog.dismiss();

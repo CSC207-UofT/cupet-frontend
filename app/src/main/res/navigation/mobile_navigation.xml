@@ -3,13 +3,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation_bar"
-    app:startDestination="@+id/nav_potential_matches">
+    app:startDestination="@+id/nav_view_my_pets">
 
     <fragment
         android:id="@+id/nav_account_settings"
-        android:name="com.example.cupetfrontend.ui.edit_account.EditUserAccountFragment"
+        android:name="com.example.cupetfrontend.ui.user_account.UserAccountFragment"
         android:label="@string/nav_account_settings"
+        tools:layout="@layout/fragment_user_account" />
+    <fragment
+        android:id="@+id/nav_edit_account"
+        android:name="com.example.cupetfrontend.ui.edit_account.EditUserAccountFragment"
+        android:label="@string/nav_user_account_title"
         tools:layout="@layout/fragment_edit_user_account" />
+    <fragment
+        android:id="@+id/nav_matched_pet_profile"
+        android:name="com.example.cupetfrontend.ui.matched_pet_profile.MatchedPetProfileFragment"
+        android:label="@string/nav_user_account_title"
+        tools:layout="@layout/fragment_matched_pet_profile" />
     <fragment
         android:id="@+id/nav_view_my_pets"
         android:name="com.example.cupetfrontend.ui.view_my_pets.ViewMyPetsFragment"
@@ -17,6 +27,11 @@
         tools:layout="@layout/fragment_view_my_pets" />
     <fragment
         android:id="@+id/nav_my_user_profile"
+        android:name="com.example.cupetfrontend.ui.user_profile.UserProfileFragment"
+        android:label="@string/nav_my_user_profile"
+        tools:layout="@layout/fragment_user_profile" />
+    <fragment
+        android:id="@+id/nav_public_user_profile"
         android:name="com.example.cupetfrontend.ui.user_profile.UserProfileFragment"
         android:label="@string/nav_my_user_profile"
         tools:layout="@layout/fragment_user_profile" />

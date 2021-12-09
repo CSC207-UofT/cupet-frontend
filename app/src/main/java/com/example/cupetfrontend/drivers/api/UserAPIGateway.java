@@ -41,7 +41,7 @@ public class UserAPIGateway extends APIGateway implements IUserAPIGateway {
     @Override
     public void fetchUserProfile(APIFetchUserProfileRequestModel requestData, IServerResponseListener responseListener) {
         HashMap<String, String> queryParams = new HashMap<String, String>(){{
-            put("userId", UserIdFetcher.getUserId(requestData.getToken()));
+            put("userId", requestData.getUserId());
         }};
 
         String url = UserRoutesStore.toAbsoluteRoute(UserRoutesStore.FETCH_USER_PROFILE);

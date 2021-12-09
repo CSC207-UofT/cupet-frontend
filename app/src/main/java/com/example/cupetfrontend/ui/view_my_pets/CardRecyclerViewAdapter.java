@@ -17,6 +17,10 @@ import com.bumptech.glide.Glide;
 import com.example.cupetfrontend.R;
 import com.example.cupetfrontend.controllers.abstracts.IPetSessionManager;
 import com.example.cupetfrontend.data.model.PetModel;
+import com.example.cupetfrontend.presenters.view_model_abstracts.ICreatePetViewModel;
+import com.example.cupetfrontend.presenters.view_model_abstracts.IViewMyPetsViewModel;
+import com.example.cupetfrontend.presenters.view_model_abstracts.nav_context_models.CreatePetContext;
+import com.example.cupetfrontend.presenters.view_model_abstracts.nav_context_models.ViewMyPetsContext;
 import com.example.cupetfrontend.ui.Navigator;
 
 import org.jetbrains.annotations.NotNull;
@@ -28,17 +32,24 @@ public class CardRecyclerViewAdapter extends RecyclerView.Adapter<CardRecyclerVi
 
     private static final String TAG = "RecyclerViewAdapter";
 
-    private final List<PetModel> mPetModels;
+    private List<PetModel> mPetModels;
     private final Context mContext;
     private final Navigator navigator;
     private final IPetSessionManager petSessionManager;
+    private final ICreatePetViewModel createPetViewModel;
+    private final IViewMyPetsViewModel viewMyPetsViewModel;
 
-    public CardRecyclerViewAdapter(Context mContext, List<PetModel> mPetModels,
-                                   Navigator navigator, IPetSessionManager petSessionManager) {
+    public CardRecyclerViewAdapter(Context mContext, IPetSessionManager petSessionManager, Navigator navigator,
+                                   ICreatePetViewModel createPetViewModel, IViewMyPetsViewModel viewMyPetsViewModel) {
         this.mContext = mContext;
-        this.mPetModels = mPetModels;
-        this.navigator = navigator;
         this.petSessionManager = petSessionManager;
+        this.navigator = navigator;
+        this.createPetViewModel = createPetViewModel;
+        this.viewMyPetsViewModel = viewMyPetsViewModel;
+    }
+
+    public void setPetModels(List<PetModel> mPetModels) {
+        this.mPetModels = mPetModels;
     }
 
     @NonNull
@@ -47,8 +58,7 @@ public class CardRecyclerViewAdapter extends RecyclerView.Adapter<CardRecyclerVi
         // This method is responsible for inflating the view
         // Basically recycles the view holders - puts them in position they should be put into
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_carditem, parent, false);
-        ViewHolder holder = new ViewHolder(view);
-        return holder;
+        return new ViewHolder(view);
     }
 
     @Override
@@ -77,12 +87,19 @@ public class CardRecyclerViewAdapter extends RecyclerView.Adapter<CardRecyclerVi
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "onClick: clicked on:" + getPetModelFrom(holder));
-                PetModel model = getPetModelFrom(holder);
+                PetModel petModel = getPetModelFrom(holder);
 
-                String toastMessage = "Switched to " + model.getPetName();
+                String toastMessage = "Switched to " + petModel.getPetName();
+
                 Toast.makeText(mContext, toastMessage, Toast.LENGTH_SHORT).show();
+                petSessionManager.setPetId(petModel.getPetId());
 
-                petSessionManager.setPetId(model.getPetId());
+                createPetViewModel.setContext(
+                        new CreatePetContext(false));
+                viewMyPetsViewModel.setContext(
+                        new ViewMyPetsContext(false));
+                navigator.showNavigation();
+
                 navigator.navigate(R.id.nav_my_pet_profile);
             }
         });

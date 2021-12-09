@@ -21,6 +21,8 @@ import com.example.cupetfrontend.controllers.abstracts.IAuthController;
 import com.example.cupetfrontend.controllers.abstracts.ISessionManager;
 import com.example.cupetfrontend.dependency_selector.DependencySelector;
 import com.example.cupetfrontend.presenters.abstracts.ILoginPresenter;
+import com.example.cupetfrontend.presenters.view_model_abstracts.IViewMyPetsViewModel;
+import com.example.cupetfrontend.presenters.view_model_abstracts.nav_context_models.ViewMyPetsContext;
 import com.example.cupetfrontend.ui.MainActivity;
 import com.example.cupetfrontend.ui.register.RegisterActivity;
 
@@ -41,9 +43,10 @@ public class LoginActivity extends AppCompatActivity {
     public IAuthController authController;
     @Inject
     public ILoginPresenter loginPresenter;
+    @Inject
+    public IViewMyPetsViewModel viewMyPetsViewModel;
 
     private void initializeViews(){
-        // TODO: Replace with binding
         loginButton = findViewById(R.id.login_button);
         emailField = findViewById(R.id.login_email);
         passwordField = findViewById(R.id.login_password);
@@ -121,12 +124,17 @@ public class LoginActivity extends AppCompatActivity {
                 if (loginFormState == null) {
                     return;
                 }
+
                 loginButton.setEnabled(loginFormState.isDataValid());
-                if (loginFormState.getEmailError() != null) {
-                    emailField.setError(getString(loginFormState.getEmailError()));
+
+                String emailError = loginFormState.getEmailState().getErrorMessage();
+                String passwordError = loginFormState.getPasswordState().getErrorMessage();
+
+                if (emailError != null) {
+                    emailField.setError(emailError);
                 }
-                if (loginFormState.getPasswordError() != null) {
-                    passwordField.setError(getString(loginFormState.getPasswordError()));
+                if (passwordError != null) {
+                    passwordField.setError(passwordError);
                 }
             }
         });
@@ -134,21 +142,14 @@ public class LoginActivity extends AppCompatActivity {
 
     private void onLoginSuccess(String token) {
         Toast.makeText(getApplicationContext(), "Login Success", Toast.LENGTH_SHORT).show();
-        System.out.println("Successful login with token " + token);
-
-        try {
-            sessionManager.setToken(token);
-            System.out.println("Successful login with user " + sessionManager.getUserId());
-        } catch (InvalidJWTException e) {
-            e.printStackTrace();
-        }
+        sessionManager.setToken(token);
 
         Intent moveToMainActivity = new Intent(LoginActivity.this, MainActivity.class);
+        viewMyPetsViewModel.setContext(new ViewMyPetsContext(true));
         startActivity(moveToMainActivity);
     }
 
     private void onLoginFailure(String errorMessage) {
-        System.out.println("Login failed");
-        Toast.makeText(getApplicationContext(), "Login failed: " + errorMessage, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "Login Failed: " + errorMessage, Toast.LENGTH_SHORT).show();
     }
 }

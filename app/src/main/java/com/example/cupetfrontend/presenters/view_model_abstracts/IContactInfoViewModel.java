@@ -1,7 +1,7 @@
 package com.example.cupetfrontend.presenters.view_model_abstracts;
 
 import com.example.cupetfrontend.presenters.view_model_abstracts.nav_context_models.ContactInfoContext;
-import com.example.cupetfrontend.presenters.view_model_abstracts.data_models.ContactInfoData;
+import com.example.cupetfrontend.presenters.data_models.ContactInfoData;
 
 import androidx.lifecycle.LiveData;
 

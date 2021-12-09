@@ -22,6 +22,7 @@ import com.example.cupetfrontend.presenters.abstracts.IEditPetPresenter;
 import com.example.cupetfrontend.presenters.data_models.PetProfileData;
 import com.example.cupetfrontend.presenters.view_model_abstracts.IEditPetViewModel;
 import com.example.cupetfrontend.presenters.view_model_abstracts.IUploadImageViewModel;
+import com.example.cupetfrontend.presenters.view_model_abstracts.nav_context_models.DataTypeOrigin;
 import com.example.cupetfrontend.presenters.view_model_abstracts.nav_context_models.UploadImageContext;
 import com.example.cupetfrontend.ui.MainActivityFragment;
 
@@ -61,14 +62,14 @@ public class EditPetFragment extends MainActivityFragment {
     }
 
     /**
-     * If errorState is non-null, display the error state on the field.
+     * If the errorMessage is non-null, display the errorMessage on the field.
      *
      * @param field The field to display the error state in
-     * @param errorState The error state represented by an integer
+     * @param errorMessage the error message to display
      */
-    private void setFieldError(EditText field, Integer errorState) {
-        if (errorState != null) {
-            field.setError(getString(errorState));
+    private void setFieldError(EditText field, String errorMessage) {
+        if (errorMessage != null) {
+            field.setError(errorMessage);
         }
     }
 
@@ -196,10 +197,10 @@ public class EditPetFragment extends MainActivityFragment {
                     return;
                 }
 
-                setFieldError(petNameField, editPetFormState.getPetNameError());
-                setFieldError(petAgeField, editPetFormState.getPetAgeError());
-                setFieldError(petBreedField, editPetFormState.getPetBreedError());
-                setFieldError(petBioField, editPetFormState.getPetBioError());
+                setFieldError(petNameField, editPetFormState.getNameState().getErrorMessage());
+                setFieldError(petAgeField, editPetFormState.getAgeState().getErrorMessage());
+                setFieldError(petBreedField, editPetFormState.getBreedState().getErrorMessage());
+                setFieldError(petBioField, editPetFormState.getBiographyState().getErrorMessage());
 
                 editPetButton.setEnabled(editPetFormState.isDataValid());
             }
@@ -220,8 +221,7 @@ public class EditPetFragment extends MainActivityFragment {
      * @param errorMessage The error message to display
      */
     private void onEditPetFailure (String errorMessage) {
-        System.out.println("Pet Edit failed");
-        Toast.makeText(getApplicationContext(), "Pet Edit failed: " + errorMessage, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "Pet Edit Failed: " + errorMessage, Toast.LENGTH_SHORT).show();
     }
 
     private void prefillData(PetProfileData petProfileData) {
@@ -230,6 +230,9 @@ public class EditPetFragment extends MainActivityFragment {
         petBioField.setText(petProfileData.getBiography());
         petBreedField.setText(petProfileData.getBreed());
 
-        // TODO: Fill in the pet profile image
+        uploadImageViewModel.setContext(new UploadImageContext(
+                DataTypeOrigin.PET,
+                petProfileData.getImgUrl()
+        ));
     }
 }

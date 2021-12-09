@@ -82,7 +82,7 @@
     <string name="nav_header_title">Android Studio</string>
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
-    <string name="nav_account_settings">Account Settings</string>
+    <string name="nav_account_settings">My Account</string>
     <string name="nav_my_user_profile">User Profile</string>
     <string name="nav_edit_btn">Edit</string>
 
@@ -112,11 +112,19 @@
     <string name="potential_no_matches_text">No Potential Matches</string>
 
     <string name="pet_profile_picture">Pet Profile Picture</string>
-    <string name="your_pets">Your Pets</string>
+    <string name="your_pets">Select a pet</string>
     <string name="delete_button">delete</string>
     <string name="nav_view_my_pets">My Pets</string>
     <string name="create_pet_name">Add a New Pet</string>
     <string name="public_contactinfo_title">Owner Contact Info</string>
+    <string name="pet_name_age">Pet Name, Age</string>
     <string name="contactinfo_title_non_pet">Contact Info</string>
     <string name="user_profile_header">Name, Age</string>
+    <string name="visit_owner_s_profile">Visit Owner\'s Profile</string>
+    <string name="no_matches_view_text">No Matches</string>
+    <string name="nav_user_account_title">Edit My Acccount</string>
+    <string name="user_account_location_title">Location Data</string>
+    <string name="leave_blank_to_remain_unchanged">Leave blank to remain unchanged</string>
+    <string name="nav_public_user_profile">Pet\'s Owner</string>
+    <string name="matched_pet_profile_title">Matched Pet Profile</string>
 </resources>
