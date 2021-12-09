@@ -26,35 +26,35 @@ public class UserPresenterDependencies {
     }
 
     // TODO: Just move all these select methods into the constructor
-    private void selectCreateUserPresenter () {
+    private void selectCreateUserPresenter() {
         createUserPresenter = new CreateUserPresenter();
     }
 
-    private void selectEditUserAccountPresenter () {
+    private void selectEditUserAccountPresenter() {
         editUserAccountPresenter = new EditUserAccountPresenter();
     }
 
-    private void selectEditUserProfilePresenter () {
+    private void selectEditUserProfilePresenter() {
         editUserProfilePresenter = new EditUserProfilePresenter();
     }
 
-    private void selectFetchUserAccountPresenter () {
+    private void selectFetchUserAccountPresenter() {
         fetchUserAccountPresenter = new FetchUserAccountPresenter();
     }
 
-    private void selectFetchUserProfilePresenter () {
+    private void selectFetchUserProfilePresenter() {
         fetchUserProfilePresenter = new FetchUserProfilePresenter();
     }
 
-    private void selectGetPetsPresenter () {
+    private void selectGetPetsPresenter() {
         getPetsPresenter = new GetPetsPresenter();
     }
 
-    private void selectSetUserProfileImagePresenter () {
+    private void selectSetUserProfileImagePresenter() {
         setUserProfileImagePresenter = new SetUserProfileImagePresenter();
     }
 
-    private void selectFetchUserProfileImagePresenter () {
+    private void selectFetchUserProfileImagePresenter() {
         fetchUserAccountPresenter = new FetchUserAccountPresenter();
     }
 

@@ -7,6 +7,7 @@ import com.example.cupetfrontend.use_cases.input_boundaries.LoginInputBoundary;
 import com.example.cupetfrontend.use_cases.output_boundaries.LoginOutputBoundary;
 import com.example.cupetfrontend.use_cases.request_models.LoginRequestModel;
 import com.example.cupetfrontend.use_cases.response_models.LoginSuccessResponseModel;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -32,9 +33,9 @@ public class LoginUseCase extends DefaultFailResponseUseCase implements LoginInp
                 //  code to prevent a runtime exception from crashing the application
 
                 try {
-                    if (jsonResponse.get("isSuccess").equals("true")){
+                    if (jsonResponse.get("isSuccess").equals("true")) {
                         outputBoundary.onLoginSuccess(toSuccessResponseModel(jsonResponse));
-                    }else{
+                    } else {
                         outputBoundary.onLoginFailure(toFailResponseModel(jsonResponse));
                     }
                 } catch (JSONException e) {

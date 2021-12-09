@@ -17,9 +17,9 @@ public class EditPetPresenter implements IEditPetPresenter {
     /**
      * On the successful edition of a pet, handover the presented
      * data to the view model.
-     *
+     * <p>
      * Presentation:
-     *  - remove all data as it is not necessary for display
+     * - remove all data as it is not necessary for display
      *
      * @param response The response from the use case's layer
      */
@@ -31,9 +31,9 @@ public class EditPetPresenter implements IEditPetPresenter {
     /**
      * On the failed edition of a pet, handover the presented
      * data to the view model.
-     *
+     * <p>
      * Presentation:
-     *  - preserve the response's message to display
+     * - preserve the response's message to display
      *
      * @param response The response from the use case's layer
      */

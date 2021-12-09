@@ -37,7 +37,7 @@ public class EditUserAccountFragment extends MainActivityFragment {
     /**
      * If error message is non-null, display the error message on the field.
      *
-     * @param field The field to display the error state in
+     * @param field        The field to display the error state in
      * @param errorMessage the error message to display
      */
     private void setFieldError(EditText field, String errorMessage) {
@@ -65,7 +65,7 @@ public class EditUserAccountFragment extends MainActivityFragment {
 
         getMainActivity().hideEditButton();
 
-        if (editUserAccountViewModel.getContext() != null){
+        if (editUserAccountViewModel.getContext() != null) {
             preFillData(editUserAccountViewModel.getContext().getUserAccountData());
         }
 
@@ -104,16 +104,16 @@ public class EditUserAccountFragment extends MainActivityFragment {
         binding.editUserAccountCity.addTextChangedListener(listener);
     }
 
-    private void setUpConfirmButtonClickedListener(){
-        binding.confirmEditUserAccount.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View view){
+    private void setUpConfirmButtonClickedListener() {
+        binding.confirmEditUserAccount.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
                 EditUserAccountFormData formData = getFormData();
                 editUserAccountViewModel.editUserAccount(formData, sessionManager.getToken());
             }
         });
     }
 
-    private EditUserAccountFormData getFormData(){
+    private EditUserAccountFormData getFormData() {
         EditUserAccountFormData formData = new EditUserAccountFormData();
 
         formData.setFirstname(binding.editUserAccountFirstName.getText().toString());
@@ -127,29 +127,28 @@ public class EditUserAccountFragment extends MainActivityFragment {
         return formData;
     }
 
-    private void setUpObserveUserAccountResult(){
+    private void setUpObserveUserAccountResult() {
         editUserAccountViewModel.getEditUserAccountResult().observe(getViewLifecycleOwner(), new Observer<EditUserAccountResult>() {
             @Override
             public void onChanged(EditUserAccountResult editUserAccountResult) {
-                if (editUserAccountResult == null){
+                if (editUserAccountResult == null) {
                     return;
                 }
 
-                if (editUserAccountResult.isError()){
+                if (editUserAccountResult.isError()) {
                     onEditUserAccountFailure(editUserAccountResult.getErrorMessage());
-                }
-                else{
+                } else {
                     onEditUserAccountSuccess();
                 }
             }
         });
     }
 
-    private void setUpObserveEditUserAccountFormState(){
+    private void setUpObserveEditUserAccountFormState() {
         editUserAccountViewModel.getFormState().observe(getViewLifecycleOwner(), new Observer<EditUserAccountFormState>() {
             @Override
             public void onChanged(EditUserAccountFormState editUserAccountFormState) {
-                if (editUserAccountFormState == null){
+                if (editUserAccountFormState == null) {
                     return;
                 }
 
@@ -174,12 +173,12 @@ public class EditUserAccountFragment extends MainActivityFragment {
         });
     }
 
-    private void onEditUserAccountSuccess(){
+    private void onEditUserAccountSuccess() {
         Toast.makeText(getApplicationContext(), "Edit Success", Toast.LENGTH_SHORT).show();
         getMainActivity().navigate(R.id.nav_account_settings);
     }
 
-    private void onEditUserAccountFailure(String errorMessage){
+    private void onEditUserAccountFailure(String errorMessage) {
         Toast.makeText(getApplicationContext(), "Edit Failed:" + errorMessage, Toast.LENGTH_SHORT).show();
     }
 

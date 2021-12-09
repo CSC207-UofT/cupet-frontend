@@ -4,9 +4,9 @@ import com.example.cupetfrontend.presenters.data_models.UserProfileData;
 
 
 public class FetchUserProfileResult {
-    private boolean isError;
-    private String errorMessage;
-    private UserProfileData userProfileData;
+    private final boolean isError;
+    private final String errorMessage;
+    private final UserProfileData userProfileData;
 
     public FetchUserProfileResult(boolean isError, String message) {
         this.isError = isError;

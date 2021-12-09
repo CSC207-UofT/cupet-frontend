@@ -27,12 +27,12 @@ public class UsesPetDataWrapper extends DefaultFailResponseUseCase {
      * Convert a JSONObject response containing a list of pet data
      * to a list of pet data.
      *
-     * @param token The token used to make the original request
-     * @param jsonResponse A JSON representation of the response.
+     * @param token               The token used to make the original request
+     * @param jsonResponse        A JSON representation of the response.
      * @param getPetDataListeners Listeners for the success/fail of the conversion
      */
     public void getPetDataList(String token, JSONObject jsonResponse,
-                                GetPetDataListOutputBoundary getPetDataListeners) {
+                               GetPetDataListOutputBoundary getPetDataListeners) {
         try {
             List<String> petIds = getPetIds(jsonResponse);
 
@@ -57,7 +57,7 @@ public class UsesPetDataWrapper extends DefaultFailResponseUseCase {
         JSONArray petIdsJSON = dataObj.getJSONArray("petIds");
         List<String> petIds = new ArrayList<>();
 
-        for (int i = 0; i < petIdsJSON.length(); i++){
+        for (int i = 0; i < petIdsJSON.length(); i++) {
             petIds.add(petIdsJSON.getString(i));
         }
         return petIds;

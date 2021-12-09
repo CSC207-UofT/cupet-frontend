@@ -5,6 +5,7 @@ import com.example.cupetfrontend.use_cases.request_models.pet.AddToPetImageGalle
 public interface AddToPetImageGalleryInputBoundary {
     /**
      * Add an image to a pet's image gallery.
+     *
      * @param request The request data
      */
     void addToPetImageGallery(AddToPetImageGalleryRequestModel request);

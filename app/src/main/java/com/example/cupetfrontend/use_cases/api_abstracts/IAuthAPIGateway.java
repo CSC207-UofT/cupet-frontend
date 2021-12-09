@@ -10,8 +10,8 @@ public interface IAuthAPIGateway {
     /**
      * Log in a user
      *
-     * @param requestData The data needed to log in the user
+     * @param requestData      The data needed to log in the user
      * @param responseListener A class with callback methods for when a response is received
      */
-    public void login(APILoginRequestModel requestData, IServerResponseListener responseListener);
+    void login(APILoginRequestModel requestData, IServerResponseListener responseListener);
 }

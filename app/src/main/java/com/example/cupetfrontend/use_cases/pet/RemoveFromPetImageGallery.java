@@ -11,7 +11,7 @@ import com.example.cupetfrontend.use_cases.response_models.pet.RemoveFromPetImag
 
 import org.json.JSONObject;
 
-public class RemoveFromPetImageGallery extends DefaultFailResponseUseCase implements RemoveFromPetImageGalleryInputBoundary{
+public class RemoveFromPetImageGallery extends DefaultFailResponseUseCase implements RemoveFromPetImageGalleryInputBoundary {
     IPetAPIGateway petAPIGateway;
     RemoveFromPetImageGalleryOutputBoundary outputBoundary;
 

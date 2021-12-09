@@ -29,7 +29,6 @@ public class GetMatchesPresenter implements IGetMatchesPresenter {
      * On the successful get pet matches, handover the presented
      * data to the view model.
      *
-     *
      * @param response The response from the use case's layer
      */
     @Override
@@ -38,7 +37,7 @@ public class GetMatchesPresenter implements IGetMatchesPresenter {
 
         ArrayList<PetModel> mPetModels = new ArrayList<>();
 
-        for (PetData pet: response.getMatches()) {
+        for (PetData pet : response.getMatches()) {
             mPetModels.add(new PetModel(pet.getPetId(), pet.getName(), pet.getAge(),
                     pet.getBreed(), pet.getProfileImgUrl(), pet.getUserId()));
 
@@ -49,7 +48,6 @@ public class GetMatchesPresenter implements IGetMatchesPresenter {
     /**
      * On the failed get pet matches, handover the presented
      * data to the view model.
-     *
      *
      * @param response The response from the use case's layer
      */

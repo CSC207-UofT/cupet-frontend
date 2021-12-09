@@ -16,17 +16,17 @@ public class UserProfileViewModel implements IUserProfileViewModel {
     private final MutableLiveData<FetchUserProfileResult> fetchUserProfileResult = new MutableLiveData<>();
     private UserProfileContext context;
 
-    public UserProfileViewModel(IUserController userController){
+    public UserProfileViewModel(IUserController userController) {
         this.userController = userController;
     }
 
     @Override
-    public void fetchUserProfile(String token, String userId){
+    public void fetchUserProfile(String token, String userId) {
         userController.fetchUserProfile(token, userId);
     }
 
     @Override
-    public LiveData<FetchUserProfileResult> getFetchUserProfileResult(){
+    public LiveData<FetchUserProfileResult> getFetchUserProfileResult() {
         return this.fetchUserProfileResult;
     }
 

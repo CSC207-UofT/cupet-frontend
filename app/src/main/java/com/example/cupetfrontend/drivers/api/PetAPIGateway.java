@@ -6,6 +6,7 @@ import com.example.cupetfrontend.use_cases.api_abstracts.IPetAPIGateway;
 import com.example.cupetfrontend.use_cases.api_abstracts.IServerRequestManager;
 import com.example.cupetfrontend.use_cases.api_abstracts.IServerResponseListener;
 import com.example.cupetfrontend.use_cases.api_abstracts.request_models.pet.*;
+
 import org.json.JSONObject;
 
 import java.util.HashMap;
@@ -48,7 +49,7 @@ public class PetAPIGateway extends APIGateway implements IPetAPIGateway {
 
     @Override
     public void editPet(APIEditPetRequestModel requestData, IServerResponseListener responseListener) {
-        JSONObject requestBody = new JSONObject(new HashMap<String, String>(){{
+        JSONObject requestBody = new JSONObject(new HashMap<String, String>() {{
             put("newName", requestData.getName());
             put("newAge", requestData.getAge());
             put("newBreed", requestData.getBreed());
@@ -64,7 +65,7 @@ public class PetAPIGateway extends APIGateway implements IPetAPIGateway {
 
     @Override
     public void getPotentialMatches(APIGetPotentialMatchesRequestModel requestData, IServerResponseListener responseListener) {
-        HashMap<String, String> queryParams = new HashMap<String, String>(){{
+        HashMap<String, String> queryParams = new HashMap<String, String>() {{
             put("petId", requestData.getPetId());
         }};
 
@@ -76,7 +77,7 @@ public class PetAPIGateway extends APIGateway implements IPetAPIGateway {
 
     @Override
     public void intendToMatch(APIIntendToMatchRequestModel requestData, IServerResponseListener responseListener) {
-        JSONObject requestBody = new JSONObject(new HashMap<String, String>(){{
+        JSONObject requestBody = new JSONObject(new HashMap<String, String>() {{
             put("pet1Id", requestData.getMyPetId());
             put("pet2Id", requestData.getOtherPetId());
         }});
@@ -89,7 +90,7 @@ public class PetAPIGateway extends APIGateway implements IPetAPIGateway {
 
     @Override
     public void rejectMatch(APIRejectMatchRequestModel requestData, IServerResponseListener responseListener) {
-        JSONObject requestBody = new JSONObject(new HashMap<String, String>(){{
+        JSONObject requestBody = new JSONObject(new HashMap<String, String>() {{
             put("pet1Id", requestData.getMyPetId());
             put("pet2Id", requestData.getOtherPetId());
         }});
@@ -102,7 +103,7 @@ public class PetAPIGateway extends APIGateway implements IPetAPIGateway {
 
     @Override
     public void getMatches(APIGetMatchesRequestModel requestData, IServerResponseListener responseListener) {
-        HashMap<String, String> queryParams = new HashMap<String, String>(){{
+        HashMap<String, String> queryParams = new HashMap<String, String>() {{
             put("petId", requestData.getPetId());
         }};
 
@@ -114,7 +115,7 @@ public class PetAPIGateway extends APIGateway implements IPetAPIGateway {
 
     @Override
     public void unMatchPet(APIUnMatchPetRequestModel requestData, IServerResponseListener responseListener) {
-        JSONObject requestBody = new JSONObject(new HashMap<String, String>(){{
+        JSONObject requestBody = new JSONObject(new HashMap<String, String>() {{
             put("pet1Id", requestData.getMyPetId());
             put("pet2Id", requestData.getOtherPetId());
         }});
@@ -127,7 +128,7 @@ public class PetAPIGateway extends APIGateway implements IPetAPIGateway {
 
     @Override
     public void setPetProfileImage(APISetPetProfileImageRequestModel requestData, IServerResponseListener responseListener) {
-        JSONObject requestBody = new JSONObject(new HashMap<String, String>(){{
+        JSONObject requestBody = new JSONObject(new HashMap<String, String>() {{
             put("petId", requestData.getPetId());
             put("base64Encoded", requestData.getImgB64());
         }});
@@ -140,7 +141,7 @@ public class PetAPIGateway extends APIGateway implements IPetAPIGateway {
 
     @Override
     public void addToPetImageGallery(APIAddToPetImageGalleryRequestModel requestData, IServerResponseListener responseListener) {
-        JSONObject requestBody = new JSONObject(new HashMap<String, String>(){{
+        JSONObject requestBody = new JSONObject(new HashMap<String, String>() {{
             put("petId", requestData.getPetId());
             put("base64Encoded", requestData.getImgB64());
         }});
@@ -153,7 +154,7 @@ public class PetAPIGateway extends APIGateway implements IPetAPIGateway {
 
     @Override
     public void removeFromPetImageGallery(APIRemoveFromPetImageGalleryRequestModel requestData, IServerResponseListener responseListener) {
-        JSONObject requestBody = new JSONObject(new HashMap<String, String>(){{
+        JSONObject requestBody = new JSONObject(new HashMap<String, String>() {{
             put("petId", requestData.getPetId());
             put("assetId", requestData.getAssetId());
         }});
@@ -166,8 +167,8 @@ public class PetAPIGateway extends APIGateway implements IPetAPIGateway {
 
     @Override
     public void fetchPetProfileImage(APIFetchPetProfileImageRequestModel requestData, IServerResponseListener responseListener) {
-        HashMap<String, String> queryParams = new HashMap<String, String>(){{
-                put("petId", requestData.getPetId());
+        HashMap<String, String> queryParams = new HashMap<String, String>() {{
+            put("petId", requestData.getPetId());
         }};
 
         String url = UserRoutesStore.toAbsoluteRoute(PetRoutesStore.FETCH_PET_PROFILE_IMAGE);

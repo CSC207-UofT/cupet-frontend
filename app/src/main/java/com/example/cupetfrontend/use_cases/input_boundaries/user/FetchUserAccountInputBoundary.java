@@ -5,6 +5,7 @@ import com.example.cupetfrontend.use_cases.request_models.user.FetchUserAccountR
 public interface FetchUserAccountInputBoundary {
     /**
      * Fetch a user's account given request data
+     *
      * @param request The request data
      */
     void fetchUserAccount(FetchUserAccountRequestModel request);

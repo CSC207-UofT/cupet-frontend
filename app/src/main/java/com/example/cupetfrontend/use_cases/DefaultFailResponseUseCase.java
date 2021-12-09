@@ -1,6 +1,7 @@
 package com.example.cupetfrontend.use_cases;
 
 import com.example.cupetfrontend.use_cases.response_models.pet.DefaultFailureResponseModel;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 

@@ -3,10 +3,14 @@ package com.example.cupetfrontend.ui.login;
 import android.app.Activity;
 import android.content.Intent;
 import android.se.omapi.Session;
+
 import androidx.lifecycle.Observer;
+
 import android.os.Bundle;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -46,7 +50,7 @@ public class LoginActivity extends AppCompatActivity {
     @Inject
     public IViewMyPetsViewModel viewMyPetsViewModel;
 
-    private void initializeViews(){
+    private void initializeViews() {
         loginButton = findViewById(R.id.login_button);
         emailField = findViewById(R.id.login_email);
         passwordField = findViewById(R.id.login_password);
@@ -108,9 +112,9 @@ public class LoginActivity extends AppCompatActivity {
                     return;
                 }
 
-                if (loginResult.isError()){
+                if (loginResult.isError()) {
                     onLoginFailure(loginResult.getErrorMessage());
-                }else{
+                } else {
                     onLoginSuccess(loginResult.getToken());
                 }
             }

@@ -65,7 +65,7 @@ public class ControllerDependencies {
         ));
     }
 
-    private void setPetController(IPetAPIGateway petAPIGateway, PetPresenterDependencies petPresenters){
+    private void setPetController(IPetAPIGateway petAPIGateway, PetPresenterDependencies petPresenters) {
         petController = new PetController();
 
         petController.setEditPet(new EditPet(petAPIGateway,
@@ -89,7 +89,7 @@ public class ControllerDependencies {
     }
 
     private void setAuthController(IAuthAPIGateway authAPIGateway,
-                                   AuthPresenterDependencies authPresenters){
+                                   AuthPresenterDependencies authPresenters) {
         authController = new AuthController(new LoginUseCase(authAPIGateway,
                 authPresenters.getLoginPresenter()));
     }

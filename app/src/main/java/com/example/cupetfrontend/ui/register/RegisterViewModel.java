@@ -1,4 +1,5 @@
 package com.example.cupetfrontend.ui.register;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -18,7 +19,7 @@ public class RegisterViewModel extends ViewModel implements IRegisterViewModel {
     private final MutableLiveData<RegisterResult> registerResult = new MutableLiveData<>();
     private final IUserController userController;
 
-    public RegisterViewModel (IUserController userController) {
+    public RegisterViewModel(IUserController userController) {
         this.userController = userController;
         registerFormState.setValue(new RegisterFormState());
     }
@@ -33,9 +34,10 @@ public class RegisterViewModel extends ViewModel implements IRegisterViewModel {
 
     /**
      * Create a new register request
+     *
      * @param formData The registration data entered into the form
      */
-    public void register(RegisterFormData formData){
+    public void register(RegisterFormData formData) {
         userController.createUser(formData.getFirstName(), formData.getLastName(),
                 formData.getEmail(), formData.getPassword(), formData.getHomeAddress(),
                 formData.getCity());
@@ -46,38 +48,39 @@ public class RegisterViewModel extends ViewModel implements IRegisterViewModel {
      * been interacted with.
      */
     private void checkFormStateInteracted(RegisterFormState state, RegisterFormData formData) {
-        if (formData.getFirstName() != null && !formData.getFirstName().equals("")){
+        if (formData.getFirstName() != null && !formData.getFirstName().equals("")) {
             state.getFirstNameState().onFieldInteracted();
         }
-        if (formData.getLastName() != null && !formData.getLastName().equals("")){
+        if (formData.getLastName() != null && !formData.getLastName().equals("")) {
             state.getLastNameState().onFieldInteracted();
         }
-        if (formData.getEmail() != null && !formData.getEmail().equals("")){
+        if (formData.getEmail() != null && !formData.getEmail().equals("")) {
             state.getEmailState().onFieldInteracted();
         }
-        if (formData.getPassword() != null && !formData.getPassword().equals("")){
+        if (formData.getPassword() != null && !formData.getPassword().equals("")) {
             state.getPasswordState().onFieldInteracted();
         }
-        if (formData.getConfirmPassword() != null && !formData.getConfirmPassword().equals("")){
+        if (formData.getConfirmPassword() != null && !formData.getConfirmPassword().equals("")) {
             state.getConfirmPasswordState().onFieldInteracted();
         }
-        if (formData.getHomeAddress() != null && !formData.getHomeAddress().equals("")){
+        if (formData.getHomeAddress() != null && !formData.getHomeAddress().equals("")) {
             state.getHomeAddressState().onFieldInteracted();
         }
-        if (formData.getCity() != null && !formData.getCity().equals("")){
+        if (formData.getCity() != null && !formData.getCity().equals("")) {
             state.getCityState().onFieldInteracted();
         }
     }
 
     /**
      * Update the state of the registration form.
+     *
      * @param formData The data entered into the form.
      */
     public void updateFormState(RegisterFormData formData) {
         RegisterFormState newFormState = new RegisterFormState();
         RegisterFormState oldFormState = registerFormState.getValue();
 
-        if (oldFormState == null){
+        if (oldFormState == null) {
             registerFormState.setValue(newFormState);
             return;
         }

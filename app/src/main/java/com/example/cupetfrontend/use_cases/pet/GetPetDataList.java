@@ -14,16 +14,16 @@ import java.util.List;
 /**
  * A helper use case class responsible for converting a list of pet ids
  * to a list of PetData.
- *
+ * <p>
  * NOTE: This class should be re-constructed each time this conversion is made.
  */
-public class  GetPetDataList {
-    private List<PetData> petDataList;
+public class GetPetDataList {
+    private final List<PetData> petDataList;
     private List<String> petIds;
     private final FetchPetProfile fetchPetProfile;
     private final String token;
     private int currentIndex;
-    private GetPetDataListOutputBoundary outputBoundary;
+    private final GetPetDataListOutputBoundary outputBoundary;
 
     public GetPetDataList(String token, IPetAPIGateway petAPIGateway,
                           GetPetDataListOutputBoundary outputBoundary) {
@@ -64,11 +64,11 @@ public class  GetPetDataList {
      *
      * @param petIds A list of pet ids
      */
-    public void getPetDataList (List<String> petIds) {
+    public void getPetDataList(List<String> petIds) {
         this.petIds = petIds;
-        if (petIds.size() > 0){
+        if (petIds.size() > 0) {
             sendNextRequest();
-        }else{
+        } else {
             this.outputBoundary.onGetPetDataListSuccess(petDataList);
         }
     }
@@ -82,10 +82,10 @@ public class  GetPetDataList {
 
         petDataList.add(newPetData);
 
-        if (currentIndex + 1 < petIds.size()){
+        if (currentIndex + 1 < petIds.size()) {
             currentIndex += 1;
             sendNextRequest();
-        }else{
+        } else {
             this.outputBoundary.onGetPetDataListSuccess(petDataList);
         }
     }

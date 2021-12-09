@@ -35,7 +35,7 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 
-@Module(includes={UserUseCasesModule.class, PetUseCasesModule.class, AuthUseCasesModule.class})
+@Module(includes = {UserUseCasesModule.class, PetUseCasesModule.class, AuthUseCasesModule.class})
 public class ControllersModule {
     @Singleton
     @Provides
@@ -47,7 +47,7 @@ public class ControllersModule {
             EditUserAccountInputBoundary editUserAccount,
             GetPetsInputBoundary getPets,
             SetUserProfileImageInputBoundary setUserProfileImage
-    ){
+    ) {
         UserController userController = new UserController();
 
         userController.setUserCreator(userCreator);
@@ -73,7 +73,7 @@ public class ControllersModule {
             GetMatchesInputBoundary getMatches,
             UnMatchPetInputBoundary unMatchPet,
             SetPetProfileImageInputBoundary setPetProfileImage
-    ){
+    ) {
         PetController petController = new PetController();
 
         petController.setPetCreator(petCreator);
@@ -103,13 +103,13 @@ public class ControllersModule {
 
     @Singleton
     @Provides
-    public ISessionManager provideSessionManager(IJWTParser jwtParser){
+    public ISessionManager provideSessionManager(IJWTParser jwtParser) {
         return new SessionManager(jwtParser);
     }
 
     @Singleton
     @Provides
-    public IPetSessionManager providePetSessionManager(){
+    public IPetSessionManager providePetSessionManager() {
         return new PetSessionManager();
     }
 }

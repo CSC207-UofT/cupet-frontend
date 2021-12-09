@@ -27,7 +27,7 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class CardRecyclerViewAdapter extends RecyclerView.Adapter<CardRecyclerViewAdapter.ViewHolder>{
+public class CardRecyclerViewAdapter extends RecyclerView.Adapter<CardRecyclerViewAdapter.ViewHolder> {
 
     private static final String TAG = "RecyclerViewAdapter";
 
@@ -67,7 +67,7 @@ public class CardRecyclerViewAdapter extends RecyclerView.Adapter<CardRecyclerVi
 
         String petImageUrl = getPetModelFrom(holder).getPetImageUrl();
 
-        if (!petImageUrl.equals("")){
+        if (!petImageUrl.equals("")) {
             Glide.with(mContext)
                     // tells Glide we it as bitmap
                     .asBitmap()
@@ -114,6 +114,7 @@ public class CardRecyclerViewAdapter extends RecyclerView.Adapter<CardRecyclerVi
     /**
      * Return the number of items in the list which corresponds to the number of views to be
      * displayed in the RecyclerView
+     *
      * @return the number of items in the list mPetModels
      */
     @Override

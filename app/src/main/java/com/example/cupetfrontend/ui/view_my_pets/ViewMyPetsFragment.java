@@ -96,7 +96,7 @@ public class ViewMyPetsFragment extends MainActivityFragment {
             @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
             public void onCreate() {
                 if (viewMyPetsViewModel.getContext() != null &&
-                        viewMyPetsViewModel.getContext().isFromLoginPage()){
+                        viewMyPetsViewModel.getContext().isFromLoginPage()) {
                     getMainActivity().hideNavigation();
                 }
 
@@ -105,17 +105,17 @@ public class ViewMyPetsFragment extends MainActivityFragment {
         });
     }
 
-    private void initCardRecyclerView(){
+    private void initCardRecyclerView() {
         Log.d(TAG, "initRecyclerView: init recyclerview");
         adapter = new CardRecyclerViewAdapter(getContext(), petSessionManager,
-                getMainActivity(),createPetViewModel, viewMyPetsViewModel);
+                getMainActivity(), createPetViewModel, viewMyPetsViewModel);
         adapter.setPetModels(petModelList);
 
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager((new GridLayoutManager(getContext(), 2)));
     }
 
-    private void setUpAddPetButtonListener(){
+    private void setUpAddPetButtonListener() {
         addPetButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 getMainActivity().navigate(R.id.nav_create_pet);
@@ -125,7 +125,7 @@ public class ViewMyPetsFragment extends MainActivityFragment {
 
     /**
      * Set up this activity as an observer that observes the result of getting pets.
-     *
+     * <p>
      * Update the displayed views when the get pets result has changed.
      */
     private void setUpObserveGetPetsResult() {
@@ -136,10 +136,10 @@ public class ViewMyPetsFragment extends MainActivityFragment {
                 if (getPetsResult == null) {
                     return;
                 }
-                if (getPetsResult.isError()){
+                if (getPetsResult.isError()) {
                     Log.e(TAG, "onChanged: get pets result Error ");
                     onGetPetsFailure(getPetsResult.getErrorMessage());
-                }else{
+                } else {
                     Log.d(TAG, "onChanged: get pets result success");
                     onGetPetsSuccess(getPetsResult.getPets());
                 }
@@ -161,9 +161,10 @@ public class ViewMyPetsFragment extends MainActivityFragment {
     /**
      * Display a Get Pets failed toast message.
      * Notify adapter for RecyclerView.
+     *
      * @param errorMessage The error message to display
      */
-    private void onGetPetsFailure (String errorMessage) {
+    private void onGetPetsFailure(String errorMessage) {
         Log.e(TAG, "onGetPetsFailure: Get pets Failure");
         Toast.makeText(getApplicationContext(), "Get Pets Failed: " + errorMessage, Toast.LENGTH_SHORT).show();
         adapter.notifyDataSetChanged();

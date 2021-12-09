@@ -99,7 +99,7 @@ public class PetProfileFragment extends MainActivityFragment {
 
     /**
      * Set up this activity as an observer that observes the result of pet profile.
-     *
+     * <p>
      * Update the displayed views when the pet profile result has changed.
      */
     private void setUpObservePetProfileResult() {
@@ -111,7 +111,7 @@ public class PetProfileFragment extends MainActivityFragment {
                     return;
                 }
 
-                if (petProfileResult.isError()){
+                if (petProfileResult.isError()) {
                     onPetProfileFailure(petProfileResult.getErrorMessage());
                 } else {
                     onPetProfileSuccess(
@@ -127,8 +127,8 @@ public class PetProfileFragment extends MainActivityFragment {
 
     /**
      * Set up the edit button of the page:
-     *  - ensure that MainActivity displays the button
-     *  - link the button to the edit pet page
+     * - ensure that MainActivity displays the button
+     * - link the button to the edit pet page
      */
     private void setUpEditBtn() {
         getMainActivity().showEditButton();
@@ -160,6 +160,7 @@ public class PetProfileFragment extends MainActivityFragment {
 
     /**
      * Display a Fetch pet profile failed toast message.
+     *
      * @param errorMessage The error message to display
      */
     private void onPetProfileFailure(String errorMessage) {

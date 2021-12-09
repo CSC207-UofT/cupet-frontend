@@ -9,6 +9,7 @@ import com.example.cupetfrontend.use_cases.input_boundaries.user.FetchUserAccoun
 import com.example.cupetfrontend.use_cases.output_boundaries.user.FetchUserAccountOutputBoundary;
 import com.example.cupetfrontend.use_cases.request_models.user.FetchUserAccountRequestModel;
 import com.example.cupetfrontend.use_cases.response_models.user.FetchUserAccountSuccessResponseModel;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -57,7 +58,7 @@ public class FetchUserAccount extends DefaultFailResponseUseCase implements Fetc
                     dataObj.getString("email"),
                     dataObj.getString("currentAddress"),
                     dataObj.getString("currentCity")
-                    );
+            );
         } catch (JSONException e) {
             throw new InvalidAPIResponseException("The API gave an invalid successful fetch user response.");
         }

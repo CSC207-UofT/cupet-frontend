@@ -93,7 +93,7 @@ public class PotentialMatchesFragment extends MainActivityFragment {
     /**
      * Set up listeners for expanding the pet preview view
      */
-    private void setUpExpandListeners(){
+    private void setUpExpandListeners() {
         binding.potentialProfileImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -114,11 +114,11 @@ public class PotentialMatchesFragment extends MainActivityFragment {
                     return;
                 }
 
-                if (getPotentialMatchesResult.isError()){
+                if (getPotentialMatchesResult.isError()) {
                     onGetPotentialMatchesFailure(getPotentialMatchesResult.getErrorMessage());
-                }else if(getPotentialMatchesResult.getPotentialMatches().size() == 0){
+                } else if (getPotentialMatchesResult.getPotentialMatches().size() == 0) {
                     showNoMatchesView();
-                } else{
+                } else {
                     moveToNextMatch();
                 }
             }
@@ -193,7 +193,7 @@ public class PotentialMatchesFragment extends MainActivityFragment {
         binding.potentialHeadingPreview.setText(heading);
         binding.potentialSubheadingPreview.setText(petData.getBreed());
 
-        if (!petData.getProfileImgUrl().equals("")){
+        if (!petData.getProfileImgUrl().equals("")) {
             Glide.with(this).load(petData.getProfileImgUrl()).into(
                     binding.potentialProfileImg);
         }
@@ -206,7 +206,7 @@ public class PotentialMatchesFragment extends MainActivityFragment {
     /**
      * Display no matches screen
      */
-    private void displayNoMatches(){
+    private void displayNoMatches() {
         showNoMatchesView();
         hideMatchView();
     }
@@ -217,9 +217,9 @@ public class PotentialMatchesFragment extends MainActivityFragment {
      * are no more matches to scroll through.
      */
     private void moveToNextMatch() {
-        if (viewModel.hasNextMatch()){
+        if (viewModel.hasNextMatch()) {
             displayMatch(viewModel.getNextMatch());
-        }else{
+        } else {
             displayNoMatches();
         }
     }
@@ -227,9 +227,10 @@ public class PotentialMatchesFragment extends MainActivityFragment {
     /**
      * Display a failure message on an unsuccessful get potential
      * matches request.
+     *
      * @param errorMessage The error message
      */
-    private void onGetPotentialMatchesFailure(String errorMessage){
+    private void onGetPotentialMatchesFailure(String errorMessage) {
         Toast.makeText(getApplicationContext(),
                 "Request failed: " + errorMessage, Toast.LENGTH_SHORT).show();
     }
@@ -237,7 +238,7 @@ public class PotentialMatchesFragment extends MainActivityFragment {
     /**
      * Hide the appbar edit button
      */
-    private void setUpEditBtn () {
+    private void setUpEditBtn() {
         getMainActivity().hideEditButton();
     }
 }

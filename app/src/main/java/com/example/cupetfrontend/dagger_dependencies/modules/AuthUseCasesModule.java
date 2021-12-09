@@ -15,7 +15,7 @@ public class AuthUseCasesModule {
     @Singleton
     @Provides
     public LoginInputBoundary provideLogin(IAuthAPIGateway authAPIGateway,
-                                           LoginOutputBoundary outputBoundary){
+                                           LoginOutputBoundary outputBoundary) {
         return new LoginUseCase(authAPIGateway, outputBoundary);
     }
 }

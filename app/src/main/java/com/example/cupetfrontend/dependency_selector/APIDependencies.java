@@ -1,6 +1,7 @@
 package com.example.cupetfrontend.dependency_selector;
 
 import android.content.Context;
+
 import com.example.cupetfrontend.drivers.api.AuthAPIGateway;
 import com.example.cupetfrontend.drivers.api.HTTPRequestManager;
 import com.example.cupetfrontend.drivers.api.PetAPIGateway;
@@ -23,19 +24,19 @@ public class APIDependencies {
         selectAuthAPIGateway(requestManager);
     }
 
-    private void selectRequestManager (Context applicationContext) {
+    private void selectRequestManager(Context applicationContext) {
         requestManager = new HTTPRequestManager(applicationContext);
     }
 
-    private void selectUserAPIGateway (IServerRequestManager requestManager) {
+    private void selectUserAPIGateway(IServerRequestManager requestManager) {
         userAPIGateway = new UserAPIGateway(requestManager);
     }
 
-    private void selectPetAPIGateway (IServerRequestManager requestManager) {
+    private void selectPetAPIGateway(IServerRequestManager requestManager) {
         petAPIGateway = new PetAPIGateway(requestManager);
     }
 
-    private void selectAuthAPIGateway (IServerRequestManager requestManager) {
+    private void selectAuthAPIGateway(IServerRequestManager requestManager) {
         authAPIGateway = new AuthAPIGateway(requestManager);
     }
 

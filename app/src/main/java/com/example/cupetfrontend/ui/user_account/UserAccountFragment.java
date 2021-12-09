@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import androidx.lifecycle.Observer;
+
 import com.bumptech.glide.Glide;
 import com.example.cupetfrontend.App;
 import com.example.cupetfrontend.R;
@@ -59,29 +60,29 @@ public class UserAccountFragment extends MainActivityFragment {
     }
 
 
-    private void setUpEditBtn(){
+    private void setUpEditBtn() {
         getMainActivity().showEditButton();
         getMainActivity().setEditBtnNavTarget(R.id.nav_edit_account);
     }
 
-    public void setUpObserveUserProfileResult(){
+    public void setUpObserveUserProfileResult() {
         userAccountViewModel.getUserAccountResult().observe(getViewLifecycleOwner(), new Observer<UserAccountResult>() {
             @Override
             public void onChanged(UserAccountResult userAccountResult) {
-                if (userAccountResult == null){
+                if (userAccountResult == null) {
                     return;
                 }
 
-                if (userAccountResult.isError()){
+                if (userAccountResult.isError()) {
                     onUserAccountFailure(userAccountResult.getErrorMessage());
-                }
-                else{
+                } else {
                     onUserAccountSuccess(userAccountResult.getAccountData());
                 }
             }
         });
     }
-    private void onUserAccountSuccess(UserAccountData userAccountData){
+
+    private void onUserAccountSuccess(UserAccountData userAccountData) {
         binding.userAccountAddress.setText(userAccountData.getHomeAddress());
         binding.userAccountCity.setText(userAccountData.getCity());
 
@@ -90,7 +91,7 @@ public class UserAccountFragment extends MainActivityFragment {
         binding.userAccountEmail.setText(userAccountData.getEmail());
 
         if (sessionManager.getCachedUserData() != null &&
-                !sessionManager.getCachedUserData().getProfileImgUrl().equals("")){
+                !sessionManager.getCachedUserData().getProfileImgUrl().equals("")) {
             Glide.with(this).load(sessionManager.
                     getCachedUserData().getProfileImgUrl()).into(binding.imageView);
         }
@@ -100,7 +101,7 @@ public class UserAccountFragment extends MainActivityFragment {
         ));
     }
 
-    private void onUserAccountFailure(String errorMessage){
+    private void onUserAccountFailure(String errorMessage) {
         String toastMessage = "Fetch user account failed: " + errorMessage;
         Toast.makeText(getApplicationContext(), toastMessage, Toast.LENGTH_SHORT).show();
     }

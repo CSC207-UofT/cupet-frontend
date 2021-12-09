@@ -3,7 +3,7 @@ package com.example.cupetfrontend.drivers.api.routes;
 /**
  * A class responsible for storing all relative routes relating to a user.
  */
-public class UserRoutesStore extends RoutesStore{
+public class UserRoutesStore extends RoutesStore {
     public static final String CREATE_USER = "/users/create";
     public static final String FETCH_USER_ACCOUNT = "/users/account";
     public static final String EDIT_USER_PROFILE = "/users/editprofile";

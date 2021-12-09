@@ -10,7 +10,8 @@ public class CreatePetResult {
 
     /**
      * Initialize an unsuccessful CreatePetResult
-     * @param isError Whether or not an error occured
+     *
+     * @param isError      Whether or not an error occured
      * @param errorMessage The error message to display
      */
     public CreatePetResult(boolean isError, String errorMessage) {
@@ -21,6 +22,7 @@ public class CreatePetResult {
 
     /**
      * Initialize an unsuccessful CreatePetResult
+     *
      * @param petId the id of the new pet
      */
     public CreatePetResult(String petId) {

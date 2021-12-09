@@ -30,10 +30,11 @@ public class ViewMyPetsViewModel implements IViewMyPetsViewModel {
 
     /**
      * Create a new get pets request
+     *
      * @param token The token
      */
     @Override
-    public void getPets(String token){
+    public void getPets(String token) {
         userController.getPets(token);
     }
 

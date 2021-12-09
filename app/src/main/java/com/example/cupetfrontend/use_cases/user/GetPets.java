@@ -11,6 +11,7 @@ import com.example.cupetfrontend.use_cases.pet.UsesPetDataWrapper;
 import com.example.cupetfrontend.use_cases.request_models.user.GetPetsRequestModel;
 import com.example.cupetfrontend.use_cases.data_models.PetData;
 import com.example.cupetfrontend.use_cases.response_models.user.GetPetsSuccessResponseModel;
+
 import org.json.JSONObject;
 
 import java.util.List;

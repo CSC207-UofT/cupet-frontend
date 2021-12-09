@@ -19,54 +19,54 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 
-@Module(includes={APIGatewaysModule.class})
+@Module(includes = {APIGatewaysModule.class})
 public class UserPresentersModule {
     @Singleton
     @Provides
-    public ICreateUserPresenter provideUserPresenter () {
+    public ICreateUserPresenter provideUserPresenter() {
         return new CreateUserPresenter();
     }
 
     @Singleton
     @Provides
-    public IEditUserProfilePresenter provideEditUserProfilePresenter () {
+    public IEditUserProfilePresenter provideEditUserProfilePresenter() {
         return new EditUserProfilePresenter();
     }
 
     @Singleton
     @Provides
-    public IFetchUserAccountPresenter provideFetchUserAccountPresenter () {
+    public IFetchUserAccountPresenter provideFetchUserAccountPresenter() {
         return new FetchUserAccountPresenter();
     }
 
     @Singleton
     @Provides
-    public IFetchUserProfilePresenter provideFetchUserProfile () {
+    public IFetchUserProfilePresenter provideFetchUserProfile() {
         return new FetchUserProfilePresenter();
     }
 
     @Singleton
     @Provides
-    public IGetPetsPresenter provideGetPetsPresenter () {
+    public IGetPetsPresenter provideGetPetsPresenter() {
         return new GetPetsPresenter();
     }
 
 
     @Singleton
     @Provides
-    public ISetUserProfileImagePresenter provideSetUserProfileImagePresenter () {
+    public ISetUserProfileImagePresenter provideSetUserProfileImagePresenter() {
         return new SetUserProfileImagePresenter();
     }
 
     @Singleton
     @Provides
-    public IEditUserAccountPresenter provideEditUserAccountPresenter(){
+    public IEditUserAccountPresenter provideEditUserAccountPresenter() {
         return new EditUserAccountPresenter();
     }
 
     @Singleton
     @Provides
-    public IUserProfileViewModel provideUserProfileViewModel(IUserController userController){
+    public IUserProfileViewModel provideUserProfileViewModel(IUserController userController) {
         return new UserProfileViewModel(userController);
     }
 }

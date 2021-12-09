@@ -34,19 +34,34 @@ import dagger.Component;
         UserPresentersModule.class, PetPresentersModule.class})
 public interface AppComponent {
     void inject(MainActivity mainActivity);
+
     void inject(LoginActivity loginActivity);
+
     void inject(RegisterActivity registerActivity);
+
     void inject(EditPetFragment editPetFragment);
+
     void inject(PetProfileFragment petProfileFragment);
+
     void inject(PotentialMatchesFragment potentialMatchesFragment);
+
     void inject(ViewMyPetsFragment viewMyPetsFragment);
+
     void inject(GetMatchesFragment getMatchesFragment);
+
     void inject(CreatePetFragment createPetFragment);
+
     void inject(EditUserProfileFragment editUserProfileFragment);
+
     void inject(UserProfileFragment userProfileFragment);
+
     void inject(EditUserAccountFragment editUserAccountFragment);
+
     void inject(ContactInfoFragment contactInfoFragment);
+
     void inject(UploadImageFragment uploadImageFragment);
+
     void inject(MatchedPetProfileFragment matchedPetProfileFragment);
+
     void inject(UserAccountFragment userAccountFragment);
 }

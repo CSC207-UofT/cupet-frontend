@@ -68,7 +68,7 @@ public class CreatePetFragment extends MainActivityFragment {
     /**
      * If errorState is non-null, display the error state on the field.
      *
-     * @param field The field to display the error state in
+     * @param field      The field to display the error state in
      * @param errorState The error state represented by an integer
      */
     private void setFieldError(EditText field, Integer errorState) {
@@ -102,7 +102,7 @@ public class CreatePetFragment extends MainActivityFragment {
             @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
             public void onCreate() {
                 if (createPetViewModel.getContext() != null &&
-                        createPetViewModel.getContext().isFromLoginPage()){
+                        createPetViewModel.getContext().isFromLoginPage()) {
                     getMainActivity().hideNavigation();
                 }
 
@@ -171,7 +171,7 @@ public class CreatePetFragment extends MainActivityFragment {
 
     /**
      * Set up this activity as an observer that observes the result of pet creation.
-     *
+     * <p>
      * Update the displayed views when the pet creation result has changed.
      */
     private void setUpObserveCreatePetResult() {
@@ -182,9 +182,9 @@ public class CreatePetFragment extends MainActivityFragment {
                     return;
                 }
 
-                if (createPetResult.isError()){
+                if (createPetResult.isError()) {
                     onCreatePetFailure(createPetResult.getErrorMessage());
-                }else{
+                } else {
                     onCreatePetSuccess(createPetResult.getPetId());
                 }
             }
@@ -194,7 +194,7 @@ public class CreatePetFragment extends MainActivityFragment {
     /**
      * Set up this activity as an observer that observes the error states of the
      * pet creation form.
-     *
+     * <p>
      * Update the fields accordingly to whether or not they have errors.
      */
     private void setUpObserveCreatePetFormState() {
@@ -225,9 +225,10 @@ public class CreatePetFragment extends MainActivityFragment {
 
     /**
      * Display a Pet Creation failed toast message.
+     *
      * @param errorMessage The error message to display
      */
-    private void onCreatePetFailure (String errorMessage) {
+    private void onCreatePetFailure(String errorMessage) {
         System.out.println("Pet Creation failed");
         Toast.makeText(getApplicationContext(), "Pet Creation failed: " + errorMessage, Toast.LENGTH_SHORT).show();
     }

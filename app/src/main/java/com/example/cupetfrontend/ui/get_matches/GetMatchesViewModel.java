@@ -1,4 +1,5 @@
 package com.example.cupetfrontend.ui.get_matches;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -24,10 +25,11 @@ public class GetMatchesViewModel extends ViewModel implements IGetMatchesViewMod
 
     /**
      * Create a new get matches request
-     * @param token The token
+     *
+     * @param token   The token
      * @param myPetId The ID of the pet whose matches are to be displayed
      */
-    public void getMatches(String token, String myPetId){
+    public void getMatches(String token, String myPetId) {
         petController.getMatches(token, myPetId);
     }
 

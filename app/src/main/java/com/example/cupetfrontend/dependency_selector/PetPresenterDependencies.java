@@ -30,31 +30,31 @@ public class PetPresenterDependencies {
         selectRemoveFromPetImageGalleryPresenter();
     }
 
-    private void selectCreatePetPresenter(){
+    private void selectCreatePetPresenter() {
         createPetPresenter = new CreatePetPresenter();
     }
 
-    private void selectEditPetPresenter(){
+    private void selectEditPetPresenter() {
         editPetPresenter = new EditPetPresenter();
     }
 
-    private void selectFetchPetProfilePresenter(){
+    private void selectFetchPetProfilePresenter() {
         fetchPetProfilePresenter = new FetchPetProfilePresenter();
     }
 
-    private void selectGetMatchesPresenter(){
+    private void selectGetMatchesPresenter() {
         getMatchesPresenter = new GetMatchesPresenter();
     }
 
-    private void selectGetPotentialMatchesPresenter(){
+    private void selectGetPotentialMatchesPresenter() {
         getPotentialMatchesPresenter = new GetPotentialMatchesPresenter();
     }
 
-    private void selectIntendToMatchPresenter(){
+    private void selectIntendToMatchPresenter() {
         intendToMatchPresenter = new IntendToMatchPresenter();
     }
 
-    private void selectRejectMatchPresenter(){
+    private void selectRejectMatchPresenter() {
         rejectMatchPresenter = new RejectMatchPresenter();
     }
 
@@ -74,7 +74,7 @@ public class PetPresenterDependencies {
         removeFromPetImageGalleryPresenter = new RemoveFromPetImageGalleryPresenter();
     }
 
-    private void selectFetchPetProfileImagePresenter () {
+    private void selectFetchPetProfileImagePresenter() {
         fetchPetProfileImagePresenter = new FetchPetProfileImagePresenter();
     }
 
