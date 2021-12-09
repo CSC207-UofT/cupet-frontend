@@ -90,7 +90,7 @@ public class UserAccountFragment extends MainActivityFragment {
         binding.userAccountEmail.setText(userAccountData.getEmail());
 
         if (sessionManager.getCachedUserData() != null &&
-                !sessionManager.getCachedUserData().getProfileImgUrl().equals("null")){
+                !sessionManager.getCachedUserData().getProfileImgUrl().equals("")){
             Glide.with(this).load(sessionManager.
                     getCachedUserData().getProfileImgUrl()).into(binding.imageView);
         }

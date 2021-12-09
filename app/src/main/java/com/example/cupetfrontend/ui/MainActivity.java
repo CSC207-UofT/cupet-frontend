@@ -22,6 +22,7 @@ import com.example.cupetfrontend.controllers.cached_data_models.CachedUserData;
 import com.example.cupetfrontend.presenters.abstracts.IFetchUserProfilePresenter;
 import com.example.cupetfrontend.presenters.data_models.UserProfileData;
 import com.example.cupetfrontend.presenters.view_model_abstracts.IFetchUserProfileViewModel;
+import com.example.cupetfrontend.presenters.view_model_abstracts.nav_context_models.UserProfileContext;
 import com.example.cupetfrontend.ui.login.LoginActivity;
 import com.example.cupetfrontend.ui.splash_screen.SplashScreenActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -109,7 +110,7 @@ public class MainActivity extends AppCompatActivity implements Navigator {
         });
 
         userController.fetchUserProfile(
-                sessionManager.getToken(), petSessionManager.getPetId());
+                sessionManager.getToken(), sessionManager.getUserId());
     }
 
     // Menu icons are inflated just as they were with actionbar
@@ -229,6 +230,23 @@ public class MainActivity extends AppCompatActivity implements Navigator {
                 this, R.id.main_nav_fragment);
 
         navController.navigate(navTarget);
+    }
+
+    /**
+     * Get the current page navigated to.
+     *
+     * If no such page is found, return -1.
+     */
+    @Override
+    public int getCurrentPage() {
+        NavController navController = Navigation.findNavController(
+                this, R.id.main_nav_fragment);
+
+        if (navController.getCurrentDestination() != null) {
+            return navController.getCurrentDestination().getId();
+        }else{
+            return -1;
+        }
     }
 
 

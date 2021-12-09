@@ -24,6 +24,7 @@ import com.example.cupetfrontend.databinding.FragmentGetMatchesBinding;
 import com.example.cupetfrontend.presenters.abstracts.IGetMatchesPresenter;
 import com.example.cupetfrontend.presenters.abstracts.IUnMatchPresenter;
 import com.example.cupetfrontend.presenters.pet.GetMatchesPresenter;
+import com.example.cupetfrontend.presenters.view_model_abstracts.IMatchedPetProfileViewModel;
 import com.example.cupetfrontend.ui.MainActivityFragment;
 import com.example.cupetfrontend.ui.get_matches.recycler.RecyclerViewAdapter;
 
@@ -56,6 +57,8 @@ public class GetMatchesFragment extends MainActivityFragment {
     public IGetMatchesPresenter getMatchesPresenter;
     @Inject
     public IUnMatchPresenter unMatchPresenter;
+    @Inject
+    public IMatchedPetProfileViewModel matchedPetProfileViewModel;
 
     private void initializeViews() {
         recyclerView = binding.recyclerView;
@@ -101,9 +104,11 @@ public class GetMatchesFragment extends MainActivityFragment {
     private void initRecyclerView(){
         Log.d(TAG, "initRecyclerView: init recyclerview");
 
-        adapter = new RecyclerViewAdapter(getContext(), petSessionManager,
+        adapter = new RecyclerViewAdapter(matchedPetProfileViewModel, petSessionManager,
                 sessionManager, unMatchPresenter, petController);
         adapter.setPetModels(petModelList);
+        adapter.setContext(getContext());
+        adapter.setNavigator(getMainActivity());
 
         Log.d(TAG, "initRecyclerView: got adapter");
         recyclerView.setAdapter(adapter);

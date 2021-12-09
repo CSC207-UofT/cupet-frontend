@@ -56,7 +56,8 @@ public class FetchPetProfile extends DefaultFailResponseUseCase implements Fetch
                     dataObj.getString("age"),
                     dataObj.getString("breed"),
                     dataObj.getString("biography"),
-                    dataObj.getString("profileImgUrl")
+                    dataObj.getString("profileImgUrl"),
+                    dataObj.getString("userId")
             );
         } catch (JSONException e) {
             throw new InvalidAPIResponseException("The API gave an invalid successful fetch pet profile response.");

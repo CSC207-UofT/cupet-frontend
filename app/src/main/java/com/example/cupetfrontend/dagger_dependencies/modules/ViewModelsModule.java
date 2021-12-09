@@ -8,6 +8,7 @@ import com.example.cupetfrontend.presenters.view_model_abstracts.ICreatePetViewM
 import com.example.cupetfrontend.presenters.view_model_abstracts.IEditPetViewModel;
 import com.example.cupetfrontend.presenters.view_model_abstracts.IEditUserAccountViewModel;
 import com.example.cupetfrontend.presenters.view_model_abstracts.IEditUserProfileViewModel;
+import com.example.cupetfrontend.presenters.view_model_abstracts.IMatchedPetProfileViewModel;
 import com.example.cupetfrontend.presenters.view_model_abstracts.IUploadImageViewModel;
 import com.example.cupetfrontend.presenters.view_model_abstracts.IViewMyPetsViewModel;
 import com.example.cupetfrontend.ui.contact_info_fragment.ContactInfoViewModel;
@@ -16,6 +17,7 @@ import com.example.cupetfrontend.ui.create_pet.CreatePetViewModel;
 import com.example.cupetfrontend.ui.edit_account.EditUserAccountViewModel;
 import com.example.cupetfrontend.ui.edit_pet.EditPetViewModel;
 import com.example.cupetfrontend.ui.edit_user_profile.EditUserProfileViewModel;
+import com.example.cupetfrontend.ui.matched_pet_profile.MatchedPetProfileViewModel;
 import com.example.cupetfrontend.ui.upload_image_fragment.UploadImageViewModel;
 import com.example.cupetfrontend.ui.view_my_pets.ViewMyPetsViewModel;
 
@@ -69,5 +71,11 @@ public class ViewModelsModule {
     @Provides
     public IEditUserAccountViewModel provideEditUserAccountViewModel(IUserController userController){
         return new EditUserAccountViewModel(userController);
+    }
+
+    @Singleton
+    @Provides
+    public IMatchedPetProfileViewModel provideMatchedPetProfileViewModel(IUserController userController){
+        return new MatchedPetProfileViewModel(userController);
     }
 }

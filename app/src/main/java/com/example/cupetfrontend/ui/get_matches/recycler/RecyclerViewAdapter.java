@@ -27,6 +27,7 @@ import com.example.cupetfrontend.dependency_selector.DependencySelector;
 import com.example.cupetfrontend.presenters.view_model_abstracts.IMatchedPetProfileViewModel;
 import com.example.cupetfrontend.presenters.view_model_abstracts.nav_context_models.MatchedPetProfileContext;
 import com.example.cupetfrontend.presenters.abstracts.IUnMatchPresenter;
+import com.example.cupetfrontend.ui.Navigator;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -45,23 +46,23 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     private static final String TAG = "RecyclerViewAdapter";
     private List<PetModel> mPetModels;
-    private final Context context;
+    private Context context;
     private GetMatchesRecyclerViewModel viewModel;
-
-    @Inject
-    public IMatchedPetProfileViewModel matchedPetProfileViewModel;
+    private final IMatchedPetProfileViewModel matchedPetProfileViewModel;
 
     private final IPetSessionManager petSessionManager;
     private final ISessionManager sessionManager;
     private final IUnMatchPresenter unMatchPresenter;
     private final IPetController petController;
+    private Navigator navigator;
 
-    public RecyclerViewAdapter(Context context,
-                               IPetSessionManager petSessionManager,
+    @Inject
+    public RecyclerViewAdapter(IMatchedPetProfileViewModel matchedPetProfileViewModel,
+                                IPetSessionManager petSessionManager,
                                ISessionManager sessionManager,
                                IUnMatchPresenter unMatchPresenter,
                                IPetController petController) {
-        this.context = context;
+        this.matchedPetProfileViewModel = matchedPetProfileViewModel;
         this.petSessionManager = petSessionManager;
         this.sessionManager = sessionManager;
         this.unMatchPresenter = unMatchPresenter;
@@ -70,8 +71,16 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         initializeViewModel();
     }
 
+    public void setContext(Context context) {
+        this.context = context;
+    }
+
     public void setPetModels(List<PetModel> mPetModels) {
         this.mPetModels = mPetModels;
+    }
+
+    public void setNavigator(Navigator navigator){
+        this.navigator = navigator;
     }
 
     private void initializeViewModel() {
@@ -139,8 +148,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 Log.d(TAG, "onClick: clicked on:" + getPetModelFor(holder)
                         .getPetName());
 
-                Toast.makeText(context, mPetModels.get(holder.getAdapterPosition()).getPetName(), Toast.LENGTH_SHORT).show();
-                matchedPetProfileViewModel.setContext(new MatchedPetProfileContext(getPetModelFor(holder)));
+                Toast.makeText(context, mPetModels.get(
+                        holder.getAdapterPosition()).getPetName(), Toast.LENGTH_SHORT).show();
+
+                matchedPetProfileViewModel.setContext(
+                        new MatchedPetProfileContext(getPetModelFor(holder)));
+
+                navigator.navigate(R.id.nav_matched_pet_profile);
             }
         });
     }

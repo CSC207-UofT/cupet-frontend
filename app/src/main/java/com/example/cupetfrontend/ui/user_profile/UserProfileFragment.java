@@ -16,6 +16,7 @@ import com.example.cupetfrontend.databinding.FragmentUserProfileBinding;
 import com.example.cupetfrontend.presenters.abstracts.IFetchUserProfilePresenter;
 import com.example.cupetfrontend.presenters.data_models.UserProfileData;
 import com.example.cupetfrontend.presenters.view_model_abstracts.IEditUserProfileViewModel;
+import com.example.cupetfrontend.presenters.view_model_abstracts.IUserProfileViewModel;
 import com.example.cupetfrontend.presenters.view_model_abstracts.nav_context_models.EditUserProfileContext;
 import com.example.cupetfrontend.ui.MainActivityFragment;
 import com.example.cupetfrontend.presenters.view_model_abstracts.IContactInfoViewModel;
@@ -23,7 +24,6 @@ import com.example.cupetfrontend.presenters.view_model_abstracts.IContactInfoVie
 import javax.inject.Inject;
 
 public class UserProfileFragment extends MainActivityFragment {
-    private UserProfileViewModel viewModel;
     private FragmentUserProfileBinding binding;
 
     @Inject
@@ -36,6 +36,10 @@ public class UserProfileFragment extends MainActivityFragment {
     public IContactInfoViewModel contactInfoViewModel;
     @Inject
     public IEditUserProfileViewModel editUserProfileViewModel;
+    @Inject
+    public IUserProfileViewModel viewModel;
+
+    private String userId;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -45,11 +49,17 @@ public class UserProfileFragment extends MainActivityFragment {
         View root = binding.getRoot();
 
         getApplicationContext().getAppComponent().inject(this);
-
-        viewModel = new UserProfileViewModel(userController);
         fetchUserProfilePresenter.setViewModel(viewModel);
 
-        viewModel.fetchUserProfile(sessionManager.getToken(), sessionManager.getUserId());
+        if (viewModel.getContext() != null && getMainActivity().getCurrentPage() == R.id.nav_public_user_profile){
+            userId = viewModel.getContext().getUserId();
+            getMainActivity().hideEditButton();
+        }else{
+            userId = sessionManager.getUserId();
+            getMainActivity().showEditButton();
+        }
+
+        viewModel.fetchUserProfile(sessionManager.getToken(), userId);
 
         viewModel.getFetchUserProfileResult().observe(getViewLifecycleOwner(), new Observer<FetchUserProfileResult>() {
             @Override
@@ -66,7 +76,6 @@ public class UserProfileFragment extends MainActivityFragment {
             }
         });
 
-        getMainActivity().showEditButton();
         getMainActivity().setEditBtnNavTarget(R.id.nav_edit_user_profile);
 
         return root;

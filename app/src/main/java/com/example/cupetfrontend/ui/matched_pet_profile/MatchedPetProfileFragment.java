@@ -9,14 +9,18 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.Observer;
 
+import com.example.cupetfrontend.R;
 import com.example.cupetfrontend.controllers.abstracts.ISessionManager;
 import com.example.cupetfrontend.controllers.abstracts.IUserController;
 import com.example.cupetfrontend.data.model.PetModel;
 import com.example.cupetfrontend.databinding.FragmentMatchedPetProfileBinding;
+import com.example.cupetfrontend.presenters.abstracts.IFetchUserProfilePresenter;
 import com.example.cupetfrontend.presenters.abstracts.IMatchedPetProfilePresenter;
 import com.example.cupetfrontend.presenters.data_models.UserProfileData;
 import com.example.cupetfrontend.presenters.view_model_abstracts.IContactInfoViewModel;
 import com.example.cupetfrontend.presenters.view_model_abstracts.IMatchedPetProfileViewModel;
+import com.example.cupetfrontend.presenters.view_model_abstracts.IUserProfileViewModel;
+import com.example.cupetfrontend.presenters.view_model_abstracts.nav_context_models.UserProfileContext;
 import com.example.cupetfrontend.ui.MainActivityFragment;
 
 import javax.inject.Inject;
@@ -27,13 +31,15 @@ public class MatchedPetProfileFragment extends MainActivityFragment {
     @Inject
     public IUserController userController;
     @Inject
-    IMatchedPetProfilePresenter matchedPetProfilePresenter;
+    public IFetchUserProfilePresenter presenter;
     @Inject
     public ISessionManager sessionManager;
     @Inject
     public IContactInfoViewModel contactInfoViewModel;
     @Inject
     public IMatchedPetProfileViewModel viewModel;
+    @Inject
+    public IUserProfileViewModel userProfileViewModel;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -43,13 +49,15 @@ public class MatchedPetProfileFragment extends MainActivityFragment {
         View root = binding.getRoot();
 
         getApplicationContext().getAppComponent().inject(this);
-        matchedPetProfilePresenter.setMatchedPetProfileViewModel(viewModel);
-
-        //viewModel.fetchUserProfile(sessionManager, viewModel.getContext.getSelectedMatchedPet().getUserId()); //TODO: Get owner's User Id from PetModel of selected pet
+        presenter.setViewModel(viewModel);
 
         if (viewModel.getContext() != null) {
+            viewModel.fetchUserProfile(sessionManager.getToken(), viewModel.getContext().
+                    getSelectedMatchedPet().getUserId());
+
             setUpPetProfile(viewModel.getContext().getSelectedMatchedPet());
-            setUpVisitOwnerProfileButtonClickedListener();
+            setUpVisitOwnerProfileButtonClickedListener(viewModel.getContext().
+                    getSelectedMatchedPet().getUserId());
             setUpObserveGetUserContactInfoResult();
         }
         return root;
@@ -70,11 +78,13 @@ public class MatchedPetProfileFragment extends MainActivityFragment {
     /**
      * Sets up the user contact information fragment for the owner of the selected matched pet
      */
-    private void setUpVisitOwnerProfileButtonClickedListener() {
+    private void setUpVisitOwnerProfileButtonClickedListener(String userId) {
         binding.visitOwnerProfileButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO: Navigate to User's public profile
+                userProfileViewModel.setContext(new UserProfileContext(userId));
+
+                getMainActivity().navigate(R.id.nav_public_user_profile);
             }
         });
     }

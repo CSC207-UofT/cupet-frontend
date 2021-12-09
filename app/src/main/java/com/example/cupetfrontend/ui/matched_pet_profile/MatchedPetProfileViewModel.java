@@ -42,14 +42,14 @@ public class MatchedPetProfileViewModel extends ViewModel implements IMatchedPet
     }
 
     @Override
-    public void onFetchOwnerContactInfoSuccess(UserProfileData userProfileData) {
+    public void onFetchUserProfileSuccess(UserProfileData userProfileData) {
         fetchUserContactInfoResultData.setValue(new
                 MatchedPetProfileOwnerContactInfoResult(userProfileData));
     }
 
     @Override
-    public void onFetchOwnerContactInfoFailure(String message) {
-        fetchUserContactInfoResultData.setValue(new MatchedPetProfileOwnerContactInfoResult(true, message));
-
+    public void onFetchUserProfileFailure(String message) {
+        fetchUserContactInfoResultData.setValue(
+                new MatchedPetProfileOwnerContactInfoResult(true, message));
     }
 }

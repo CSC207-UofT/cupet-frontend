@@ -5,6 +5,7 @@ import com.example.cupetfrontend.presenters.abstracts.IEditPetPresenter;
 import com.example.cupetfrontend.presenters.abstracts.IFetchPetProfilePresenter;
 import com.example.cupetfrontend.presenters.abstracts.IGetMatchesPresenter;
 import com.example.cupetfrontend.presenters.abstracts.IGetPotentialMatchesPresenter;
+import com.example.cupetfrontend.presenters.abstracts.IMatchedPetProfilePresenter;
 import com.example.cupetfrontend.presenters.abstracts.IUnMatchPresenter;
 import com.example.cupetfrontend.presenters.pet.CreatePetPresenter;
 import com.example.cupetfrontend.presenters.pet.EditPetPresenter;
@@ -79,5 +80,4 @@ public class PetPresentersModule {
     public IUnMatchPresenter provideUnMatchPetPresenter() {
         return new UnMatchPresenter();
     }
-
 }

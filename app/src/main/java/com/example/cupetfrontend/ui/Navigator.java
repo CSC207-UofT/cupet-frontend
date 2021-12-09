@@ -14,4 +14,6 @@ public interface Navigator {
      * @param navTarget The id of the page to navigate to
      */
     void navigate(int navTarget);
+
+    int getCurrentPage();
 }

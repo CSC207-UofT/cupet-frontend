@@ -77,7 +77,8 @@ public class  GetPetDataList {
         PetData newPetData = new PetData(response.getName(), response.getAge(),
                 response.getBreed(), response.getBiography(),
                 response.getProfileImgUrl(),
-                petIds.get(currentIndex));
+                petIds.get(currentIndex),
+                response.getUserId());
 
         petDataList.add(newPetData);
 

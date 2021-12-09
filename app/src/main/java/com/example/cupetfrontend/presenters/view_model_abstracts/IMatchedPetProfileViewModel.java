@@ -7,13 +7,8 @@ import com.example.cupetfrontend.presenters.view_model_abstracts.nav_context_mod
 import com.example.cupetfrontend.ui.matched_pet_profile.MatchedPetProfileOwnerContactInfoResult;
 import com.example.cupetfrontend.ui.user_profile.FetchUserProfileResult;
 
-public interface IMatchedPetProfileViewModel {
+public interface IMatchedPetProfileViewModel extends IFetchUserProfileViewModel {
     LiveData<MatchedPetProfileOwnerContactInfoResult> getUserContactInfoResult();
-
-    void onFetchOwnerContactInfoSuccess(UserProfileData userProfileData);
-
-    void onFetchOwnerContactInfoFailure(String message);
-
 
     void setContext(MatchedPetProfileContext context);
 

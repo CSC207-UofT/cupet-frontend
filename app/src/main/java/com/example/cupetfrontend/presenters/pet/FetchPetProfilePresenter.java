@@ -20,7 +20,8 @@ public class FetchPetProfilePresenter implements IFetchPetProfilePresenter {
                 response.getName(),
                 response.getAge(),
                 response.getBreed(),
-                response.getBiography()
+                response.getBiography(),
+                response.getUserId()
         );
     }
 

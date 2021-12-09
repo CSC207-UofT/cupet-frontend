@@ -124,4 +124,6 @@
     <string name="nav_user_account_title">Edit My Acccount</string>
     <string name="user_account_location_title">Location Data</string>
     <string name="leave_blank_to_remain_unchanged">Leave blank to remain unchanged</string>
+    <string name="nav_public_user_profile">Pet\'s Owner</string>
+    <string name="matched_pet_profile_title">Matched Pet Profile</string>
 </resources>
