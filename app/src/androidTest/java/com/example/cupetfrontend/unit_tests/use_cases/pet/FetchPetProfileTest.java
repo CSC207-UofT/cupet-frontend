@@ -1,7 +1,7 @@
 package com.example.cupetfrontend.unit_tests.use_cases.pet;
 
 import com.example.cupetfrontend.unit_tests.use_cases.UseCaseTestClass;
-import com.example.cupetfrontend.use_cases.FetchPetProfile;
+import com.example.cupetfrontend.use_cases.pet.FetchPetProfile;
 import com.example.cupetfrontend.use_cases.output_boundaries.pet.FetchPetProfileOutputBoundary;
 import com.example.cupetfrontend.use_cases.request_models.pet.FetchPetProfileRequestModel;
 import com.example.cupetfrontend.use_cases.response_models.pet.DefaultFailureResponseModel;

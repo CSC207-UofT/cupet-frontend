@@ -1,7 +1,7 @@
 package com.example.cupetfrontend.unit_tests.use_cases.pet;
 
 import com.example.cupetfrontend.unit_tests.use_cases.UseCaseTestClass;
-import com.example.cupetfrontend.use_cases.GetPotentialMatches;
+import com.example.cupetfrontend.use_cases.pet.GetPotentialMatches;
 import com.example.cupetfrontend.use_cases.output_boundaries.pet.GetPotentialMatchesOutputBoundary;
 import com.example.cupetfrontend.use_cases.request_models.pet.GetPotentialMatchesRequestModel;
 import com.example.cupetfrontend.use_cases.data_models.PetData;

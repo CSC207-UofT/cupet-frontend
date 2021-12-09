@@ -7,6 +7,9 @@ import androidx.lifecycle.ViewModel;
 import com.example.cupetfrontend.R;
 import com.example.cupetfrontend.controllers.abstracts.IPetController;
 import com.example.cupetfrontend.presenters.view_model_abstracts.ICreatePetViewModel;
+import com.example.cupetfrontend.presenters.view_model_abstracts.nav_context_models.CreatePetContext;
+
+import javax.inject.Inject;
 
 /**
  * A ViewModel class for the Create Pet page.
@@ -17,26 +20,32 @@ public class CreatePetViewModel extends ViewModel implements ICreatePetViewModel
     private final MutableLiveData<CreatePetFormState> createPetFormState = new MutableLiveData<>();
     private final MutableLiveData<CreatePetResult> createPetResult = new MutableLiveData<>();
     private final IPetController petController;
+    private CreatePetContext context;
 
+    @Inject
     public CreatePetViewModel(IPetController petController) {
         this.petController = petController;
     }
 
-    LiveData<CreatePetFormState> getCreatePetFormState() {
+    @Override
+    public LiveData<CreatePetFormState> getCreatePetFormState() {
         return createPetFormState;
     }
 
-    LiveData<CreatePetResult> getCreatePetResult() {
+    @Override
+    public LiveData<CreatePetResult> getCreatePetResult() {
         return createPetResult;
     }
 
     /**
      * Create a new create pet request
+     *
+     * @param token The user's session token
      * @param formData The pet creation data entered into the form
      */
-    public void createPet(CreatePetFormData formData){
-        // TODO: add token code
-        petController.createPet("token", formData.getPetName(), formData.getPetAge(),
+    @Override
+    public void createPet(String token, CreatePetFormData formData){
+        petController.createPet(token, formData.getPetName(), formData.getPetAge(),
                 formData.getPetBreed(), formData.getPetBio());
     }
 
@@ -44,6 +53,7 @@ public class CreatePetViewModel extends ViewModel implements ICreatePetViewModel
      * Update the state of the create pet form.
      * @param formData The data entered into the form.
      */
+    @Override
     public void updateFormState(CreatePetFormData formData) {
         CreatePetFormState newFormState = new CreatePetFormState();
 
@@ -115,8 +125,8 @@ public class CreatePetViewModel extends ViewModel implements ICreatePetViewModel
     }
 
     @Override
-    public void onCreatePetSuccess() {
-        CreatePetResult newCreatePetResult = new CreatePetResult(false);
+    public void onCreatePetSuccess(String petId) {
+        CreatePetResult newCreatePetResult = new CreatePetResult(petId);
 
         createPetResult.setValue(newCreatePetResult);
     }
@@ -126,5 +136,15 @@ public class CreatePetViewModel extends ViewModel implements ICreatePetViewModel
         CreatePetResult newCreatePetResult = new CreatePetResult(true, message);
 
         createPetResult.setValue(newCreatePetResult);
+    }
+
+    @Override
+    public CreatePetContext getContext() {
+        return context;
+    }
+
+    @Override
+    public void setContext(CreatePetContext context) {
+        this.context = context;
     }
 }

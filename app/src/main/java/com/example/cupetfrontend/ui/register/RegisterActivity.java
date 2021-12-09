@@ -12,12 +12,14 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.lifecycle.Observer;
+
 import com.example.cupetfrontend.App;
 import com.example.cupetfrontend.R;
 import com.example.cupetfrontend.controllers.abstracts.IUserController;
-import com.example.cupetfrontend.dependency_selector.DependencySelector;
 import com.example.cupetfrontend.presenters.abstracts.ICreateUserPresenter;
 import com.example.cupetfrontend.ui.login.LoginActivity;
+
+import javax.inject.Inject;
 
 /**
  * The activity for the Register page.
@@ -32,11 +34,16 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText cityField;
     private Button registerButton;
     private RegisterViewModel registerViewModel;
+    @Inject
+    public IUserController userController;
+    @Inject
+    public ICreateUserPresenter createUserPresenter;
 
     /**
      * Initialize the views of the form into the field instance variables.
      */
     private void initializeViews() {
+        // TODO: Replace with binding
         firstNameField = findViewById(R.id.reg_firstName);
         lastNameField = findViewById(R.id.reg_lastName);
         emailField = findViewById(R.id.reg_email);
@@ -48,14 +55,14 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     /**
-     * If errorState is non-null, display the error state on the field.
-     * 
+     * If error message is non-null, display the error message on the field.
+     *
      * @param field The field to display the error state in
-     * @param errorState The error state represented by an integer
+     * @param errorMessage the error message to display
      */
-    private void setFieldError(EditText field, Integer errorState) {
-        if (errorState != null) {
-            field.setError(getString(errorState));
+    private void setFieldError(EditText field, String errorMessage) {
+        if (errorMessage != null) {
+            field.setError(errorMessage);
         }
     }
 
@@ -67,11 +74,8 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        DependencySelector dependencySelector = ((App) getApplication()).getDependencySelector();
+        ((App) getApplicationContext()).getAppComponent().inject(this);
 
-        IUserController userController = dependencySelector.getControllers().getUserController();
-
-        ICreateUserPresenter createUserPresenter = dependencySelector.getUserPresenters().getCreateUserPresenter();
         registerViewModel = new RegisterViewModel(userController);
         createUserPresenter.setRegisterViewModel(registerViewModel);
 
@@ -184,13 +188,20 @@ public class RegisterActivity extends AppCompatActivity {
                     return;
                 }
 
-                setFieldError(firstNameField, registerFormState.getFirstnameError());
-                setFieldError(lastNameField, registerFormState.getLastnameError());
-                setFieldError(emailField, registerFormState.getEmailError());
-                setFieldError(passwordField, registerFormState.getPasswordError());
-                setFieldError(passwordConfirmField, registerFormState.getConfirmPasswordError());
-                setFieldError(addressField, registerFormState.getAddressError());
-                setFieldError(cityField, registerFormState.getCityError());
+                setFieldError(firstNameField,
+                        registerFormState.getFirstNameState().getErrorMessage());
+                setFieldError(lastNameField,
+                        registerFormState.getLastNameState().getErrorMessage());
+                setFieldError(emailField,
+                        registerFormState.getEmailState().getErrorMessage());
+                setFieldError(passwordField,
+                        registerFormState.getPasswordState().getErrorMessage());
+                setFieldError(passwordConfirmField,
+                        registerFormState.getConfirmPasswordState().getErrorMessage());
+                setFieldError(addressField,
+                        registerFormState.getHomeAddressState().getErrorMessage());
+                setFieldError(cityField,
+                        registerFormState.getCityState().getErrorMessage());
 
                 registerButton.setEnabled(registerFormState.isDataValid());
             }
@@ -212,8 +223,7 @@ public class RegisterActivity extends AppCompatActivity {
      * @param errorMessage The error message to display
      */
     private void onRegisterFailure (String errorMessage) {
-        System.out.println("Registration failed");
-        Toast.makeText(getApplicationContext(), "Registration failed: " + errorMessage, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "Registration Failed: " + errorMessage, Toast.LENGTH_SHORT).show();
     }
 
 }

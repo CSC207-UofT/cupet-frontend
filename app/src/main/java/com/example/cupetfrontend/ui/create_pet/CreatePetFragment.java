@@ -15,17 +15,22 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.Observer;
+import androidx.lifecycle.OnLifecycleEvent;
 
 import com.example.cupetfrontend.App;
 import com.example.cupetfrontend.R;
 import com.example.cupetfrontend.controllers.abstracts.IPetController;
+import com.example.cupetfrontend.controllers.abstracts.IPetSessionManager;
+import com.example.cupetfrontend.controllers.abstracts.ISessionManager;
 import com.example.cupetfrontend.databinding.FragmentCreatePetBinding;
-import com.example.cupetfrontend.databinding.FragmentEditPetBinding;
-import com.example.cupetfrontend.dependency_selector.DependencySelector;
 import com.example.cupetfrontend.presenters.abstracts.ICreatePetPresenter;
+import com.example.cupetfrontend.presenters.view_model_abstracts.ICreatePetViewModel;
 import com.example.cupetfrontend.ui.MainActivityFragment;
-import com.example.cupetfrontend.ui.my_pet_profile.PetProfileFragment;
+
+import javax.inject.Inject;
 
 /**
  * The fragment for the Create Pet page.
@@ -35,23 +40,29 @@ public class CreatePetFragment extends MainActivityFragment {
     private EditText petAgeField;
     private EditText petBreedField;
     private EditText petBioField;
-    private ImageView petImage;
     private Button createPetButton;
-    private ImageButton editPetImageButton;
-    private CreatePetViewModel createPetViewModel;
     private FragmentCreatePetBinding binding;
+
+    @Inject
+    public ICreatePetViewModel createPetViewModel;
+    @Inject
+    public IPetController petController;
+    @Inject
+    public ISessionManager sessionManager;
+    @Inject
+    public IPetSessionManager petSessionManager;
+    @Inject
+    public ICreatePetPresenter createPetPresenter;
 
     /**
      * Initialize the views of the form into the field instance variables.
      */
     private void initializeViews() {
-        petNameField = binding.petPetName;
-        petAgeField = binding.petPetAge;
-        petBreedField = binding.petPetBreed;
-        petBioField = binding.petPetBio;
-        petImage = binding.petImage;
+        petNameField = binding.createPetName;
+        petAgeField = binding.createPetAge;
+        petBreedField = binding.createPetBreed;
+        petBioField = binding.createPetBio;
         createPetButton = binding.confirmAddPetButton;
-        editPetImageButton = binding.editPetImageButton;
     }
 
     /**
@@ -73,11 +84,7 @@ public class CreatePetFragment extends MainActivityFragment {
         binding = FragmentCreatePetBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        initializeDependencySelector();
-        IPetController petController = dependencySelector.getControllers().getPetController();
-
-        ICreatePetPresenter createPetPresenter = dependencySelector.getPetPresenters().getCreatePetPresenter();
-        createPetViewModel = new CreatePetViewModel(petController);
+        ((App) getApplicationContext()).getAppComponent().inject(this);
         createPetPresenter.setCreatePetViewModel(createPetViewModel);
 
         initializeViews();
@@ -85,9 +92,23 @@ public class CreatePetFragment extends MainActivityFragment {
         setUpObserveCreatePetResult();
         setUpFormEditedListener();
         setUpCreatePetButtonClickedListener();
-        setUpEditPetImageButtonClickedListener();
+        attachToActivityCreate();
 
         return root;
+    }
+
+    private void attachToActivityCreate() {
+        getMainActivity().getLifecycle().addObserver(new LifecycleObserver() {
+            @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
+            public void onCreate() {
+                if (createPetViewModel.getContext() != null &&
+                        createPetViewModel.getContext().isFromLoginPage()){
+                    getMainActivity().hideNavigation();
+                }
+
+                getMainActivity().getLifecycle().removeObserver(this);
+            }
+        });
     }
 
     /**
@@ -127,19 +148,7 @@ public class CreatePetFragment extends MainActivityFragment {
         createPetButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 CreatePetFormData formData = getCreatePetFormData();
-                createPetViewModel.createPet(formData);
-            }
-        });
-    }
-
-    /**
-     * Set up a listener that sends a upload pet image request when editPetImageButton (pen)
-     * is clicked.
-     */
-    private void setUpEditPetImageButtonClickedListener() {
-        editPetImageButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                // TODO: take-in image
+                createPetViewModel.createPet(sessionManager.getToken(), formData);
             }
         });
     }
@@ -176,7 +185,7 @@ public class CreatePetFragment extends MainActivityFragment {
                 if (createPetResult.isError()){
                     onCreatePetFailure(createPetResult.getErrorMessage());
                 }else{
-                    onCreatePetSuccess();
+                    onCreatePetSuccess(createPetResult.getPetId());
                 }
             }
         });
@@ -209,11 +218,9 @@ public class CreatePetFragment extends MainActivityFragment {
     /**
      * Display a Pet Creation Success toast message and move to the login view.
      */
-    private void onCreatePetSuccess() {
+    private void onCreatePetSuccess(String petId) {
         Toast.makeText(getApplicationContext(), "Pet Creation Success", Toast.LENGTH_SHORT).show();
-
-        // TODO: Eventually navigate to all pets page and sign in as the newly created pet.
-        getMainActivity().navigate(R.id.nav_my_pet_profile);
+        getMainActivity().navigate(R.id.nav_view_my_pets);
     }
 
     /**

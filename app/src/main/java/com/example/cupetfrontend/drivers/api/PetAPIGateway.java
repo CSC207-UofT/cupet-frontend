@@ -81,7 +81,7 @@ public class PetAPIGateway extends APIGateway implements IPetAPIGateway {
             put("pet2Id", requestData.getOtherPetId());
         }});
 
-        String url = PetRoutesStore.toAbsoluteRoute(PetRoutesStore.REJECT_PETS);
+        String url = PetRoutesStore.toAbsoluteRoute(PetRoutesStore.SWIPE_PETS);
 
         requestManager.makePostRequest(url, requestBody,
                 createAuthHeaders(requestData.getToken()), responseListener);
@@ -94,7 +94,7 @@ public class PetAPIGateway extends APIGateway implements IPetAPIGateway {
             put("pet2Id", requestData.getOtherPetId());
         }});
 
-        String url = PetRoutesStore.toAbsoluteRoute(PetRoutesStore.SWIPE_PETS);
+        String url = PetRoutesStore.toAbsoluteRoute(PetRoutesStore.REJECT_PETS);
 
         requestManager.makePostRequest(url, requestBody,
                 createAuthHeaders(requestData.getToken()), responseListener);
@@ -119,7 +119,7 @@ public class PetAPIGateway extends APIGateway implements IPetAPIGateway {
             put("pet2Id", requestData.getOtherPetId());
         }});
 
-        String url = PetRoutesStore.toAbsoluteRoute(PetRoutesStore.UN_SWIPE_PETS);
+        String url = PetRoutesStore.toAbsoluteRoute(PetRoutesStore.UN_MATCH_PETS);
 
         requestManager.makePostRequest(url, requestBody,
                 createAuthHeaders(requestData.getToken()), responseListener);
@@ -128,6 +128,7 @@ public class PetAPIGateway extends APIGateway implements IPetAPIGateway {
     @Override
     public void setPetProfileImage(APISetPetProfileImageRequestModel requestData, IServerResponseListener responseListener) {
         JSONObject requestBody = new JSONObject(new HashMap<String, String>(){{
+            put("petId", requestData.getPetId());
             put("base64Encoded", requestData.getImgB64());
         }});
 

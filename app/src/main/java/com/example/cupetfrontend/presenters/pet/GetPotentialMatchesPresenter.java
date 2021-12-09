@@ -25,8 +25,8 @@ public class GetPotentialMatchesPresenter implements IGetPotentialMatchesPresent
             presentedPetData.add(new PresentedPetData(
                     petData.getName(),
                     petData.getAge(),
-                    petData.getBiography(),
                     petData.getBreed(),
+                    petData.getBiography(),
                     petData.getProfileImgUrl(),
                     petData.getPetId()
             ));

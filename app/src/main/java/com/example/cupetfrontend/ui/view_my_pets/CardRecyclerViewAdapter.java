@@ -15,7 +15,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.cupetfrontend.R;
+import com.example.cupetfrontend.controllers.abstracts.IPetSessionManager;
 import com.example.cupetfrontend.data.model.PetModel;
+import com.example.cupetfrontend.presenters.view_model_abstracts.ICreatePetViewModel;
+import com.example.cupetfrontend.presenters.view_model_abstracts.IViewMyPetsViewModel;
+import com.example.cupetfrontend.presenters.view_model_abstracts.nav_context_models.CreatePetContext;
+import com.example.cupetfrontend.presenters.view_model_abstracts.nav_context_models.ViewMyPetsContext;
+import com.example.cupetfrontend.ui.Navigator;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,11 +32,23 @@ public class CardRecyclerViewAdapter extends RecyclerView.Adapter<CardRecyclerVi
 
     private static final String TAG = "RecyclerViewAdapter";
 
-    private List<PetModel> mPetModels = new ArrayList<>();
+    private List<PetModel> mPetModels;
     private final Context mContext;
+    private final Navigator navigator;
+    private final IPetSessionManager petSessionManager;
+    private final ICreatePetViewModel createPetViewModel;
+    private final IViewMyPetsViewModel viewMyPetsViewModel;
 
-    public CardRecyclerViewAdapter(Context mContext, List<PetModel> mPetModels) {
+    public CardRecyclerViewAdapter(Context mContext, IPetSessionManager petSessionManager, Navigator navigator,
+                                   ICreatePetViewModel createPetViewModel, IViewMyPetsViewModel viewMyPetsViewModel) {
         this.mContext = mContext;
+        this.petSessionManager = petSessionManager;
+        this.navigator = navigator;
+        this.createPetViewModel = createPetViewModel;
+        this.viewMyPetsViewModel = viewMyPetsViewModel;
+    }
+
+    public void setPetModels(List<PetModel> mPetModels) {
         this.mPetModels = mPetModels;
     }
 
@@ -38,8 +58,7 @@ public class CardRecyclerViewAdapter extends RecyclerView.Adapter<CardRecyclerVi
         // This method is responsible for inflating the view
         // Basically recycles the view holders - puts them in position they should be put into
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_carditem, parent, false);
-        ViewHolder holder = new ViewHolder(view);
-        return holder;
+        return new ViewHolder(view);
     }
 
     @Override
@@ -47,25 +66,50 @@ public class CardRecyclerViewAdapter extends RecyclerView.Adapter<CardRecyclerVi
         // important method - will change based on our layouts and what they should look like
         Log.d(TAG, "onBindViewHolder: called."); // debugging
 
-        Glide.with(mContext)
-                // tells Glide we it as bitmap
-                .asBitmap()
-                // where we would reference img URLs - resource where img is coming from
-                .load(mPetModels.get(holder.getAdapterPosition()).getPetImageUrl())
-                // loading image into image view - so reference view holder -> image widget
-                .into(holder.petImage);
-        holder.petName.setText(mPetModels.get(holder.getAdapterPosition()).getPetName());
+        String petImageUrl = getPetModelFrom(holder).getPetImageUrl();
 
-        // set on click listener for each view in the RecyclerView.
+        if (!petImageUrl.equals("")){
+            Glide.with(mContext)
+                    // tells Glide we it as bitmap
+                    .asBitmap()
+                    // where we would reference img URLs - resource where img is coming from
+                    .load(petImageUrl)
+                    // loading image into image view - so reference view holder -> image widget
+                    .into(holder.petImage);
+        }
+
+        holder.petName.setText(getPetModelFrom(holder).getPetName());
+        setUpHolderClickListener(holder);
+    }
+
+    private void setUpHolderClickListener(@NotNull ViewHolder holder) {
         holder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(TAG, "onClick: clicked on:" + mPetModels.get(holder.getAdapterPosition()));
+                Log.d(TAG, "onClick: clicked on:" + getPetModelFrom(holder));
+                PetModel petModel = getPetModelFrom(holder);
 
-                Toast.makeText(mContext, mPetModels.get(holder.getAdapterPosition()).getPetName(), Toast.LENGTH_SHORT).show();
-                //TODO: Send to appropriate page for selected pet
+                String toastMessage = "Switched to " + petModel.getPetName();
+
+                Toast.makeText(mContext, toastMessage, Toast.LENGTH_SHORT).show();
+                petSessionManager.setPetId(petModel.getPetId());
+
+                createPetViewModel.setContext(
+                        new CreatePetContext(false));
+                viewMyPetsViewModel.setContext(
+                        new ViewMyPetsContext(false));
+                navigator.showNavigation();
+
+                navigator.navigate(R.id.nav_my_pet_profile);
             }
         });
+    }
+
+    /**
+     * Return the pet model associated with a view holder.
+     */
+    private PetModel getPetModelFrom(@NonNull ViewHolder holder) {
+        return mPetModels.get(holder.getAdapterPosition());
     }
 
 
@@ -79,7 +123,6 @@ public class CardRecyclerViewAdapter extends RecyclerView.Adapter<CardRecyclerVi
     public int getItemCount() {
         return mPetModels.size();
     }
-
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 

@@ -17,6 +17,12 @@ import com.example.cupetfrontend.use_cases.request_models.user.*;
 import com.example.cupetfrontend.use_cases.response_models.LoginSuccessResponseModel;
 import com.example.cupetfrontend.use_cases.response_models.pet.DefaultFailureResponseModel;
 import com.example.cupetfrontend.use_cases.response_models.user.*;
+import com.example.cupetfrontend.use_cases.user.EditUserAccount;
+import com.example.cupetfrontend.use_cases.user.EditUserProfile;
+import com.example.cupetfrontend.use_cases.user.FetchUserAccount;
+import com.example.cupetfrontend.use_cases.user.FetchUserProfile;
+import com.example.cupetfrontend.use_cases.user.UserCreator;
+
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Test;

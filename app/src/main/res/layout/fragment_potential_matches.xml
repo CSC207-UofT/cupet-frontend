@@ -16,7 +16,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/potential_no_matches_text"
-            android:textSize="36sp"
+            android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -40,11 +40,12 @@
                 <ImageView
                     android:id="@+id/potential_profile_img"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="411dp"
                     android:adjustViewBounds="true"
                     android:scaleType="fitCenter"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/default_pet_profile_img"
                     tools:src="@tools:sample/avatars" />
 
                 <ImageView
@@ -85,7 +86,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="20dp"
-                    android:src="@drawable/ic_dot_dot_dot"
+                    app:srcCompat="@drawable/ic_dot_dot_dot"
                     app:layout_constraintBottom_toBottomOf="@+id/potential_profile_img"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
@@ -148,7 +149,7 @@
                     android:layout_marginStart="70dp"
                     android:background="@drawable/round_btn"
                     android:padding="20dp"
-                    android:src="@drawable/ic_reject_x"
+                    app:srcCompat ="@drawable/ic_reject_x"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -160,8 +161,7 @@
                     android:background="@drawable/round_btn"
                     android:padding="20dp"
                     android:paddingBottom="20dp"
-
-                    android:src="@drawable/ic_match_heart"
+                    app:srcCompat ="@drawable/ic_match_heart"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>

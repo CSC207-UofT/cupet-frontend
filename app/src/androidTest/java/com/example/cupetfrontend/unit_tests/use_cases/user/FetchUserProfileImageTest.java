@@ -1,14 +1,10 @@
 package com.example.cupetfrontend.unit_tests.use_cases.user;
 
 import com.example.cupetfrontend.unit_tests.use_cases.UseCaseTestClass;
-import com.example.cupetfrontend.use_cases.FetchPetProfileImage;
-import com.example.cupetfrontend.use_cases.FetchUserProfileImage;
-import com.example.cupetfrontend.use_cases.output_boundaries.pet.FetchPetProfileImageOutputBoundary;
+import com.example.cupetfrontend.use_cases.user.FetchUserProfileImage;
 import com.example.cupetfrontend.use_cases.output_boundaries.user.FetchUserProfileImageOutputBoundary;
-import com.example.cupetfrontend.use_cases.request_models.pet.FetchPetProfileImageRequestModel;
 import com.example.cupetfrontend.use_cases.request_models.user.FetchUserProfileImageRequestModel;
 import com.example.cupetfrontend.use_cases.response_models.pet.DefaultFailureResponseModel;
-import com.example.cupetfrontend.use_cases.response_models.pet.PetProfileImageSuccessResponseModel;
 import com.example.cupetfrontend.use_cases.response_models.user.UserProfileImageSuccessResponseModel;
 
 import org.junit.Test;

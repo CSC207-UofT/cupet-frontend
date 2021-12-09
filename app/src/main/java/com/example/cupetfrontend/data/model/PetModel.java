@@ -11,22 +11,16 @@ public class PetModel {
     private String petBreed;
     private String petImageUrl;
     private String petAge;
+    private String userId;
 
-
-    public PetModel(String petId, String petName, String petAge, String petBreed, String petImageUrl){
+    public PetModel(String petId, String petName, String petAge,
+                    String petBreed, String petImageUrl, String userId){
         this.petId = petId;
         this.petName = petName;
         this.petAge = petAge;
         this.petBreed = petBreed;
         this.petImageUrl = petImageUrl;
-    }
-
-    public PetModel(String petId, String petName, String petAge, String petBreed){
-        this.petId = petId;
-        this.petName = petName;
-        this.petAge = petAge;
-        this.petBreed = petBreed;
-        this.petImageUrl = "https://static.thenounproject.com/png/963949-200.png";
+        this.userId = userId;
     }
 
     public String getPetId() {
@@ -67,5 +61,13 @@ public class PetModel {
 
     public void setPetAge(String petAge) {
         this.petAge = petAge;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 }

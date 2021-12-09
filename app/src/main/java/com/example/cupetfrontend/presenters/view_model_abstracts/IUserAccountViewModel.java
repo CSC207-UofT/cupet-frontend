@@ -1,7 +1,9 @@
 package com.example.cupetfrontend.presenters.view_model_abstracts;
 
-public interface IUserAccountViewModel {
-    void onUserAccountSuccess(String firstname, String lastname, String address, String city, String password);
+import com.example.cupetfrontend.presenters.data_models.UserAccountData;
 
-    void onUserAccountFailure();
+public interface IUserAccountViewModel {
+    void onUserAccountSuccess(UserAccountData userAccountData);
+
+    void onUserAccountFailure(String message);
 }
