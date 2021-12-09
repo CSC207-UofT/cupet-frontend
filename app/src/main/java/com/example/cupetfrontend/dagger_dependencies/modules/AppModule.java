@@ -22,7 +22,7 @@ public class AppModule {
     @Singleton
     @Provides
     @NonNull
-    public Context provideContext(){
+    public Context provideContext() {
         return context;
     }
 

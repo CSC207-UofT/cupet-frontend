@@ -6,6 +6,7 @@ import com.example.cupetfrontend.use_cases.api_abstracts.IServerRequestManager;
 import com.example.cupetfrontend.use_cases.api_abstracts.IServerResponseListener;
 import com.example.cupetfrontend.use_cases.api_abstracts.IUserAPIGateway;
 import com.example.cupetfrontend.use_cases.api_abstracts.request_models.user.*;
+
 import org.json.JSONObject;
 
 import java.util.HashMap;
@@ -40,7 +41,7 @@ public class UserAPIGateway extends APIGateway implements IUserAPIGateway {
 
     @Override
     public void fetchUserProfile(APIFetchUserProfileRequestModel requestData, IServerResponseListener responseListener) {
-        HashMap<String, String> queryParams = new HashMap<String, String>(){{
+        HashMap<String, String> queryParams = new HashMap<String, String>() {{
             put("userId", requestData.getUserId());
         }};
 
@@ -52,7 +53,7 @@ public class UserAPIGateway extends APIGateway implements IUserAPIGateway {
 
     @Override
     public void editUserProfile(APIEditUserProfileRequestModel requestData, IServerResponseListener responseListener) {
-        JSONObject requestBody = new JSONObject(new HashMap<String, String>(){{
+        JSONObject requestBody = new JSONObject(new HashMap<String, String>() {{
             put("newBiography", requestData.getBiography());
             put("newInstagram", requestData.getInstagram());
             put("newFacebook", requestData.getFacebook());
@@ -68,7 +69,7 @@ public class UserAPIGateway extends APIGateway implements IUserAPIGateway {
 
     @Override
     public void fetchUserAccount(APIFetchUserAccountRequestModel requestData, IServerResponseListener responseListener) {
-        HashMap<String, String> queryParams = new HashMap<String, String>(){{
+        HashMap<String, String> queryParams = new HashMap<String, String>() {{
             put("userId", UserIdFetcher.getUserId(requestData.getToken()));
         }};
 
@@ -80,12 +81,12 @@ public class UserAPIGateway extends APIGateway implements IUserAPIGateway {
 
     @Override
     public void editUserAccount(APIEditUserAccountRequestModel requestData, IServerResponseListener responseListener) {
-        JSONObject requestBody = new JSONObject(new HashMap<String, String>(){{
+        JSONObject requestBody = new JSONObject(new HashMap<String, String>() {{
             put("newFirstName", requestData.getFirstName());
             put("newLastName", requestData.getLastName());
             put("newAddress", requestData.getHomeAddress());
             put("newCity", requestData.getCity());
-            if (requestData.getPassword() != null){
+            if (requestData.getPassword() != null) {
                 put("newPassword", requestData.getPassword());
             }
             put("newEmail", requestData.getEmail());
@@ -100,7 +101,7 @@ public class UserAPIGateway extends APIGateway implements IUserAPIGateway {
 
     @Override
     public void getPets(APIGetPetsRequestModel requestData, IServerResponseListener responseListener) {
-        HashMap<String, String> queryParams = new HashMap<String, String>(){{
+        HashMap<String, String> queryParams = new HashMap<String, String>() {{
             put("userId", UserIdFetcher.getUserId(requestData.getToken()));
         }};
 
@@ -113,7 +114,7 @@ public class UserAPIGateway extends APIGateway implements IUserAPIGateway {
     @Override
     public void setUserProfileImage(APISetUserProfileImageRequestModel requestData,
                                     IServerResponseListener responseListener) {
-        JSONObject requestBody = new JSONObject(new HashMap<String, String>(){{
+        JSONObject requestBody = new JSONObject(new HashMap<String, String>() {{
             put("base64Encoded", requestData.getImgB64());
         }});
 
@@ -125,7 +126,7 @@ public class UserAPIGateway extends APIGateway implements IUserAPIGateway {
 
     @Override
     public void fetchUserProfileImage(APIFetchUserProfileImageRequestModel requestData, IServerResponseListener responseListener) {
-        HashMap<String, String> queryParams = new HashMap<String, String>(){{
+        HashMap<String, String> queryParams = new HashMap<String, String>() {{
             put("userId", requestData.getUserId());
         }};
 

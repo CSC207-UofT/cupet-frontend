@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.Observer;
+
 import com.bumptech.glide.Glide;
 import com.example.cupetfrontend.R;
 import com.example.cupetfrontend.controllers.abstracts.ISessionManager;
@@ -51,10 +52,10 @@ public class UserProfileFragment extends MainActivityFragment {
         getApplicationContext().getAppComponent().inject(this);
         fetchUserProfilePresenter.setViewModel(viewModel);
 
-        if (viewModel.getContext() != null && getMainActivity().getCurrentPage() == R.id.nav_public_user_profile){
+        if (viewModel.getContext() != null && getMainActivity().getCurrentPage() == R.id.nav_public_user_profile) {
             userId = viewModel.getContext().getUserId();
             getMainActivity().hideEditButton();
-        }else{
+        } else {
             userId = sessionManager.getUserId();
             getMainActivity().showEditButton();
         }
@@ -64,11 +65,11 @@ public class UserProfileFragment extends MainActivityFragment {
         viewModel.getFetchUserProfileResult().observe(getViewLifecycleOwner(), new Observer<FetchUserProfileResult>() {
             @Override
             public void onChanged(FetchUserProfileResult fetchUserProfileResult) {
-                if (fetchUserProfileResult == null){
+                if (fetchUserProfileResult == null) {
                     return;
                 }
 
-                if (fetchUserProfileResult.isError()){
+                if (fetchUserProfileResult.isError()) {
                     onFetchUserProfileFailure(fetchUserProfileResult.getErrorMessage());
                 } else {
                     onFetchUserProfileSuccess(fetchUserProfileResult.getUserProfileData());
@@ -81,12 +82,12 @@ public class UserProfileFragment extends MainActivityFragment {
         return root;
     }
 
-    private void onFetchUserProfileSuccess(UserProfileData userProfileData){
+    private void onFetchUserProfileSuccess(UserProfileData userProfileData) {
         contactInfoViewModel.setContactInfoData(userProfileData.getEmail(),
                 userProfileData.getPhoneNumber(), userProfileData.getFacebook(),
                 userProfileData.getInstagram(), null);
 
-        if (!userProfileData.getProfileImgUrl().equals("")){
+        if (!userProfileData.getProfileImgUrl().equals("")) {
             Glide.with(this).load(userProfileData.getProfileImgUrl())
                     .into(binding.userProfileImage);
         }
@@ -102,7 +103,7 @@ public class UserProfileFragment extends MainActivityFragment {
         ));
     }
 
-    private void onFetchUserProfileFailure(String errorMessage){
+    private void onFetchUserProfileFailure(String errorMessage) {
         Toast.makeText(getApplicationContext(), "Fetch User Profile Failed: " +
                 errorMessage, Toast.LENGTH_SHORT).show();
     }

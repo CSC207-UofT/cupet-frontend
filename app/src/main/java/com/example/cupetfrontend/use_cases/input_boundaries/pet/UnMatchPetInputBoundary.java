@@ -5,6 +5,7 @@ import com.example.cupetfrontend.use_cases.request_models.pet.UnMatchPetRequestM
 public interface UnMatchPetInputBoundary {
     /**
      * Un-match a pet you've already matched with
+     *
      * @param request The request data
      */
     void unMatchPet(UnMatchPetRequestModel request);

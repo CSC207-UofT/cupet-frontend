@@ -6,6 +6,7 @@ import com.example.cupetfrontend.use_cases.request_models.pet.GetMatchesRequestM
 public interface GetMatchesInputBoundary {
     /**
      * Get a list of successful matches for a pet given request data
+     *
      * @param request The request data
      */
     void getMatches(GetMatchesRequestModel request);

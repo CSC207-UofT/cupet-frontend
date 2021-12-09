@@ -10,11 +10,14 @@ import com.example.cupetfrontend.use_cases.response_models.pet.RejectMatchSucces
 public interface RejectMatchOutputBoundary {
     /**
      * Method called when a successful response is received.
+     *
      * @param response The response data
      */
     void onRejectMatchSuccess(RejectMatchSuccessResponseModel response);
+
     /**
      * Method called when a failed response is received.
+     *
      * @param response The response data
      */
     void onRejectMatchFailure(DefaultFailureResponseModel response);

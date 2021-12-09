@@ -9,11 +9,12 @@ import com.example.cupetfrontend.use_cases.output_boundaries.pet.GetPetDataListO
 import com.example.cupetfrontend.use_cases.request_models.pet.GetMatchesRequestModel;
 import com.example.cupetfrontend.use_cases.data_models.PetData;
 import com.example.cupetfrontend.use_cases.response_models.pet.GetMatchesSuccessResponseModel;
+
 import org.json.JSONObject;
 
 import java.util.List;
 
-public class GetMatches extends UsesPetDataWrapper implements GetMatchesInputBoundary{
+public class GetMatches extends UsesPetDataWrapper implements GetMatchesInputBoundary {
     IPetAPIGateway petAPIGateway;
     GetMatchesOutputBoundary outputBoundary;
 

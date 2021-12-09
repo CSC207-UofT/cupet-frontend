@@ -3,7 +3,7 @@ package com.example.cupetfrontend.use_cases.data_models;
 /**
  * A class representing all data stored for a particular pet
  */
-public class PetData extends PetProfile{
+public class PetData extends PetProfile {
     private final String petId;
     private final String profileImgUrl;
     private final String userId;

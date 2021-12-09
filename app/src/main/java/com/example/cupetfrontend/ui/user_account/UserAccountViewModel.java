@@ -3,6 +3,7 @@ package com.example.cupetfrontend.ui.user_account;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
+
 import com.example.cupetfrontend.controllers.SessionManager;
 import com.example.cupetfrontend.controllers.abstracts.IUserController;
 import com.example.cupetfrontend.presenters.data_models.UserAccountData;
@@ -14,17 +15,17 @@ public class UserAccountViewModel extends ViewModel implements IUserAccountViewM
     private final IUserController userController;
     private final MutableLiveData<UserAccountResult> userAccountResult = new MutableLiveData<>();
 
-    public UserAccountViewModel(IUserController userController){
+    public UserAccountViewModel(IUserController userController) {
         this.userController = userController;
 
     }
 
-    public void fetchUserAccount(String token){
+    public void fetchUserAccount(String token) {
         userController.fetchUserAccount(token);
     }
 
     @Override
-    public void onUserAccountSuccess(UserAccountData userAccountData){
+    public void onUserAccountSuccess(UserAccountData userAccountData) {
         userAccountResult.setValue(new UserAccountResult(userAccountData));
     }
 
@@ -34,7 +35,7 @@ public class UserAccountViewModel extends ViewModel implements IUserAccountViewM
         userAccountResult.setValue(newFetchUserAccountResult);
     }
 
-    public LiveData<UserAccountResult> getUserAccountResult(){
+    public LiveData<UserAccountResult> getUserAccountResult() {
         return this.userAccountResult;
     }
 }

@@ -25,59 +25,59 @@ public class EditUserProfileViewModel extends ViewModel implements IEditUserProf
     private EditUserProfileContext context;
 
     @Inject
-    public EditUserProfileViewModel(IUserController userController){
+    public EditUserProfileViewModel(IUserController userController) {
         this.userController = userController;
     }
 
     @Override
-    public LiveData<EditUserProfileState> getEditUserProfileState(){
+    public LiveData<EditUserProfileState> getEditUserProfileState() {
         return this.editUserProfileState;
     }
 
     @Override
-    public LiveData<EditUserProfileResult> getEditUserProfileResult(){
+    public LiveData<EditUserProfileResult> getEditUserProfileResult() {
         return this.editUserProfileResult;
     }
 
     @Override
-    public void setUserProfileImage(String token, String imgB64){
+    public void setUserProfileImage(String token, String imgB64) {
         userController.setUserProfileImage(token, imgB64);
     }
 
     @Override
-    public void editUserProfile(EditUserProfileData formData, String token){
+    public void editUserProfile(EditUserProfileData formData, String token) {
         userController.editUserProfile(token, formData.getBiography(),
-                formData.getInstagram(),formData.getFacebook(), formData.getPhoneNumber());
+                formData.getInstagram(), formData.getFacebook(), formData.getPhoneNumber());
     }
 
     @Override
-    public void updateFormState(EditUserProfileData formData){
+    public void updateFormState(EditUserProfileData formData) {
         EditUserProfileState newFormState = new EditUserProfileState();
         EditUserProfileState oldFormState = editUserProfileState.getValue();
 
-        if (oldFormState == null){
+        if (oldFormState == null) {
             editUserProfileState.setValue(newFormState);
             return;
         }
 
         validateForm(formData, newFormState, oldFormState);
-        checkFormStateInteracted(formData,  newFormState);
+        checkFormStateInteracted(formData, newFormState);
 
         editUserProfileState.setValue(newFormState);
     }
 
     private void checkFormStateInteracted(EditUserProfileData formData,
                                           EditUserProfileState state) {
-        if (formData.getBiography() != null && !formData.getBiography().equals("")){
+        if (formData.getBiography() != null && !formData.getBiography().equals("")) {
             state.getBiographyState().onFieldInteracted();
         }
-        if (formData.getPhoneNumber() != null && !formData.getPhoneNumber().equals("")){
+        if (formData.getPhoneNumber() != null && !formData.getPhoneNumber().equals("")) {
             state.getPhoneNumberState().onFieldInteracted();
         }
-        if (formData.getFacebook() != null && !formData.getFacebook().equals("")){
+        if (formData.getFacebook() != null && !formData.getFacebook().equals("")) {
             state.getFacebookState().onFieldInteracted();
         }
-        if (formData.getInstagram() != null && !formData.getInstagram().equals("")){
+        if (formData.getInstagram() != null && !formData.getInstagram().equals("")) {
             state.getInstagramState().onFieldInteracted();
         }
     }

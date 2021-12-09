@@ -5,6 +5,7 @@ import com.example.cupetfrontend.use_cases.request_models.pet.FetchPetProfileReq
 public interface FetchPetProfileInputBoundary {
     /**
      * Fetch a pet profile given request data
+     *
      * @param request The request data
      */
     void fetchPetProfile(FetchPetProfileRequestModel request);

@@ -5,6 +5,7 @@ import com.example.cupetfrontend.use_cases.request_models.user.EditUserAccountRe
 public interface EditUserAccountInputBoundary {
     /**
      * Edit a user's account given the request data
+     *
      * @param request The request data
      */
     void editUserAccount(EditUserAccountRequestModel request);

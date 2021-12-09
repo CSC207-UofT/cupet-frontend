@@ -16,26 +16,31 @@ import com.example.cupetfrontend.use_cases.output_boundaries.pet.UnMatchPetOutpu
 import dagger.Binds;
 import dagger.Module;
 
-@Module(includes={PetPresentersModule.class})
+@Module(includes = {PetPresentersModule.class})
 public abstract class PetOutputBoundariesModule {
     @Binds
     abstract PetCreatorOutputBoundary providePetCreatorOutputBoundary(
             ICreatePetPresenter createPetPresenter);
 
-    @Binds abstract EditPetOutputBoundary provideEditPetOutputBoundary(
+    @Binds
+    abstract EditPetOutputBoundary provideEditPetOutputBoundary(
             IEditPetPresenter editPetPresenter);
 
 
-    @Binds abstract FetchPetProfileOutputBoundary provideFetchPetProfileOutputBoundary(
+    @Binds
+    abstract FetchPetProfileOutputBoundary provideFetchPetProfileOutputBoundary(
             IFetchPetProfilePresenter fetchPetProfilePresenter);
 
 
-    @Binds abstract GetMatchesOutputBoundary provideGetMatchesOutputBoundary(
+    @Binds
+    abstract GetMatchesOutputBoundary provideGetMatchesOutputBoundary(
             IGetMatchesPresenter getMatchesPresenter);
 
-    @Binds abstract GetPotentialMatchesOutputBoundary provideGetPotentialMatchesOutputBoundary(
+    @Binds
+    abstract GetPotentialMatchesOutputBoundary provideGetPotentialMatchesOutputBoundary(
             IGetPotentialMatchesPresenter getPotentialMatchesPresenter);
 
-    @Binds abstract UnMatchPetOutputBoundary provideUnMatchPetOutputBoundary(
+    @Binds
+    abstract UnMatchPetOutputBoundary provideUnMatchPetOutputBoundary(
             IUnMatchPresenter unMatchPresenter);
 }

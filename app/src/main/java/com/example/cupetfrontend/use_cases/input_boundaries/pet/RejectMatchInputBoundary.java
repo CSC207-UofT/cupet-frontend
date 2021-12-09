@@ -5,6 +5,7 @@ import com.example.cupetfrontend.use_cases.request_models.pet.RejectMatchRequest
 public interface RejectMatchInputBoundary {
     /**
      * Reject a potential match given request data
+     *
      * @param request The request data
      */
     void rejectMatch(RejectMatchRequestModel request);

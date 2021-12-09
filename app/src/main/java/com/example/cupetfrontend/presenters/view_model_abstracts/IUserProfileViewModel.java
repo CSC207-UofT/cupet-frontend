@@ -5,7 +5,7 @@ import com.example.cupetfrontend.ui.user_profile.FetchUserProfileResult;
 
 import androidx.lifecycle.LiveData;
 
-public interface IUserProfileViewModel extends IFetchUserProfileViewModel{
+public interface IUserProfileViewModel extends IFetchUserProfileViewModel {
     void fetchUserProfile(String token, String userId);
 
     LiveData<FetchUserProfileResult> getFetchUserProfileResult();

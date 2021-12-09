@@ -40,17 +40,18 @@ public class CreatePetViewModel extends ViewModel implements ICreatePetViewModel
     /**
      * Create a new create pet request
      *
-     * @param token The user's session token
+     * @param token    The user's session token
      * @param formData The pet creation data entered into the form
      */
     @Override
-    public void createPet(String token, CreatePetFormData formData){
+    public void createPet(String token, CreatePetFormData formData) {
         petController.createPet(token, formData.getPetName(), formData.getPetAge(),
                 formData.getPetBreed(), formData.getPetBio());
     }
 
     /**
      * Update the state of the create pet form.
+     *
      * @param formData The data entered into the form.
      */
     @Override
@@ -74,25 +75,28 @@ public class CreatePetViewModel extends ViewModel implements ICreatePetViewModel
 
     /**
      * Return whether petName is valid.
+     *
      * @param petName The pet's name
      * @return whether petName is valid
      */
-    private boolean isPetNameValid(String petName){
+    private boolean isPetNameValid(String petName) {
         return petName != null && petName.trim().length() > 0;
     }
 
     /**
      * Return whether petAge is valid.
+     *
      * @param petAge The pet's age
      * @return whether petAge is valid
      */
-    private boolean isPetAgeValid(String petAge){
+    private boolean isPetAgeValid(String petAge) {
         return petAge != null && petAge.trim().length() > 0 && isInt(petAge.trim());
 
     }
 
     /**
      * A helper method that check if petAge is an integer.
+     *
      * @param str input string (eg. petAge)
      * @return whether input string can be convert to integer.
      */
@@ -108,19 +112,21 @@ public class CreatePetViewModel extends ViewModel implements ICreatePetViewModel
 
     /**
      * Return whether petBreed is valid.
+     *
      * @param petBreed The pet's breed
      * @return whether petBreed is valid
      */
-    private boolean isPetBreedValid(String petBreed){
+    private boolean isPetBreedValid(String petBreed) {
         return petBreed != null && petBreed.trim().length() > 0;
     }
 
     /**
      * Return whether petBio is valid.
+     *
      * @param petBio The pet's breed
      * @return whether petBio is valid
      */
-    private boolean isPetBioValid(String petBio){
+    private boolean isPetBioValid(String petBio) {
         return petBio != null && petBio.trim().length() > 0;
     }
 

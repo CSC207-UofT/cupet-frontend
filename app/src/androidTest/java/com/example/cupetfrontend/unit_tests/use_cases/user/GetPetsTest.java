@@ -1,12 +1,13 @@
 package com.example.cupetfrontend.unit_tests.use_cases.user;
 
 import com.example.cupetfrontend.unit_tests.use_cases.UseCaseTestClass;
-import com.example.cupetfrontend.use_cases.user.GetPets;
+import com.example.cupetfrontend.use_cases.data_models.PetData;
 import com.example.cupetfrontend.use_cases.output_boundaries.user.GetPetsOutputBoundary;
 import com.example.cupetfrontend.use_cases.request_models.user.GetPetsRequestModel;
-import com.example.cupetfrontend.use_cases.data_models.PetData;
 import com.example.cupetfrontend.use_cases.response_models.pet.DefaultFailureResponseModel;
 import com.example.cupetfrontend.use_cases.response_models.user.GetPetsSuccessResponseModel;
+import com.example.cupetfrontend.use_cases.user.GetPets;
+
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -14,14 +15,14 @@ import static org.junit.Assert.fail;
 
 public class GetPetsTest extends UseCaseTestClass {
     @Test
-    public void testGetPetsSuccess(){
+    public void testGetPetsSuccess() {
         GetPetsRequestModel request = new GetPetsRequestModel(
                 "dummy token");
 
         new GetPets(successPetAPIGateway, successUserAPIGateway, new GetPetsOutputBoundary() {
             @Override
             public void onGetPetsSuccess(GetPetsSuccessResponseModel response) {
-                for (PetData pet : response.getPets()){
+                for (PetData pet : response.getPets()) {
                     assertEquals(pet.getName(), "dummy name");
                     assertEquals(pet.getAge(), "dummy age");
                     assertEquals(pet.getBreed(), "dummy breed");
@@ -42,7 +43,7 @@ public class GetPetsTest extends UseCaseTestClass {
     }
 
     @Test
-    public void testGetPetsFailure(){
+    public void testGetPetsFailure() {
         GetPetsRequestModel request = new GetPetsRequestModel(
                 "dummy token");
 

@@ -77,7 +77,7 @@ public class EditUserAccountFormState {
         this.cityState = cityState;
     }
 
-    public boolean isDataValid(){
+    public boolean isDataValid() {
         boolean isError = firstNameState.isError() || lastNameState.isError() ||
                 emailState.isError() || passwordState.isError() || confirmPasswordState.isError()
                 || homeAddressState.isError() || cityState.isError();

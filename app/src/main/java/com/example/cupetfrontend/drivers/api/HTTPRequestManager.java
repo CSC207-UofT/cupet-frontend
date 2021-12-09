@@ -3,14 +3,17 @@ package com.example.cupetfrontend.drivers.api;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Build;
+
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+
 import com.android.volley.*;
 import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.cupetfrontend.use_cases.api_abstracts.IServerRequestManager;
 import com.example.cupetfrontend.use_cases.api_abstracts.IServerResponseListener;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -51,7 +54,7 @@ public class HTTPRequestManager implements IServerRequestManager {
 
     /**
      * Construct a new instance of HTTPRequestManager
-     * 
+     *
      * @param context An Android context (activity, application, etc.)
      */
     public HTTPRequestManager(Context context) {
@@ -70,13 +73,13 @@ public class HTTPRequestManager implements IServerRequestManager {
     /**
      * Attach query parameters to a URL.
      *
-     * @param url The url
+     * @param url      The url
      * @param queryMap A map representing the query parameters to add to the url
      */
-    public String attachQueryParamsToUrl(String url, Map<String, String> queryMap){
+    public String attachQueryParamsToUrl(String url, Map<String, String> queryMap) {
         Uri.Builder uriBuilder = Uri.parse(url).buildUpon();
 
-        for (String key : queryMap.keySet()){
+        for (String key : queryMap.keySet()) {
             uriBuilder.appendQueryParameter(key, queryMap.get(key));
         }
 
@@ -87,11 +90,11 @@ public class HTTPRequestManager implements IServerRequestManager {
      * Make an HTTP request with a JSON body that expects a JSON
      * response.
      *
-     * @param method An integer representing the method of request (GET, POST, etc.)
-     *               See volley.Request.method
-     * @param url The url of the HTTP request
+     * @param method      An integer representing the method of request (GET, POST, etc.)
+     *                    See volley.Request.method
+     * @param url         The url of the HTTP request
      * @param requestBody The body of the HTTP request as a JSONObject
-     * @param listener An object that listens to the server response
+     * @param listener    An object that listens to the server response
      */
     private void makeJSONRequest(int method, String url, JSONObject requestBody,
                                  IServerResponseListener listener) {
@@ -105,12 +108,12 @@ public class HTTPRequestManager implements IServerRequestManager {
      * Make an HTTP request with a JSON body that expects a JSON
      * response.
      *
-     * @param method An integer representing the method of request (GET, POST, etc.)
-     *               See volley.Request.method
-     * @param url The url of the HTTP request
+     * @param method      An integer representing the method of request (GET, POST, etc.)
+     *                    See volley.Request.method
+     * @param url         The url of the HTTP request
      * @param requestBody The body of the HTTP request as a JSONObject
-     * @param headers The headers for the HTTP request
-     * @param listener An object that listens to the server response
+     * @param headers     The headers for the HTTP request
+     * @param listener    An object that listens to the server response
      */
     private void makeJSONRequest(int method, String url, JSONObject requestBody,
                                  Map<String, String> headers, IServerResponseListener listener) {
@@ -124,11 +127,11 @@ public class HTTPRequestManager implements IServerRequestManager {
      * Make an HTTP request with a JSON body that expects a JSON
      * response. The HTTP request has an empty header.
      *
-     * @param method An integer representing the method of request (GET, POST, etc.)
-     *               See volley.Request.method
-     * @param url The url of the HTTP request
+     * @param method      An integer representing the method of request (GET, POST, etc.)
+     *                    See volley.Request.method
+     * @param url         The url of the HTTP request
      * @param requestBody The body of the HTTP request as a JSONObject
-     * @param listener An object that listens to the server response
+     * @param listener    An object that listens to the server response
      */
     private JSONRequestWithHeaders makeJSONRequestNoHeaders(int method, String url, JSONObject requestBody,
                                                             IServerResponseListener listener) {
@@ -157,12 +160,12 @@ public class HTTPRequestManager implements IServerRequestManager {
     private JSONObject getErrorJsonResponse(VolleyError error) {
         JSONObject response;
 
-        if (error.networkResponse == null){
+        if (error.networkResponse == null) {
             response = new JSONObject(new HashMap<String, String>() {{
                 put("message", error.getMessage());
             }});
 
-        }else{
+        } else {
             try {
                 String responseJSON = new String(error.networkResponse.data,
                         HttpHeaderParser.parseCharset(error.networkResponse.headers));
@@ -188,7 +191,7 @@ public class HTTPRequestManager implements IServerRequestManager {
      * Make an HTTP GET request with a JSON body that expects a JSON
      * response.
      *
-     * @param url The url of the HTTP request
+     * @param url      The url of the HTTP request
      * @param queryMap A map of query parameters
      * @param listener An object that listens to the server response
      */
@@ -202,9 +205,9 @@ public class HTTPRequestManager implements IServerRequestManager {
      * Make an HTTP GET request with a JSON body that expects a JSON
      * response.
      *
-     * @param url The url of the HTTP request
+     * @param url      The url of the HTTP request
      * @param queryMap A map of query parameters
-     * @param headers The headers of the HTTP request
+     * @param headers  The headers of the HTTP request
      * @param listener An object that listens to the server response
      */
     @Override
@@ -218,9 +221,9 @@ public class HTTPRequestManager implements IServerRequestManager {
      * Make an HTTP POST request with a JSON body that expects a JSON
      * response.
      *
-     * @param url The url of the HTTP request
+     * @param url         The url of the HTTP request
      * @param requestBody The body of the HTTP request as a JSONObject
-     * @param listener An object that listens to the server response
+     * @param listener    An object that listens to the server response
      */
     @Override
     public void makePostRequest(String url, JSONObject requestBody, IServerResponseListener listener) {
@@ -231,14 +234,14 @@ public class HTTPRequestManager implements IServerRequestManager {
      * Make an HTTP POST request with a JSON body that expects a JSON
      * response.
      *
-     * @param url The url of the HTTP request
+     * @param url         The url of the HTTP request
      * @param requestBody The body of the HTTP request as a JSONObject
-     * @param headers The headers of the HTTP request
-     * @param listener An object that listens to the server response
+     * @param headers     The headers of the HTTP request
+     * @param listener    An object that listens to the server response
      */
     @Override
     public void makePostRequest(String url, JSONObject requestBody,
-                               Map<String, String> headers, IServerResponseListener listener) {
+                                Map<String, String> headers, IServerResponseListener listener) {
         makeJSONRequest(Request.Method.POST, url, requestBody, headers, listener);
     }
 }

@@ -42,7 +42,7 @@ public class UploadImageFragment extends MainActivityFragment {
         setUpHandleGalleryResponse();
     }
 
-    public void setUpHandleGalleryResponse(){
+    public void setUpHandleGalleryResponse() {
         galleryResultLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
                 new ActivityResultCallback<ActivityResult>() {
@@ -51,7 +51,7 @@ public class UploadImageFragment extends MainActivityFragment {
                         if (result.getResultCode() == Activity.RESULT_OK) {
                             // There are no request codes
 
-                            if (result.getData().getData() == null){
+                            if (result.getData().getData() == null) {
                                 return;
                             }
 
@@ -113,7 +113,7 @@ public class UploadImageFragment extends MainActivityFragment {
     }
 
     public void prefillImage(DataTypeOrigin origin, String prefillImgUrl) {
-        if (prefillImgUrl.equals("")){
+        if (prefillImgUrl.equals("")) {
             switch (origin) {
                 case USER:
                     binding.uploadImgView.setImageResource(R.drawable.default_profile_img);
@@ -121,7 +121,7 @@ public class UploadImageFragment extends MainActivityFragment {
                 case PET:
                     binding.uploadImgView.setImageResource(R.drawable.default_pet_profile_img);
             }
-        }else{
+        } else {
             Glide.with(getMainActivity()).
                     load(prefillImgUrl).into(binding.uploadImgView);
         }

@@ -47,7 +47,7 @@ public class ContactInfoFragment extends MainActivityFragment {
         });
     }
 
-    private void hideAllInfo(){
+    private void hideAllInfo() {
         binding.pubContactinfoPhoneLayout.setVisibility(View.GONE);
         binding.pubContactinfoEmailLayout.setVisibility(View.GONE);
         binding.pubContactinfoFacebookLayout.setVisibility(View.GONE);
@@ -58,19 +58,19 @@ public class ContactInfoFragment extends MainActivityFragment {
         binding.pubContactinfoEmailLayout.setVisibility(View.VISIBLE);
     }
 
-    private void showPhoneInfo(){
+    private void showPhoneInfo() {
         binding.pubContactinfoPhoneLayout.setVisibility(View.VISIBLE);
     }
 
-    private void showFacebookInfo(){
+    private void showFacebookInfo() {
         binding.pubContactinfoFacebookLayout.setVisibility(View.VISIBLE);
     }
 
-    private void showInstagramInfo(){
+    private void showInstagramInfo() {
         binding.pubContactinfoInstagramLayout.setVisibility(View.VISIBLE);
     }
 
-    private void showOwnerSpecificInfo(){
+    private void showOwnerSpecificInfo() {
         binding.pubContactinfoProfileImg.setVisibility(View.VISIBLE);
         binding.pubContactinfoTitle.setText(R.string.public_contactinfo_title);
     }
@@ -81,34 +81,34 @@ public class ContactInfoFragment extends MainActivityFragment {
     }
 
 
-    private void loadContactInfo (ContactInfoData contactInfoData) {
+    private void loadContactInfo(ContactInfoData contactInfoData) {
         hideAllInfo();
 
         binding.pubContactinfoEmail.setText(contactInfoData.getEmail());
         showEmailInfo();
 
         if (contactInfoViewModel.getContext() != null &&
-                contactInfoViewModel.getContext().isFromPetProfile()){
+                contactInfoViewModel.getContext().isFromPetProfile()) {
             showOwnerSpecificInfo();
-        }else{
+        } else {
             hideOwnerSpecificInfo();
         }
 
-        if (!contactInfoData.getPhoneNumber().equals("")){
+        if (!contactInfoData.getPhoneNumber().equals("")) {
             String phoneNumber = contactInfoData.getPhoneNumber();
 
             binding.pubContactinfoPhone.setText(phoneNumber);
             showPhoneInfo();
         }
 
-        if (!contactInfoData.getFacebook().equals("")){
+        if (!contactInfoData.getFacebook().equals("")) {
             String phoneNumber = contactInfoData.getFacebook();
 
             binding.pubContactinfoFacebook.setText(phoneNumber);
             showFacebookInfo();
         }
 
-        if (!contactInfoData.getInstagram().equals("")){
+        if (!contactInfoData.getInstagram().equals("")) {
             String phoneNumber = contactInfoData.getInstagram();
 
             binding.pubContactinfoInstagram.setText(phoneNumber);

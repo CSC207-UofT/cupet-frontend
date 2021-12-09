@@ -9,6 +9,7 @@ import com.example.cupetfrontend.use_cases.input_boundaries.pet.FetchPetProfileI
 import com.example.cupetfrontend.use_cases.output_boundaries.pet.FetchPetProfileOutputBoundary;
 import com.example.cupetfrontend.use_cases.request_models.pet.FetchPetProfileRequestModel;
 import com.example.cupetfrontend.use_cases.response_models.pet.FetchPetProfileSuccessResponseModel;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 

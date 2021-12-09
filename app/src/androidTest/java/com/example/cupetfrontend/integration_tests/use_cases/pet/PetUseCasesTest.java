@@ -4,7 +4,13 @@ import com.example.cupetfrontend.AsyncTaskListener;
 import com.example.cupetfrontend.FailedInitializationException;
 import com.example.cupetfrontend.drivers.api.PetAPIGateway;
 import com.example.cupetfrontend.use_cases.api_abstracts.IPetAPIGateway;
-import com.example.cupetfrontend.use_cases.output_boundaries.pet.*;
+import com.example.cupetfrontend.use_cases.data_models.PetData;
+import com.example.cupetfrontend.use_cases.output_boundaries.pet.EditPetOutputBoundary;
+import com.example.cupetfrontend.use_cases.output_boundaries.pet.FetchPetProfileOutputBoundary;
+import com.example.cupetfrontend.use_cases.output_boundaries.pet.GetMatchesOutputBoundary;
+import com.example.cupetfrontend.use_cases.output_boundaries.pet.GetPotentialMatchesOutputBoundary;
+import com.example.cupetfrontend.use_cases.output_boundaries.pet.IntendToMatchOutputBoundary;
+import com.example.cupetfrontend.use_cases.output_boundaries.pet.PetCreatorOutputBoundary;
 import com.example.cupetfrontend.use_cases.output_boundaries.user.GetPetsOutputBoundary;
 import com.example.cupetfrontend.use_cases.pet.EditPet;
 import com.example.cupetfrontend.use_cases.pet.FetchPetProfile;
@@ -12,10 +18,20 @@ import com.example.cupetfrontend.use_cases.pet.GetMatches;
 import com.example.cupetfrontend.use_cases.pet.GetPotentialMatches;
 import com.example.cupetfrontend.use_cases.pet.IntendToMatch;
 import com.example.cupetfrontend.use_cases.pet.PetCreator;
-import com.example.cupetfrontend.use_cases.request_models.pet.*;
+import com.example.cupetfrontend.use_cases.request_models.pet.EditPetRequestModel;
+import com.example.cupetfrontend.use_cases.request_models.pet.FetchPetProfileRequestModel;
+import com.example.cupetfrontend.use_cases.request_models.pet.GetMatchesRequestModel;
+import com.example.cupetfrontend.use_cases.request_models.pet.GetPotentialMatchesRequestModel;
+import com.example.cupetfrontend.use_cases.request_models.pet.IntendToMatchRequestModel;
+import com.example.cupetfrontend.use_cases.request_models.pet.PetCreatorRequestModel;
 import com.example.cupetfrontend.use_cases.request_models.user.GetPetsRequestModel;
-import com.example.cupetfrontend.use_cases.data_models.PetData;
-import com.example.cupetfrontend.use_cases.response_models.pet.*;
+import com.example.cupetfrontend.use_cases.response_models.pet.DefaultFailureResponseModel;
+import com.example.cupetfrontend.use_cases.response_models.pet.EditPetSuccessResponseModel;
+import com.example.cupetfrontend.use_cases.response_models.pet.FetchPetProfileSuccessResponseModel;
+import com.example.cupetfrontend.use_cases.response_models.pet.GetMatchesSuccessResponseModel;
+import com.example.cupetfrontend.use_cases.response_models.pet.GetPotentialMatchesSuccessResponseModel;
+import com.example.cupetfrontend.use_cases.response_models.pet.IntendToMatchSuccessResponseModel;
+import com.example.cupetfrontend.use_cases.response_models.pet.PetCreatorSuccessResponseModel;
 import com.example.cupetfrontend.use_cases.response_models.user.GetPetsSuccessResponseModel;
 import com.example.cupetfrontend.use_cases.user.GetPets;
 
@@ -33,18 +49,18 @@ import static org.junit.Assert.fail;
 
 /**
  * Test the pet related uses cases:
- *  - getting a list of pets from a user
- *  - editing a pet
- *  - fetching a pet's profile
- *  - getting a list of potential matches for a pet
- *  - getting a list of matches for a pet
- *  - intending to match with another pet
- *  - rejecting a match with another pet
- *
+ * - getting a list of pets from a user
+ * - editing a pet
+ * - fetching a pet's profile
+ * - getting a list of potential matches for a pet
+ * - getting a list of matches for a pet
+ * - intending to match with another pet
+ * - rejecting a match with another pet
+ * <p>
  * NOTE: This is an integration test.
  * The test cases are dependent on each bottom-up, and they
  * should be run in succession.
- *
+ * <p>
  * To run these tests, run the entire test class
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -59,7 +75,7 @@ public class PetUseCasesTest extends NUsersTestClass {
     }
 
     @Test
-    public void test00_setup_createAndLogin(){
+    public void test00_setup_createAndLogin() {
         createAndLogin(2, new AsyncTaskListener() {
             @Override
             public void onSuccess() {
@@ -76,7 +92,7 @@ public class PetUseCasesTest extends NUsersTestClass {
     }
 
     @Test
-    public void test0_createPet1(){
+    public void test0_createPet1() {
         PetCreatorRequestModel request = new PetCreatorRequestModel(
                 tokens.get(0),
                 "alfred",
@@ -104,13 +120,13 @@ public class PetUseCasesTest extends NUsersTestClass {
             }
         }).createPet(request);
 
-        awaitForTask(2000);
+        awaitForTask(5000);
     }
 
     @Test
-    public void test0_createPet2(){
+    public void test0_createPet2() {
         PetCreatorRequestModel request = new PetCreatorRequestModel(
-                tokens.get(0),
+                tokens.get(1),
                 "second pet",
                 "5",
                 "Dog Breed",
@@ -136,11 +152,11 @@ public class PetUseCasesTest extends NUsersTestClass {
             }
         }).createPet(request);
 
-        awaitForTask(2000);
+        awaitForTask(5000);
     }
 
     @Test
-    public void test1_fetchPetProfile(){
+    public void test1_fetchPetProfile() {
         FetchPetProfileRequestModel request = new FetchPetProfileRequestModel(
                 tokens.get(0),
                 petIds.get(0)
@@ -164,11 +180,11 @@ public class PetUseCasesTest extends NUsersTestClass {
 
         }).fetchPetProfile(request);
 
-        awaitForTask(2000);
+        awaitForTask(5000);
     }
 
     @Test
-    public void test_2_editPetProfile(){
+    public void test_2_editPetProfile() {
         EditPetRequestModel request = new EditPetRequestModel(
                 tokens.get(0),
                 petIds.get(0),
@@ -195,11 +211,11 @@ public class PetUseCasesTest extends NUsersTestClass {
             }
         }).editPet(request);
 
-        awaitForTask(2000);
+        awaitForTask(5000);
     }
 
     @Test
-    public void test_3_getPets(){
+    public void test_3_getPets() {
         GetPetsRequestModel request = new GetPetsRequestModel(
                 tokens.get(0)
         );
@@ -223,37 +239,11 @@ public class PetUseCasesTest extends NUsersTestClass {
             }
         }).getPets(request);
 
-        awaitForTask(2000);
-    }
-
-    @Ignore("Waiting for implementation on backend")
-    @Test
-    public void test_4_getPotentialMatches(){
-        GetPotentialMatchesRequestModel request = new GetPotentialMatchesRequestModel(
-                tokens.get(0),
-                petIds.get(0)
-        );
-
-        new GetPotentialMatches(petAPIGateway, new GetPotentialMatchesOutputBoundary() {
-            @Override
-            public void onGetPotentialMatchesSuccess(GetPotentialMatchesSuccessResponseModel response) {
-                // No need to test the correctness of the matching algorithm here
-                // It will be tested on the backend.
-                setTaskComplete();
-            }
-
-            @Override
-            public void onGetPotentialMatchesFailure(DefaultFailureResponseModel response) {
-                fail("Request incorrectly failed");
-
-            }
-        }).getPotentialMatches(request);
-
-        awaitForTask(2000);
+        awaitForTask(5000);
     }
 
     @Test
-    public void test_5_intendToMatch0(){
+    public void test_5_intendToMatch0() {
         IntendToMatchRequestModel request = new IntendToMatchRequestModel(
                 tokens.get(0),
                 petIds.get(0),
@@ -272,11 +262,11 @@ public class PetUseCasesTest extends NUsersTestClass {
             }
         }).intendToMatch(request);
 
-        awaitForTask(2000);
+        awaitForTask(5000);
     }
 
     @Test
-    public void test_5_intendToMatch1(){
+    public void test_5_intendToMatch1() {
         IntendToMatchRequestModel request = new IntendToMatchRequestModel(
                 tokens.get(1),
                 petIds.get(1),
@@ -291,15 +281,15 @@ public class PetUseCasesTest extends NUsersTestClass {
 
             @Override
             public void onIntendToMatchFailure(DefaultFailureResponseModel response) {
-                fail("Request incorrectly failed");
+                fail("Request incorrectly failed" + response.getErrorMessage());
             }
         }).intendToMatch(request);
 
-        awaitForTask(2000);
+        awaitForTask(5000);
     }
 
     @Test
-    public void test_6_getMatches(){
+    public void test_6_getMatches() {
         GetMatchesRequestModel request = new GetMatchesRequestModel(
                 tokens.get(0),
                 petIds.get(0)
@@ -309,16 +299,6 @@ public class PetUseCasesTest extends NUsersTestClass {
             @Override
             public void onGetMatchesSuccess(GetMatchesSuccessResponseModel response) {
                 setTaskComplete();
-                // TODO: uncomment test once matching algorithm on back-end is complete
-                //  For now, test that we are able to access the endpoint correctly
-
-                PetData petData = response.getMatches().get(0);
-//
-//                assertEquals(petIds.get(1), petData.getPetId());
-//                assertEquals("second pet", petData.getName());
-//                assertEquals("5", petData.getAge());
-//                assertEquals("Dog Breed", petData.getBreed());
-//                assertEquals("this is my dog 2", petData.getBiography());
             }
 
             @Override
@@ -330,6 +310,4 @@ public class PetUseCasesTest extends NUsersTestClass {
 
         awaitForTask(5000);
     }
-
-    // TODO: Implement test for rejecting match
 }

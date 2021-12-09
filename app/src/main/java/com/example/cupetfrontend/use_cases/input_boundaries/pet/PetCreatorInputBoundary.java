@@ -5,6 +5,7 @@ import com.example.cupetfrontend.use_cases.request_models.pet.PetCreatorRequestM
 public interface PetCreatorInputBoundary {
     /**
      * Create a new pet given the request data
+     *
      * @param request The request data
      */
     void createPet(PetCreatorRequestModel request);

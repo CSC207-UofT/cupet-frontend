@@ -13,10 +13,6 @@
         android:theme="@style/Theme.CupetFrontEnd"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".ui.user_account.UserAccountFragment"
-            android:exported="true"
-
-            />
         <activity
             android:name=".ui.MainActivity"
             android:exported="true"

@@ -16,29 +16,29 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 
-@Module(includes={AppModule.class})
+@Module(includes = {AppModule.class})
 public class APIGatewaysModule {
     @Provides
     @Singleton
-    public IServerRequestManager provideRequestManager(Context context){
+    public IServerRequestManager provideRequestManager(Context context) {
         return new HTTPRequestManager(context);
     }
 
     @Provides
     @Singleton
-    public IAuthAPIGateway provideUserAPIGateway(IServerRequestManager requestManager){
+    public IAuthAPIGateway provideUserAPIGateway(IServerRequestManager requestManager) {
         return new AuthAPIGateway(requestManager);
     }
 
     @Provides
     @Singleton
-    public IUserAPIGateway provideAuthAPIGateway(IServerRequestManager requestManager){
+    public IUserAPIGateway provideAuthAPIGateway(IServerRequestManager requestManager) {
         return new UserAPIGateway(requestManager);
     }
 
     @Provides
     @Singleton
-    public IPetAPIGateway providePetAPIGateway(IServerRequestManager requestManager){
+    public IPetAPIGateway providePetAPIGateway(IServerRequestManager requestManager) {
         return new PetAPIGateway(requestManager);
     }
 }

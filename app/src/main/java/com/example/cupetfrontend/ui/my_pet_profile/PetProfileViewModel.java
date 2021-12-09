@@ -24,6 +24,7 @@ public class PetProfileViewModel extends ViewModel implements IPetProfileViewMod
 
     /**
      * Fetch a pet's profile request
+     *
      * @param token The session token of the user
      * @param petId The id of the pet
      */

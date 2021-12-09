@@ -1,7 +1,7 @@
 package com.example.cupetfrontend.ui.get_matches.recycler;
 
 public class UnMatchResult {
-    private boolean isError;
+    private final boolean isError;
     private String errorMessage;
 
     public UnMatchResult(boolean isError) {

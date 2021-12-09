@@ -30,20 +30,20 @@ import dagger.Provides;
 public class ViewModelsModule {
     @Singleton
     @Provides
-    public IContactInfoViewModel provideContactInfoViewModel(){
+    public IContactInfoViewModel provideContactInfoViewModel() {
         return new ContactInfoViewModel();
     }
 
     @Singleton
     @Provides
     public IEditUserProfileViewModel provideEditUserProfileViewModel(
-            IUserController userController){
+            IUserController userController) {
         return new EditUserProfileViewModel(userController);
     }
 
     @Singleton
     @Provides
-    public IUploadImageViewModel provideUploadImageViewModel(){
+    public IUploadImageViewModel provideUploadImageViewModel() {
         return new UploadImageViewModel();
     }
 
@@ -51,31 +51,31 @@ public class ViewModelsModule {
     @Provides
     public IEditPetViewModel provideEditPetViewModel(IPetController petController,
                                                      ISessionManager sessionManager,
-                                                     IPetSessionManager petSessionManager){
+                                                     IPetSessionManager petSessionManager) {
         return new EditPetViewModel(petController, sessionManager, petSessionManager);
     }
 
     @Singleton
     @Provides
-    public IViewMyPetsViewModel provideViewMyPetsViewModel(IUserController userController){
+    public IViewMyPetsViewModel provideViewMyPetsViewModel(IUserController userController) {
         return new ViewMyPetsViewModel(userController);
     }
 
     @Singleton
     @Provides
-    public ICreatePetViewModel provideCreatePetViewModel(IPetController petController){
+    public ICreatePetViewModel provideCreatePetViewModel(IPetController petController) {
         return new CreatePetViewModel(petController);
     }
 
     @Singleton
     @Provides
-    public IEditUserAccountViewModel provideEditUserAccountViewModel(IUserController userController){
+    public IEditUserAccountViewModel provideEditUserAccountViewModel(IUserController userController) {
         return new EditUserAccountViewModel(userController);
     }
 
     @Singleton
     @Provides
-    public IMatchedPetProfileViewModel provideMatchedPetProfileViewModel(IUserController userController){
+    public IMatchedPetProfileViewModel provideMatchedPetProfileViewModel(IUserController userController) {
         return new MatchedPetProfileViewModel(userController);
     }
 }

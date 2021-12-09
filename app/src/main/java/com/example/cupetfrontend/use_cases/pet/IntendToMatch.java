@@ -8,6 +8,7 @@ import com.example.cupetfrontend.use_cases.input_boundaries.pet.IntendToMatchInp
 import com.example.cupetfrontend.use_cases.output_boundaries.pet.IntendToMatchOutputBoundary;
 import com.example.cupetfrontend.use_cases.request_models.pet.IntendToMatchRequestModel;
 import com.example.cupetfrontend.use_cases.response_models.pet.IntendToMatchSuccessResponseModel;
+
 import org.json.JSONObject;
 
 public class IntendToMatch extends DefaultFailResponseUseCase implements IntendToMatchInputBoundary {

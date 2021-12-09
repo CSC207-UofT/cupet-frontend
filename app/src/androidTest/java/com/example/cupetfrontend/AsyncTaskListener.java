@@ -1,6 +1,7 @@
 package com.example.cupetfrontend;
 
-public interface AsyncTaskListener{
+public interface AsyncTaskListener {
     void onSuccess();
+
     void onFailure();
 }

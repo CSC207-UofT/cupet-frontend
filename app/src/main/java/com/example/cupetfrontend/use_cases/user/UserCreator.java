@@ -9,6 +9,7 @@ import com.example.cupetfrontend.use_cases.input_boundaries.user.UserCreatorInpu
 import com.example.cupetfrontend.use_cases.output_boundaries.user.UserCreatorOutputBoundary;
 import com.example.cupetfrontend.use_cases.request_models.user.UserCreatorRequestModel;
 import com.example.cupetfrontend.use_cases.response_models.user.UserCreatorSuccessResponseModel;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -35,9 +36,9 @@ public class UserCreator extends DefaultFailResponseUseCase implements UserCreat
                 //  code to prevent a runtime exception from crashing the application
 
                 try {
-                    if (jsonResponse.get("isSuccess").equals("true")){
+                    if (jsonResponse.get("isSuccess").equals("true")) {
                         outputBoundary.onCreateUserSuccess(toSuccessResponseModel(jsonResponse));
-                    }else{
+                    } else {
                         outputBoundary.onCreateUserFailure(toFailResponseModel(jsonResponse));
                     }
                 } catch (JSONException e) {

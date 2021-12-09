@@ -34,12 +34,12 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 
-@Module(includes={APIGatewaysModule.class, PetOutputBoundariesModule.class})
+@Module(includes = {APIGatewaysModule.class, PetOutputBoundariesModule.class})
 public class PetUseCasesModule {
     @Singleton
     @Provides
     public EditPetInputBoundary provideEditPet(
-            IPetAPIGateway petAPIGateway, EditPetOutputBoundary outputBoundary){
+            IPetAPIGateway petAPIGateway, EditPetOutputBoundary outputBoundary) {
         return new EditPet(petAPIGateway, outputBoundary);
     }
 
@@ -52,7 +52,7 @@ public class PetUseCasesModule {
 
     @Singleton
     @Provides
-    public GetMatchesInputBoundary provideGetMatches (
+    public GetMatchesInputBoundary provideGetMatches(
             IPetAPIGateway petAPIGateway, GetMatchesOutputBoundary outputBoundary) {
         return new GetMatches(petAPIGateway, outputBoundary);
     }

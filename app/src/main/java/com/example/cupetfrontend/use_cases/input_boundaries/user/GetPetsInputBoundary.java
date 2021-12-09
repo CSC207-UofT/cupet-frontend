@@ -5,6 +5,7 @@ import com.example.cupetfrontend.use_cases.request_models.user.GetPetsRequestMod
 public interface GetPetsInputBoundary {
     /**
      * Get a user's list of pets given request data
+     *
      * @param request The request data
      */
     void getPets(GetPetsRequestModel request);

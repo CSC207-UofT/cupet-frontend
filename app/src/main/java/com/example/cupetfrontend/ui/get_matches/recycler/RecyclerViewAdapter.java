@@ -25,7 +25,6 @@ import com.example.cupetfrontend.presenters.abstracts.IUnMatchPresenter;
 import com.example.cupetfrontend.controllers.abstracts.IPetSessionManager;
 import com.example.cupetfrontend.controllers.abstracts.ISessionManager;
 import com.example.cupetfrontend.data.model.PetModel;
-import com.example.cupetfrontend.dependency_selector.DependencySelector;
 import com.example.cupetfrontend.presenters.view_model_abstracts.IMatchedPetProfileViewModel;
 import com.example.cupetfrontend.presenters.view_model_abstracts.nav_context_models.MatchedPetProfileContext;
 import com.example.cupetfrontend.presenters.abstracts.IUnMatchPresenter;
@@ -44,7 +43,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * This class is responsible for providing a binding from the related data set to views that are
  * displayed within the RecyclerView for the Get Matches page.
  */
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>{
+public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
 
     private static final String TAG = "RecyclerViewAdapter";
     private List<PetModel> mPetModels;
@@ -59,7 +58,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Inject
     public RecyclerViewAdapter(IMatchedPetProfileViewModel matchedPetProfileViewModel,
-                                IPetSessionManager petSessionManager,
+                               IPetSessionManager petSessionManager,
                                ISessionManager sessionManager,
                                IUnMatchPresenter unMatchPresenter,
                                IPetController petController) {
@@ -80,7 +79,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         this.mPetModels = mPetModels;
     }
 
-    public void setNavigator(Navigator navigator){
+    public void setNavigator(Navigator navigator) {
         this.navigator = navigator;
     }
 
@@ -92,7 +91,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     /**
      * Inflates the view. The new ViewHolder is used to display items of the adapter using onBindViewHolder.
      * Called when RecyclerView needs a new RecyclerView.ViewHolder of the given type to represent an item.
-     * @param parent The ViewGroup into which the new View will be added after it is bound to an adapter position.
+     *
+     * @param parent   The ViewGroup into which the new View will be added after it is bound to an adapter position.
      * @param viewType The view type of the new View.
      * @return A new ViewHolder that holds a View of the given view type.
      */
@@ -109,7 +109,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     /**
      * Called by RecyclerView to display the data at the specified position.
      * This method should update the contents of the RecyclerView.ViewHolder.itemView to reflect the item at the given position.
-     * @param holder The ViewHolder which should be updated to represent the contents of the item at the given position in the data set.
+     *
+     * @param holder   The ViewHolder which should be updated to represent the contents of the item at the given position in the data set.
      * @param position The position of the item within the adapter's data set.
      */
     @Override
@@ -128,7 +129,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private void loadDataIntoViews(@NotNull ViewHolder holder) {
         String petImgUrl = getPetModelFor(holder).getPetImageUrl();
 
-        if (!petImgUrl.equals("")){
+        if (!petImgUrl.equals("")) {
             Glide.with(context)
                     // tells Glide we it as bitmap
                     .asBitmap()
@@ -212,6 +213,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     /**
      * Return the number of items in the list which corresponds to the number of views to be
      * displayed in the RecyclerView
+     *
      * @return the number of items in the list mPetNames
      */
     @Override

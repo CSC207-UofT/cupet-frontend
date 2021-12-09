@@ -1,11 +1,12 @@
 package com.example.cupetfrontend.unit_tests.use_cases.pet;
 
 import com.example.cupetfrontend.unit_tests.use_cases.UseCaseTestClass;
-import com.example.cupetfrontend.use_cases.pet.FetchPetProfile;
 import com.example.cupetfrontend.use_cases.output_boundaries.pet.FetchPetProfileOutputBoundary;
+import com.example.cupetfrontend.use_cases.pet.FetchPetProfile;
 import com.example.cupetfrontend.use_cases.request_models.pet.FetchPetProfileRequestModel;
 import com.example.cupetfrontend.use_cases.response_models.pet.DefaultFailureResponseModel;
 import com.example.cupetfrontend.use_cases.response_models.pet.FetchPetProfileSuccessResponseModel;
+
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -13,7 +14,7 @@ import static org.junit.Assert.fail;
 
 public class FetchPetProfileTest extends UseCaseTestClass {
     @Test
-    public void testFetchPetProfileSuccess(){
+    public void testFetchPetProfileSuccess() {
         FetchPetProfileRequestModel request = new FetchPetProfileRequestModel(
                 "dummy token", "dummy pet id");
 
@@ -40,7 +41,7 @@ public class FetchPetProfileTest extends UseCaseTestClass {
     }
 
     @Test
-    public void testFetchPetProfileFailure(){
+    public void testFetchPetProfileFailure() {
         FetchPetProfileRequestModel request = new FetchPetProfileRequestModel(
                 "dummy token", "dummy pet id");
 

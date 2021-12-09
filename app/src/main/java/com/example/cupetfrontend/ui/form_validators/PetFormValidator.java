@@ -18,11 +18,11 @@ public class PetFormValidator {
      * @return Error text if applicable, otherwise return null
      */
     public static String validatePetName(String petName) {
-        if (petName == null){
+        if (petName == null) {
             return "The pet's name must be more than 2 characters long.";
-        } else if (petName.length() > 2){
+        } else if (petName.length() > 2) {
             return null;
-        }else{
+        } else {
             return "The pet's name must be more than 2 characters long.";
         }
     }
@@ -33,11 +33,11 @@ public class PetFormValidator {
      * @return Error text if applicable, otherwise return null
      */
     public static String validateAge(String age) {
-        if (age == null){
+        if (age == null) {
             return "The page age must be non-empty";
-        } else if (doesStringRepresentInt(age)){
+        } else if (doesStringRepresentInt(age)) {
             return null;
-        }else{
+        } else {
             return "The age must be an integer";
         }
     }
@@ -48,11 +48,11 @@ public class PetFormValidator {
      * @return Error text if applicable, otherwise return null
      */
     public static String validateBreed(String breed) {
-        if (breed == null){
+        if (breed == null) {
             return "The breed must be more than 2 characters long.";
-        } else if (breed.length() > 2){
+        } else if (breed.length() > 2) {
             return null;
-        }else{
+        } else {
             return "The breed must be more than 2 characters long.";
         }
     }

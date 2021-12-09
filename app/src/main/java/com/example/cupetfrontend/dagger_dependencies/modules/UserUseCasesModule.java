@@ -32,40 +32,40 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 
-@Module(includes={APIGatewaysModule.class, UserOutputBoundariesModule.class})
+@Module(includes = {APIGatewaysModule.class, UserOutputBoundariesModule.class})
 public class UserUseCasesModule {
     @Singleton
     @Provides
     public EditUserAccountInputBoundary provideEditUserAccount(
-            IUserAPIGateway userAPIGateway, EditUserAccountOutputBoundary outputBoundary){
+            IUserAPIGateway userAPIGateway, EditUserAccountOutputBoundary outputBoundary) {
         return new EditUserAccount(userAPIGateway, outputBoundary);
     }
 
     @Singleton
     @Provides
     public EditUserProfileInputBoundary provideEditUserProfile(
-            IUserAPIGateway userAPIGateway, EditUserProfileOutputBoundary outputBoundary){
+            IUserAPIGateway userAPIGateway, EditUserProfileOutputBoundary outputBoundary) {
         return new EditUserProfile(userAPIGateway, outputBoundary);
     }
 
     @Singleton
     @Provides
     public FetchUserAccountInputBoundary provideFetchUserAccount(
-            IUserAPIGateway userAPIGateway, FetchUserAccountOutputBoundary outputBoundary){
+            IUserAPIGateway userAPIGateway, FetchUserAccountOutputBoundary outputBoundary) {
         return new FetchUserAccount(userAPIGateway, outputBoundary);
     }
 
     @Singleton
     @Provides
     public FetchUserProfileInputBoundary provideFetchUserProfile(
-            IUserAPIGateway userAPIGateway, FetchUserProfileOutputBoundary outputBoundary){
+            IUserAPIGateway userAPIGateway, FetchUserProfileOutputBoundary outputBoundary) {
         return new FetchUserProfile(userAPIGateway, outputBoundary);
     }
 
     @Singleton
     @Provides
     public FetchUserProfileImageInputBoundary provideFetchUserProfileImage(
-            IUserAPIGateway userAPIGateway, FetchUserProfileImageOutputBoundary outputBoundary){
+            IUserAPIGateway userAPIGateway, FetchUserProfileImageOutputBoundary outputBoundary) {
         return new FetchUserProfileImage(userAPIGateway, outputBoundary);
     }
 
@@ -73,21 +73,21 @@ public class UserUseCasesModule {
     @Provides
     public GetPetsInputBoundary provideGetPets(
             IPetAPIGateway petAPIGateway, IUserAPIGateway userAPIGateway,
-            GetPetsOutputBoundary outputBoundary){
+            GetPetsOutputBoundary outputBoundary) {
         return new GetPets(petAPIGateway, userAPIGateway, outputBoundary);
     }
 
     @Singleton
     @Provides
     public SetUserProfileImageInputBoundary provideSetUserProfileImage(
-            IUserAPIGateway userAPIGateway, SetUserProfileImageOutputBoundary outputBoundary){
+            IUserAPIGateway userAPIGateway, SetUserProfileImageOutputBoundary outputBoundary) {
         return new SetUserProfileImage(userAPIGateway, outputBoundary);
     }
 
     @Singleton
     @Provides
     public UserCreatorInputBoundary provideUserCreator(
-            IUserAPIGateway userAPIGateway, UserCreatorOutputBoundary outputBoundary){
+            IUserAPIGateway userAPIGateway, UserCreatorOutputBoundary outputBoundary) {
         return new UserCreator(userAPIGateway, outputBoundary);
     }
 }

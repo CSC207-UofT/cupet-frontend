@@ -21,7 +21,7 @@ public class GetPotentialMatchesPresenter implements IGetPotentialMatchesPresent
     public void onGetPotentialMatchesSuccess(GetPotentialMatchesSuccessResponseModel response) {
         List<PresentedPetData> presentedPetData = new ArrayList<>();
 
-        for (PetData petData : response.getPotentialMatches()){
+        for (PetData petData : response.getPotentialMatches()) {
             presentedPetData.add(new PresentedPetData(
                     petData.getName(),
                     petData.getAge(),

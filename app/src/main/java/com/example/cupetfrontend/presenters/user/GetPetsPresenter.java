@@ -22,14 +22,13 @@ public class GetPetsPresenter implements IGetPetsPresenter {
      * On the successful get pets, handover the presented
      * data to the view model.
      *
-     *
      * @param response The response from the use case's layer
      */
     @Override
     public void onGetPetsSuccess(GetPetsSuccessResponseModel response) {
         ArrayList<PetModel> mPetModels = new ArrayList<>();
 
-        for (PetData pet: response.getPets()) {
+        for (PetData pet : response.getPets()) {
             mPetModels.add(new PetModel(pet.getPetId(), pet.getName(), pet.getAge(),
                     pet.getBreed(), pet.getProfileImgUrl(), pet.getUserId()));
 
@@ -42,7 +41,6 @@ public class GetPetsPresenter implements IGetPetsPresenter {
     /**
      * On the failed get pets, handover the presented
      * data to the view model.
-     *
      *
      * @param response The response from the use case's layer
      */

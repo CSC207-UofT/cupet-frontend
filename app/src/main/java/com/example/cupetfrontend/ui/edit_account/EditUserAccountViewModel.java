@@ -22,7 +22,7 @@ public class EditUserAccountViewModel extends ViewModel implements IEditUserAcco
     private EditUserAccountContext context;
 
     @Inject
-    public EditUserAccountViewModel (IUserController userController){
+    public EditUserAccountViewModel(IUserController userController) {
         this.userController = userController;
     }
 
@@ -37,28 +37,28 @@ public class EditUserAccountViewModel extends ViewModel implements IEditUserAcco
     }
 
     @Override
-    public void editUserAccount(EditUserAccountFormData formData, String token){
-        if (formData.getPassword() == null || formData.getPassword().equals("")){
+    public void editUserAccount(EditUserAccountFormData formData, String token) {
+        if (formData.getPassword() == null || formData.getPassword().equals("")) {
             userController.editUserAccount(token, formData.getFirstname(), formData.getLastname(),
                     formData.getEmail(), formData.getAddress(), formData.getCity());
-        }else{
+        } else {
             userController.editUserAccount(token, formData.getFirstname(), formData.getLastname(),
                     formData.getEmail(), formData.getPassword(), formData.getAddress(), formData.getCity());
         }
     }
 
     @Override
-    public void updateFormState(EditUserAccountFormData formData){
+    public void updateFormState(EditUserAccountFormData formData) {
         EditUserAccountFormState newFormState = new EditUserAccountFormState();
         EditUserAccountFormState oldFormState = formState.getValue();
 
-        if (oldFormState == null){
+        if (oldFormState == null) {
             formState.setValue(newFormState);
             return;
         }
 
         validateForm(formData, newFormState, oldFormState);
-        checkFormStateInteracted(formData,  newFormState);
+        checkFormStateInteracted(formData, newFormState);
 
         formState.setValue(newFormState);
     }
@@ -106,27 +106,27 @@ public class EditUserAccountViewModel extends ViewModel implements IEditUserAcco
                 ));
     }
 
-    private void checkFormStateInteracted (EditUserAccountFormData formData,
-                                           EditUserAccountFormState state) {
-        if (formData.getFirstname() != null && !formData.getFirstname().equals("")){
+    private void checkFormStateInteracted(EditUserAccountFormData formData,
+                                          EditUserAccountFormState state) {
+        if (formData.getFirstname() != null && !formData.getFirstname().equals("")) {
             state.getFirstNameState().onFieldInteracted();
         }
-        if (formData.getLastname() != null && !formData.getLastname().equals("")){
+        if (formData.getLastname() != null && !formData.getLastname().equals("")) {
             state.getLastNameState().onFieldInteracted();
         }
-        if (formData.getEmail() != null && !formData.getEmail().equals("")){
+        if (formData.getEmail() != null && !formData.getEmail().equals("")) {
             state.getEmailState().onFieldInteracted();
         }
-        if (formData.getPassword() != null && !formData.getPassword().equals("")){
+        if (formData.getPassword() != null && !formData.getPassword().equals("")) {
             state.getPasswordState().onFieldInteracted();
         }
-        if (formData.getConfirmPassword() != null && !formData.getConfirmPassword().equals("")){
+        if (formData.getConfirmPassword() != null && !formData.getConfirmPassword().equals("")) {
             state.getConfirmPasswordState().onFieldInteracted();
         }
-        if (formData.getAddress() != null && !formData.getAddress().equals("")){
+        if (formData.getAddress() != null && !formData.getAddress().equals("")) {
             state.getHomeAddressState().onFieldInteracted();
         }
-        if (formData.getCity() != null && !formData.getCity().equals("")){
+        if (formData.getCity() != null && !formData.getCity().equals("")) {
             state.getCityState().onFieldInteracted();
         }
     }

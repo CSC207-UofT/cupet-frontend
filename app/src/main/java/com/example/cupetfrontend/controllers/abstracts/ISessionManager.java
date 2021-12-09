@@ -16,6 +16,7 @@ public interface ISessionManager {
 
     /**
      * Set the current user's login token
+     *
      * @param token The user's token
      */
     void setToken(String token);
@@ -36,6 +37,7 @@ public interface ISessionManager {
 
     /**
      * Set the cached data of the logged in user
+     *
      * @param cachedUserData Data to set
      */
     void setCachedUserData(CachedUserData cachedUserData);

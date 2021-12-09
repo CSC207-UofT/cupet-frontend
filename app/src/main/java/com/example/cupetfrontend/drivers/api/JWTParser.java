@@ -5,6 +5,7 @@ import com.auth0.jwt.exceptions.JWTDecodeException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.example.cupetfrontend.controllers.InvalidJWTException;
 import com.example.cupetfrontend.controllers.abstracts.IJWTParser;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -17,7 +18,7 @@ public class JWTParser implements IJWTParser {
         try {
             DecodedJWT decodedJWT = JWT.decode(jwt);
             return decodedJWT.getSubject();
-        } catch (JWTDecodeException e){
+        } catch (JWTDecodeException e) {
             throw new InvalidJWTException();
         }
     }
