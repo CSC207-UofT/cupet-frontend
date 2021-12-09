@@ -9,6 +9,7 @@ import com.example.cupetfrontend.use_cases.input_boundaries.pet.PetCreatorInputB
 import com.example.cupetfrontend.use_cases.output_boundaries.pet.PetCreatorOutputBoundary;
 import com.example.cupetfrontend.use_cases.request_models.pet.PetCreatorRequestModel;
 import com.example.cupetfrontend.use_cases.response_models.pet.PetCreatorSuccessResponseModel;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -24,7 +25,7 @@ public class PetCreator extends DefaultFailResponseUseCase implements PetCreator
     @Override
     public void createPet(PetCreatorRequestModel request) {
         APICreatePetRequestModel apiRequest = new APICreatePetRequestModel(
-               request.getToken(), request.getName(), request.getAge(), request.getBreed(), request.getBiography()
+                request.getToken(), request.getName(), request.getAge(), request.getBreed(), request.getBiography()
         );
 
         petAPIGateway.createPet(apiRequest, new IServerResponseListener() {
@@ -57,7 +58,7 @@ public class PetCreator extends DefaultFailResponseUseCase implements PetCreator
                     dataObj.getString("breed"),
                     dataObj.getString("biography"),
                     dataObj.getString("petId")
-                    );
+            );
         } catch (JSONException e) {
             throw new InvalidAPIResponseException("The API gave an invalid successful create pet response.");
         }

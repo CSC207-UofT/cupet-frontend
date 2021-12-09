@@ -92,7 +92,7 @@ public class MatchedPetProfileFragment extends MainActivityFragment {
     /**
      * Set up this fragment as an observer that observes the result of obtaining the user profile
      * data for the selected pet's owner.
-     *
+     * <p>
      * Update the displayed views when the MatchedPetProfileOwnerContactInfoResult
      * result has changed.
      */

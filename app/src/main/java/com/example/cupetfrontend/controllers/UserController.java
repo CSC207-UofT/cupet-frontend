@@ -37,7 +37,7 @@ public class UserController implements IUserController {
         this.editUserAccount = editUserAccount;
     }
 
-    public void setSetUserProfileImage(SetUserProfileImageInputBoundary setUserProfileImage){
+    public void setSetUserProfileImage(SetUserProfileImageInputBoundary setUserProfileImage) {
         this.setUserProfileImage = setUserProfileImage;
     }
 
@@ -46,7 +46,7 @@ public class UserController implements IUserController {
     }
 
     @Override
-    public void createUser(String firstName, String lastName, String email, String password, String homeAddress, String city){
+    public void createUser(String firstName, String lastName, String email, String password, String homeAddress, String city) {
         UserCreatorRequestModel request = new UserCreatorRequestModel(
                 firstName, lastName, email, password, homeAddress, city);
 

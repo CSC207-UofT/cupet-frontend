@@ -1,11 +1,12 @@
 package com.example.cupetfrontend.unit_tests.use_cases.user;
 
 import com.example.cupetfrontend.unit_tests.use_cases.UseCaseTestClass;
-import com.example.cupetfrontend.use_cases.user.UserCreator;
 import com.example.cupetfrontend.use_cases.output_boundaries.user.UserCreatorOutputBoundary;
 import com.example.cupetfrontend.use_cases.request_models.user.UserCreatorRequestModel;
 import com.example.cupetfrontend.use_cases.response_models.pet.DefaultFailureResponseModel;
 import com.example.cupetfrontend.use_cases.response_models.user.UserCreatorSuccessResponseModel;
+import com.example.cupetfrontend.use_cases.user.UserCreator;
+
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -13,7 +14,7 @@ import static org.junit.Assert.fail;
 
 public class CreateUserTest extends UseCaseTestClass {
     @Test
-    public void testCreateUserSuccess(){
+    public void testCreateUserSuccess() {
         UserCreatorRequestModel request = new UserCreatorRequestModel(
                 "dummy first name", "dummy last name", "dummy email",
                 "dummy password", "dummy address", "dummy city");
@@ -40,7 +41,7 @@ public class CreateUserTest extends UseCaseTestClass {
     }
 
     @Test
-    public void testCreateUserFailure(){
+    public void testCreateUserFailure() {
         UserCreatorRequestModel request = new UserCreatorRequestModel(
                 "dummy first name", "dummy last name", "dummy email",
                 "dummy password", "dummy home address", "dummy city");

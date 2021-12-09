@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Toast;
 import android.os.Bundle;
+
 import com.example.cupetfrontend.R;
 
 import androidx.annotation.NonNull;
@@ -45,7 +46,7 @@ public class EditUserProfileFragment extends MainActivityFragment {
     /**
      * If errorState is non-null, display the error state on the field.
      *
-     * @param field The field to display the error state in
+     * @param field        The field to display the error state in
      * @param errorMessage the error message to display
      */
     private void setFieldError(EditText field, String errorMessage) {
@@ -70,15 +71,15 @@ public class EditUserProfileFragment extends MainActivityFragment {
         setUpObserveUserProfileResult();
         setUpObserveEditUserProfileFormState();
 
-        if (viewModel.getContext() != null){
+        if (viewModel.getContext() != null) {
             preFillExistingData(viewModel.getContext().getPreFilledData());
         }
 
         return root;
     }
 
-    private void setUpFormEditedListener(){
-        TextWatcher listener = new TextWatcher(){
+    private void setUpFormEditedListener() {
+        TextWatcher listener = new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
                 // Override with empty method
@@ -101,7 +102,7 @@ public class EditUserProfileFragment extends MainActivityFragment {
         binding.editUserProfilePhoneNum.addTextChangedListener(listener);
     }
 
-    private EditUserProfileData getEditUserProfileData(){
+    private EditUserProfileData getEditUserProfileData() {
         return new EditUserProfileData(
                 binding.editUserProfileBiography.getText().toString(),
                 binding.editUserProfilePhoneNum.getText().toString(),
@@ -110,7 +111,7 @@ public class EditUserProfileFragment extends MainActivityFragment {
         );
     }
 
-    private void setUpConfirmButtonClickedListener(){
+    private void setUpConfirmButtonClickedListener() {
         binding.ConfirmEditUserProfileButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -118,7 +119,7 @@ public class EditUserProfileFragment extends MainActivityFragment {
 
                 viewModel.editUserProfile(formData, sessionManager.getToken());
 
-                if (uploadImageViewModel.getImgB64() != null){
+                if (uploadImageViewModel.getImgB64() != null) {
                     viewModel.setUserProfileImage(sessionManager.getToken(),
                             uploadImageViewModel.getImgB64());
                 }
@@ -126,39 +127,38 @@ public class EditUserProfileFragment extends MainActivityFragment {
         });
     }
 
-    private void setUpObserveUserProfileResult(){
+    private void setUpObserveUserProfileResult() {
         viewModel.getEditUserProfileResult().observe(getViewLifecycleOwner(), new Observer<EditUserProfileResult>() {
             @Override
             public void onChanged(EditUserProfileResult editUserProfileResult) {
                 if (editUserProfileResult == null)
                     return;
 
-                if (editUserProfileResult.isError()){
+                if (editUserProfileResult.isError()) {
                     onEditUserProfileFailure(editUserProfileResult.getErrorMessage());
-                }
-                else{
+                } else {
                     onEditUserProfileSuccess();
                 }
             }
         });
     }
 
-    private void onEditUserProfileSuccess(){
+    private void onEditUserProfileSuccess() {
         Toast.makeText(getApplicationContext(), "Edit Success", Toast.LENGTH_SHORT).show();
         getMainActivity().navigate(R.id.nav_my_user_profile);
     }
 
 
-    private void onEditUserProfileFailure(String errorMessage){
+    private void onEditUserProfileFailure(String errorMessage) {
         Toast.makeText(getApplicationContext(), "Edit Failed:" + errorMessage, Toast.LENGTH_SHORT).show();
         Toast.makeText(getApplicationContext(), "User Profile Edit Failed: " + errorMessage, Toast.LENGTH_SHORT).show();
     }
 
-    private void setUpObserveEditUserProfileFormState(){
+    private void setUpObserveEditUserProfileFormState() {
         viewModel.getEditUserProfileState().observe(getViewLifecycleOwner(), new Observer<EditUserProfileState>() {
             @Override
             public void onChanged(EditUserProfileState editUserProfileState) {
-                if (editUserProfileState == null){
+                if (editUserProfileState == null) {
                     return;
                 }
 

@@ -15,9 +15,9 @@ public class CreateUserPresenter implements ICreateUserPresenter {
     /**
      * On the successful creation of a new user, handover the presented
      * data to the view model.
-     *
+     * <p>
      * Presentation:
-     *  - remove all data as it is not necessary for display
+     * - remove all data as it is not necessary for display
      *
      * @param response The response from the use case's layer
      */
@@ -29,9 +29,9 @@ public class CreateUserPresenter implements ICreateUserPresenter {
     /**
      * On the failed creation of a new user, handover the presented
      * data to the view model.
-     *
+     * <p>
      * Presentation:
-     *  - preserve the response's message to display
+     * - preserve the response's message to display
      *
      * @param response The response from the use case's layer
      */

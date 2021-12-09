@@ -8,6 +8,7 @@ import com.example.cupetfrontend.use_cases.input_boundaries.pet.RejectMatchInput
 import com.example.cupetfrontend.use_cases.output_boundaries.pet.RejectMatchOutputBoundary;
 import com.example.cupetfrontend.use_cases.request_models.pet.RejectMatchRequestModel;
 import com.example.cupetfrontend.use_cases.response_models.pet.RejectMatchSuccessResponseModel;
+
 import org.json.JSONObject;
 
 public class RejectMatch extends DefaultFailResponseUseCase implements RejectMatchInputBoundary {

@@ -22,9 +22,9 @@ public class FormFieldState {
      * provided it is in an error state. Otherwise, return null
      */
     public String getErrorMessage() {
-        if (isError()){
+        if (isError()) {
             return errorMessage;
-        }else{
+        } else {
             return null;
         }
     }
@@ -32,10 +32,10 @@ public class FormFieldState {
     /**
      * Return whether the field is in an error state.
      */
-    public boolean isError () {
-        if (hasFieldBeenTouched){
+    public boolean isError() {
+        if (hasFieldBeenTouched) {
             return errorMessage != null;
-        }else{
+        } else {
             return false;
         }
     }

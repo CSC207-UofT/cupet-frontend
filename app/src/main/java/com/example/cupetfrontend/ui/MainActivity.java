@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import android.widget.Toast;
+
 import com.bumptech.glide.Glide;
 import com.example.cupetfrontend.App;
 import com.example.cupetfrontend.R;
@@ -71,7 +72,7 @@ public class MainActivity extends AppCompatActivity implements Navigator {
                 R.id.nav_potential_matches, R.id.nav_matches,
                 R.id.nav_my_pet_profile, R.id.nav_account_settings,
                 R.id.nav_my_user_profile
-                )
+        )
                 .setOpenableLayout(binding.mainDrawerLayout)
                 .build();
 
@@ -138,7 +139,7 @@ public class MainActivity extends AppCompatActivity implements Navigator {
     /**
      * Attach the user's data to the drawer
      */
-    public void attachUserDataToDrawer(){
+    public void attachUserDataToDrawer() {
         ImageView imgView = findViewById(R.id.drawer_profile_img);
         TextView fullNameView = findViewById(R.id.drawer_full_name);
         TextView emailView = findViewById(R.id.drawer_email);
@@ -149,7 +150,7 @@ public class MainActivity extends AppCompatActivity implements Navigator {
         fullNameView.setText(fullName);
         emailView.setText(cachedUserData.getEmail());
 
-        if (!cachedUserData.getProfileImgUrl().equals("")){
+        if (!cachedUserData.getProfileImgUrl().equals("")) {
             Glide.with(this).load(cachedUserData.getProfileImgUrl()).into(imgView);
         }
     }
@@ -177,7 +178,7 @@ public class MainActivity extends AppCompatActivity implements Navigator {
                 navigate(editBtnNavTarget);
             }
 
-        }else{
+        } else {
             onSupportNavigateUp();
         }
 
@@ -207,7 +208,7 @@ public class MainActivity extends AppCompatActivity implements Navigator {
     /**
      * Hide the edit action button.
      */
-    public void hideEditButton () {
+    public void hideEditButton() {
         if (appBarMenu != null) {
             MenuItem item = appBarMenu.findItem(R.id.main_appbar_edit);
             item.setVisible(false);
@@ -217,7 +218,7 @@ public class MainActivity extends AppCompatActivity implements Navigator {
     /**
      * Show the edit action button.
      */
-    public void showEditButton () {
+    public void showEditButton() {
         if (appBarMenu != null) {
             MenuItem item = appBarMenu.findItem(R.id.main_appbar_edit);
             item.setVisible(true);
@@ -234,7 +235,7 @@ public class MainActivity extends AppCompatActivity implements Navigator {
 
     /**
      * Get the current page navigated to.
-     *
+     * <p>
      * If no such page is found, return -1.
      */
     @Override
@@ -244,7 +245,7 @@ public class MainActivity extends AppCompatActivity implements Navigator {
 
         if (navController.getCurrentDestination() != null) {
             return navController.getCurrentDestination().getId();
-        }else{
+        } else {
             return -1;
         }
     }
@@ -252,7 +253,7 @@ public class MainActivity extends AppCompatActivity implements Navigator {
 
     /**
      * Set the navigation target fragment when the edit button is clicked.
-     *
+     * <p>
      * Ex. setEditBtnNavTarget(R.id.nav_account_settings);
      */
     public void setEditBtnNavTarget(int navTarget) {

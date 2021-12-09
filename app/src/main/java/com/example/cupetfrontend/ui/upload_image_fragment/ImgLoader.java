@@ -28,11 +28,11 @@ public class ImgLoader {
     /**
      * Attach a PNG B64 prefix to a b64 image raw-data string.
      */
-    private static String attachB64ImagePrefix(String b64){
+    private static String attachB64ImagePrefix(String b64) {
         return "data:image/png;base64," + b64;
     }
 
-    public static String b64FromBitmap(Bitmap bitmap){
+    public static String b64FromBitmap(Bitmap bitmap) {
         // Convert bitmap to byte array
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);

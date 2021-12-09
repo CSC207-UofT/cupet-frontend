@@ -8,6 +8,7 @@ import com.example.cupetfrontend.use_cases.input_boundaries.pet.UnMatchPetInputB
 import com.example.cupetfrontend.use_cases.output_boundaries.pet.UnMatchPetOutputBoundary;
 import com.example.cupetfrontend.use_cases.request_models.pet.UnMatchPetRequestModel;
 import com.example.cupetfrontend.use_cases.response_models.pet.UnMatchPetSuccessResponseModel;
+
 import org.json.JSONObject;
 
 public class UnMatchPet extends DefaultFailResponseUseCase implements UnMatchPetInputBoundary {

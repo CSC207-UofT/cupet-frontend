@@ -35,7 +35,7 @@ public class PotentialMatchesViewModel implements IPotentialMatchesViewModel {
         petController.rejectMatch(token, petId, targetPetId);
     }
 
-    public void intendToMatchCurrentPet(String token, String petId){
+    public void intendToMatchCurrentPet(String token, String petId) {
         String targetPetId = getMatchAt(currentIndex - 1).getPetId();
 
         petController.intendToMatch(token, petId, targetPetId);
@@ -47,7 +47,7 @@ public class PotentialMatchesViewModel implements IPotentialMatchesViewModel {
     public boolean hasNextMatch() {
         GetPotentialMatchesResult result = getPotentialMatchesResult.getValue();
 
-        if (result == null){
+        if (result == null) {
             throw new MatchesNotLoadedException();
         } else {
             List<PresentedPetData> potentialMatches = result.getPotentialMatches();
@@ -60,13 +60,13 @@ public class PotentialMatchesViewModel implements IPotentialMatchesViewModel {
 
     /**
      * Return the next pet to be viewed.
-     *
+     * <p>
      * If there are no more pets to be viewed,
      */
     public PresentedPetData getNextMatch() {
         GetPotentialMatchesResult result = getPotentialMatchesResult.getValue();
 
-        if (result == null){
+        if (result == null) {
             throw new MatchesNotLoadedException();
         } else {
             List<PresentedPetData> potentialMatches = result.getPotentialMatches();
@@ -82,10 +82,10 @@ public class PotentialMatchesViewModel implements IPotentialMatchesViewModel {
     /**
      * Return a potential match at the given index.
      */
-    private PresentedPetData getMatchAt(int index){
+    private PresentedPetData getMatchAt(int index) {
         GetPotentialMatchesResult result = getPotentialMatchesResult.getValue();
 
-        if (result == null){
+        if (result == null) {
             throw new MatchesNotLoadedException();
         } else {
             List<PresentedPetData> potentialMatches = result.getPotentialMatches();

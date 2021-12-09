@@ -1,6 +1,6 @@
 package com.example.cupetfrontend.use_cases.data_models;
 
-public class UserAccount extends UserAccountWithoutPassword{
+public class UserAccount extends UserAccountWithoutPassword {
     private final String password;
 
     public UserAccount(String firstName, String lastName, String email, String password, String homeAddress, String city) {

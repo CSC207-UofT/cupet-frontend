@@ -18,7 +18,7 @@ public class GetPotentialMatchesResult {
         this.potentialMatches = null;
     }
 
-    public GetPotentialMatchesResult(List<PresentedPetData> potentialMatches){
+    public GetPotentialMatchesResult(List<PresentedPetData> potentialMatches) {
         this.isError = false;
         this.errorMessage = null;
         this.potentialMatches = potentialMatches;

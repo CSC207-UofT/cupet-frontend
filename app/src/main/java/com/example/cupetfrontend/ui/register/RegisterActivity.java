@@ -6,8 +6,10 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Toast;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -57,7 +59,7 @@ public class RegisterActivity extends AppCompatActivity {
     /**
      * If error message is non-null, display the error message on the field.
      *
-     * @param field The field to display the error state in
+     * @param field        The field to display the error state in
      * @param errorMessage the error message to display
      */
     private void setFieldError(EditText field, String errorMessage) {
@@ -152,7 +154,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     /**
      * Set up this activity as an observer that observes the result of registration.
-     *
+     * <p>
      * Update the displayed views when the registration result has changed.
      */
     private void setUpObserveRegisterResult() {
@@ -163,9 +165,9 @@ public class RegisterActivity extends AppCompatActivity {
                     return;
                 }
 
-                if (registerResult.isError()){
+                if (registerResult.isError()) {
                     onRegisterFailure(registerResult.getErrorMessage());
-                }else{
+                } else {
                     onRegisterSuccess();
                 }
 
@@ -177,7 +179,7 @@ public class RegisterActivity extends AppCompatActivity {
     /**
      * Set up this activity as an observer that observes the error states of the
      * registration form.
-     *
+     * <p>
      * Update the fields accordingly to whether or not they have errors.
      */
     private void setUpObserveRegisterFormState() {
@@ -220,9 +222,10 @@ public class RegisterActivity extends AppCompatActivity {
 
     /**
      * Display a Registration failed toast message.
+     *
      * @param errorMessage The error message to display
      */
-    private void onRegisterFailure (String errorMessage) {
+    private void onRegisterFailure(String errorMessage) {
         Toast.makeText(getApplicationContext(), "Registration Failed: " + errorMessage, Toast.LENGTH_SHORT).show();
     }
 

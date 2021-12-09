@@ -18,16 +18,16 @@ public class AsyncTestClass {
      * Before each test case, create a new count down latch.
      */
     @Before
-    public void setUpLatch(){
+    public void setUpLatch() {
         latch = new CountDownLatch(1);
     }
 
     /**
      * Pause synchronous code execution to await for an asynchronous task.
-     *
+     * <p>
      * If asynchronous threads are interrupted (through exceptions or etc.),
      * fail the current test.
-     *
+     * <p>
      * If the task is incomplete by the end of the timer,
      * fail the current test.
      *

@@ -8,10 +8,10 @@ public interface IPetController {
     /**
      * Create a new pet
      *
-     * @param token The user's session token
-     * @param name The name of the pet
-     * @param age The age of the pet
-     * @param breed The breed of the pet
+     * @param token     The user's session token
+     * @param name      The name of the pet
+     * @param age       The age of the pet
+     * @param breed     The breed of the pet
      * @param biography The pet's biography, as written by the user
      */
     void createPet(String token, String name, String age, String breed, String biography);
@@ -27,11 +27,11 @@ public interface IPetController {
     /**
      * Edit a pet's profile
      *
-     * @param token The user's session token
-     * @param petId The pet's id
-     * @param newName The pet's new name
-     * @param newAge The pet's new age
-     * @param newBreed The pet's new breed
+     * @param token        The user's session token
+     * @param petId        The pet's id
+     * @param newName      The pet's new name
+     * @param newAge       The pet's new age
+     * @param newBreed     The pet's new breed
      * @param newBiography The pet's new biography
      */
     void editPet(String token, String petId, String newName, String newAge, String newBreed, String newBiography);
@@ -49,19 +49,19 @@ public interface IPetController {
      * user's pet. A match is only made if the other user intends to match with
      * your pet as well. This is equivalent to swiping right.
      *
-     * @param token The user's session token
-     * @param myPetId My pet's id
+     * @param token      The user's session token
+     * @param myPetId    My pet's id
      * @param otherPetId The other user's pet's id
      */
     void intendToMatch(String token, String myPetId, String otherPetId);
 
     /**
      * Given a potential match with another pet, reject the other pet.
-     *
+     * <p>
      * This is equivalent to swiping left.
      *
-     * @param token The user's session token
-     * @param myPetId My pet's id
+     * @param token      The user's session token
+     * @param myPetId    My pet's id
      * @param otherPetId The other user's pet's id
      */
     void rejectMatch(String token, String myPetId, String otherPetId);
@@ -69,7 +69,7 @@ public interface IPetController {
     /**
      * Return a list of matches your pet has made.
      *
-     * @param token The user's session token
+     * @param token   The user's session token
      * @param myPetId The pet's id
      */
     void getMatches(String token, String myPetId);
@@ -77,8 +77,8 @@ public interface IPetController {
     /**
      * Un-match with a pet you've already matched with.
      *
-     * @param token The user's session token
-     * @param myPetId The pet's id
+     * @param token      The user's session token
+     * @param myPetId    The pet's id
      * @param otherPetId The other user's pet's id
      */
     void unMatchPet(String token, String myPetId, String otherPetId);
@@ -86,8 +86,8 @@ public interface IPetController {
     /**
      * Set a pet's profile image
      *
-     * @param token The user's session token
-     * @param petId The pet's id
+     * @param token  The user's session token
+     * @param petId  The pet's id
      * @param imgB64 The image as a base64 string
      */
     void setPetProfileImage(String token, String petId, String imgB64);

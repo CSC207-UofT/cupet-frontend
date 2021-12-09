@@ -1,10 +1,16 @@
 package com.example.cupetfrontend.unit_tests.use_cases;
 
 import com.example.cupetfrontend.AsyncTestClass;
-import com.example.cupetfrontend.unit_tests.use_cases.mocks.*;
+import com.example.cupetfrontend.unit_tests.use_cases.mocks.MockFailureAuthAPIGateway;
+import com.example.cupetfrontend.unit_tests.use_cases.mocks.MockFailurePetAPIGateway;
+import com.example.cupetfrontend.unit_tests.use_cases.mocks.MockFailureUserAPIGateway;
+import com.example.cupetfrontend.unit_tests.use_cases.mocks.MockSuccessAuthAPIGateway;
+import com.example.cupetfrontend.unit_tests.use_cases.mocks.MockSuccessPetAPIGateway;
+import com.example.cupetfrontend.unit_tests.use_cases.mocks.MockSuccessUserAPIGateway;
 import com.example.cupetfrontend.use_cases.api_abstracts.IAuthAPIGateway;
 import com.example.cupetfrontend.use_cases.api_abstracts.IPetAPIGateway;
 import com.example.cupetfrontend.use_cases.api_abstracts.IUserAPIGateway;
+
 import org.junit.Before;
 
 public class UseCaseTestClass extends AsyncTestClass {

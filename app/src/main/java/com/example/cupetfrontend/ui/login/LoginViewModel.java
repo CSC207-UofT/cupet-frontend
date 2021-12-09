@@ -3,6 +3,7 @@ package com.example.cupetfrontend.ui.login;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
+
 import android.util.Patterns;
 
 import com.example.cupetfrontend.controllers.abstracts.IAuthController;
@@ -41,7 +42,7 @@ public class LoginViewModel extends ViewModel implements ILoginViewModel {
         LoginFormState newFormState = new LoginFormState();
         LoginFormState oldFormState = loginFormState.getValue();
 
-        if (oldFormState == null){
+        if (oldFormState == null) {
             loginFormState.setValue(newFormState);
             return;
         }
@@ -66,11 +67,11 @@ public class LoginViewModel extends ViewModel implements ILoginViewModel {
                 ));
     }
 
-    private void checkFormStateInteracted (String email, String password, LoginFormState state) {
-        if (email != null && !email.equals("")){
+    private void checkFormStateInteracted(String email, String password, LoginFormState state) {
+        if (email != null && !email.equals("")) {
             state.getEmailState().onFieldInteracted();
         }
-        if (password != null && !password.equals("")){
+        if (password != null && !password.equals("")) {
             state.getPasswordState().onFieldInteracted();
         }
     }

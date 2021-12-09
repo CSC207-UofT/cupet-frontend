@@ -5,6 +5,7 @@ import com.example.cupetfrontend.use_cases.request_models.user.EditUserProfileRe
 public interface EditUserProfileInputBoundary {
     /**
      * Edit a user's profile given request data
+     *
      * @param request The request data
      */
     void editUserProfile(EditUserProfileRequestModel request);

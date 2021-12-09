@@ -8,7 +8,8 @@ import com.example.cupetfrontend.use_cases.response_models.user.EditUserAccountS
 
 public class EditUserAccountPresenter implements IEditUserAccountPresenter {
     IEditUserAccountViewModel editUserAccountViewModel;
-    public void setEditUserAccountViewModel(IEditUserAccountViewModel editUserAccountViewModel){
+
+    public void setEditUserAccountViewModel(IEditUserAccountViewModel editUserAccountViewModel) {
         this.editUserAccountViewModel = editUserAccountViewModel;
     }
 

@@ -3,6 +3,7 @@ package com.example.cupetfrontend.ui.edit_pet;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
+
 import com.example.cupetfrontend.R;
 import com.example.cupetfrontend.controllers.abstracts.IPetController;
 import com.example.cupetfrontend.controllers.abstracts.IPetSessionManager;
@@ -48,7 +49,7 @@ public class EditPetViewModel extends ViewModel implements IEditPetViewModel {
     }
 
     @Override
-    public void editPet(EditPetFormData formData){
+    public void editPet(EditPetFormData formData) {
         petController.editPet(sessionManager.getToken(), petSessionManager.getPetId(), formData.getPetName(), formData.getPetAge(),
                 formData.getPetBreed(), formData.getPetBio());
     }
@@ -60,6 +61,7 @@ public class EditPetViewModel extends ViewModel implements IEditPetViewModel {
 
     /**
      * Update the state of the edit pet form.
+     *
      * @param formData The data entered into the form.
      */
     @Override
@@ -67,13 +69,13 @@ public class EditPetViewModel extends ViewModel implements IEditPetViewModel {
         EditPetFormState newFormState = new EditPetFormState();
         EditPetFormState oldFormState = editPetFormState.getValue();
 
-        if (oldFormState == null){
+        if (oldFormState == null) {
             editPetFormState.setValue(newFormState);
             return;
         }
 
         validateForm(formData, newFormState, oldFormState);
-        checkFormStateInteracted(formData,  newFormState);
+        checkFormStateInteracted(formData, newFormState);
 
         editPetFormState.setValue(newFormState);
     }
@@ -102,36 +104,38 @@ public class EditPetViewModel extends ViewModel implements IEditPetViewModel {
                 ));
     }
 
-    private void checkFormStateInteracted (EditPetFormData formData, EditPetFormState state) {
-        if (formData.getPetName() != null && !formData.getPetName().equals("")){
+    private void checkFormStateInteracted(EditPetFormData formData, EditPetFormState state) {
+        if (formData.getPetName() != null && !formData.getPetName().equals("")) {
             state.getNameState().onFieldInteracted();
         }
-        if (formData.getPetAge() != null && !formData.getPetAge().equals("")){
+        if (formData.getPetAge() != null && !formData.getPetAge().equals("")) {
             state.getAgeState().onFieldInteracted();
         }
-        if (formData.getPetBreed() != null && !formData.getPetBreed().equals("")){
+        if (formData.getPetBreed() != null && !formData.getPetBreed().equals("")) {
             state.getBreedState().onFieldInteracted();
         }
-        if (formData.getPetBio() != null && !formData.getPetBio().equals("")){
+        if (formData.getPetBio() != null && !formData.getPetBio().equals("")) {
             state.getBiographyState().onFieldInteracted();
         }
     }
 
     /**
      * Return whether petName is valid.
+     *
      * @param petName The pet's name
      * @return whether petName is valid
      */
-    private boolean isPetNameValid(String petName){
+    private boolean isPetNameValid(String petName) {
         return petName != null && petName.trim().length() > 0;
     }
 
     /**
      * Return whether petAge is valid.
+     *
      * @param petAge The pet's age
      * @return whether petAge is valid
      */
-    private boolean isPetAgeValid(String petAge){
+    private boolean isPetAgeValid(String petAge) {
         return petAge != null && petAge.trim().length() > 0 && isInt(petAge.trim());
 
     }
@@ -149,19 +153,21 @@ public class EditPetViewModel extends ViewModel implements IEditPetViewModel {
 
     /**
      * Return whether petBreed is valid.
+     *
      * @param petBreed The pet's breed
      * @return whether petBreed is valid
      */
-    private boolean isPetBreedValid(String petBreed){
+    private boolean isPetBreedValid(String petBreed) {
         return petBreed != null && petBreed.trim().length() > 0;
     }
 
     /**
      * Return whether petBio is valid.
+     *
      * @param petBio The pet's breed
      * @return whether petBio is valid
      */
-    private boolean isPetBioValid(String petBio){
+    private boolean isPetBioValid(String petBio) {
         return petBio != null && petBio.trim().length() > 0;
     }
 

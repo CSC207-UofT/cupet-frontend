@@ -9,7 +9,7 @@ import java.util.HashMap;
 public class MockSuccessAuthAPIGateway extends MockSuccessAPIGateway implements IAuthAPIGateway {
     @Override
     public void login(APILoginRequestModel requestData, IServerResponseListener responseListener) {
-        responseListener.onRequestSuccess(createDummySuccessJSON(new HashMap<String, String>(){{
+        responseListener.onRequestSuccess(createDummySuccessJSON(new HashMap<String, String>() {{
             put("jwt", "dummy token");
         }}));
     }

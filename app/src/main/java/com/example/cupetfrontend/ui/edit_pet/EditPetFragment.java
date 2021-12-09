@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.Observer;
@@ -64,7 +65,7 @@ public class EditPetFragment extends MainActivityFragment {
     /**
      * If the errorMessage is non-null, display the errorMessage on the field.
      *
-     * @param field The field to display the error state in
+     * @param field        The field to display the error state in
      * @param errorMessage the error message to display
      */
     private void setFieldError(EditText field, String errorMessage) {
@@ -89,7 +90,7 @@ public class EditPetFragment extends MainActivityFragment {
         setUpFormEditedListener();
         setUpEditPetButtonClickedListener();
 
-        if (editPetViewModel.getContext() != null){
+        if (editPetViewModel.getContext() != null) {
             prefillData(editPetViewModel.getContext().getPetProfileData());
         }
 
@@ -137,7 +138,7 @@ public class EditPetFragment extends MainActivityFragment {
                 EditPetFormData formData = getEditPetFormData();
                 editPetViewModel.editPet(formData);
 
-                if (uploadImageViewModel.getImgB64() != null){
+                if (uploadImageViewModel.getImgB64() != null) {
                     editPetViewModel.setPetProfileImage(
                             uploadImageViewModel.getImgB64());
                 }
@@ -163,7 +164,7 @@ public class EditPetFragment extends MainActivityFragment {
 
     /**
      * Set up this activity as an observer that observes the result of pet edition.
-     *
+     * <p>
      * Update the displayed views when the pet edition result has changed.
      */
     private void setUpObserveEditPetResult() {
@@ -174,9 +175,9 @@ public class EditPetFragment extends MainActivityFragment {
                     return;
                 }
 
-                if (editPetResult.isError()){
+                if (editPetResult.isError()) {
                     onEditPetFailure(editPetResult.getErrorMessage());
-                }else{
+                } else {
                     onEditPetSuccess();
                 }
             }
@@ -186,7 +187,7 @@ public class EditPetFragment extends MainActivityFragment {
     /**
      * Set up this activity as an observer that observes the error states of the
      * pet edition form.
-     *
+     * <p>
      * Update the fields accordingly to whether or not they have errors.
      */
     private void setUpObserveEditPetFormState() {
@@ -218,9 +219,10 @@ public class EditPetFragment extends MainActivityFragment {
 
     /**
      * Display a Pet Edition failed toast message.
+     *
      * @param errorMessage The error message to display
      */
-    private void onEditPetFailure (String errorMessage) {
+    private void onEditPetFailure(String errorMessage) {
         Toast.makeText(getApplicationContext(), "Pet Edit Failed: " + errorMessage, Toast.LENGTH_SHORT).show();
     }
 

@@ -5,6 +5,7 @@ import com.example.cupetfrontend.use_cases.request_models.pet.FetchPetProfileIma
 public interface FetchPetProfileImageInputBoundary {
     /**
      * Fetch a pet's profile picture given request data
+     *
      * @param request The request data
      */
     void fetchPetProfileImage(FetchPetProfileImageRequestModel request);

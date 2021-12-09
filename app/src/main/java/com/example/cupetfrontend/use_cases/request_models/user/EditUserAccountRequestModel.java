@@ -8,7 +8,7 @@ public class EditUserAccountRequestModel extends UserAccount {
     /**
      * Initialize an EditUserAccountRequestModel with a password.
      */
-    public EditUserAccountRequestModel(String token,  String firstName, String lastName, String email,
+    public EditUserAccountRequestModel(String token, String firstName, String lastName, String email,
                                        String password, String homeAddress, String city) {
         super(firstName, lastName, email, password, homeAddress, city);
         this.token = token;
@@ -17,7 +17,7 @@ public class EditUserAccountRequestModel extends UserAccount {
     /**
      * Initialize an EditUserAccountRequestModel without a password.
      */
-    public EditUserAccountRequestModel(String token,  String firstName, String lastName, String email,
+    public EditUserAccountRequestModel(String token, String firstName, String lastName, String email,
                                        String homeAddress, String city) {
         super(firstName, lastName, email, null, homeAddress, city);
         this.token = token;

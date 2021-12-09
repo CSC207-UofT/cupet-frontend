@@ -1,11 +1,12 @@
 package com.example.cupetfrontend.unit_tests.use_cases.pet;
 
 import com.example.cupetfrontend.unit_tests.use_cases.UseCaseTestClass;
-import com.example.cupetfrontend.use_cases.pet.UnMatchPet;
 import com.example.cupetfrontend.use_cases.output_boundaries.pet.UnMatchPetOutputBoundary;
+import com.example.cupetfrontend.use_cases.pet.UnMatchPet;
 import com.example.cupetfrontend.use_cases.request_models.pet.UnMatchPetRequestModel;
 import com.example.cupetfrontend.use_cases.response_models.pet.DefaultFailureResponseModel;
 import com.example.cupetfrontend.use_cases.response_models.pet.UnMatchPetSuccessResponseModel;
+
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -13,7 +14,7 @@ import static org.junit.Assert.fail;
 
 public class UnMatchPetTest extends UseCaseTestClass {
     @Test
-    public void testUnMatchPetSuccess(){
+    public void testUnMatchPetSuccess() {
         UnMatchPetRequestModel request = new UnMatchPetRequestModel(
                 "dummy token", "dummy pet id", "dummy other pet id");
 
@@ -33,7 +34,7 @@ public class UnMatchPetTest extends UseCaseTestClass {
     }
 
     @Test
-    public void testUnMatchPetFailure(){
+    public void testUnMatchPetFailure() {
         UnMatchPetRequestModel request = new UnMatchPetRequestModel(
                 "dummy token", "dummy pet id", "dummy other pet id");
 

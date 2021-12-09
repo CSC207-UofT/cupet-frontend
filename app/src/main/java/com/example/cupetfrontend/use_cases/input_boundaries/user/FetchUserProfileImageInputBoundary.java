@@ -5,6 +5,7 @@ import com.example.cupetfrontend.use_cases.request_models.user.FetchUserProfileI
 public interface FetchUserProfileImageInputBoundary {
     /**
      * Fetch a user's profile picture given request data
+     *
      * @param request The request data
      */
     void fetchUserProfileImage(FetchUserProfileImageRequestModel request);

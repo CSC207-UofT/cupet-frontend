@@ -101,7 +101,7 @@ public class GetMatchesFragment extends MainActivityFragment {
 
 
     // method for actually setting up our recycler view
-    private void initRecyclerView(){
+    private void initRecyclerView() {
         Log.d(TAG, "initRecyclerView: init recyclerview");
 
         adapter = new RecyclerViewAdapter(matchedPetProfileViewModel, petSessionManager,
@@ -117,27 +117,27 @@ public class GetMatchesFragment extends MainActivityFragment {
 
     /**
      * Set up this activity as an observer that observes the result of getting matches.
-     *
+     * <p>
      * Update the displayed views when the get matches result has changed.
      */
     private void setUpObserveGetMatchesResult() {
         getMatchesViewModel.getMatchesResult().observe(getViewLifecycleOwner(),
                 new Observer<GetMatchesResult>() {
-            @Override
-            public void onChanged(@Nullable GetMatchesResult getMatchesResult) {
-                Log.d(TAG, "onChanged: setUpObserveGetMatchesResult");
-                if (getMatchesResult == null) {
-                    return;
-                }
-                if (getMatchesResult.isError()){
-                    Log.e(TAG, "onChanged: get matches result Error ");
-                    onGetMatchesFailure(getMatchesResult.getErrorMessage());
-                }else{
-                    Log.d(TAG, "onChanged: get matches result success");
-                    onGetMatchesSuccess(getMatchesResult.getMatches());
-                }
-            }
-        });
+                    @Override
+                    public void onChanged(@Nullable GetMatchesResult getMatchesResult) {
+                        Log.d(TAG, "onChanged: setUpObserveGetMatchesResult");
+                        if (getMatchesResult == null) {
+                            return;
+                        }
+                        if (getMatchesResult.isError()) {
+                            Log.e(TAG, "onChanged: get matches result Error ");
+                            onGetMatchesFailure(getMatchesResult.getErrorMessage());
+                        } else {
+                            Log.d(TAG, "onChanged: get matches result success");
+                            onGetMatchesSuccess(getMatchesResult.getMatches());
+                        }
+                    }
+                });
     }
 
     /**
@@ -147,9 +147,9 @@ public class GetMatchesFragment extends MainActivityFragment {
     private void onGetMatchesSuccess(List<PetModel> matches) {
         Log.d(TAG, "onGetMatchesSuccess: success - matches:" + matches);
 
-        if (matches.size() == 0){
+        if (matches.size() == 0) {
             binding.noMatchesView.setVisibility(View.VISIBLE);
-        }else{
+        } else {
             binding.noMatchesView.setVisibility(View.GONE);
             petModelList.clear();
             petModelList.addAll(matches);
@@ -160,9 +160,10 @@ public class GetMatchesFragment extends MainActivityFragment {
     /**
      * Display a Get Matches failed toast message.
      * Notify adapter for RecyclerView.
+     *
      * @param errorMessage The error message to display
      */
-    private void onGetMatchesFailure (String errorMessage) {
+    private void onGetMatchesFailure(String errorMessage) {
         Log.e(TAG, "onGetMatchesFailure: Get Matches Failure");
         Toast.makeText(getApplicationContext(), "Get Matches Failed: " + errorMessage, Toast.LENGTH_SHORT).show();
         adapter.notifyDataSetChanged();
@@ -171,7 +172,7 @@ public class GetMatchesFragment extends MainActivityFragment {
     /**
      * Hide the appbar edit button
      */
-    public void setUpBtn () {
+    public void setUpBtn() {
         getMainActivity().hideEditButton();
     }
 }

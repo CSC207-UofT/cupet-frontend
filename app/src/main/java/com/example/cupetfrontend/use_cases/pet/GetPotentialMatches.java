@@ -9,6 +9,7 @@ import com.example.cupetfrontend.use_cases.output_boundaries.pet.GetPotentialMat
 import com.example.cupetfrontend.use_cases.request_models.pet.GetPotentialMatchesRequestModel;
 import com.example.cupetfrontend.use_cases.data_models.PetData;
 import com.example.cupetfrontend.use_cases.response_models.pet.*;
+
 import org.json.JSONObject;
 
 import java.util.List;

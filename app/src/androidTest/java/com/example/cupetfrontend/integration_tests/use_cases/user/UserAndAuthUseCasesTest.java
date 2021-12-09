@@ -1,22 +1,34 @@
 package com.example.cupetfrontend.integration_tests.use_cases.user;
 
 import android.content.Context;
-import androidx.test.platform.app.InstrumentationRegistry;
+
 import com.example.cupetfrontend.AsyncTestClass;
 import com.example.cupetfrontend.drivers.api.AuthAPIGateway;
 import com.example.cupetfrontend.drivers.api.HTTPRequestManager;
 import com.example.cupetfrontend.drivers.api.UserAPIGateway;
-import com.example.cupetfrontend.use_cases.*;
+import com.example.cupetfrontend.use_cases.LoginUseCase;
 import com.example.cupetfrontend.use_cases.api_abstracts.IAuthAPIGateway;
 import com.example.cupetfrontend.use_cases.api_abstracts.IServerRequestManager;
 import com.example.cupetfrontend.use_cases.api_abstracts.IUserAPIGateway;
 import com.example.cupetfrontend.use_cases.output_boundaries.LoginOutputBoundary;
-import com.example.cupetfrontend.use_cases.output_boundaries.user.*;
+import com.example.cupetfrontend.use_cases.output_boundaries.user.EditUserAccountOutputBoundary;
+import com.example.cupetfrontend.use_cases.output_boundaries.user.EditUserProfileOutputBoundary;
+import com.example.cupetfrontend.use_cases.output_boundaries.user.FetchUserAccountOutputBoundary;
+import com.example.cupetfrontend.use_cases.output_boundaries.user.FetchUserProfileOutputBoundary;
+import com.example.cupetfrontend.use_cases.output_boundaries.user.UserCreatorOutputBoundary;
 import com.example.cupetfrontend.use_cases.request_models.LoginRequestModel;
-import com.example.cupetfrontend.use_cases.request_models.user.*;
+import com.example.cupetfrontend.use_cases.request_models.user.EditUserAccountRequestModel;
+import com.example.cupetfrontend.use_cases.request_models.user.EditUserProfileRequestModel;
+import com.example.cupetfrontend.use_cases.request_models.user.FetchUserAccountRequestModel;
+import com.example.cupetfrontend.use_cases.request_models.user.FetchUserProfileRequestModel;
+import com.example.cupetfrontend.use_cases.request_models.user.UserCreatorRequestModel;
 import com.example.cupetfrontend.use_cases.response_models.LoginSuccessResponseModel;
 import com.example.cupetfrontend.use_cases.response_models.pet.DefaultFailureResponseModel;
-import com.example.cupetfrontend.use_cases.response_models.user.*;
+import com.example.cupetfrontend.use_cases.response_models.user.EditUserAccountSuccessResponseModel;
+import com.example.cupetfrontend.use_cases.response_models.user.EditUserProfileSuccessResponseModel;
+import com.example.cupetfrontend.use_cases.response_models.user.FetchUserAccountSuccessResponseModel;
+import com.example.cupetfrontend.use_cases.response_models.user.FetchUserProfileSuccessResponseModel;
+import com.example.cupetfrontend.use_cases.response_models.user.UserCreatorSuccessResponseModel;
 import com.example.cupetfrontend.use_cases.user.EditUserAccount;
 import com.example.cupetfrontend.use_cases.user.EditUserProfile;
 import com.example.cupetfrontend.use_cases.user.FetchUserAccount;
@@ -28,20 +40,22 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
+import androidx.test.platform.app.InstrumentationRegistry;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 /**
  * Test the users and auth related use cases:
- *  - creating a new user
- *  - logging in
- *  - retrieving and editing account
- *  - retrieving and editing profile
- *
+ * - creating a new user
+ * - logging in
+ * - retrieving and editing account
+ * - retrieving and editing profile
+ * <p>
  * NOTE: This is an integration test.
  * The test cases are dependent on each bottom-up, and they
  * should be run in succession.
- *
+ * <p>
  * To run these tests, run the entire test class.
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -53,7 +67,7 @@ public class UserAndAuthUseCasesTest extends AsyncTestClass {
     private static String userId;
 
     @BeforeClass
-    public static void setUp(){
+    public static void setUp() {
         Context context = InstrumentationRegistry.getInstrumentation().getTargetContext();
 
         IServerRequestManager requestManager = new HTTPRequestManager(context);
@@ -68,7 +82,7 @@ public class UserAndAuthUseCasesTest extends AsyncTestClass {
      *
      * @return a unique UserCreator request
      */
-    protected static UserCreatorRequestModel createNewUniqueUserRequest(){
+    protected static UserCreatorRequestModel createNewUniqueUserRequest() {
         // Create a unique email in the database using the current time
         String time = ((Long) System.currentTimeMillis()).toString();
         String email = "android_test_" + time + "@android.test";
@@ -77,14 +91,14 @@ public class UserAndAuthUseCasesTest extends AsyncTestClass {
                 "android_first",
                 "android_last",
                 email,
-                "AndroidPassword",
-                "1234 Android St",
-                "Android City"
+                "1Password",
+                "1234 Yonge St",
+                "Toronto"
         );
     }
 
     @Test
-    public void test0_createUser(){
+    public void test0_createUser() {
         new UserCreator(userAPIGateway, new UserCreatorOutputBoundary() {
             @Override
             public void onCreateUserSuccess(UserCreatorSuccessResponseModel response) {
@@ -110,7 +124,7 @@ public class UserAndAuthUseCasesTest extends AsyncTestClass {
     }
 
     @Test
-    public void test1_login(){
+    public void test1_login() {
         LoginRequestModel request = new LoginRequestModel(newUserRequest.getEmail(),
                 newUserRequest.getPassword());
 
@@ -131,7 +145,7 @@ public class UserAndAuthUseCasesTest extends AsyncTestClass {
     }
 
     @Test
-    public void test2_fetchUserAccount(){
+    public void test2_fetchUserAccount() {
         FetchUserAccountRequestModel request = new FetchUserAccountRequestModel(token);
 
         new FetchUserAccount(userAPIGateway, new FetchUserAccountOutputBoundary() {
@@ -157,10 +171,10 @@ public class UserAndAuthUseCasesTest extends AsyncTestClass {
     }
 
     @Test
-    public void test3_editAccount(){
+    public void test3_editAccount() {
         EditUserAccountRequestModel request = new EditUserAccountRequestModel(token,
                 "android_edited_first", "android_edited_last",
-                "android_edited_email@email.com", "1234password",
+                "android_edited_email@email.com", "1Password",
                 "new home", "new city");
 
         new EditUserAccount(userAPIGateway, new EditUserAccountOutputBoundary() {
@@ -185,7 +199,7 @@ public class UserAndAuthUseCasesTest extends AsyncTestClass {
     }
 
     @Test
-    public void test4_editUserProfile(){
+    public void test4_editUserProfile() {
         EditUserProfileRequestModel request = new EditUserProfileRequestModel(token,
                 "android test biography", "test instagram",
                 "test facebook", "123456789");
@@ -213,7 +227,7 @@ public class UserAndAuthUseCasesTest extends AsyncTestClass {
     }
 
     @Test
-    public void test5_fetchUserProfile(){
+    public void test5_fetchUserProfile() {
         FetchUserProfileRequestModel request = new FetchUserProfileRequestModel(token, userId);
 
         new FetchUserProfile(userAPIGateway, new FetchUserProfileOutputBoundary() {

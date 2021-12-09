@@ -1,11 +1,11 @@
 package com.example.cupetfrontend.unit_tests.use_cases.user;
 
 import com.example.cupetfrontend.unit_tests.use_cases.UseCaseTestClass;
-import com.example.cupetfrontend.use_cases.user.FetchUserProfileImage;
 import com.example.cupetfrontend.use_cases.output_boundaries.user.FetchUserProfileImageOutputBoundary;
 import com.example.cupetfrontend.use_cases.request_models.user.FetchUserProfileImageRequestModel;
 import com.example.cupetfrontend.use_cases.response_models.pet.DefaultFailureResponseModel;
 import com.example.cupetfrontend.use_cases.response_models.user.UserProfileImageSuccessResponseModel;
+import com.example.cupetfrontend.use_cases.user.FetchUserProfileImage;
 
 import org.junit.Test;
 
@@ -14,7 +14,7 @@ import static org.junit.Assert.fail;
 
 public class FetchUserProfileImageTest extends UseCaseTestClass {
     @Test
-    public void testFetchUserProfileImageSuccess(){
+    public void testFetchUserProfileImageSuccess() {
         FetchUserProfileImageRequestModel request = new FetchUserProfileImageRequestModel(
                 "dummy token", "dummy user id");
 
@@ -36,7 +36,7 @@ public class FetchUserProfileImageTest extends UseCaseTestClass {
     }
 
     @Test
-    public void testFetchPetProfileImageFailure(){
+    public void testFetchPetProfileImageFailure() {
         FetchUserProfileImageRequestModel request = new FetchUserProfileImageRequestModel(
                 "dummy token", "dummy user id");
 
@@ -50,7 +50,8 @@ public class FetchUserProfileImageTest extends UseCaseTestClass {
             public void onFetchUserProfileImageFailure(DefaultFailureResponseModel response) {
                 assertEquals(response.getErrorMessage(), "dummy error message");
 
-                setTaskComplete();            }
+                setTaskComplete();
+            }
 
         }).fetchUserProfileImage(request);
 

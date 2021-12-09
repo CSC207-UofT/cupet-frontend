@@ -14,7 +14,7 @@ public class PetModel {
     private String userId;
 
     public PetModel(String petId, String petName, String petAge,
-                    String petBreed, String petImageUrl, String userId){
+                    String petBreed, String petImageUrl, String userId) {
         this.petId = petId;
         this.petName = petName;
         this.petAge = petAge;

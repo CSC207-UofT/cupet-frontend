@@ -5,6 +5,7 @@ import com.example.cupetfrontend.use_cases.request_models.pet.IntendToMatchReque
 public interface IntendToMatchInputBoundary {
     /**
      * Intend to match your pet with another pet given request data
+     *
      * @param request The request data
      */
     void intendToMatch(IntendToMatchRequestModel request);

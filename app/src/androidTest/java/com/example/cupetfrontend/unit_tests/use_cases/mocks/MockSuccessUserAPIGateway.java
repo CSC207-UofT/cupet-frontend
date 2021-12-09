@@ -2,7 +2,14 @@ package com.example.cupetfrontend.unit_tests.use_cases.mocks;
 
 import com.example.cupetfrontend.use_cases.api_abstracts.IServerResponseListener;
 import com.example.cupetfrontend.use_cases.api_abstracts.IUserAPIGateway;
-import com.example.cupetfrontend.use_cases.api_abstracts.request_models.user.*;
+import com.example.cupetfrontend.use_cases.api_abstracts.request_models.user.APICreateUserRequestModel;
+import com.example.cupetfrontend.use_cases.api_abstracts.request_models.user.APIEditUserAccountRequestModel;
+import com.example.cupetfrontend.use_cases.api_abstracts.request_models.user.APIEditUserProfileRequestModel;
+import com.example.cupetfrontend.use_cases.api_abstracts.request_models.user.APIFetchUserAccountRequestModel;
+import com.example.cupetfrontend.use_cases.api_abstracts.request_models.user.APIFetchUserProfileImageRequestModel;
+import com.example.cupetfrontend.use_cases.api_abstracts.request_models.user.APIFetchUserProfileRequestModel;
+import com.example.cupetfrontend.use_cases.api_abstracts.request_models.user.APIGetPetsRequestModel;
+import com.example.cupetfrontend.use_cases.api_abstracts.request_models.user.APISetUserProfileImageRequestModel;
 
 import java.util.HashMap;
 
@@ -13,7 +20,7 @@ public class MockSuccessUserAPIGateway extends MockSuccessAPIGateway implements 
 
     @Override
     public void createUser(APICreateUserRequestModel requestData, IServerResponseListener responseListener) {
-        responseListener.onRequestSuccess(createDummySuccessJSON(new HashMap<String, String>(){{
+        responseListener.onRequestSuccess(createDummySuccessJSON(new HashMap<String, String>() {{
             put("userId", "dummy user id");
             put("firstName", requestData.getFirstName());
             put("lastName", requestData.getLastName());
@@ -25,7 +32,7 @@ public class MockSuccessUserAPIGateway extends MockSuccessAPIGateway implements 
 
     @Override
     public void fetchUserProfile(APIFetchUserProfileRequestModel requestData, IServerResponseListener responseListener) {
-        responseListener.onRequestSuccess(createDummySuccessJSON(new HashMap<String, String>(){{
+        responseListener.onRequestSuccess(createDummySuccessJSON(new HashMap<String, String>() {{
             put("firstName", "dummy first name");
             put("lastName", "dummy last name");
             put("biography", "dummy biography");
@@ -39,7 +46,7 @@ public class MockSuccessUserAPIGateway extends MockSuccessAPIGateway implements 
 
     @Override
     public void editUserProfile(APIEditUserProfileRequestModel requestData, IServerResponseListener responseListener) {
-        responseListener.onRequestSuccess(createDummySuccessJSON(new HashMap<String, String>(){{
+        responseListener.onRequestSuccess(createDummySuccessJSON(new HashMap<String, String>() {{
             put("newBiography", requestData.getBiography());
             put("newPhoneNumber", requestData.getPhoneNumber());
             put("newInstagram", requestData.getInstagram());
@@ -49,7 +56,7 @@ public class MockSuccessUserAPIGateway extends MockSuccessAPIGateway implements 
 
     @Override
     public void fetchUserAccount(APIFetchUserAccountRequestModel requestData, IServerResponseListener responseListener) {
-        responseListener.onRequestSuccess(createDummySuccessJSON(new HashMap<String, String>(){{
+        responseListener.onRequestSuccess(createDummySuccessJSON(new HashMap<String, String>() {{
             put("firstName", "dummy first name");
             put("lastName", "dummy last name");
             put("currentAddress", "dummy address");
@@ -60,7 +67,7 @@ public class MockSuccessUserAPIGateway extends MockSuccessAPIGateway implements 
 
     @Override
     public void editUserAccount(APIEditUserAccountRequestModel requestData, IServerResponseListener responseListener) {
-        responseListener.onRequestSuccess(createDummySuccessJSON(new HashMap<String, String>(){{
+        responseListener.onRequestSuccess(createDummySuccessJSON(new HashMap<String, String>() {{
             put("newFirstName", requestData.getFirstName());
             put("newLastName", requestData.getLastName());
             put("newCurrentAddress", requestData.getHomeAddress());
@@ -76,14 +83,14 @@ public class MockSuccessUserAPIGateway extends MockSuccessAPIGateway implements 
 
     @Override
     public void setUserProfileImage(APISetUserProfileImageRequestModel requestData, IServerResponseListener responseListener) {
-        responseListener.onRequestSuccess(createDummySuccessJSON(new HashMap<String, String>(){{
+        responseListener.onRequestSuccess(createDummySuccessJSON(new HashMap<String, String>() {{
             put("url", "dummy url");
         }}));
     }
 
     @Override
     public void fetchUserProfileImage(APIFetchUserProfileImageRequestModel requestData, IServerResponseListener responseListener) {
-        responseListener.onRequestSuccess(createDummySuccessJSON(new HashMap<String, String>(){{
+        responseListener.onRequestSuccess(createDummySuccessJSON(new HashMap<String, String>() {{
             put("url", "dummy url");
         }}));
     }

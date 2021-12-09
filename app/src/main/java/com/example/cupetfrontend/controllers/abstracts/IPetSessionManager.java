@@ -9,6 +9,7 @@ import com.example.cupetfrontend.controllers.cached_data_models.CachedPetData;
 public interface IPetSessionManager {
     /**
      * Get the signed-in pet's id
+     *
      * @return The pet's id
      */
     String getPetId();
@@ -20,12 +21,14 @@ public interface IPetSessionManager {
 
     /**
      * Get the cached data of the pet that's signed in
+     *
      * @return The signed-in pet's cached data
      */
     CachedPetData getCachedPetData();
 
     /**
      * Set the cached data of the pet that's signed in
+     *
      * @param cachedPetData The data to set
      */
     void setCachedPetData(CachedPetData cachedPetData);
