@@ -14,7 +14,7 @@ import static org.junit.Assert.fail;
 
 public class UnMatchPetTest extends UseCaseTestClass {
     @Test
-    public void testUnMatchPetSuccess(){
+    public void testUnMatchPetSuccess() {
         UnMatchPetRequestModel request = new UnMatchPetRequestModel(
                 "dummy token", "dummy pet id", "dummy other pet id");
 
@@ -34,7 +34,7 @@ public class UnMatchPetTest extends UseCaseTestClass {
     }
 
     @Test
-    public void testUnMatchPetFailure(){
+    public void testUnMatchPetFailure() {
         UnMatchPetRequestModel request = new UnMatchPetRequestModel(
                 "dummy token", "dummy pet id", "dummy other pet id");
 

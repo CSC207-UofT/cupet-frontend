@@ -14,9 +14,9 @@ import static org.junit.Assert.fail;
 
 public class SetUserProfileImageTest extends UseCaseTestClass {
     @Test
-    public void testSetUserProfileImageSuccess(){
+    public void testSetUserProfileImageSuccess() {
         SetUserProfileImageRequestModel request = new SetUserProfileImageRequestModel(
-                "dummy token","dummy image b64");
+                "dummy token", "dummy image b64");
 
         new SetUserProfileImage(successUserAPIGateway, new SetUserProfileImageOutputBoundary() {
             @Override
@@ -36,9 +36,9 @@ public class SetUserProfileImageTest extends UseCaseTestClass {
     }
 
     @Test
-    public void testSetUserProfileImageFailure(){
+    public void testSetUserProfileImageFailure() {
         SetUserProfileImageRequestModel request = new SetUserProfileImageRequestModel(
-                "dummy token","dummy image b64");
+                "dummy token", "dummy image b64");
 
         new SetUserProfileImage(failureUserAPIGateway, new SetUserProfileImageOutputBoundary() {
             @Override

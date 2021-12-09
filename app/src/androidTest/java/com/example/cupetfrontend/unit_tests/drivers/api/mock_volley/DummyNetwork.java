@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * A network that produces a dummy response for all requests.
  */
-public class DummyNetwork extends MockNetwork{
+public class DummyNetwork extends MockNetwork {
     private NetworkResponse dummyResponse;
 
     /**
@@ -33,7 +33,7 @@ public class DummyNetwork extends MockNetwork{
      * Return a dummy server response that will be given for all future
      * server responses until a new dummy response is set.
      *
-     * @param statusCode The status code for the response
+     * @param statusCode   The status code for the response
      * @param responseBody The response body
      */
     public void setDummyResponse(int statusCode, JSONObject responseBody) {

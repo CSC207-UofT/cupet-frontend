@@ -15,12 +15,12 @@ import java.util.Map;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
-public class HTTPRequestManagerTest extends AsyncTestClass{
+public class HTTPRequestManagerTest extends AsyncTestClass {
     private HTTPRequestManager requestManager;
     private DummyNetwork dummyNetwork;
 
     @Before
-    public void setUp(){
+    public void setUp() {
         dummyNetwork = new DummyNetwork();
         requestManager = new HTTPRequestManager(new MockRequestQueue(dummyNetwork));
     }
@@ -31,7 +31,7 @@ public class HTTPRequestManagerTest extends AsyncTestClass{
      *
      * @return a dummy request body
      */
-    public Map<String, String> makeDummyRequestBody () {
+    public Map<String, String> makeDummyRequestBody() {
         Map<String, String> dummyDataMap = new HashMap<>();
         dummyDataMap.put("testParam1", "abc");
         dummyDataMap.put("testParam2", "1234");

@@ -14,7 +14,7 @@ import static org.junit.Assert.fail;
 
 public class FetchUserAccountTest extends UseCaseTestClass {
     @Test
-    public void testFetchUserAccountSuccess(){
+    public void testFetchUserAccountSuccess() {
         FetchUserAccountRequestModel request = new FetchUserAccountRequestModel(
                 "dummy token");
 
@@ -41,7 +41,7 @@ public class FetchUserAccountTest extends UseCaseTestClass {
     }
 
     @Test
-    public void testFetchUserAccountFailure(){
+    public void testFetchUserAccountFailure() {
         FetchUserAccountRequestModel request = new FetchUserAccountRequestModel(
                 "dummy token");
 

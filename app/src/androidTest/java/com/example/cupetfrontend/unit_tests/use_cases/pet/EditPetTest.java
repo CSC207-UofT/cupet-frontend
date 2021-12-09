@@ -14,7 +14,7 @@ import static org.junit.Assert.fail;
 
 public class EditPetTest extends UseCaseTestClass {
     @Test
-    public void testEditPetSuccess(){
+    public void testEditPetSuccess() {
         EditPetRequestModel request = new EditPetRequestModel(
                 "dummy token", "dummy pet id", "dummy name",
                 "dummy age", "dummy breed", "dummy biography");
@@ -40,7 +40,7 @@ public class EditPetTest extends UseCaseTestClass {
     }
 
     @Test
-    public void testEditPetFailure(){
+    public void testEditPetFailure() {
         EditPetRequestModel request = new EditPetRequestModel(
                 "dummy token", "dummy pet id", "dummy name",
                 "dummy age", "dummy breed", "dummy biography");

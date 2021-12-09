@@ -5,7 +5,7 @@ import com.android.volley.toolbox.NoCache;
 
 /**
  * A class that mimics the behaviour of a Volley request queue.
- *
+ * <p>
  * This request queue has an empty cache, and uses a mock network injected
  * through the constructor.
  */

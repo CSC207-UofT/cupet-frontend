@@ -14,7 +14,7 @@ import static org.junit.Assert.fail;
 
 public class IntendToMatchTest extends UseCaseTestClass {
     @Test
-    public void testIntendToMatchSuccess(){
+    public void testIntendToMatchSuccess() {
         IntendToMatchRequestModel request = new IntendToMatchRequestModel(
                 "dummy token", "dummy pet id", "dummy other pet id");
 
@@ -35,7 +35,7 @@ public class IntendToMatchTest extends UseCaseTestClass {
     }
 
     @Test
-    public void testIntendToMatchFailure(){
+    public void testIntendToMatchFailure() {
         IntendToMatchRequestModel request = new IntendToMatchRequestModel(
                 "dummy token", "dummy pet id", "dummy other pet id");
 

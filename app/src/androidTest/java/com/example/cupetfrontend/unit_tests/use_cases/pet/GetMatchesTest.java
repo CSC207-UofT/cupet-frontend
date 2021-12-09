@@ -15,7 +15,7 @@ import static org.junit.Assert.fail;
 
 public class GetMatchesTest extends UseCaseTestClass {
     @Test
-    public void testGetMatchesSuccess(){
+    public void testGetMatchesSuccess() {
         GetMatchesRequestModel request = new GetMatchesRequestModel(
                 "dummy token", "dummy pet id");
 
@@ -43,7 +43,7 @@ public class GetMatchesTest extends UseCaseTestClass {
     }
 
     @Test
-    public void testGetMatchesFailure(){
+    public void testGetMatchesFailure() {
         GetMatchesRequestModel request = new GetMatchesRequestModel(
                 "dummy token", "dummy pet id");
 

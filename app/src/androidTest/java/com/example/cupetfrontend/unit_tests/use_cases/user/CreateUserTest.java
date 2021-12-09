@@ -14,7 +14,7 @@ import static org.junit.Assert.fail;
 
 public class CreateUserTest extends UseCaseTestClass {
     @Test
-    public void testCreateUserSuccess(){
+    public void testCreateUserSuccess() {
         UserCreatorRequestModel request = new UserCreatorRequestModel(
                 "dummy first name", "dummy last name", "dummy email",
                 "dummy password", "dummy address", "dummy city");
@@ -41,7 +41,7 @@ public class CreateUserTest extends UseCaseTestClass {
     }
 
     @Test
-    public void testCreateUserFailure(){
+    public void testCreateUserFailure() {
         UserCreatorRequestModel request = new UserCreatorRequestModel(
                 "dummy first name", "dummy last name", "dummy email",
                 "dummy password", "dummy home address", "dummy city");

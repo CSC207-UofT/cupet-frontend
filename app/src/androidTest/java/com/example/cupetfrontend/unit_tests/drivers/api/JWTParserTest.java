@@ -17,7 +17,7 @@ public class JWTParserTest {
     }
 
     @Test
-    public void testGetSubject(){
+    public void testGetSubject() {
         String sampleJWT = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzNCIsImV4cCI6MTYzNjk2ODEyNSwiaWF0IjoxNjM2OTMyMTI1fQ.NcDdRsUXLXsgkUMrSdqDe2C8h2hReDcN-ygQSmLdMVY";
         try {
             Assert.assertEquals("34", jwtParser.getSubject(sampleJWT));

@@ -47,15 +47,15 @@ import static org.junit.Assert.fail;
 
 /**
  * Test the users and auth related use cases:
- *  - creating a new user
- *  - logging in
- *  - retrieving and editing account
- *  - retrieving and editing profile
- *
+ * - creating a new user
+ * - logging in
+ * - retrieving and editing account
+ * - retrieving and editing profile
+ * <p>
  * NOTE: This is an integration test.
  * The test cases are dependent on each bottom-up, and they
  * should be run in succession.
- *
+ * <p>
  * To run these tests, run the entire test class.
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -67,7 +67,7 @@ public class UserAndAuthUseCasesTest extends AsyncTestClass {
     private static String userId;
 
     @BeforeClass
-    public static void setUp(){
+    public static void setUp() {
         Context context = InstrumentationRegistry.getInstrumentation().getTargetContext();
 
         IServerRequestManager requestManager = new HTTPRequestManager(context);
@@ -82,7 +82,7 @@ public class UserAndAuthUseCasesTest extends AsyncTestClass {
      *
      * @return a unique UserCreator request
      */
-    protected static UserCreatorRequestModel createNewUniqueUserRequest(){
+    protected static UserCreatorRequestModel createNewUniqueUserRequest() {
         // Create a unique email in the database using the current time
         String time = ((Long) System.currentTimeMillis()).toString();
         String email = "android_test_" + time + "@android.test";
@@ -98,7 +98,7 @@ public class UserAndAuthUseCasesTest extends AsyncTestClass {
     }
 
     @Test
-    public void test0_createUser(){
+    public void test0_createUser() {
         new UserCreator(userAPIGateway, new UserCreatorOutputBoundary() {
             @Override
             public void onCreateUserSuccess(UserCreatorSuccessResponseModel response) {
@@ -124,7 +124,7 @@ public class UserAndAuthUseCasesTest extends AsyncTestClass {
     }
 
     @Test
-    public void test1_login(){
+    public void test1_login() {
         LoginRequestModel request = new LoginRequestModel(newUserRequest.getEmail(),
                 newUserRequest.getPassword());
 
@@ -145,7 +145,7 @@ public class UserAndAuthUseCasesTest extends AsyncTestClass {
     }
 
     @Test
-    public void test2_fetchUserAccount(){
+    public void test2_fetchUserAccount() {
         FetchUserAccountRequestModel request = new FetchUserAccountRequestModel(token);
 
         new FetchUserAccount(userAPIGateway, new FetchUserAccountOutputBoundary() {
@@ -171,7 +171,7 @@ public class UserAndAuthUseCasesTest extends AsyncTestClass {
     }
 
     @Test
-    public void test3_editAccount(){
+    public void test3_editAccount() {
         EditUserAccountRequestModel request = new EditUserAccountRequestModel(token,
                 "android_edited_first", "android_edited_last",
                 "android_edited_email@email.com", "1234password",
@@ -199,7 +199,7 @@ public class UserAndAuthUseCasesTest extends AsyncTestClass {
     }
 
     @Test
-    public void test4_editUserProfile(){
+    public void test4_editUserProfile() {
         EditUserProfileRequestModel request = new EditUserProfileRequestModel(token,
                 "android test biography", "test instagram",
                 "test facebook", "123456789");
@@ -227,7 +227,7 @@ public class UserAndAuthUseCasesTest extends AsyncTestClass {
     }
 
     @Test
-    public void test5_fetchUserProfile(){
+    public void test5_fetchUserProfile() {
         FetchUserProfileRequestModel request = new FetchUserProfileRequestModel(token, userId);
 
         new FetchUserProfile(userAPIGateway, new FetchUserProfileOutputBoundary() {

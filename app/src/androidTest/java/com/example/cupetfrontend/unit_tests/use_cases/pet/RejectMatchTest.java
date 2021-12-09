@@ -14,7 +14,7 @@ import static org.junit.Assert.fail;
 
 public class RejectMatchTest extends UseCaseTestClass {
     @Test
-    public void testRejectMatchSuccess(){
+    public void testRejectMatchSuccess() {
         RejectMatchRequestModel request = new RejectMatchRequestModel(
                 "dummy token", "dummy pet id", "dummy other pet id");
 
@@ -34,7 +34,7 @@ public class RejectMatchTest extends UseCaseTestClass {
     }
 
     @Test
-    public void testRejectMatchFailure(){
+    public void testRejectMatchFailure() {
         RejectMatchRequestModel request = new RejectMatchRequestModel(
                 "dummy token", "dummy pet id", "dummy other pet id");
 
@@ -48,7 +48,8 @@ public class RejectMatchTest extends UseCaseTestClass {
             public void onRejectMatchFailure(DefaultFailureResponseModel response) {
                 assertEquals(response.getErrorMessage(), "dummy error message");
 
-                setTaskComplete();            }
+                setTaskComplete();
+            }
         }).rejectMatch(request);
 
         awaitForTask(1000);

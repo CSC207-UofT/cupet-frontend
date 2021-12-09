@@ -14,7 +14,7 @@ import static org.junit.Assert.fail;
 
 public class EditUserProfileTest extends UseCaseTestClass {
     @Test
-    public void testEditUserProfileSuccess(){
+    public void testEditUserProfileSuccess() {
         EditUserProfileRequestModel request = new EditUserProfileRequestModel(
                 "dummy token", "dummy biography", "dummy instagram",
                 "dummy facebook", "dummy phone number");
@@ -42,7 +42,7 @@ public class EditUserProfileTest extends UseCaseTestClass {
     }
 
     @Test
-    public void testEditUserProfileFailure(){
+    public void testEditUserProfileFailure() {
         EditUserProfileRequestModel request = new EditUserProfileRequestModel(
                 "dummy token", "dummy biography", "dummy instagram",
                 "dummy facebook", "dummy phone number");

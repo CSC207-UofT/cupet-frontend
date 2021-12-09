@@ -7,8 +7,8 @@ import org.json.JSONObject;
 import java.util.HashMap;
 
 public class MockSuccessAPIGateway {
-    public JSONObject createDummySuccessJSON(HashMap<String, String> innerData){
-        JSONObject toReturnData = new JSONObject(new HashMap<String, String>(){{
+    public JSONObject createDummySuccessJSON(HashMap<String, String> innerData) {
+        JSONObject toReturnData = new JSONObject(new HashMap<String, String>() {{
             put("isSuccess", "true");
             put("message", "dummy success message");
         }});
@@ -22,7 +22,7 @@ public class MockSuccessAPIGateway {
         return toReturnData;
     }
 
-    public JSONObject createPetIdSuccessJSON(String[] petIds){
+    public JSONObject createPetIdSuccessJSON(String[] petIds) {
         JSONObject toReturn = createDummySuccessJSON(new HashMap<>());
 
         try {

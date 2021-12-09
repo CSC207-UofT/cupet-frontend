@@ -44,7 +44,7 @@ public class NUsersTestClass extends AsyncTestClass {
     protected static IAuthAPIGateway authAPIGateway;
 
     @BeforeClass
-    public static void setUpNUsersTestClass(){
+    public static void setUpNUsersTestClass() {
         Context context = InstrumentationRegistry.getInstrumentation().getTargetContext();
 
         requestManager = new HTTPRequestManager(context);
@@ -60,7 +60,7 @@ public class NUsersTestClass extends AsyncTestClass {
      *
      * @return a unique UserCreator request
      */
-    private UserCreatorRequestModel createNewUniqueUserRequest(){
+    private UserCreatorRequestModel createNewUniqueUserRequest() {
         // Create a unique email in the database using the current time
         String time = ((Long) System.currentTimeMillis()).toString();
         String email = "android_test_" + time + "@android.test";
@@ -77,11 +77,12 @@ public class NUsersTestClass extends AsyncTestClass {
 
     /**
      * Create and login some number of users.
-     *  @param numberOfUsers the number of users to create and login
-     * @param listener A listener that listens for the completion of the task
+     *
+     * @param numberOfUsers the number of users to create and login
+     * @param listener      A listener that listens for the completion of the task
      */
-    public void createAndLogin(int numberOfUsers, AsyncTaskListener listener){
-        if (numberOfUsers <= 0){
+    public void createAndLogin(int numberOfUsers, AsyncTaskListener listener) {
+        if (numberOfUsers <= 0) {
             listener.onSuccess();
         }
 

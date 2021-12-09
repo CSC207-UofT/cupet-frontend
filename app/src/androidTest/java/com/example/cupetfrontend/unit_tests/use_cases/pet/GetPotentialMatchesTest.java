@@ -15,14 +15,14 @@ import static org.junit.Assert.fail;
 
 public class GetPotentialMatchesTest extends UseCaseTestClass {
     @Test
-    public void testGetPotentialMatchesSuccess(){
+    public void testGetPotentialMatchesSuccess() {
         GetPotentialMatchesRequestModel request = new GetPotentialMatchesRequestModel(
                 "dummy token", "dummy pet id");
 
         new GetPotentialMatches(successPetAPIGateway, new GetPotentialMatchesOutputBoundary() {
             @Override
             public void onGetPotentialMatchesSuccess(GetPotentialMatchesSuccessResponseModel response) {
-                for (PetData pet : response.getPotentialMatches()){
+                for (PetData pet : response.getPotentialMatches()) {
                     assertEquals(pet.getName(), "dummy name");
                     assertEquals(pet.getAge(), "dummy age");
                     assertEquals(pet.getBreed(), "dummy breed");
@@ -44,7 +44,7 @@ public class GetPotentialMatchesTest extends UseCaseTestClass {
     }
 
     @Test
-    public void testGetPotentialMatchesFailure(){
+    public void testGetPotentialMatchesFailure() {
         GetPotentialMatchesRequestModel request = new GetPotentialMatchesRequestModel(
                 "dummy token", "dummy pet id");
 

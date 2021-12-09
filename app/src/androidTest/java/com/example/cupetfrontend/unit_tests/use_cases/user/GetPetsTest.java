@@ -15,14 +15,14 @@ import static org.junit.Assert.fail;
 
 public class GetPetsTest extends UseCaseTestClass {
     @Test
-    public void testGetPetsSuccess(){
+    public void testGetPetsSuccess() {
         GetPetsRequestModel request = new GetPetsRequestModel(
                 "dummy token");
 
         new GetPets(successPetAPIGateway, successUserAPIGateway, new GetPetsOutputBoundary() {
             @Override
             public void onGetPetsSuccess(GetPetsSuccessResponseModel response) {
-                for (PetData pet : response.getPets()){
+                for (PetData pet : response.getPets()) {
                     assertEquals(pet.getName(), "dummy name");
                     assertEquals(pet.getAge(), "dummy age");
                     assertEquals(pet.getBreed(), "dummy breed");
@@ -43,7 +43,7 @@ public class GetPetsTest extends UseCaseTestClass {
     }
 
     @Test
-    public void testGetPetsFailure(){
+    public void testGetPetsFailure() {
         GetPetsRequestModel request = new GetPetsRequestModel(
                 "dummy token");
 

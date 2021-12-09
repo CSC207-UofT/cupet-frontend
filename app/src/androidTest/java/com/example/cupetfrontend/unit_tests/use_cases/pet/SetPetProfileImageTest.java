@@ -14,7 +14,7 @@ import static org.junit.Assert.fail;
 
 public class SetPetProfileImageTest extends UseCaseTestClass {
     @Test
-    public void testSetPetProfileImageSuccess(){
+    public void testSetPetProfileImageSuccess() {
         SetPetProfileImageRequestModel request = new SetPetProfileImageRequestModel(
                 "dummy token", "dummy pet id", "dummy image b64");
 
@@ -35,7 +35,7 @@ public class SetPetProfileImageTest extends UseCaseTestClass {
     }
 
     @Test
-    public void testSetPetProfileImageFailure(){
+    public void testSetPetProfileImageFailure() {
         SetPetProfileImageRequestModel request = new SetPetProfileImageRequestModel(
                 "dummy token", "dummy pet id", "dummy image b64");
 

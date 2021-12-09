@@ -14,7 +14,7 @@ import static org.junit.Assert.fail;
 
 public class FetchUserProfileImageTest extends UseCaseTestClass {
     @Test
-    public void testFetchUserProfileImageSuccess(){
+    public void testFetchUserProfileImageSuccess() {
         FetchUserProfileImageRequestModel request = new FetchUserProfileImageRequestModel(
                 "dummy token", "dummy user id");
 
@@ -36,7 +36,7 @@ public class FetchUserProfileImageTest extends UseCaseTestClass {
     }
 
     @Test
-    public void testFetchPetProfileImageFailure(){
+    public void testFetchPetProfileImageFailure() {
         FetchUserProfileImageRequestModel request = new FetchUserProfileImageRequestModel(
                 "dummy token", "dummy user id");
 
@@ -50,7 +50,8 @@ public class FetchUserProfileImageTest extends UseCaseTestClass {
             public void onFetchUserProfileImageFailure(DefaultFailureResponseModel response) {
                 assertEquals(response.getErrorMessage(), "dummy error message");
 
-                setTaskComplete();            }
+                setTaskComplete();
+            }
 
         }).fetchUserProfileImage(request);
 

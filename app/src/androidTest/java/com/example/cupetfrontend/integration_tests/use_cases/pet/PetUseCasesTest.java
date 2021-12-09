@@ -49,18 +49,18 @@ import static org.junit.Assert.fail;
 
 /**
  * Test the pet related uses cases:
- *  - getting a list of pets from a user
- *  - editing a pet
- *  - fetching a pet's profile
- *  - getting a list of potential matches for a pet
- *  - getting a list of matches for a pet
- *  - intending to match with another pet
- *  - rejecting a match with another pet
- *
+ * - getting a list of pets from a user
+ * - editing a pet
+ * - fetching a pet's profile
+ * - getting a list of potential matches for a pet
+ * - getting a list of matches for a pet
+ * - intending to match with another pet
+ * - rejecting a match with another pet
+ * <p>
  * NOTE: This is an integration test.
  * The test cases are dependent on each bottom-up, and they
  * should be run in succession.
- *
+ * <p>
  * To run these tests, run the entire test class
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -75,7 +75,7 @@ public class PetUseCasesTest extends NUsersTestClass {
     }
 
     @Test
-    public void test00_setup_createAndLogin(){
+    public void test00_setup_createAndLogin() {
         createAndLogin(2, new AsyncTaskListener() {
             @Override
             public void onSuccess() {
@@ -92,7 +92,7 @@ public class PetUseCasesTest extends NUsersTestClass {
     }
 
     @Test
-    public void test0_createPet1(){
+    public void test0_createPet1() {
         PetCreatorRequestModel request = new PetCreatorRequestModel(
                 tokens.get(0),
                 "alfred",
@@ -124,7 +124,7 @@ public class PetUseCasesTest extends NUsersTestClass {
     }
 
     @Test
-    public void test0_createPet2(){
+    public void test0_createPet2() {
         PetCreatorRequestModel request = new PetCreatorRequestModel(
                 tokens.get(0),
                 "second pet",
@@ -156,7 +156,7 @@ public class PetUseCasesTest extends NUsersTestClass {
     }
 
     @Test
-    public void test1_fetchPetProfile(){
+    public void test1_fetchPetProfile() {
         FetchPetProfileRequestModel request = new FetchPetProfileRequestModel(
                 tokens.get(0),
                 petIds.get(0)
@@ -184,7 +184,7 @@ public class PetUseCasesTest extends NUsersTestClass {
     }
 
     @Test
-    public void test_2_editPetProfile(){
+    public void test_2_editPetProfile() {
         EditPetRequestModel request = new EditPetRequestModel(
                 tokens.get(0),
                 petIds.get(0),
@@ -215,7 +215,7 @@ public class PetUseCasesTest extends NUsersTestClass {
     }
 
     @Test
-    public void test_3_getPets(){
+    public void test_3_getPets() {
         GetPetsRequestModel request = new GetPetsRequestModel(
                 tokens.get(0)
         );
@@ -244,7 +244,7 @@ public class PetUseCasesTest extends NUsersTestClass {
 
     @Ignore("Waiting for implementation on backend")
     @Test
-    public void test_4_getPotentialMatches(){
+    public void test_4_getPotentialMatches() {
         GetPotentialMatchesRequestModel request = new GetPotentialMatchesRequestModel(
                 tokens.get(0),
                 petIds.get(0)
@@ -269,7 +269,7 @@ public class PetUseCasesTest extends NUsersTestClass {
     }
 
     @Test
-    public void test_5_intendToMatch0(){
+    public void test_5_intendToMatch0() {
         IntendToMatchRequestModel request = new IntendToMatchRequestModel(
                 tokens.get(0),
                 petIds.get(0),
@@ -292,7 +292,7 @@ public class PetUseCasesTest extends NUsersTestClass {
     }
 
     @Test
-    public void test_5_intendToMatch1(){
+    public void test_5_intendToMatch1() {
         IntendToMatchRequestModel request = new IntendToMatchRequestModel(
                 tokens.get(1),
                 petIds.get(1),
@@ -315,7 +315,7 @@ public class PetUseCasesTest extends NUsersTestClass {
     }
 
     @Test
-    public void test_6_getMatches(){
+    public void test_6_getMatches() {
         GetMatchesRequestModel request = new GetMatchesRequestModel(
                 tokens.get(0),
                 petIds.get(0)
