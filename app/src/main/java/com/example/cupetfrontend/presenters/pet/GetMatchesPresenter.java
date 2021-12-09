@@ -39,7 +39,7 @@ public class GetMatchesPresenter implements IGetMatchesPresenter {
 
         for (PetData pet : response.getMatches()) {
             mPetModels.add(new PetModel(pet.getPetId(), pet.getName(), pet.getAge(),
-                    pet.getBreed(), pet.getProfileImgUrl(), pet.getUserId()));
+                    pet.getBreed(), pet.getBiography(), pet.getProfileImgUrl(), pet.getUserId()));
 
         }
         getMatchesViewModel.onGetMatchesSuccess(mPetModels);

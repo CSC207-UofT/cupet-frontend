@@ -9,6 +9,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.Observer;
 
+import com.bumptech.glide.Glide;
 import com.example.cupetfrontend.R;
 import com.example.cupetfrontend.controllers.abstracts.ISessionManager;
 import com.example.cupetfrontend.controllers.abstracts.IUserController;
@@ -72,7 +73,13 @@ public class MatchedPetProfileFragment extends MainActivityFragment {
         String petHeading = petModel.getPetName() + ", " + petModel.getPetAge();
         binding.petHeading.setText(petHeading);
         binding.breed.setText(petModel.getPetBreed());
-        binding.petBio.setText(petModel.getPetImageUrl());
+        binding.petBio.setText(petModel.getPetBio());
+        String profileImgUrl = petModel.getPetImageUrl();
+
+        if (!profileImgUrl.equals("")){
+            Glide.with(getApplicationContext()).load(
+                    profileImgUrl).into(binding.profileImage);
+        }
     }
 
     /**
@@ -106,7 +113,8 @@ public class MatchedPetProfileFragment extends MainActivityFragment {
                 if (fetchUserContactInfoResult.isError()) {
                     onFetchUserContactInfoFailure(fetchUserContactInfoResult.getErrorMessage());
                 } else {
-                    onFetchUserContactInfoSuccess(fetchUserContactInfoResult.getOwnerContactInfoData());
+                    onFetchUserContactInfoSuccess(
+                            fetchUserContactInfoResult.getOwnerContactInfoData());
                 }
             }
         });

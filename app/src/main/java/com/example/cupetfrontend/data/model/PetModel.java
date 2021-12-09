@@ -10,18 +10,21 @@ public class PetModel {
     private String petName;
     private String petBreed;
     private String petImageUrl;
+    private String petBio;
     private String petAge;
     private String userId;
 
-    public PetModel(String petId, String petName, String petAge,
-                    String petBreed, String petImageUrl, String userId) {
+    public PetModel(String petId, String petName, String petAge, String petBreed, String petBio,
+                      String petImageUrl, String userId) {
         this.petId = petId;
         this.petName = petName;
-        this.petAge = petAge;
         this.petBreed = petBreed;
         this.petImageUrl = petImageUrl;
+        this.petBio = petBio;
+        this.petAge = petAge;
         this.userId = userId;
     }
+
 
     public String getPetId() {
         return petId;
@@ -69,5 +72,13 @@ public class PetModel {
 
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    public String getPetBio() {
+        return petBio;
+    }
+
+    public void setPetBio(String petBio) {
+        this.petBio = petBio;
     }
 }

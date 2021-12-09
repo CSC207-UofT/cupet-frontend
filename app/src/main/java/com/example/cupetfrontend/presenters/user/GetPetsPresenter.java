@@ -30,7 +30,7 @@ public class GetPetsPresenter implements IGetPetsPresenter {
 
         for (PetData pet : response.getPets()) {
             mPetModels.add(new PetModel(pet.getPetId(), pet.getName(), pet.getAge(),
-                    pet.getBreed(), pet.getProfileImgUrl(), pet.getUserId()));
+                    pet.getBreed(),pet.getBiography(), pet.getProfileImgUrl(), pet.getUserId()));
 
         }
         getPetsViewModel.onGetPetsSuccess(mPetModels);
